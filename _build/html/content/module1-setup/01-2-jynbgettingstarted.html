@@ -1,0 +1,1350 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2: Runnng and Creating Jupyter Notebooks &#8212; Draft Python for Science Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/module1-setup/01-2-jynbgettingstarted';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. Overview of Jupyter Notebooks" href="01-3-jynb-intro.html" />
+    <link rel="prev" title="1. Setting up your computer" href="01-1-setupcomputer.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Draft Python for Science Book - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Draft Python for Science Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Python for Science
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01-1-setupcomputer.html">1. Setting up your computer</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2: Runnng and Creating Jupyter Notebooks</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="01-3-jynb-intro.html">3. Overview of Jupyter Notebooks</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="01-5-git.html">5. Git and GitHub</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="01-6-oop.html">6. Object Oriented Programming</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="01-7-virtual-environments.html">7. Virtual Environments</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/module1-setup/01-2-jynbgettingstarted.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/module1-setup/01-2-jynbgettingstarted.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2: Runnng and Creating Jupyter Notebooks</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2: Runnng and Creating Jupyter Notebooks</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topics-covered">Topics Covered</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-jupyter-lab">1. Starting Jupyter Lab</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-cells">1. Types of Cells</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#keyboard-shortcuts">2. Keyboard Shortcuts</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#running-multiple-notebooks">3. Running Multiple Notebooks</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code-cells">4. Code Cells</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#show-line-numbers">Show Line Numbers</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown-cells">5. Markdown Cells</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown-formatting">Markdown Formatting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-of-backticks">Use of backticks (`)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#headings">Headings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#links">Links</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unordered-lists">Unordered lists</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enumerated-ordered-lists">Enumerated (ordered) Lists</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tables">Tables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#images">Images</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#unicode">6. Unicode</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-unicode-subscript-and-superscript-characters">Table of unicode subscript and superscript characters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-unicode-greek-characters">Table of unicode greek characters</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#latex-markdown-cells">7. Latex (markdown cells)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tables-of-common-latex-commands">Tables of common LaTex Commands</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#math-operators">Math Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#root-operators">Root Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculus-operators">Calculus Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frations-and-matrices">Frations and Matrices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-portability-considerations">Code Portability Considerations</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="runnng-and-creating-jupyter-notebooks">
+<span id="module1-setup-01-2-jynbgettingstarted"></span><h1>2: Runnng and Creating Jupyter Notebooks<a class="headerlink" href="#runnng-and-creating-jupyter-notebooks" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives:<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<p>In this class you will be creating and using Jupyter Notebooks. You will be writing or modifying code in jupyter notebooks and then using Markdown language to describe the code. You will also be using an AI tutor that generates responses in markdown language, and so the goal of this chapter is to introduce you to running code and provide a reference for writing content in markdown cells.</p>
+<section id="topics-covered">
+<h3>Topics Covered<a class="headerlink" href="#topics-covered" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Types of Cells</p></li>
+<li><p>Keyboard Shortcuts</p></li>
+<li><p>Running Multiple Notebooks</p></li>
+<li><p>Code Cells</p></li>
+<li><p>Markdown Cells</p></li>
+<li><p>Unicode</p></li>
+<li><p>LaTex</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="starting-jupyter-lab">
+<h1>1. Starting Jupyter Lab<a class="headerlink" href="#starting-jupyter-lab" title="Link to this heading">#</a></h1>
+<p>Jupyter Lab is actually a web application that runs on your browser. Jupyter Lab allows you to run multiple Jupyter notebooks concurrently.</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Lab</span></code> - starts the Jupyter Lab server, which is a Python application. This will provide you with a url on your local host that starts with something like <a class="reference external" href="http://localhost:8888/lab/tree">http://localhost:8888/lab/tree</a>…</p></li>
+<li><p>Paste the URL into the address bar of your browser and open the page.</p></li>
+<li><p>If this is the first time it will ask you to pick a kernel. When you pick the kernel:</p>
+<ul class="simple">
+<li><p>Jupyter starts a new Python process (interpreter) in the background.</p></li>
+<li><p>This interpreter is initialized with the specific environment you selected.</p></li>
+<li><p>The kernel acts as a bridge between this Python interpreter and your Jupyter notebook.
+**Note: the kernel shows in the upper right corner of your notebook. If it is not the kernel you wish to use you should click on it and choose the one you want</p></li>
+</ul>
+</li>
+</ol>
+<p><img alt="image.png" src="../../_images/c4700623-21b3-4ed3-a44f-4fcc1f58e4eb.png" />
+picking a new kernel if the default one is not the one you want. Note, in this image of a Jupyter Lab there are 5 notebooks running, one in each tab.  You can actually run different notebooks in the same lab on different kernels, and you need to be sure the kernel you are running has the packages you need.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="types-of-cells">
+<h1>1. Types of Cells<a class="headerlink" href="#types-of-cells" title="Link to this heading">#</a></h1>
+<p>A Jupyter notebook has three types of cells and we will be using the first two types</p>
+<ul class="simple">
+<li><p><strong>Code Cells:</strong> (can run python or multiple other scripts)</p></li>
+<li><p><strong>Markdown Cells</strong> (a text formatting language we will use)</p></li>
+<li><p>Raw Cells (these can contain code that is not executed, and are involved in converting notebooks to other types.  Unless you get into advanced documentation you will probably not use these during this class)</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="keyboard-shortcuts">
+<h1>2. Keyboard Shortcuts<a class="headerlink" href="#keyboard-shortcuts" title="Link to this heading">#</a></h1>
+<p>The easiest way to run a Jupyter notebook is to use a keyboard shortcut.  Here are several useful keyboard shortcuts</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">shift-enter</span></code> run cell and move to next cell (creates one if there is none below it)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ctrl-enter</span></code> run cell and stay in same cell</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alt-enter</span></code> run cell and create new cell below it</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">esc-m</span></code> convert cell to <strong>markdown</strong></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">esc-y</span></code> convert cell to <strong>code</strong></p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="running-multiple-notebooks">
+<h1>3. Running Multiple Notebooks<a class="headerlink" href="#running-multiple-notebooks" title="Link to this heading">#</a></h1>
+<p>It is easy to open multiple notebooks, simply</p>
+<ul>
+<li><p>locate the notebook you want in the “File Browser” of any notebook (top icon of left frame)</p></li>
+<li><p>right click and choose <strong>Copy Shareable Link</strong></p></li>
+<li><p>Paste link into new browser window.</p>
+<p><img alt="image.png" src="../../_images/9d5d999b-ff2d-40ae-99e2-de967179c31c.png" /></p>
+</li>
+</ul>
+<p><strong>Warning</strong> be careful not to have the same notebook open at the same time in different windows.  If you do, Jupyter will give you a warning if you try and save a file that has been altered in the other browser.
+<img alt="image.png" src="../../_images/4e2fe4f7-9729-4b96-b6f4-1ba9fe4deb02.png" /></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="code-cells">
+<h1>4. Code Cells<a class="headerlink" href="#code-cells" title="Link to this heading">#</a></h1>
+<p>These allow you to run code in your notebook. In this class we will be running python, but there are other options.  If you look at the upper right corner of the notebook you can see the python kernel that is being run</p>
+<p><img alt="image.png" src="../../_images/2cdfddd1-5c79-45c9-8175-945f5757fc19.png" /></p>
+<section id="show-line-numbers">
+<h2>Show Line Numbers<a class="headerlink" href="#show-line-numbers" title="Link to this heading">#</a></h2>
+<p>The easiest way to show line numbers is go to the main menu and choose <strong>View &gt; Show Line Numbers</strong> , and this will toggle them on or off.</p>
+<p>The following cell is a code cell, and when you press <code class="docutils literal notranslate"><span class="pre">shift</span> <span class="pre">enter</span></code> it will execute the code and move to the next cell.  This will be the most common way we will run cells. In this cell we are printing a string of words (the material in parenthesis of the print function), and performing an arithmetic operation twice.  Note, a Jupyter notebook automatically outputs the last expression in a cell, and so 2_3 was output, while 2+2 was not.  If we want to output the 2+2 we need to print it, as is done in the subsequent cell.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A &quot;#&quot; makes a line a comment line and is not executed</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span> <span class="c1"># We will discuss the print function when we get to the python chapter.</span>
+<span class="mi">2</span><span class="o">+</span><span class="mi">2</span>
+<span class="mi">2</span><span class="o">+</span><span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello World
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A &quot;#&quot; makes a line a comment line and is not executed</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hello World&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+<span class="mi">2</span><span class="o">+</span><span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello World
+4
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="markdown-cells">
+<h1>5. Markdown Cells<a class="headerlink" href="#markdown-cells" title="Link to this heading">#</a></h1>
+<section id="markdown-formatting">
+<h2>Markdown Formatting<a class="headerlink" href="#markdown-formatting" title="Link to this heading">#</a></h2>
+<section id="use-of-backticks">
+<h3>Use of backticks (`)<a class="headerlink" href="#use-of-backticks" title="Link to this heading">#</a></h3>
+<p>Tips about backticks (below the tilde on your keyboard) in Jupyter notebooks and markdown in general:</p>
+<ol class="arabic simple">
+<li><p>Single backticks (<code class="docutils literal notranslate"><span class="pre">code</span></code>) are used for inline code snippets within text.</p></li>
+<li><p>Triple backticks (```) are used for code blocks, allowing you to display multiple lines of code.</p></li>
+</ol>
+</section>
+<section id="headings">
+<h3>Headings<a class="headerlink" href="#headings" title="Link to this heading">#</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">#</span></code> symbol followed by a space</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Heading 1</span>
+<span class="c1">## Heading 2</span>
+<span class="c1">### Heading 3</span>
+</pre></div>
+</div>
+<p>(note, if you look at the above code you will see that backticks were used to prevent the <code class="docutils literal notranslate"><span class="pre">#</span></code> from turning into a heading)</p>
+</section>
+<section id="links">
+<h3>Links<a class="headerlink" href="#links" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">[text</span> <span class="pre">to</span> <span class="pre">show](http://</span> <span class="pre">the</span> <span class="pre">link)</span></code></p>
+</section>
+<section id="unordered-lists">
+<h3>Unordered lists<a class="headerlink" href="#unordered-lists" title="Link to this heading">#</a></h3>
+<p>Use symbols <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code> or <code class="docutils literal notranslate"><span class="pre">+</span></code> followed by a space, I tend to use <code class="docutils literal notranslate"><span class="pre">-</span></code> all the time</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span> <span class="n">item</span> <span class="mi">1</span> 
+<span class="o">*</span> <span class="n">item</span> <span class="mi">2</span>
+    <span class="o">-</span> <span class="n">indent</span> <span class="mi">1</span>
+    <span class="o">-</span> <span class="n">indent</span> <span class="mi">2</span>
+<span class="o">+</span> <span class="n">item</span> <span class="mi">3</span>
+</pre></div>
+</div>
+<p>gives the following, and it makes no difference which symbol is used.</p>
+<ul class="simple">
+<li><p>item 1</p></li>
+<li><p>item 2</p>
+<ul>
+<li><p>indent 1</p></li>
+<li><p>indent 2</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>item 3</p></li>
+</ul>
+</section>
+<section id="enumerated-ordered-lists">
+<h3>Enumerated (ordered) Lists<a class="headerlink" href="#enumerated-ordered-lists" title="Link to this heading">#</a></h3>
+<p>Simply use a number followed by a space.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span> <span class="n">First</span> <span class="n">item</span>
+<span class="mf">2.</span> <span class="n">Second</span> <span class="n">item</span>
+   <span class="mf">1.</span> <span class="n">indent</span>
+   <span class="mf">2.</span> <span class="n">indent</span>
+      <span class="mf">1.</span> <span class="n">second</span> <span class="n">indent</span>
+      <span class="mf">2.</span> <span class="n">second</span> <span class="n">indent</span>  
+<span class="mf">3.</span> <span class="n">Third</span> <span class="n">item</span>
+</pre></div>
+</div>
+<p>The above code gives the following output</p>
+<ol class="arabic simple">
+<li><p>First item</p></li>
+<li><p>Second item</p>
+<ol class="arabic simple">
+<li><p>indent</p></li>
+<li><p>indent</p>
+<ol class="arabic simple">
+<li><p>second indent</p></li>
+<li><p>second indent</p></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>Third item</p></li>
+</ol>
+</section>
+<section id="tables">
+<h3>Tables<a class="headerlink" href="#tables" title="Link to this heading">#</a></h3>
+</section>
+<section id="images">
+<h3>Images<a class="headerlink" href="#images" title="Link to this heading">#</a></h3>
+<p>*paste image in (ctrl-v), the text will look like:</p>
+<p><code class="docutils literal notranslate"><span class="pre">![image.png](attachment:image.png)</span></code></p>
+<p>**note: Images are not stored as separate file but embedded directly  within the notebook file”. This means you can not move images from one notebook to another, but have to make a new copy of them, and paste that new copy.</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="unicode">
+<h1>6. Unicode<a class="headerlink" href="#unicode" title="Link to this heading">#</a></h1>
+<p><strong>Unicode characters work in code cells. You can copy the character and use it in either code or markdown cells</strong></p>
+<section id="table-of-unicode-subscript-and-superscript-characters">
+<h2>Table of unicode subscript and superscript characters<a class="headerlink" href="#table-of-unicode-subscript-and-superscript-characters" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Character</p></th>
+<th class="head"><p>Subscript</p></th>
+<th class="head"><p>Subscript Unicode</p></th>
+<th class="head"><p>Superscript</p></th>
+<th class="head"><p>Superscript Unicode</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>₀</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u2080</span></code></p></td>
+<td><p>⁰</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u2070</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>₁</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u2081</span></code></p></td>
+<td><p>¹</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u00B9</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>₂</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u2082</span></code></p></td>
+<td><p>²</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u00B2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>₃</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u2083</span></code></p></td>
+<td><p>³</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u00B3</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>₄</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u2084</span></code></p></td>
+<td><p>⁴</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u2074</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>₅</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u2085</span></code></p></td>
+<td><p>⁵</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u2075</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>₆</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u2086</span></code></p></td>
+<td><p>⁶</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u2076</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>₇</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u2087</span></code></p></td>
+<td><p>⁷</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u2077</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>₈</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u2088</span></code></p></td>
+<td><p>⁸</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u2078</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>₉</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u2089</span></code></p></td>
+<td><p>⁹</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u2079</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>+</p></td>
+<td><p>₊</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u208A</span></code></p></td>
+<td><p>⁺</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u207A</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>-</p></td>
+<td><p>₋</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u208B</span></code></p></td>
+<td><p>⁻</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u207B</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>=</p></td>
+<td><p>₌</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u208C</span></code></p></td>
+<td><p>⁼</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u207C</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>(</p></td>
+<td><p>₍</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u208D</span></code></p></td>
+<td><p>⁽</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u207D</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>)</p></td>
+<td><p>₎</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u208E</span></code></p></td>
+<td><p>⁾</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">\u207E</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CH</span><span class="se">\u2083</span><span class="s2">&quot;</span><span class="o">+</span><span class="mi">4</span><span class="o">*</span><span class="s2">&quot;(CH</span><span class="se">\u2082</span><span class="s2">)&quot;</span><span class="o">+</span><span class="s2">&quot;NH</span><span class="se">\u2084\u207A</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Using unicode character</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CH₃&quot;</span><span class="o">+</span><span class="mi">4</span><span class="o">*</span><span class="s2">&quot;(CH₂)&quot;</span><span class="o">+</span><span class="s2">&quot;NH₄⁺&quot;</span><span class="p">)</span>  <span class="c1"># Copying text that was already subscripted</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CH₃(CH₂)(CH₂)(CH₂)(CH₂)NH₄⁺
+CH₃(CH₂)(CH₂)(CH₂)(CH₂)NH₄⁺
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="table-of-unicode-greek-characters">
+<h2>Table of unicode greek characters<a class="headerlink" href="#table-of-unicode-greek-characters" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Greek Symbol</p></th>
+<th class="head"><p>Lowercase Unicode</p></th>
+<th class="head"><p>Uppercase Unicode</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>α (alpha)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03B1'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u0391'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>β (beta)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03B2'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u0392'</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>γ (gamma)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03B3'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u0393'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>δ (delta)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03B4'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u0394'</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>ε (epsilon)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03B5'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u0395'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>ζ (zeta)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03B6'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u0396'</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>η (eta)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03B7'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u0397'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>θ (theta)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03B8'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u0398'</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>ι (iota)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03B9'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u0399'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>κ (kappa)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03BA'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u039A'</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>λ (lambda)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03BB'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u039B'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>μ (mu)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03BC'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u039C'</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>ν (nu)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03BD'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u039D'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>ξ (xi)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03BE'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u039E'</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>ο (omicron)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03BF'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u039F'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>π (pi)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03C0'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03A0'</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>ρ (rho)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03C1'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03A1'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>σ (sigma)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03C3'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03A3'</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>τ (tau)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03C4'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03A4'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>υ (upsilon)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03C5'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03A5'</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>φ (phi)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03C6'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03A6'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>χ (chi)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03C7'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03A7'</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>ψ (psi)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03C8'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03A8'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>ω (omega)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03C9'</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'\u03A9'</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;</span><span class="se">\u03BB</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;λ&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note you can not assign the unicode in a variable assignment</strong> (the following code gives an error), but you can copy the symbol from either a code or markdown cell and use that as your variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment the following line and you will see an error when you run it</span>
+<span class="c1">#&#39;\u03BB&#39; = 560 # nm</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">λ</span> <span class="o">=</span> <span class="mi">560</span> <span class="c1"># nm </span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;λ is </span><span class="si">{</span><span class="n">λ</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\u03BB</span><span class="s1"> is </span><span class="si">{</span><span class="n">λ</span><span class="si">}</span><span class="s1">. &#39;</span><span class="p">)</span> <span class="c1"># this is using f-string formatting that we will cover later</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;h = λν&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>λ is 560.
+λ is 560. 
+h = λν
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="latex-markdown-cells">
+<h1>7. Latex (markdown cells)<a class="headerlink" href="#latex-markdown-cells" title="Link to this heading">#</a></h1>
+<p>LaTeX is a common typesetting system used in scientific and mathematical documents that allows you to put equations in the line of text, or on a unique line.  A latex command is preceded by a \ (forward slash).  In Jupyter notebooks a the latex command with the forward slash is surrounded by dollar signs.  A single dollar sign puts the output in the line of text where it occurs, while double dollar signs put it on its own line.</p>
+<ul class="simple">
+<li><p>\<span class="math notranslate nohighlight">\(\lamda\\\)</span>  - puts <span class="math notranslate nohighlight">\(\lambda\)</span> in line of text</p></li>
+<li><p>\<span class="math notranslate nohighlight">\(\\\)</span>\lambda\<span class="math notranslate nohighlight">\(\\\)</span> puts $<span class="math notranslate nohighlight">\(\lambda\)</span>$ on its own line</p></li>
+</ul>
+<p><strong>Note: if you look at the code you will see two forward slashes in front of the dollar signs, which is an escape sequence, and tells Jupyter not to process the dollar sign</strong></p>
+<p>Although there are ways you can use LaTex in the code cells you should avoid this because of code portability issues to standard IDEs (Interactive Development Environments).  That is, if you use a “Magic Command” like %%latex in a code cell, you can use LaTex in that cell, but it will not work in many other coding environments.</p>
+<section id="tables-of-common-latex-commands">
+<h2>Tables of common LaTex Commands<a class="headerlink" href="#tables-of-common-latex-commands" title="Link to this heading">#</a></h2>
+<section id="math-operators">
+<h3>Math Operators<a class="headerlink" href="#math-operators" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>LaTeX</p></th>
+<th class="head"><p>Symbol</p></th>
+<th class="head"><p>Feature</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>\pm</p></td>
+<td><p>±</p></td>
+<td><p>Plus-minus</p></td>
+</tr>
+<tr class="row-odd"><td><p>\times</p></td>
+<td><p>×</p></td>
+<td><p>Times</p></td>
+</tr>
+<tr class="row-even"><td><p>\div</p></td>
+<td><p>÷</p></td>
+<td><p>Division</p></td>
+</tr>
+<tr class="row-odd"><td><p>\neq</p></td>
+<td><p>≠</p></td>
+<td><p>Not equal</p></td>
+</tr>
+<tr class="row-even"><td><p>\approx</p></td>
+<td><p>≈</p></td>
+<td><p>Approximate</p></td>
+</tr>
+<tr class="row-odd"><td><p>\equiv</p></td>
+<td><p>≡</p></td>
+<td><p>Equivalent</p></td>
+</tr>
+<tr class="row-even"><td><p>\not\equiv</p></td>
+<td><p>≢</p></td>
+<td><p>Not equivalent</p></td>
+</tr>
+<tr class="row-odd"><td><p>\geq</p></td>
+<td><p>≥</p></td>
+<td><p>Greater than or equal</p></td>
+</tr>
+<tr class="row-even"><td><p>\leq</p></td>
+<td><p>≤</p></td>
+<td><p>Less than or equal</p></td>
+</tr>
+<tr class="row-odd"><td><p>\sim</p></td>
+<td><p>∼</p></td>
+<td><p>Similar</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="root-operators">
+<h3>Root Operators<a class="headerlink" href="#root-operators" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>LaTeX</p></th>
+<th class="head"><p>Symbol</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>\sqrt{x}</p></td>
+<td><p>√x</p></td>
+<td><p>Square root</p></td>
+</tr>
+<tr class="row-odd"><td><p>\sqrt[n]{x}</p></td>
+<td><p>∛x</p></td>
+<td><p>nth root</p></td>
+</tr>
+<tr class="row-even"><td><p>\surd</p></td>
+<td><p>√</p></td>
+<td><p>Square root symbol</p></td>
+</tr>
+<tr class="row-odd"><td><p>\cuberoot{x}</p></td>
+<td><p>∛x</p></td>
+<td><p>Cube root (requires amsmath package)</p></td>
+</tr>
+<tr class="row-even"><td><p>\fourthroot{x}</p></td>
+<td><p>∜x</p></td>
+<td><p>Fourth root (requires amsmath package)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="calculus-operators">
+<h3>Calculus Operators<a class="headerlink" href="#calculus-operators" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>LaTeX</p></th>
+<th class="head"><p>Symbol</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>\int</p></td>
+<td><p>∫</p></td>
+<td><p>Integral</p></td>
+</tr>
+<tr class="row-odd"><td><p>\iint</p></td>
+<td><p>∬</p></td>
+<td><p>Double integral</p></td>
+</tr>
+<tr class="row-even"><td><p>\iiint</p></td>
+<td><p>∭</p></td>
+<td><p>Triple integral</p></td>
+</tr>
+<tr class="row-odd"><td><p>\oint</p></td>
+<td><p>∮</p></td>
+<td><p>Contour integral</p></td>
+</tr>
+<tr class="row-even"><td><p>\partial</p></td>
+<td><p>∂</p></td>
+<td><p>Partial derivative</p></td>
+</tr>
+<tr class="row-odd"><td><p>\nabla</p></td>
+<td><p>∇</p></td>
+<td><p>Nabla (del) operator</p></td>
+</tr>
+<tr class="row-even"><td><p>\lim</p></td>
+<td><p>lim</p></td>
+<td><p>Limit</p></td>
+</tr>
+<tr class="row-odd"><td><p>\sum</p></td>
+<td><p>∑</p></td>
+<td><p>Summation</p></td>
+</tr>
+<tr class="row-even"><td><p>\prod</p></td>
+<td><p>∏</p></td>
+<td><p>Product</p></td>
+</tr>
+<tr class="row-odd"><td><p>\frac{d}{dx}</p></td>
+<td><p>d/dx</p></td>
+<td><p>Derivative</p></td>
+</tr>
+<tr class="row-even"><td><p>\infty</p></td>
+<td><p>∞</p></td>
+<td><p>Infinity</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="frations-and-matrices">
+<h3>Frations and Matrices<a class="headerlink" href="#frations-and-matrices" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>LaTeX</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Rendered Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>\frac{a}{b}</p></td>
+<td><p>Simple fraction</p></td>
+<td><p>$<span class="math notranslate nohighlight">\(\frac{a}{b}\)</span>$</p></td>
+</tr>
+<tr class="row-odd"><td><p>\dfrac{a}{b}</p></td>
+<td><p>Display fraction</p></td>
+<td><p>$<span class="math notranslate nohighlight">\(\dfrac{a}{b}\)</span>$</p></td>
+</tr>
+<tr class="row-even"><td><p>\cfrac{a}{b}</p></td>
+<td><p>Continued fraction</p></td>
+<td><p>$<span class="math notranslate nohighlight">\(\cfrac{a}{b + \cfrac{c}{d}}\)</span>$</p></td>
+</tr>
+<tr class="row-odd"><td><p>\binom{n}{k}</p></td>
+<td><p>Binomial coefficient</p></td>
+<td><p>$<span class="math notranslate nohighlight">\(\binom{n}{k}\)</span>$</p></td>
+</tr>
+<tr class="row-even"><td><p>\begin{pmatrix} a &amp; b \ c &amp; d \end{pmatrix}</p></td>
+<td><p>Parenthesis matrix</p></td>
+<td><p>$<span class="math notranslate nohighlight">\(\begin{pmatrix} a &amp; b \\ c &amp; d \end{pmatrix}\)</span>$</p></td>
+</tr>
+<tr class="row-odd"><td><p>\begin{bmatrix} a &amp; b \ c &amp; d \end{bmatrix}</p></td>
+<td><p>Bracket matrix</p></td>
+<td><p>$<span class="math notranslate nohighlight">\(\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}\)</span>$</p></td>
+</tr>
+<tr class="row-even"><td><p>\begin{vmatrix} a &amp; b \ c &amp; d \end{vmatrix}</p></td>
+<td><p>Vertical bar matrix</p></td>
+<td><p>$<span class="math notranslate nohighlight">\(\begin{vmatrix} a &amp; b \\ c &amp; d \end{vmatrix}\)</span>$</p></td>
+</tr>
+<tr class="row-odd"><td><p>\begin{Vmatrix} a &amp; b \ c &amp; d \end{Vmatrix}</p></td>
+<td><p>Double vertical bar matrix</p></td>
+<td><p>$<span class="math notranslate nohighlight">\(\begin{Vmatrix} a &amp; b \\ c &amp; d \end{Vmatrix}\)</span>$</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="code-portability-considerations">
+<h2>Code Portability Considerations<a class="headerlink" href="#code-portability-considerations" title="Link to this heading">#</a></h2>
+<p>I principle you should avoid using LaTeX in code cells, and only use it in markdown cells, or else it may not be portable to standard python IDEs</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="acknowledgements">
+<h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">#</a></h1>
+<p>This content was developed with assistance from <a class="reference external" href="https://www.perplexity.ai/">Perplexity AI</a> and <a class="reference external" href="https://chatgpt.com/">Chat GPT</a>. Multiple queries were made during the Fall 2024 and the Spring 2025.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "py4sci"
+        },
+        kernelOptions: {
+            name: "py4sci",
+            path: "./content/module1-setup"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'py4sci'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01-1-setupcomputer.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1. Setting up your computer</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="01-3-jynb-intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3. Overview of Jupyter Notebooks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2: Runnng and Creating Jupyter Notebooks</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives:</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topics-covered">Topics Covered</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-jupyter-lab">1. Starting Jupyter Lab</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-cells">1. Types of Cells</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#keyboard-shortcuts">2. Keyboard Shortcuts</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#running-multiple-notebooks">3. Running Multiple Notebooks</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#code-cells">4. Code Cells</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#show-line-numbers">Show Line Numbers</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown-cells">5. Markdown Cells</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown-formatting">Markdown Formatting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-of-backticks">Use of backticks (`)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#headings">Headings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#links">Links</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unordered-lists">Unordered lists</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enumerated-ordered-lists">Enumerated (ordered) Lists</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tables">Tables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#images">Images</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#unicode">6. Unicode</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-unicode-subscript-and-superscript-characters">Table of unicode subscript and superscript characters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-unicode-greek-characters">Table of unicode greek characters</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#latex-markdown-cells">7. Latex (markdown cells)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tables-of-common-latex-commands">Tables of common LaTex Commands</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#math-operators">Math Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#root-operators">Root Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculus-operators">Calculus Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#frations-and-matrices">Frations and Matrices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-portability-considerations">Code Portability Considerations</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Robert Belford
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+format: jb-book
+root: content/index
+chapters:
+  - file: content/module1-setup/01-1-setupcomputer
+  - file: content/module1-setup/01-2-jynbgettingstarted
+  - file: content/module1-setup/01-3-jynb-intro
+  - file: content/module1-setup/01-4-oshardware
+  - file: content/module1-setup/01-5-git
+  - file: content/module1-setup/01-6-oop
+  - file: content/module1-setup/01-7-virtual-environments
+
