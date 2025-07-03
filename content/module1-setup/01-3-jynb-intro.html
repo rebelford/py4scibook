@@ -1,0 +1,843 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3. Overview of Jupyter Notebooks &#8212; Draft Python for Science Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/module1-setup/01-3-jynb-intro';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4. Computer Hardware Germane to Running a Program" href="01-4-oshardware.html" />
+    <link rel="prev" title="2: Runnng and Creating Jupyter Notebooks" href="01-2-jynbgettingstarted.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Draft Python for Science Book - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Draft Python for Science Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Python for Science
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01-1-setupcomputer.html">1. Setting up your computer</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="01-2-jynbgettingstarted.html">2: Runnng and Creating Jupyter Notebooks</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Overview of Jupyter Notebooks</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="01-5-git.html">5. Git and GitHub</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="01-6-oop.html">6. Object Oriented Programming</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="01-7-virtual-environments.html">7. Virtual Environments</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/module1-setup/01-3-jynb-intro.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/module1-setup/01-3-jynb-intro.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3. Overview of Jupyter Notebooks</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">3. Overview of Jupyter Notebooks</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebooks-in-science">1. Jupyter Notebooks in Science</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-ides">Overview of IDEs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-ides-for-python">Common IDEs (for Python)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Overview of Jupyter Notebooks</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-vs-python-file-types">2.  Jupyter vs. Python file types</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-between-file-types">Converting Between File Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ipynb-to-py">.ipynb to .py:**</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#py-to-ipynb">.py to .ipynb:**</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-lab-vs-google-colab">3. Jupyter Lab vs Google Colab</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="overview-of-jupyter-notebooks">
+<span id="module1-setup-01-3-jynb-intro"></span><h1>3. Overview of Jupyter Notebooks<a class="headerlink" href="#overview-of-jupyter-notebooks" title="Link to this heading">#</a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Understand role of Jupyter Notebooks in Science</p></li>
+<li><p>Understand the difference between Jupyter notebook files (<em>.ipynb) and Python files (</em>.py)</p></li>
+<li><p>Understand the difference *.py and *.ipynb  files</p></li>
+</ol>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="jupyter-notebooks-in-science">
+<h1>1. Jupyter Notebooks in Science<a class="headerlink" href="#jupyter-notebooks-in-science" title="Link to this heading">#</a></h1>
+<p>We will be using Jupyter notebooks to code in Python because they are an ideal educational platform for teaching coding to science majors. Many of the Python packages we will use are data science packages and we here is an outline of some of the roles Jupyter Notebooks play in data science.</p>
+<ul class="simple">
+<li><p><strong>Exploratory Data Analysis (EDA):</strong> Load and inspect data interactively and use a wide variety of visualizations, while documenting insights and observations alongside the code</p></li>
+<li><p><strong>Data Cleaning and Preprocessing:</strong> A critical part of data analysis where one identifies and handles missing values and outliers. One can also normalize or scale the data and create new features for analysis.</p></li>
+<li><p><strong>Model Development:</strong> Develop machine learning models, implement and test different algorithms, tune hyperparameters, evaluate model performance and visualize model results.</p></li>
+<li><p><strong>Data Visualization and Reporting:</strong> Create interactive visualizations and reports, that can be exported in a variety of formats.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="overview-of-ides">
+<h1>Overview of IDEs<a class="headerlink" href="#overview-of-ides" title="Link to this heading">#</a></h1>
+<p>An IDE (Interactive Development Environment) is like a word processor for software development and offers several core features: We will go over them in lecture and you should be familiar with what they are, but we will probably not use them in class.  IDEs are really made for software development, and that is not really our goal.  So they excel at developing code, but the major shortcoming is that when you run code in an IDE, you are running an entire program (file).  In a jupyter lab you can run code one cell at a time. Some of the key features of an IDE are:</p>
+<ol class="arabic simple">
+<li><p><strong>Text Editor</strong>:</p>
+<ul class="simple">
+<li><p>Advanced editing capabilities with syntax highlighting for various programming languages</p></li>
+<li><p>Auto-completion and intelligent code suggestions</p></li>
+<li><p>Code folding and navigation tools</p></li>
+<li><p>Multiple file editing and split views</p></li>
+</ul>
+</li>
+<li><p><strong>Compiler/Interpreter</strong>:</p>
+<ul class="simple">
+<li><p>Built-in compilation or interpretation of code</p></li>
+<li><p>Often supports multiple programming languages</p></li>
+<li><p>Provides immediate feedback on syntax errors</p></li>
+</ul>
+</li>
+<li><p><strong>Debugger</strong>:</p>
+<ul class="simple">
+<li><p>Tools for setting breakpoints and stepping through code</p></li>
+<li><p>Variable inspection and modification during runtime</p></li>
+<li><p>Stack trace analysis</p></li>
+</ul>
+</li>
+<li><p><strong>Built-in Terminal</strong>:</p>
+<ul class="simple">
+<li><p>Integrated command-line interface for executing scripts and commands</p></li>
+<li><p>Often context-aware of the current project environment</p></li>
+</ul>
+</li>
+<li><p><strong>Project Management</strong>:</p>
+<ul class="simple">
+<li><p>File and directory structure organization</p></li>
+<li><p>Version control integration (e.g., Git)</p></li>
+<li><p>Build dependency management (can sync with virtual environments)</p></li>
+</ul>
+</li>
+<li><p><strong>Refactoring Tools</strong>:</p>
+<ul class="simple">
+<li><p>Automated code restructuring and optimization</p></li>
+<li><p>Renaming variables, functions, and classes across the project</p></li>
+</ul>
+</li>
+<li><p><strong>Code Analysis</strong>:</p>
+<ul class="simple">
+<li><p>Static code analysis for potential issues</p></li>
+<li><p>Code style and quality checks</p></li>
+</ul>
+</li>
+<li><p><strong>Extensibility</strong>:</p>
+<ul class="simple">
+<li><p>Plugin systems for adding new features and language support</p></li>
+<li><p>Customizable user interface and keybindings</p></li>
+</ul>
+</li>
+</ol>
+<section id="common-ides-for-python">
+<h2>Common IDEs (for Python)<a class="headerlink" href="#common-ides-for-python" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Thonny</strong></p>
+<ul class="simple">
+<li><p>Designed specifically for beginners</p></li>
+<li><p>Simple, clean interface with low learning curve</p></li>
+<li><p>Comes bundled with Python, easy to set up</p></li>
+<li><p>Limited features compared to more advanced IDEs</p></li>
+<li><p>Not suitable for large-scale or complex projects</p></li>
+<li><p>Lacks support for other programming languages</p></li>
+</ul>
+</li>
+<li><p><strong>VSCode</strong></p>
+<ul class="simple">
+<li><p>Lightweight and fast</p></li>
+<li><p>Highly customizable with powerful debugging capabilities</p></li>
+<li><p>Free and open-source</p></li>
+<li><p>Supports multiple programming languages</p></li>
+</ul>
+</li>
+<li><p><strong>PyCharm</strong></p>
+<ul class="simple">
+<li><p>Comprehensive suite of Python-specific tools</p></li>
+<li><p>Excellent for large-scale Python projects</p></li>
+<li><p>Strong support for web development frameworks like Django and Flask</p></li>
+<li><p>Powerful refactoring capabilities</p></li>
+<li><p>Integrated package management</p></li>
+<li><p>Resource-intensive, may run slowly on less powerful hardware</p></li>
+<li><p>Steeper learning curve, especially for beginners</p></li>
+<li><p>Professional edition is paid</p></li>
+<li></li>
+</ul>
+</li>
+<li><p><strong>Spyder</strong></p>
+<ul class="simple">
+<li><p>Optimized for data science workflows</p></li>
+<li><p>Integrates well with scientific Python libraries (SciPy, NumPy, Matplotlib)</p></li>
+<li><p>Includes features like variable explorer and data visualization tools</p></li>
+<li><p>Integrated into Conda and so updated with Conda</p></li>
+<li><p>More focused on scientific computing, may not be ideal for general Python development</p></li>
+<li><p>Less extensive plugin ecosystem compared to VSCode or PyCharm</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Overview of Jupyter Notebooks<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<p>Jupyter Lab/Notebook is an interactive computational environment that combines code execution, rich text, mathematics, plots and rich media. It provides:</p>
+<ol class="arabic simple">
+<li><p><strong>Web-based Interface</strong>:</p>
+<ul class="simple">
+<li><p>Accessible through a web browser</p></li>
+<li><p>Notebook interface combining code, output, and documentation</p></li>
+<li><p>File browser for managing notebooks and other files</p></li>
+</ul>
+</li>
+<li><p><strong>Code Cells</strong>:</p>
+<ul class="simple">
+<li><p>Interactive code execution in multiple programming languages</p></li>
+<li><p>Support for Python, R, Julia, and many other languages via kernels</p></li>
+<li><p>Cell-by-cell execution with immediate output</p></li>
+</ul>
+</li>
+<li><p><strong>Markdown Cells</strong>:</p>
+<ul class="simple">
+<li><p>Rich text editing with Markdown syntax</p></li>
+<li><p>Support for mathematical equations using LaTeX</p></li>
+<li><p>Ability to create formatted documentation alongside code</p></li>
+</ul>
+</li>
+<li><p><strong>Output Display</strong>:</p>
+<ul class="simple">
+<li><p>Inline visualization of plots, charts, and graphs</p></li>
+<li><p>Display of tables, images, and interactive widgets</p></li>
+<li><p>HTML and JavaScript rendering capabilities</p></li>
+</ul>
+</li>
+<li><p><strong>Kernel Management</strong>:</p>
+<ul class="simple">
+<li><p>Support for multiple programming language kernels</p></li>
+<li><p>Ability to switch between kernels in the same notebook</p></li>
+<li><p>Kernel interruption and restart options</p></li>
+</ul>
+</li>
+<li><p><strong>File Handling</strong>:</p>
+<ul class="simple">
+<li><p>Import and export of notebooks in various formats (e.g., PDF, HTML)</p></li>
+<li><p>Support for different file types (e.g., CSV, JSON) within the environment</p></li>
+</ul>
+</li>
+<li><p><strong>Terminal Access</strong> (in Jupyter Lab):</p>
+<ul class="simple">
+<li><p>Integrated terminal for command-line operations</p></li>
+<li><p>Access to the underlying file system and shell commands</p></li>
+</ul>
+</li>
+<li><p><strong>Version Control</strong>:</p>
+<ul class="simple">
+<li><p>Basic integration with version control systems (e.g., Git)</p></li>
+<li><p>Cell-based history and checkpoints</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="jupyter-vs-python-file-types">
+<h1>2.  Jupyter vs. Python file types<a class="headerlink" href="#jupyter-vs-python-file-types" title="Link to this heading">#</a></h1>
+<p>Jupyter notebooks (<em>.ipynb) and regular Python files (</em>.py) serve different purposes and have distinct characteristics. Jupyter notebooks are interactive documents that combine code, rich text, visualizations, and other media, and can be run in Jupytter’s ecosystem (notebooks, labs, hubs) or Google Collab (by simply uploading to your Google Drive). Python files are typically developed in Interactive Development Environments (IDEs) like PyCharm, VS-Code, Thonny, Spyder, etc, and are often run from the command line. There are also versions of Python (Circuit Python) that run on microcontrollers and can be implemented into embedded devices.</p>
+<p>The goal of this course is to introduce students to Python packages of use to scientific discovery and many of the students will have no prior coding experience.  So after a lot of thought, I have decided to limit this course to the use of Jupyter Notebooks and not require students to use an IDE. There are some features, like Jupyter “Magic Commands” that only work in Notebooks, and we will do our best to avoid using them in the code we develop.  So you should be able to port your code to a different IDE and run it in other environments.</p>
+<section id="converting-between-file-types">
+<h2>Converting Between File Types<a class="headerlink" href="#converting-between-file-types" title="Link to this heading">#</a></h2>
+<p>Converting between .ipynb and .py files is possible but comes with some challenges:</p>
+<section id="ipynb-to-py">
+<h3>.ipynb to .py:**<a class="headerlink" href="#ipynb-to-py" title="Link to this heading">#</a></h3>
+<p>Go to <strong>File/Export Notebook As/Executable Script</strong></p>
+<ul class="simple">
+<li><p>Code cells are preserved, but markdown and rich output are typically converted to comments.</p></li>
+<li><p>Execution order may be lost if cells were run out of order.</p></li>
+<li><p>Magic commands (e.g., %matplotlib inline) may cause issues in regular Python environments.</p></li>
+</ul>
+</section>
+<section id="py-to-ipynb">
+<h3>.py to .ipynb:**<a class="headerlink" href="#py-to-ipynb" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Code is typically placed in a single cell, losing the interactive nature of notebooks.</p></li>
+<li><p>Comments may be converted to markdown cells, but formatting might be lost.</p></li>
+<li><p>No automatic conversion of print statements to rich output.
+<strong>jupytext package</strong> can programmatically convert *.ipynb to *.py files with same names.</p></li>
+</ul>
+</section>
+</section>
+<section id="jupyter-lab-vs-google-colab">
+<h2>3. Jupyter Lab vs Google Colab<a class="headerlink" href="#jupyter-lab-vs-google-colab" title="Link to this heading">#</a></h2>
+<p>You can actually run Jupyter notebooks in your Google Drive using Google Colab. In this class you will be using both, but you are required to run your own Jupyter Lab server and can not use Google Colab for all assigments.  The reason is that you can not create virtual environments in Google Colab, and unless a package is installed by default, you have to reinstall it each time you open the notebook in Colab.</p>
+<p><strong>Jupyter Lab:</strong></p>
+<ul class="simple">
+<li><p>Runs locally on your machine</p></li>
+<li><p>Requires installation and setup</p></li>
+<li><p>Full control over the environment and packages</p></li>
+<li><p>Files stored locally by default</p></li>
+</ul>
+<p><strong>Google Colab:</strong></p>
+<ul class="simple">
+<li><p>Cloud-based, runs in a browser</p></li>
+<li><p>No installation required</p></li>
+<li><p>Limited control over the environment</p>
+<ul>
+<li><p><strong>Biggest Problem</strong> is that you can not develop your own kernel with preconfigured packages, this means you must reload non-Google-installed packages every time you run a notebook.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="acknowledgements">
+<h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">#</a></h1>
+<p>This content was developed with assistance from <a class="reference external" href="https://www.perplexity.ai/">Perplexity AI</a> and <a class="reference external" href="https://chatgpt.com/">Chat GPT</a>. Multiple queries were made during the Fall 2024 and the Spring 2025.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "py4sci"
+        },
+        kernelOptions: {
+            name: "py4sci",
+            path: "./content/module1-setup"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'py4sci'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01-2-jynbgettingstarted.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2: Runnng and Creating Jupyter Notebooks</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="01-4-oshardware.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4. Computer Hardware Germane to Running a Program</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">3. Overview of Jupyter Notebooks</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebooks-in-science">1. Jupyter Notebooks in Science</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-ides">Overview of IDEs</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-ides-for-python">Common IDEs (for Python)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Overview of Jupyter Notebooks</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-vs-python-file-types">2.  Jupyter vs. Python file types</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-between-file-types">Converting Between File Types</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ipynb-to-py">.ipynb to .py:**</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#py-to-ipynb">.py to .ipynb:**</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-lab-vs-google-colab">3. Jupyter Lab vs Google Colab</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Robert Belford
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

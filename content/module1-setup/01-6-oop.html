@@ -1,0 +1,1171 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6. Object Oriented Programming &#8212; Draft Python for Science Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/module1-setup/01-6-oop';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7. Virtual Environments" href="01-7-virtual-environments.html" />
+    <link rel="prev" title="5. Git and GitHub" href="01-5-git.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Draft Python for Science Book - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Draft Python for Science Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Python for Science
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01-1-setupcomputer.html">1. Setting up your computer</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="01-2-jynbgettingstarted.html">2: Runnng and Creating Jupyter Notebooks</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="01-3-jynb-intro.html">3. Overview of Jupyter Notebooks</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="01-5-git.html">5. Git and GitHub</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Object Oriented Programming</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="01-7-virtual-environments.html">7. Virtual Environments</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fcontent/module1-setup/01-6-oop.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/module1-setup/01-6-oop.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>6. Object Oriented Programming</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">6. Object Oriented Programming</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#procedural-vs-object-oriented-programming">1. Procedural Vs. Object Oriented Programming</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedural-approach-to-summing-an-array">Procedural Approach to Summing an Array</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-oriented-approach-to-summing-an-array">Object Oriented Approach to Summing an Array</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-object-oriented-programming-oop">2. Overview of Object Oriented Programming (OOP)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-and-python-objects-classes-and-functions">3. Memory and Python Objects (Classes and Functions)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-functions-and-classes">3.1. Built-In Functions and Classes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-functions"><strong>Built-In Functions</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-classes"><strong>Built-In Classes</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-modules">3.2 Built in Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#externally-managed-packages-and-modules">3.3. Externally Managed Packages and Modules</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-forge">Conda-Forge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-package-index">Python Package Index</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cpython">4. CPython</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-built-in-python-types-and-their-cpython-representations"><strong>Common Built-In Python Types and Their CPython Representations</strong></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#python-functions-that-reveal-object-information">5. Python Functions that Reveal Object Information</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structures-and-classes">6. Data Structures and Classes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primitive-data-structures">Primitive Data Structures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#composite-data-structures">Composite Data Structures</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="object-oriented-programming">
+<span id="module1-setup-01-6-oop"></span><h1>6. Object Oriented Programming<a class="headerlink" href="#object-oriented-programming" title="Link to this heading">#</a></h1>
+<p><strong>Before you start this activity</strong></p>
+<ol class="arabic simple">
+<li><p>Be sure you are running the kernel needed for this lab. (click on the Python(kernel-name) next to the debugger in the upper right corner).</p></li>
+<li><p>Restart the kernel and clear Output of All Cells - in the top Menu click “Kernel” and restart the Kernel and clear output of all cells</p></li>
+</ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="procedural-vs-object-oriented-programming">
+<h1>1. Procedural Vs. Object Oriented Programming<a class="headerlink" href="#procedural-vs-object-oriented-programming" title="Link to this heading">#</a></h1>
+<p><strong>This is a Markdown Cell, and when you execute it (shift-enter) no code is sent to the python processor</strong></p>
+<p>Python is a type of programming known as Object Oriented Programming (<strong>OOP</strong>), and we are going to start by looking at the difference between the procedural and the object oriented approach to summing numbers in a python data structure known as an array, or more accurately, the numpy array. We will start by generating an array of 8 random numbers, and by using a seed, we can reproduce the same array.  If we change the seed the numbers in the array will change. We will then create two different arrays and assign them to two variables called random_arrayA and random_arrayB. In the last step of the code we will print the array and the variable’s class type.</p>
+<p><strong>The next cell is a code cell, and when you execute it, the script will run</strong>
+<strong>You will see the number 1 appear in the [ ]: to the left of the cell</strong> and this is telling you the order you have processed the cells with. That is, in a Jupyter notebook you process one cell at a time and can do so in any order you choose, and the number reflects that order.  When you restart the kernel and clear all output, all numbers disappear.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;In the next cell we are importing numpy with the alias np.  This will give us </span>
+<span class="sd">access to the resources withing the numpy package. We will first set a seed for the</span>
+<span class="sd">numpy random integer generator so that it will provide the same random numbers, </span>
+<span class="sd">and then we will create two arrays of 8 numbers between 0 and 99.&#39;&#39;&#39;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Set the seed for reproducibility</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Create a random 1D NumPy array of 8 integers between 0 and 99 inclusive</span>
+<span class="n">random_arrayA</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># Set the seed for reproducibility</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+
+<span class="c1"># Create a random 1D NumPy array of 8 integers between 0 and 99 inclusive</span>
+<span class="n">random_arrayB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+
+<span class="c1"># Print the arrays and their type.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random_arrayA</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;random_arrayA is an object of </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">random_arrayA</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random_arrayB</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;random_arrayB is an object of </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">random_arrayB</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[51 92 14 71 60 20 82 86]
+random_arrayA is an object of &lt;class &#39;numpy.ndarray&#39;&gt;.
+[34  3 64 87 17 17  1 79]
+random_arrayB is an object of &lt;class &#39;numpy.ndarray&#39;&gt;.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code output of the above cell is indicative of object oriented programming. The two arrays are different instances (objects) of the class numpy.ndarray, that have different numbers, just as two Eagles may have different weights and wingspans, but they are still eagles.</p>
+<section id="procedural-approach-to-summing-an-array">
+<h2>Procedural Approach to Summing an Array<a class="headerlink" href="#procedural-approach-to-summing-an-array" title="Link to this heading">#</a></h2>
+<p>In the next cell we are going to sum these numbers using a procedural approach. We set our counter equal to zero and then print out its value after we add the eight numbers. Each number of the array is identified by an index position, and we start at position 0 and go up to 8, adding each number to the total as we loop through the loop. <strong>Click on the code cell below and place your curser to the left of the code cell but right of the blue line and type shift L (a capital L) and line numbers will appear</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;Each position of a list has an index number, and here we use a procedural approach to </span>
+<span class="sd">sum up the values at each index position.&#39;&#39;&#39;</span>
+
+<span class="c1"># Initialize the sum and set counters = 0.  Note, the equal sign is the assignment operator.</span>
+<span class="n">totalA</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">totalB</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># Loop through the list by its index numbers and add each number to the sum</span>
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">totalA</span> <span class="o">=</span> <span class="n">totalA</span> <span class="o">+</span> <span class="n">random_arrayA</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">totalB</span> <span class="o">=</span> <span class="n">totalB</span> <span class="o">+</span> <span class="n">random_arrayB</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+    
+<span class="c1"># Print the list and the sum</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;random_arrayA: </span><span class="si">{</span><span class="n">random_arrayA</span><span class="si">}</span><span class="s2"> with sum: </span><span class="si">{</span><span class="n">totalA</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;random_arrayB: </span><span class="si">{</span><span class="n">random_arrayB</span><span class="si">}</span><span class="s2"> with sum: </span><span class="si">{</span><span class="n">totalB</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>random_arrayA: [51 92 14 71 60 20 82 86] with sum: 476
+random_arrayB: [34  3 64 87 17 17  1 79] with sum: 302
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="object-oriented-approach-to-summing-an-array">
+<h2>Object Oriented Approach to Summing an Array<a class="headerlink" href="#object-oriented-approach-to-summing-an-array" title="Link to this heading">#</a></h2>
+<p>A fish has gills and a bird has wings and these are attributes of fish and birds that allow them to live under water or fly in the air, but each bird and fish is a unique instance of its class, and the same goes for pythonic objects.  Both of the arrays have the attributes of the numpy.ndarray class, but they have different numbers that sum to different values, simply speaking, they are different arrays.</p>
+<p><strong>In the empty cell below start to type random but stop at the n and type tab</strong>, and choose one of the random arrays created in the above code block, and <strong>then type a period after the array name and hit tab again.</strong>  This will show you a list of numpy array attributes and methods (functions), and if you scroll down you will see one is called <strong>sum</strong>.  Now, sum is actually two types of attributes, it is a method and a function, and we will discuss these shortly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Here we are looking at the sum as a method</span>
+<span class="n">array_sumA</span> <span class="o">=</span><span class="n">random_arrayA</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">array_sumB</span> <span class="o">=</span><span class="n">random_arrayB</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="c1"># print the array and sum in an f-string.  This is a way of formatting </span>
+<span class="c1"># print statements and we will cover it later</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;random_arrayA: </span><span class="si">{</span><span class="n">random_arrayA</span><span class="si">}</span><span class="s2"> with sum: </span><span class="si">{</span><span class="n">array_sumA</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;random_arrayB: </span><span class="si">{</span><span class="n">random_arrayB</span><span class="si">}</span><span class="s2"> with sum: </span><span class="si">{</span><span class="n">array_sumB</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>random_arrayA: [51 92 14 71 60 20 82 86] with sum: 476
+random_arrayB: [34  3 64 87 17 17  1 79] with sum: 302
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Note the syntax above is <code class="docutils literal notranslate"><span class="pre">array_name.sum()</span></code>, where <code class="docutils literal notranslate"><span class="pre">sum</span></code> is a method of the class <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code>. It operates directly on the object (<code class="docutils literal notranslate"><span class="pre">array_name</span></code>) and is invoked using the attribute access operator (<code class="docutils literal notranslate"><span class="pre">.</span></code>).”</p></li>
+</ul>
+<ul class="simple">
+<li><p>“Note the syntax below is <code class="docutils literal notranslate"><span class="pre">np.sum(array_name)</span></code>, where <code class="docutils literal notranslate"><span class="pre">sum</span></code> is a standalone function from the NumPy module (<code class="docutils literal notranslate"><span class="pre">np</span></code>). The object (<code class="docutils literal notranslate"><span class="pre">array_name</span></code>) is passed as an argument to the function.”</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># here we are looking at sum as a function</span>
+<span class="n">array_sumAf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">random_arrayA</span><span class="p">)</span>
+<span class="n">array_sumBf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">random_arrayB</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;random_arrayA: </span><span class="si">{</span><span class="n">random_arrayA</span><span class="si">}</span><span class="s2"> with sum: </span><span class="si">{</span><span class="n">array_sumAf</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;random_arrayB: </span><span class="si">{</span><span class="n">random_arrayB</span><span class="si">}</span><span class="s2"> with sum: </span><span class="si">{</span><span class="n">array_sumBf</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>random_arrayA: [51 92 14 71 60 20 82 86] with sum: 476
+random_arrayB: [34  3 64 87 17 17  1 79] with sum: 302
+</pre></div>
+</div>
+</div>
+</div>
+<p>In fact, we could put the array with its method inside of the print statement and reduce the above to one line. This print statement is using something called an f string and we will cover that later.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Here we are looking at sum as a method</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;random_arrayA: </span><span class="si">{</span><span class="n">random_arrayA</span><span class="si">}</span><span class="s2"> with sum: </span><span class="si">{</span><span class="n">random_arrayA</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">random_arrayB: </span><span class="si">{</span><span class="n">random_arrayB</span><span class="si">}</span><span class="s2"> with sum: </span><span class="si">{</span><span class="n">random_arrayB</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>random_arrayA: [51 92 14 71 60 20 82 86] with sum: 476
+random_arrayB: [34  3 64 87 17 17  1 79] with sum: 302
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># here we are looking at sum as a function</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;random_arrayA: </span><span class="si">{</span><span class="n">random_arrayA</span><span class="si">}</span><span class="s2"> with sum: </span><span class="si">{</span><span class="n">array_sumAf</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">random_arrayB: </span><span class="si">{</span><span class="n">random_arrayB</span><span class="si">}</span><span class="s2"> with sum: </span><span class="si">{</span><span class="n">array_sumBf</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>random_arrayA: [51 92 14 71 60 20 82 86] with sum: 476 
+random_arrayB: [34  3 64 87 17 17  1 79] with sum: 302
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="overview-of-object-oriented-programming-oop">
+<h1>2. Overview of Object Oriented Programming (OOP)<a class="headerlink" href="#overview-of-object-oriented-programming-oop" title="Link to this heading">#</a></h1>
+<p>Objects are the core of Python’s OOP model. They are instances of classes, combining data (attributes) and behavior (methods) into a single entity. Objects are created from classes, which are like blueprints that define the structure and behavior of the objects. For example, a NumPy array is an object created from the numpy.ndarray class. Classes allow us to group related data and behavior together, making our code more organized and easier to work with.</p>
+<p>In OOP, an attribute is a piece of information stored in an object, like the shape of an array (array.shape), while a method is a function associated with an object that performs an action on it, like summing the elements of an array (array.sum()). An instance is a specific object created from a class, such as a particular array or dictionary you define in your code. These characteristics make Python a flexible and intuitive language for solving scientific problems, as you can work with data and its associated actions in a structured way.</p>
+<p>Python is written in C, or CPython, which is a procedural language but it contains PyObjects for each object in Python and these are what is placed in the memory heap</p>
+<p><strong>TO BE CONTINUED</strong></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="memory-and-python-objects-classes-and-functions">
+<h1>3. Memory and Python Objects (Classes and Functions)<a class="headerlink" href="#memory-and-python-objects-classes-and-functions" title="Link to this heading">#</a></h1>
+<p>There are sort of three ways you can obtain pythonic objects</p>
+<ol class="arabic simple">
+<li><p>Built-In Functions and Classes</p></li>
+<li><p>Built in Modules</p></li>
+<li><p>External Modules that you need to install.
+Let’s quickly look at these, one at a time.</p></li>
+</ol>
+<section id="built-in-functions-and-classes">
+<h2>3.1. Built-In Functions and Classes<a class="headerlink" href="#built-in-functions-and-classes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Part of Pythons Standard Library</p></li>
+<li><p>Always available and do not require importing</p></li>
+<li><p>Loaded into RAM when you launch Pythons interpreter</p></li>
+<li><p>Part of python global namespace and are available to any program by simply typing their names.</p></li>
+<li><p>Frequently used functions like print() may even be loaded into the CPU cache for quicker execution.</p></li>
+</ul>
+<hr class="docutils" />
+<section id="built-in-functions">
+<h3><strong>Built-In Functions</strong><a class="headerlink" href="#built-in-functions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Function</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">print()</span></code></p></td>
+<td><p>Displays output to the console.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">type()</span></code></p></td>
+<td><p>Returns the type (class) of an object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">len()</span></code></p></td>
+<td><p>Returns the number of items in a container (e.g., list, string, dictionary).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">float()</span></code></p></td>
+<td><p>Converts a number or string to a floating-point number.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int()</span></code></p></td>
+<td><p>Converts a number or string to an integer, truncating towards zero.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">str()</span></code></p></td>
+<td><p>Converts an object to a string representation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">input()</span></code></p></td>
+<td><p>Reads a line of input from the console.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="built-in-classes">
+<h3><strong>Built-In Classes</strong><a class="headerlink" href="#built-in-classes" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Class</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p></td>
+<td><p>An ordered collection of items (mutable).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+<td><p>A collection of key-value pairs (mutable and unordered).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>An integer number (unlimited precision).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p>A floating-point number (decimal).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>A sequence of Unicode characters (string).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p>A boolean type with only two possible values: <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p></td>
+<td><p>An unordered collection of unique elements.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="built-in-modules">
+<h2>3.2 Built in Modules<a class="headerlink" href="#built-in-modules" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Need to be imported to be available</p></li>
+<li><p>Two basic types of import statements</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">math</span></code> - functions and classes are not part of the global namespace, to use the sqrt function of that module you would need to write math.sqrt().</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">math</span> <span class="pre">import</span> <span class="pre">sqrt</span></code> now sqrt is part of the global namespace and you can use it without the math.</p></li>
+</ol>
+</li>
+</ul>
+<p>Here is a table of some common built in modules</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Module</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math</span></code></p></td>
+<td><p>Provides basic mathematical functions like <code class="docutils literal notranslate"><span class="pre">sqrt</span></code>, <code class="docutils literal notranslate"><span class="pre">sin</span></code>, and <code class="docutils literal notranslate"><span class="pre">cos</span></code>, as well as constants like <code class="docutils literal notranslate"><span class="pre">pi</span></code> and <code class="docutils literal notranslate"><span class="pre">e</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">random</span></code></p></td>
+<td><p>Offers functionality for generating random numbers, shuffling sequences, and picking random items from lists.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">os</span></code></p></td>
+<td><p>Enables interaction with the operating system, such as working with files, directories, and environment variables.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sys</span></code></p></td>
+<td><p>Gives access to system-specific parameters and functions, including command-line arguments and the Python runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">time</span></code></p></td>
+<td><p>Provides time-related functions, like getting the current time, pausing execution (<code class="docutils literal notranslate"><span class="pre">sleep</span></code>), or measuring performance.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">datetime</span></code></p></td>
+<td><p>Supplies classes for manipulating dates and times, including formatting and arithmetic with time objects.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">re</span></code></p></td>
+<td><p>Implements regular expression operations for string searching, matching, and substitution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">json</span></code></p></td>
+<td><p>Lets you read and write JSON (JavaScript Object Notation) data for easy data serialization and sharing.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">csv</span></code></p></td>
+<td><p>Simplifies reading and writing CSV (Comma-Separated Values) files.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="c1"># uncomment the following line and it will give an an error</span>
+<span class="c1">#sqrt(4)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">sqrt</span>
+<span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>NOTE: Go back and run the cell that gave the error (3 cells above)</strong>.  Can you explain why it works now?  (hint: look at the numbers next to the cell)</p>
+</section>
+<section id="externally-managed-packages-and-modules">
+<h2>3.3. Externally Managed Packages and Modules<a class="headerlink" href="#externally-managed-packages-and-modules" title="Link to this heading">#</a></h2>
+<p>One of the strengths of Python as an Open Source Software is that third parties can create their own customized libraries in the form of installable packages that can extend the capabilities of your programs. These packages can contain modules with functions and classes that are built on other modules, or the core built-in libraries. Because there are dependencies across packages it is important to install them in virtual environments and that is why we are using miniconda.</p>
+<p>To use these packages we have to first use conda commands in the terminal to install the package, and once installed, we need to import them in our python programs just was we import the built-in modules.  <strong>It is very important to use conda to install these in the virtual environments.</strong> There are two major repositories for obtaining python packages, the Python Package Index (PyPi) and Conda/Conda-Forge</p>
+<section id="conda-forge">
+<h3>Conda-Forge<a class="headerlink" href="#conda-forge" title="Link to this heading">#</a></h3>
+<p><strong><a class="reference external" href="https://conda-forge.org/">Conda-Forge</a></strong> is a Git-Hub organization that as of January 2025 has over 28.5K packages and 0.81 billion monthly downloads. Conda-Forge is essentially focused on data science and scientific computing and has libraries in multiple programming languages besides Python. The conda package management system is very robust in handling the dependencies across multiple packages and this is the repository we will give priority to when installing externally managed packages.</p>
+</section>
+<section id="python-package-index">
+<h3>Python Package Index<a class="headerlink" href="#python-package-index" title="Link to this heading">#</a></h3>
+<p><strong><a class="reference external" href="https://pypi.org/">Python Package Index (PyPi)</a></strong> is absolutely amazing and has over 600,000 python  projects as of January 2025, and is the go-to place for code for everything from sensors to data science packages. When you find packages you will often see a <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">package-name</span></code> and this will install the package from PyPi.  In this class you are to first try and install packages using conda-forge, as it tends to be better in handling the complex dependencies, and integrates with your other packages that were installed with Conda.  There is another type of environment called <code class="docutils literal notranslate"><span class="pre">venv</span></code> that is part of the python standard library and pip integrates well with it, but as out class is going to be mixing multiple packages for different projects we will try and stick to Conda.  But PyPi is an awesome resource and we may find times where there are packages we need that can only be obtained through PyPi.  In those cases, it will be prudent to create a new environment for that project, just to be on the safe side.</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="cpython">
+<h1>4. CPython<a class="headerlink" href="#cpython" title="Link to this heading">#</a></h1>
+<p>The most common version of Python is written in the C programming language and is often called CPython. When data is stored in the memory heap it is not stored as a Python object, but as a CPython object called a PyObject. This is a binary data representation that can be effectively processed by the Python interpreter, but contains additional metadata, which is data about the data, and that depends on the type of object.</p>
+<section id="common-built-in-python-types-and-their-cpython-representations">
+<h2><strong>Common Built-In Python Types and Their CPython Representations</strong><a class="headerlink" href="#common-built-in-python-types-and-their-cpython-representations" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Python Object Type</strong></p></th>
+<th class="head"><p><strong>CPython Object Structure</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PyLongObject</span></code></p></td>
+<td><p>Represents arbitrary precision integers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PyFloatObject</span></code></p></td>
+<td><p>Represents floating-point numbers.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">complex</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PyComplexObject</span></code></p></td>
+<td><p>Represents complex numbers, storing real and imaginary parts as floats.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PyUnicodeObject</span></code></p></td>
+<td><p>Represents Unicode strings, with metadata for encoding and actual character data.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bytes</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PyBytesObject</span></code></p></td>
+<td><p>Represents immutable sequences of raw bytes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PyListObject</span></code></p></td>
+<td><p>Represents lists, using a dynamic array of pointers to other objects.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tuple</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PyTupleObject</span></code></p></td>
+<td><p>Represents tuples, storing a fixed-size array of object references.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PyDictObject</span></code></p></td>
+<td><p>Represents dictionaries, implemented as hash tables.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PySetObject</span></code></p></td>
+<td><p>Represents sets, using a hash table for unique elements.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PyBoolObject</span></code></p></td>
+<td><p>Represents Boolean values (<code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">False</span></code>), implemented as a subclass of <code class="docutils literal notranslate"><span class="pre">PyLongObject</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PyNoneObject</span></code></p></td>
+<td><p>Represents the singleton <code class="docutils literal notranslate"><span class="pre">None</span></code>. Only one instance exists.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">function</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PyFunctionObject</span></code></p></td>
+<td><p>Represents Python functions, including their bytecode and other metadata.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">module</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PyModuleObject</span></code></p></td>
+<td><p>Represents Python modules, storing module-level data and functions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">class</span></code> (type)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">PyTypeObject</span></code></p></td>
+<td><p>Represents Python classes. Stores information about the class itself (methods, attributes, etc.).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="python-functions-that-reveal-object-information">
+<h1>5. Python Functions that Reveal Object Information<a class="headerlink" href="#python-functions-that-reveal-object-information" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Function</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">type(obj)</span></code></p></td>
+<td><p>Returns the class (type) of an object (e.g., <code class="docutils literal notranslate"><span class="pre">&lt;class</span> <span class="pre">'int'&gt;</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">id(obj)</span></code></p></td>
+<td><p>Returns a unique integer identifier for an object, often its memory address in CPython.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dir(obj)</span></code></p></td>
+<td><p>Lists the attributes (including methods) associated with an object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">help(obj)</span></code></p></td>
+<td><p>Displays help documentation or the docstring for an object in an interactive console.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">isinstance(obj,</span> <span class="pre">C)</span></code></p></td>
+<td><p>Checks if <code class="docutils literal notranslate"><span class="pre">obj</span></code> is an instance (or subclass instance) of the class <code class="docutils literal notranslate"><span class="pre">C</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">issubclass(A,</span> <span class="pre">B)</span></code></p></td>
+<td><p>Checks if class <code class="docutils literal notranslate"><span class="pre">A</span></code> is a subclass of class <code class="docutils literal notranslate"><span class="pre">B</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">callable(obj)</span></code></p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if <code class="docutils literal notranslate"><span class="pre">obj</span></code> can be called like a function, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hasattr(obj,</span> <span class="pre">name)</span></code></p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if an attribute named <code class="docutils literal notranslate"><span class="pre">name</span></code> exists in <code class="docutils literal notranslate"><span class="pre">obj</span></code>, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="data-structures-and-classes">
+<h1>6. Data Structures and Classes<a class="headerlink" href="#data-structures-and-classes" title="Link to this heading">#</a></h1>
+<p>In this class we are not going to worry about CPython and are going to look at data structures from the more abstract perspective of Python, that is, not how they are stored on the computer but how they are represented in the programming language we are learning.  We will start with developing an understanding of built-in break data structures and then move onto using this as a framework for developing strategies to use AIs to understand data structures and types in scientific packages. There are essentially two fundamental types of data structures, primative (atomic) nd composite (container).</p>
+<ol class="arabic simple">
+<li><p>Primitive (atomic) are where the memory block is one location on the heap. These include integers, floats, strings, booleans and complex numbers.</p></li>
+<li><p>Composite (container) are where the address of the memory block is really a pointer to other memory blocks. Examples are lists, dictionaries, tuples and arrays.</p></li>
+</ol>
+<section id="primitive-data-structures">
+<h2>Primitive Data Structures<a class="headerlink" href="#primitive-data-structures" title="Link to this heading">#</a></h2>
+<p>Primitive or atomic data structures are ones where the binary encoding that a variable points to represents the data itself, in contrast to a container, that can hold other data structures.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Data Structure</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int</span></code></p></td>
+<td><p>Represents whole numbers (positive, negative, or zero). Example: <code class="docutils literal notranslate"><span class="pre">42</span></code>, <code class="docutils literal notranslate"><span class="pre">-7</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p>Represents decimal (floating-point) numbers. Example: <code class="docutils literal notranslate"><span class="pre">3.14</span></code>, <code class="docutils literal notranslate"><span class="pre">-0.001</span></code>, <code class="docutils literal notranslate"><span class="pre">2.0</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">complex</span></code></p></td>
+<td><p>Represents numbers with real and imaginary parts. Example: <code class="docutils literal notranslate"><span class="pre">3+4j</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bool</span></code></p></td>
+<td><p>Represents truth values, either <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Represents immutable sequences of Unicode characters (text data). Example: <code class="docutils literal notranslate"><span class="pre">&quot;hello&quot;</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bytes</span></code></p></td>
+<td><p>Represents immutable sequences of raw bytes. Example: <code class="docutils literal notranslate"><span class="pre">b'hello'</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="composite-data-structures">
+<h2>Composite Data Structures<a class="headerlink" href="#composite-data-structures" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Data Structure</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p></td>
+<td><p>A collection of ordered, mutable items that can hold elements of different types.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tuple</span></code></p></td>
+<td><p>An ordered, immutable sequence of items, which can also hold elements of different types.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p></td>
+<td><p>An unordered collection of unique, immutable items.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+<td><p>A collection of key-value pairs, where keys are unique and immutable, and values are mutable.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">frozenset</span></code></p></td>
+<td><p>An immutable version of a set, useful for storing unique items that should not be changed.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="acknowledgements">
+<h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">#</a></h1>
+<p>This content was developed with assistance from <a class="reference external" href="https://www.perplexity.ai/">Perplexity AI</a> and <a class="reference external" href="https://chatgpt.com/">Chat GPT</a>. Multiple queries were made during the Fall 2024 and the Spring 2025.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "py4sci"
+        },
+        kernelOptions: {
+            name: "py4sci",
+            path: "./content/module1-setup"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'py4sci'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01-5-git.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">5. Git and GitHub</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="01-7-virtual-environments.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">7. Virtual Environments</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">6. Object Oriented Programming</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#procedural-vs-object-oriented-programming">1. Procedural Vs. Object Oriented Programming</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procedural-approach-to-summing-an-array">Procedural Approach to Summing an Array</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#object-oriented-approach-to-summing-an-array">Object Oriented Approach to Summing an Array</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-object-oriented-programming-oop">2. Overview of Object Oriented Programming (OOP)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#memory-and-python-objects-classes-and-functions">3. Memory and Python Objects (Classes and Functions)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-functions-and-classes">3.1. Built-In Functions and Classes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-functions"><strong>Built-In Functions</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-classes"><strong>Built-In Classes</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-modules">3.2 Built in Modules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#externally-managed-packages-and-modules">3.3. Externally Managed Packages and Modules</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-forge">Conda-Forge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-package-index">Python Package Index</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cpython">4. CPython</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-built-in-python-types-and-their-cpython-representations"><strong>Common Built-In Python Types and Their CPython Representations</strong></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#python-functions-that-reveal-object-information">5. Python Functions that Reveal Object Information</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-structures-and-classes">6. Data Structures and Classes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#primitive-data-structures">Primitive Data Structures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#composite-data-structures">Composite Data Structures</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Robert Belford
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
