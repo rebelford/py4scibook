@@ -1,0 +1,1912 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>5. Logic and Control Structures &#8212; Draft Python for Science Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e52fa269" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom-checkpoint.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/module2-oop-data-structures/02-5-control-structures';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="4. Built-In Modules" href="02-4-built-in-modules.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Draft Python for Science Book - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Draft Python for Science Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Python for Science
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../math-test.html">In a Markdown cell:</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../module1-setup/README.html">Module 1: Getting Set Up</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-1-setupcomputer.html">1. Setting up your computer</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-2-jynbgettingstarted.html">2: Runnng and Creating Jupyter Notebooks</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-3-jynb-intro.html">3. Overview of Jupyter Notebooks</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-5-git.html">5. Git and GitHub</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-6-oop.html">6. Object Oriented Programming</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-7-virtual-environments.html">7. Virtual Environments</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="README.html">Module 2: Data Structures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="02-1-primitive-data-structures.html">1. Primative Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-2-py-calculator.html">2. Python as a Calculator</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-3-composite-data-structures.html">3. Composite Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-4-built-in-modules.html">4. Built-In Modules</a></li>
+
+
+
+
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">5. Logic and Control Structures</a></li>
+
+
+
+
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/rebelford/py4scibook/master?urlpath=lab/tree/docs/content/module2-oop-data-structures/02-5-control-structures.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://your-jupyterhub-url.com/hub/user-redirect/git-pull?repo=https%3A//github.com/rebelford/py4scibook&urlpath=lab/tree/py4scibook/docs/content/module2-oop-data-structures/02-5-control-structures.ipynb&branch=master" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on JupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="JupyterHub logo" src="../../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rebelford/py4scibook/blob/master/docs/content/module2-oop-data-structures/02-5-control-structures.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook/issues/new?title=Issue%20on%20page%20%2Fcontent/module2-oop-data-structures/02-5-control-structures.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/module2-oop-data-structures/02-5-control-structures.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>5. Logic and Control Structures</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5. Logic and Control Structures</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conditionals">1. Conditionals</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-statement">If Statement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else-statement">If-else Statement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-elif-else-statements">If-elif-else Statements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compound-if-elif-statements">Compound if-elif Statements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#and-conjunction">AND Conjunction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#or-conjunction">OR Conjunction</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-if-statements">Nested if Statements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#try-except-error-handling">Try-Except Error Handling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-validation">Logical Validation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#loops">2. Loops</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loops">For Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iteration-over-containers">Iteration over Containers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modulus-2-division-boolean-logic-in-for-loops">Modulus 2 division - Boolean Logic in for loops</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numeric-iteration">Numeric Iteration</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#range-start-stop-increment-function">Range(start, stop, increment) function</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shorthand-operators-augmented-assignment">Shorthand Operators - Augmented Assignment</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#random-module">Random Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loops">While Loops</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#jump-control-structures">Jump (Control) Structures</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#break">break</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continue">Continue</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pass">pass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#try-except-block">try/except block</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#return">return</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comprehensions">4. Comprehensions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#list-comprehensions">List Comprehensions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-structure">Basic Structure:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-conversion-for-loop-vs-list-comprehension">Temperature Conversion: For Loop vs. List Comprehension</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-tuple-to-list">Convert Tuple to list</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-keys-from-a-dictionary">Extract Keys from a Dictionary</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-set-with-unique-values">Create a Set with Unique Values</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering">Filtering</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else-in-list-comprehension">if-else in list comprehension</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="logic-and-control-structures">
+<span id="module2-oop-data-structures-02-5-control-structures"></span><h1>5. Logic and Control Structures<a class="headerlink" href="#logic-and-control-structures" title="Link to this heading">#</a></h1>
+<p><strong>Boolean algebra</strong> deals with <strong>binary logic</strong> - values that are <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> and is the foundation of logic and control structures that allow you to control the sequence in which statements are executed.</p>
+<p>Control structures can generally be categorized into three main types:</p>
+<ol class="arabic simple">
+<li><p><strong>Conditional (Decision-Making) Control</strong> – These structures allow the program to make choices and take different execution paths based on conditions. Examples:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span></code> statement</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if-else</span></code> statement</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if-elif-else</span></code> statement</p></li>
+</ul>
+</li>
+<li><p><strong>Iteration (Looping) Control</strong> – These structures repeat a block of code multiple times until a condition is met. Examples:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">for</span></code> loop (iterates over sequences)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">while</span></code> loop (runs based on a condition)</p></li>
+</ul>
+</li>
+<li><p><strong>Branching (Jump) Control</strong> – These are statements that modify the normal flow of execution within loops or functions. Examples:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">break</span></code> (exits the loop)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">continue</span></code> (skips the rest of the current iteration and moves to the next)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pass</span></code> (placeholder statement that does nothing)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">return</span></code> (exits a function and optionally returns a value)</p></li>
+</ul>
+</li>
+</ol>
+<p>Operators that are used in logic and control structures</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="head"><p>Operator(s)</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Comparison</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">==</span></code></p></td>
+<td><p>Equal to</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">!=</span></code></p></td>
+<td><p>Not equal to</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code></p></td>
+<td><p>Greater than</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code></p></td>
+<td><p>Less than</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=</span></code></p></td>
+<td><p>Greater than or equal to</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;=</span></code></p></td>
+<td><p>Less than or equal to</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Logical (Boolean)</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">and</span></code></p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if both conditions are <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">or</span></code></p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if at least one condition is <code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">not</span></code></p></td>
+<td><p>Negates a Boolean expression</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Identity</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">is</span></code></p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if both variables reference the same object</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">is</span> <span class="pre">not</span></code></p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if variables reference different objects</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Membership</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">in</span></code></p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if a value is found in a sequence (list, tuple, string, etc.)</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">in</span></code></p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if a value is not in a sequence</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="conditionals">
+<h1>1. Conditionals<a class="headerlink" href="#conditionals" title="Link to this heading">#</a></h1>
+<p>The output of a conditional is Boolean There are three basic types of If statements</p>
+<ol class="arabic simple">
+<li><p>If Statement</p></li>
+<li><p>If-else Statement</p></li>
+<li><p>If-elif-else Statement</p></li>
+</ol>
+<p><img alt="image.png" src="../../_images/28b67167-6402-446e-b6bf-2fc9e49ccd8c.png" /></p>
+<section id="if-statement">
+<h2>If Statement<a class="headerlink" href="#if-statement" title="Link to this heading">#</a></h2>
+<p>In the following example we are asking someone to input into our code the molar mass of a compound, with diatomic hydrogen being the smallest substance, and so a <strong>molar mass of less than two is nonsense</strong> and should not be accepted as valid input.</p>
+<p><img alt="image.png" src="../../_images/28763f05-378f-4898-87e9-f8a9db8db291.png" /></p>
+<p><strong>Inspect the following code cell before running.</strong> Note how python uses indented blocks to define the if statement, with the indented statement being executed if the condition is <strong>True</strong>.</p>
+<p><strong>Be sure to try a molar mass &lt; 2 and read the output</strong></p>
+<div class="alert alert-info">  
+<center>Uncomment this code in the following cell when you transfer to a Jupyter Notebook</center> 
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#molar_mass=float(input(&quot;Enter the molar mass of a molecule in units of g/mol&quot;))</span>
+</pre></div>
+</div>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">molar_mass</span> <span class="o">=</span> <span class="mf">0.098</span>
+<span class="c1">#molar_mass=float(input(&quot;Enter the molar mass of a molecule in units of g/mol&quot;))</span>
+
+<span class="k">if</span> <span class="n">molar_mass</span> <span class="o">&lt;</span> <span class="mf">2.0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Your molar mass makes no sense&quot;</span><span class="p">)</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The molar mass you entered is: </span><span class="si">{</span><span class="n">molar_mass</span><span class="si">}</span><span class="s2">g/mol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Your molar mass makes no sense
+The molar mass you entered is: 0.098g/mol
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="if-else-statement">
+<h2>If-else Statement<a class="headerlink" href="#if-else-statement" title="Link to this heading">#</a></h2>
+<p>The shortcomings of the previous block of code can be overcome with an if-else statement</p>
+<p><img alt="image.png" src="../../_images/a218b046-732a-48d1-ab70-2780f064100e.png" /></p>
+<p><strong>Inspect the following code cell before running it</strong> and not how we switched the logic so it prints the output if true</p>
+<div class="alert alert-info">  
+<center>Uncomment this code in the following cell when you transfer to a Jupyter Notebook and enter a value less than 2 g/mol</center> 
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#molar_mass=float(input(&quot;Enter the molar mass of a molecule in units of g/mol&quot;))</span>
+</pre></div>
+</div>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># molar_mass=float(input(&quot;Enter the molar mass of a molecule in units of g/mol &quot;))</span>
+<span class="n">molar_mass</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="k">if</span> <span class="n">molar_mass</span> <span class="o">&gt;=</span> <span class="mf">2.0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The molar mass you entered is: </span><span class="si">{</span><span class="n">molar_mass</span><span class="si">}</span><span class="s2">g/mol&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">molar_mass</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a molar mass greater than or equal to diatomic hydrogen &quot;</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The molar mass you entered is: </span><span class="si">{</span><span class="n">molar_mass</span><span class="si">}</span><span class="s2">g/mol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The molar mass you entered is: 4g/mol
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="if-elif-else-statements">
+<h2>If-elif-else Statements<a class="headerlink" href="#if-elif-else-statements" title="Link to this heading">#</a></h2>
+<p><img alt="image.png" src="../../_images/07f5992e-e977-45d6-bd13-b6f0b8e1305c.png" /></p>
+<p>Note how the following code cell uses a list of strings, and the first letter of each element is capitalized.  After inspecting and running the code, can you alter it with a string method so it will work if you do not capitalize the first letter (you can do this on the first line of code).</p>
+<div class="alert alert-info">  
+<center>Uncomment this code in the following cell when you transfer to a Jupyter Notebook</center> 
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">element</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the element you want to know the family of: &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">element</span><span class="o">=</span><span class="s2">&quot;Silicon&quot;</span>
+<span class="c1">#element = input(&quot;Enter the element you want to know the family of: &quot;)</span>
+
+<span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="s2">&quot;Hydrogen&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hydrogen belongs to the nonmetal family.&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Lithium&quot;</span><span class="p">,</span> <span class="s2">&quot;Sodium&quot;</span><span class="p">,</span> <span class="s2">&quot;Potassium&quot;</span><span class="p">,</span> <span class="s2">&quot;Rubidium&quot;</span><span class="p">,</span> <span class="s2">&quot;Cesium&quot;</span><span class="p">,</span> <span class="s2">&quot;Francium&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s2"> belongs to the alkali metal family.&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Beryllium&quot;</span><span class="p">,</span> <span class="s2">&quot;Magnesium&quot;</span><span class="p">,</span> <span class="s2">&quot;Calcium&quot;</span><span class="p">,</span> <span class="s2">&quot;Strontium&quot;</span><span class="p">,</span> <span class="s2">&quot;Barium&quot;</span><span class="p">,</span> <span class="s2">&quot;Radium&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s2"> belongs to the alkaline earth metal family.&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Boron&quot;</span><span class="p">,</span> <span class="s2">&quot;Aluminum&quot;</span><span class="p">,</span> <span class="s2">&quot;Gallium&quot;</span><span class="p">,</span> <span class="s2">&quot;Indium&quot;</span><span class="p">,</span> <span class="s2">&quot;Thallium&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s2"> belongs to the metalloid family.&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Carbon&quot;</span><span class="p">,</span> <span class="s2">&quot;Silicon&quot;</span><span class="p">,</span> <span class="s2">&quot;Germanium&quot;</span><span class="p">,</span> <span class="s2">&quot;Tin&quot;</span><span class="p">,</span> <span class="s2">&quot;Lead&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s2"> belongs to the nonmetal family.&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Nitrogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Phosphorus&quot;</span><span class="p">,</span> <span class="s2">&quot;Arsenic&quot;</span><span class="p">,</span> <span class="s2">&quot;Antimony&quot;</span><span class="p">,</span> <span class="s2">&quot;Bismuth&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s2"> belongs to the pnictogen family.&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Oxygen&quot;</span><span class="p">,</span> <span class="s2">&quot;Sulfur&quot;</span><span class="p">,</span> <span class="s2">&quot;Selenium&quot;</span><span class="p">,</span> <span class="s2">&quot;Tellurium&quot;</span><span class="p">,</span> <span class="s2">&quot;Polonium&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s2"> belongs to the chalcogen family.&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Fluorine&quot;</span><span class="p">,</span> <span class="s2">&quot;Chlorine&quot;</span><span class="p">,</span> <span class="s2">&quot;Bromine&quot;</span><span class="p">,</span> <span class="s2">&quot;Iodine&quot;</span><span class="p">,</span> <span class="s2">&quot;Astatine&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s2"> belongs to the halogen family.&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Helium&quot;</span><span class="p">,</span> <span class="s2">&quot;Neon&quot;</span><span class="p">,</span> <span class="s2">&quot;Argon&quot;</span><span class="p">,</span> <span class="s2">&quot;Krypton&quot;</span><span class="p">,</span> <span class="s2">&quot;Xenon&quot;</span><span class="p">,</span> <span class="s2">&quot;Radon&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s2"> belongs to the noble gas family.&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Cerium&quot;</span><span class="p">,</span> <span class="s2">&quot;Praseodymium&quot;</span><span class="p">,</span> <span class="s2">&quot;Neodymium&quot;</span><span class="p">,</span> <span class="s2">&quot;Promethium&quot;</span><span class="p">,</span> <span class="s2">&quot;Samarium&quot;</span><span class="p">,</span> 
+               <span class="s2">&quot;Europium&quot;</span><span class="p">,</span> <span class="s2">&quot;Gadolinium&quot;</span><span class="p">,</span> <span class="s2">&quot;Terbium&quot;</span><span class="p">,</span> <span class="s2">&quot;Dysprosium&quot;</span><span class="p">,</span> <span class="s2">&quot;Holmium&quot;</span><span class="p">,</span> 
+               <span class="s2">&quot;Erbium&quot;</span><span class="p">,</span> <span class="s2">&quot;Thulium&quot;</span><span class="p">,</span> <span class="s2">&quot;Ytterbium&quot;</span><span class="p">,</span> <span class="s2">&quot;Lutetium&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s1"> is a lanthanide&#39;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Thorium&quot;</span><span class="p">,</span> <span class="s2">&quot;Protactinium&quot;</span><span class="p">,</span> <span class="s2">&quot;Uranium&quot;</span><span class="p">,</span> <span class="s2">&quot;Neptunium&quot;</span><span class="p">,</span> <span class="s2">&quot;Plutonium&quot;</span><span class="p">,</span> 
+             <span class="s2">&quot;Americium&quot;</span><span class="p">,</span> <span class="s2">&quot;Curium&quot;</span><span class="p">,</span> <span class="s2">&quot;Berkelium&quot;</span><span class="p">,</span> <span class="s2">&quot;Californium&quot;</span><span class="p">,</span> <span class="s2">&quot;Einsteinium&quot;</span><span class="p">,</span> 
+             <span class="s2">&quot;Fermium&quot;</span><span class="p">,</span> <span class="s2">&quot;Mendelevium&quot;</span><span class="p">,</span> <span class="s2">&quot;Nobelium&quot;</span><span class="p">,</span> <span class="s2">&quot;Lawrencium&quot;</span><span class="p">,</span> <span class="s2">&quot;Rutherfordium&quot;</span><span class="p">,</span> 
+             <span class="s2">&quot;Dubnium&quot;</span><span class="p">,</span> <span class="s2">&quot;Seaborgium&quot;</span><span class="p">,</span> <span class="s2">&quot;Bohrium&quot;</span><span class="p">,</span> <span class="s2">&quot;Hassium&quot;</span><span class="p">,</span> <span class="s2">&quot;Meitnerium&quot;</span><span class="p">,</span> <span class="s2">&quot;Darmstadtium&quot;</span><span class="p">,</span> 
+             <span class="s2">&quot;Roentgenium&quot;</span><span class="p">,</span> <span class="s2">&quot;Copernicium&quot;</span><span class="p">,</span> <span class="s2">&quot;Nihonium&quot;</span><span class="p">,</span> <span class="s2">&quot;Flerovium&quot;</span><span class="p">,</span> <span class="s2">&quot;Moscovium&quot;</span><span class="p">,</span> <span class="s2">&quot;Livermorium&quot;</span><span class="p">,</span> <span class="s2">&quot;Tennessine&quot;</span><span class="p">,</span> <span class="s2">&quot;Oganesson&quot;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s1"> is an actinide&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;element is a transition metal&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Silicon belongs to the nonmetal family.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="compound-if-elif-statements">
+<h2>Compound if-elif Statements<a class="headerlink" href="#compound-if-elif-statements" title="Link to this heading">#</a></h2>
+<section id="and-conjunction">
+<h3>AND Conjunction<a class="headerlink" href="#and-conjunction" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>ΔH</p></th>
+<th class="head"><p>ΔS</p></th>
+<th class="head"><p>ΔG</p></th>
+<th class="head"><p>Spontaneity Condition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>[+]</p></td>
+<td><p>[-]</p></td>
+<td><p>Always [+]</p></td>
+<td><p>Never spontaneous</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>[-]</p></td>
+<td><p>[-]</p></td>
+<td><p>[-] at low T</p></td>
+<td><p>Enthalpy-driven process, only spontaneous at low T</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>[+]</p></td>
+<td><p>[+]</p></td>
+<td><p>[-] at high T</p></td>
+<td><p>Entropy-driven process, only spontaneous at high T</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>[-]</p></td>
+<td><p>[+]</p></td>
+<td><p>Always [-]</p></td>
+<td><p>Spontaneous at all T, both enthalpy and entropy driven</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="alert alert-info">  
+<center>Uncomment this code in the following cell when you transfer to a Jupyter Notebook</center> 
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">enthalpy</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a reaction enthalpy in units of kJ and include the sign: &quot;</span><span class="p">))</span>
+<span class="n">entropy</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a reaction entropy in units of j/K and include the sign: &quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Temperature and reaction spontaneity</span>
+<span class="n">enthalpy</span> <span class="o">=</span>  <span class="o">-</span><span class="mi">4</span>
+<span class="n">entropy</span> <span class="o">=</span> <span class="o">-</span><span class="mi">34</span>
+<span class="c1">#enthalpy=float(input(&quot;Enter a reaction enthalpy in units of kJ and include the sign: &quot;))</span>
+<span class="c1">#entropy=float(input(&quot;Enter a reaction entropy in units of j/K and include the sign: &quot;))</span>
+
+<span class="k">if</span> <span class="n">enthalpy</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">entropy</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A reaction with enthalpy = </span><span class="si">{</span><span class="n">enthalpy</span><span class="si">}</span><span class="s2"> kJ and entropy = </span><span class="si">{</span><span class="n">entropy</span><span class="si">}</span><span class="s2"> J/K is never spontaneous&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">enthalpy</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">entropy</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A reaction with enthalpy = </span><span class="si">{</span><span class="n">enthalpy</span><span class="si">}</span><span class="s2"> kJ and entropy = </span><span class="si">{</span><span class="n">entropy</span><span class="si">}</span><span class="s2"> J/K is entropy driven and spontaneous at high T&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">enthalpy</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">entropy</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A reaction with enthalpy = </span><span class="si">{</span><span class="n">enthalpy</span><span class="si">}</span><span class="s2"> kJ and entropy = </span><span class="si">{</span><span class="n">entropy</span><span class="si">}</span><span class="s2"> J/K is enthalpy driven and spontaneous at low T&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A reaction with enthalpy = </span><span class="si">{</span><span class="n">enthalpy</span><span class="si">}</span><span class="s2"> kJ and entropy = </span><span class="si">{</span><span class="n">entropy</span><span class="si">}</span><span class="s2"> J/K is enthalpy  and entropy driven and spontaneous at all T&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A reaction with enthalpy = -4 kJ and entropy = -34 J/K is enthalpy driven and spontaneous at low T
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="or-conjunction">
+<h3>OR Conjunction<a class="headerlink" href="#or-conjunction" title="Link to this heading">#</a></h3>
+<div class="alert alert-info">  
+<center>Uncomment this code in the following cell when you transfer to a Jupyter Notebook</center> 
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#atom=input(&quot;Enter name of element: &quot;).capitalize()</span>
+
+</pre></div>
+</div>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#is an element an alkaline earth metal?</span>
+<span class="n">atom</span> <span class="o">=</span> <span class="s2">&quot;barium&quot;</span>
+<span class="c1">#atom=input(&quot;Enter name of element: &quot;).capitalize()</span>
+<span class="n">atom</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">atom</span> <span class="o">==</span> <span class="s2">&quot;Beryllium&quot;</span> <span class="ow">or</span> <span class="n">atom</span> <span class="o">==</span> <span class="s2">&quot;Magnesium&quot;</span> <span class="ow">or</span> <span class="n">atom</span> <span class="o">==</span> <span class="s2">&quot;Calcium&quot;</span> <span class="ow">or</span> \
+   <span class="n">atom</span> <span class="o">==</span> <span class="s2">&quot;Barium&quot;</span> <span class="ow">or</span> <span class="n">atom</span> <span class="o">==</span> <span class="s2">&quot;Strontium&quot;</span> <span class="ow">or</span> <span class="n">atom</span> <span class="o">==</span> <span class="s2">&quot;Radium&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">atom</span><span class="si">}</span><span class="s2"> is an alkaline earth metal&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">atom</span><span class="si">}</span><span class="s2"> is not an alkaline earth metal&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Barium is an alkaline earth metal
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="nested-if-statements">
+<h2>Nested if Statements<a class="headerlink" href="#nested-if-statements" title="Link to this heading">#</a></h2>
+<div class="alert alert-info">  
+<center>Uncomment this code in the following cell when you transfer to a Jupyter Notebook</center> 
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#melting_point=float(input(&quot;What is the melting point of your substance? &quot;))</span>
+<span class="c1">#boiling_point=float(input(&quot;What is the boiling point of your substance? &quot;))</span>
+<span class="c1">#temperature=float(input(&quot;What is the temperature you wish to know the phase at? &quot;))</span>
+</pre></div>
+</div>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#What is the phase of a substance?</span>
+<span class="n">melting_point</span><span class="p">,</span><span class="n">boiling_point</span><span class="p">,</span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="mf">45.0</span> 
+<span class="c1">#melting_point=float(input(&quot;What is the melting point of your substance? &quot;))</span>
+<span class="c1">#boiling_point=float(input(&quot;What is the boiling point of your substance? &quot;))</span>
+<span class="c1">#temperature=float(input(&quot;What is the temperature you wish to know the phase at? &quot;))</span>
+
+<span class="k">if</span> <span class="n">temperature</span> <span class="o">&lt;=</span> <span class="n">melting_point</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">temperature</span> <span class="o">==</span> <span class="n">melting_point</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;It is at the melting point, could be solid, liquid or both coexisting together&quot;</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;It is a solid&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">temperature</span> <span class="o">&gt;</span> <span class="n">melting_point</span> <span class="ow">and</span> <span class="n">temperature</span> <span class="o">&lt;</span> <span class="n">boiling_point</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Substance is a liquid&quot;</span><span class="p">)</span>
+<span class="k">else</span> <span class="p">:</span>
+    <span class="k">if</span> <span class="n">temperature</span> <span class="o">==</span> <span class="n">boiling_point</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;It is at the boiling point and could be liquid, gas or both&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;It is a gas&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Substance is a liquid
+</pre></div>
+</div>
+</div>
+</div>
+<section id="try-except-error-handling">
+<h3>Try-Except Error Handling<a class="headerlink" href="#try-except-error-handling" title="Link to this heading">#</a></h3>
+<p>What if your input is not a number?  Then the code can not convert it to a float and an error will return (run the above cell but type a value like ten, not 10). We can input the entire code block of the nested if statement in a try block, followed by the except ValueError for non-numeric input, as in the following code cell.</p>
+<div class="alert alert-info">  
+<center>Uncomment this code in the following cells</center> 
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1">#melting_point = float(input(&quot;What is the melting point of your substance? &quot;))</span>
+    <span class="c1">#boiling_point = float(input(&quot;What is the boiling point of your substance? &quot;))</span>
+    <span class="c1">#temperature = float(input(&quot;What is the temperature you wish to know the phase at? &quot;))</span>
+</pre></div>
+</div>
+<center>Comment out this line of code:</center>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">melting_point</span><span class="p">,</span><span class="n">boiling_point</span><span class="p">,</span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;ten&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#What is the phase of a substance?</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">melting_point</span><span class="p">,</span><span class="n">boiling_point</span><span class="p">,</span><span class="n">temperature</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;ten&quot;</span><span class="p">)</span>
+    <span class="c1">#melting_point = float(input(&quot;What is the melting point of your substance? &quot;))</span>
+    <span class="c1">#boiling_point = float(input(&quot;What is the boiling point of your substance? &quot;))</span>
+    <span class="c1">#temperature = float(input(&quot;What is the temperature you wish to know the phase at? &quot;))</span>
+
+    <span class="k">if</span> <span class="n">temperature</span> <span class="o">&lt;=</span> <span class="n">melting_point</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">temperature</span> <span class="o">==</span> <span class="n">melting_point</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is at the melting point, could be solid, liquid, or both coexisting together&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            
+            
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is a solid&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">melting_point</span> <span class="o">&lt;</span> <span class="n">temperature</span> <span class="o">&lt;</span> <span class="n">boiling_point</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Substance is a liquid&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">temperature</span> <span class="o">==</span> <span class="n">boiling_point</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is at the boiling point and could be liquid, gas, or both&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is a gas&quot;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Please enter numeric values for all inputs.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error: Please enter numeric values for all inputs.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="logical-validation">
+<h3>Logical Validation<a class="headerlink" href="#logical-validation" title="Link to this heading">#</a></h3>
+<p>The above error was a type error in the sense that non-numeric input was given.  But what if the numeric value of the melting point is higher than the boiling point?  This would be nonsense, and we could use a boolean if to terminate the code.  To do this we need to use the built-in sys module.  Note, this gives us an error message.  In the next section we will learn how to use loops, and how a <strong>while True: loop</strong> is a <strong>better way</strong> to do this.</p>
+<div class="alert alert-info">
+<center></center>Copy the following code to a Jupyter Notebook code cell to execute it</div>center>
+</div></section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="loops">
+<h1>2. Loops<a class="headerlink" href="#loops" title="Link to this heading">#</a></h1>
+<p>A loop structure is a programming construct that allows you to repeat a block of code until a terminating condition is met.  There are two basic type of loop structures in Python, the “for” loop and the “while” loop.  The basic difference between them is how they are terminated.  In the for loop the code is repeated for a certain number of times, while in a while loop it is repeated while a condition is true. We will look at each of these in turn.</p>
+<p><img alt="image.png" src="../../_images/9317336b-e8a7-49ab-9dd5-df69a9e42851.png" /></p>
+<section id="for-loops">
+<h2>For Loops<a class="headerlink" href="#for-loops" title="Link to this heading">#</a></h2>
+<p>There are two basic types of <code class="docutils literal notranslate"><span class="pre">for</span></code> loops, data-driven (iterable containers like strings, lists, dictionaries) and count-controlled (numeric iterations over a range).</p>
+<ul class="simple">
+<li><p><strong>Data-driven loops</strong> iterate over <strong>stored data</strong> (which could come from an experiment, a database, a CSV file, etc.).</p></li>
+<li><p><strong>Numeric iteration</strong> generates values <strong>on demand</strong>, often used in <strong>simulations, modeling, and algorithmic processing</strong>.</p></li>
+</ul>
+<section id="iteration-over-containers">
+<h3>Iteration over Containers<a class="headerlink" href="#iteration-over-containers" title="Link to this heading">#</a></h3>
+<p>The following is a list of the names of the elements in the periodic table</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">element_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hydrogen&#39;</span><span class="p">,</span> <span class="s1">&#39;Helium&#39;</span><span class="p">,</span> <span class="s1">&#39;Lithium&#39;</span><span class="p">,</span> <span class="s1">&#39;Beryllium&#39;</span><span class="p">,</span> <span class="s1">&#39;Boron&#39;</span><span class="p">,</span> <span class="s1">&#39;Carbon&#39;</span><span class="p">,</span> <span class="s1">&#39;Nitrogen&#39;</span><span class="p">,</span> <span class="s1">&#39;Oxygen&#39;</span><span class="p">,</span> <span class="s1">&#39;Fluorine&#39;</span><span class="p">,</span> \
+                <span class="s1">&#39;Neon&#39;</span><span class="p">,</span> <span class="s1">&#39;Sodium&#39;</span><span class="p">,</span> <span class="s1">&#39;Magnesium&#39;</span><span class="p">,</span> <span class="s1">&#39;Aluminium&#39;</span><span class="p">,</span> <span class="s1">&#39;Silicon&#39;</span><span class="p">,</span> <span class="s1">&#39;Phosphorus&#39;</span><span class="p">,</span> <span class="s1">&#39;Sulfur&#39;</span><span class="p">,</span> <span class="s1">&#39;Chlorine&#39;</span><span class="p">,</span> <span class="s1">&#39;Argon&#39;</span><span class="p">,</span> \
+                <span class="s1">&#39;Potassium&#39;</span><span class="p">,</span> <span class="s1">&#39;Calcium&#39;</span><span class="p">,</span> <span class="s1">&#39;Scandium&#39;</span><span class="p">,</span> <span class="s1">&#39;Titanium&#39;</span><span class="p">,</span> <span class="s1">&#39;Vanadium&#39;</span><span class="p">,</span> <span class="s1">&#39;Chromium&#39;</span><span class="p">,</span> <span class="s1">&#39;Manganese&#39;</span><span class="p">,</span> <span class="s1">&#39;Iron&#39;</span><span class="p">,</span> <span class="s1">&#39;Cobalt&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;Nickel&#39;</span><span class="p">,</span> <span class="s1">&#39;Copper&#39;</span><span class="p">,</span> <span class="s1">&#39;Zinc&#39;</span><span class="p">,</span> <span class="s1">&#39;Gallium&#39;</span><span class="p">,</span> <span class="s1">&#39;Germanium&#39;</span><span class="p">,</span> <span class="s1">&#39;Arsenic&#39;</span><span class="p">,</span> <span class="s1">&#39;Selenium&#39;</span><span class="p">,</span> <span class="s1">&#39;Bromine&#39;</span><span class="p">,</span> <span class="s1">&#39;Krypton&#39;</span><span class="p">,</span> <span class="s1">&#39;Rubidium&#39;</span><span class="p">,</span> \
+                <span class="s1">&#39;Strontium&#39;</span><span class="p">,</span> <span class="s1">&#39;Yttrium&#39;</span><span class="p">,</span> <span class="s1">&#39;Zirconium&#39;</span><span class="p">,</span> <span class="s1">&#39;Niobium&#39;</span><span class="p">,</span> <span class="s1">&#39;Molybdenum&#39;</span><span class="p">,</span> <span class="s1">&#39;Technetium&#39;</span><span class="p">,</span> <span class="s1">&#39;Ruthenium&#39;</span><span class="p">,</span> <span class="s1">&#39;Rhodium&#39;</span><span class="p">,</span> \
+                <span class="s1">&#39;Palladium&#39;</span><span class="p">,</span> <span class="s1">&#39;Silver&#39;</span><span class="p">,</span> <span class="s1">&#39;Cadmium&#39;</span><span class="p">,</span> <span class="s1">&#39;Indium&#39;</span><span class="p">,</span> <span class="s1">&#39;Tin&#39;</span><span class="p">,</span> <span class="s1">&#39;Antimony&#39;</span><span class="p">,</span> <span class="s1">&#39;Tellurium&#39;</span><span class="p">,</span> <span class="s1">&#39;Iodine&#39;</span><span class="p">,</span> <span class="s1">&#39;Xenon&#39;</span><span class="p">,</span> <span class="s1">&#39;Caesium&#39;</span><span class="p">,</span> \
+                <span class="s1">&#39;Barium&#39;</span><span class="p">,</span> <span class="s1">&#39;Lanthanum&#39;</span><span class="p">,</span> <span class="s1">&#39;Cerium&#39;</span><span class="p">,</span> <span class="s1">&#39;Praseodymium&#39;</span><span class="p">,</span> <span class="s1">&#39;Neodymium&#39;</span><span class="p">,</span> <span class="s1">&#39;Promethium&#39;</span><span class="p">,</span> <span class="s1">&#39;Samarium&#39;</span><span class="p">,</span> <span class="s1">&#39;Europium&#39;</span><span class="p">,</span> \
+                <span class="s1">&#39;Gadolinium&#39;</span><span class="p">,</span> <span class="s1">&#39;Terbium&#39;</span><span class="p">,</span> <span class="s1">&#39;Dysprosium&#39;</span><span class="p">,</span> <span class="s1">&#39;Holmium&#39;</span><span class="p">,</span> <span class="s1">&#39;Erbium&#39;</span><span class="p">,</span> <span class="s1">&#39;Thulium&#39;</span><span class="p">,</span> <span class="s1">&#39;Ytterbium&#39;</span><span class="p">,</span> <span class="s1">&#39;Lutetium&#39;</span><span class="p">,</span> <span class="s1">&#39;Hafnium&#39;</span><span class="p">,</span> \
+                <span class="s1">&#39;Tantalum&#39;</span><span class="p">,</span> <span class="s1">&#39;Tungsten&#39;</span><span class="p">,</span> <span class="s1">&#39;Rhenium&#39;</span><span class="p">,</span> <span class="s1">&#39;Osmium&#39;</span><span class="p">,</span> <span class="s1">&#39;Iridium&#39;</span><span class="p">,</span> <span class="s1">&#39;Platinum&#39;</span><span class="p">,</span> <span class="s1">&#39;Gold&#39;</span><span class="p">,</span> <span class="s1">&#39;Mercury&#39;</span><span class="p">,</span> <span class="s1">&#39;Thallium&#39;</span><span class="p">,</span> <span class="s1">&#39;Lead&#39;</span><span class="p">,</span> \
+                <span class="s1">&#39;Bismuth&#39;</span><span class="p">,</span> <span class="s1">&#39;Polonium&#39;</span><span class="p">,</span> <span class="s1">&#39;Astatine&#39;</span><span class="p">,</span> <span class="s1">&#39;Radon&#39;</span><span class="p">,</span> <span class="s1">&#39;Francium&#39;</span><span class="p">,</span> <span class="s1">&#39;Radium&#39;</span><span class="p">,</span> <span class="s1">&#39;Actinium&#39;</span><span class="p">,</span> <span class="s1">&#39;Thorium&#39;</span><span class="p">,</span> <span class="s1">&#39;Protactinium&#39;</span><span class="p">,</span> \
+                <span class="s1">&#39;Uranium&#39;</span><span class="p">,</span> <span class="s1">&#39;Neptunium&#39;</span><span class="p">,</span> <span class="s1">&#39;Plutonium&#39;</span><span class="p">,</span> <span class="s1">&#39;Americium&#39;</span><span class="p">,</span> <span class="s1">&#39;Curium&#39;</span><span class="p">,</span> <span class="s1">&#39;Berkelium&#39;</span><span class="p">,</span> <span class="s1">&#39;Californium&#39;</span><span class="p">,</span> <span class="s1">&#39;Einsteinium&#39;</span><span class="p">,</span> \
+                <span class="s1">&#39;Fermium&#39;</span><span class="p">,</span> <span class="s1">&#39;Mendelevium&#39;</span><span class="p">,</span> <span class="s1">&#39;Nobelium&#39;</span><span class="p">,</span> <span class="s1">&#39;Lawrencium&#39;</span><span class="p">,</span> <span class="s1">&#39;Rutherfordium&#39;</span><span class="p">,</span> <span class="s1">&#39;Dubnium&#39;</span><span class="p">,</span> <span class="s1">&#39;Seaborgium&#39;</span><span class="p">,</span> <span class="s1">&#39;Bohrium&#39;</span><span class="p">,</span> \
+                <span class="s1">&#39;Hassium&#39;</span><span class="p">,</span> <span class="s1">&#39;Meitnerium&#39;</span><span class="p">,</span> <span class="s1">&#39;Darmstadtium&#39;</span><span class="p">,</span> <span class="s1">&#39;Roentgenium&#39;</span><span class="p">,</span> <span class="s1">&#39;Copernicium&#39;</span><span class="p">,</span> <span class="s1">&#39;Nihonium&#39;</span><span class="p">,</span> <span class="s1">&#39;Flerovium&#39;</span><span class="p">,</span> <span class="s1">&#39;Moscovium&#39;</span><span class="p">,</span> \
+                <span class="s1">&#39;Livermorium&#39;</span><span class="p">,</span> <span class="s1">&#39;Tennessine&#39;</span><span class="p">,</span> <span class="s1">&#39;Oganesson&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">element_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">element_list</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Hydrogen&#39;, &#39;Helium&#39;, &#39;Lithium&#39;, &#39;Beryllium&#39;, &#39;Boron&#39;, &#39;Carbon&#39;, &#39;Nitrogen&#39;, &#39;Oxygen&#39;, &#39;Fluorine&#39;, &#39;Neon&#39;, &#39;Sodium&#39;, &#39;Magnesium&#39;, &#39;Aluminium&#39;, &#39;Silicon&#39;, &#39;Phosphorus&#39;, &#39;Sulfur&#39;, &#39;Chlorine&#39;, &#39;Argon&#39;, &#39;Potassium&#39;, &#39;Calcium&#39;, &#39;Scandium&#39;, &#39;Titanium&#39;, &#39;Vanadium&#39;, &#39;Chromium&#39;, &#39;Manganese&#39;, &#39;Iron&#39;, &#39;Cobalt&#39;, &#39;Nickel&#39;, &#39;Copper&#39;, &#39;Zinc&#39;, &#39;Gallium&#39;, &#39;Germanium&#39;, &#39;Arsenic&#39;, &#39;Selenium&#39;, &#39;Bromine&#39;, &#39;Krypton&#39;, &#39;Rubidium&#39;, &#39;Strontium&#39;, &#39;Yttrium&#39;, &#39;Zirconium&#39;, &#39;Niobium&#39;, &#39;Molybdenum&#39;, &#39;Technetium&#39;, &#39;Ruthenium&#39;, &#39;Rhodium&#39;, &#39;Palladium&#39;, &#39;Silver&#39;, &#39;Cadmium&#39;, &#39;Indium&#39;, &#39;Tin&#39;, &#39;Antimony&#39;, &#39;Tellurium&#39;, &#39;Iodine&#39;, &#39;Xenon&#39;, &#39;Caesium&#39;, &#39;Barium&#39;, &#39;Lanthanum&#39;, &#39;Cerium&#39;, &#39;Praseodymium&#39;, &#39;Neodymium&#39;, &#39;Promethium&#39;, &#39;Samarium&#39;, &#39;Europium&#39;, &#39;Gadolinium&#39;, &#39;Terbium&#39;, &#39;Dysprosium&#39;, &#39;Holmium&#39;, &#39;Erbium&#39;, &#39;Thulium&#39;, &#39;Ytterbium&#39;, &#39;Lutetium&#39;, &#39;Hafnium&#39;, &#39;Tantalum&#39;, &#39;Tungsten&#39;, &#39;Rhenium&#39;, &#39;Osmium&#39;, &#39;Iridium&#39;, &#39;Platinum&#39;, &#39;Gold&#39;, &#39;Mercury&#39;, &#39;Thallium&#39;, &#39;Lead&#39;, &#39;Bismuth&#39;, &#39;Polonium&#39;, &#39;Astatine&#39;, &#39;Radon&#39;, &#39;Francium&#39;, &#39;Radium&#39;, &#39;Actinium&#39;, &#39;Thorium&#39;, &#39;Protactinium&#39;, &#39;Uranium&#39;, &#39;Neptunium&#39;, &#39;Plutonium&#39;, &#39;Americium&#39;, &#39;Curium&#39;, &#39;Berkelium&#39;, &#39;Californium&#39;, &#39;Einsteinium&#39;, &#39;Fermium&#39;, &#39;Mendelevium&#39;, &#39;Nobelium&#39;, &#39;Lawrencium&#39;, &#39;Rutherfordium&#39;, &#39;Dubnium&#39;, &#39;Seaborgium&#39;, &#39;Bohrium&#39;, &#39;Hassium&#39;, &#39;Meitnerium&#39;, &#39;Darmstadtium&#39;, &#39;Roentgenium&#39;, &#39;Copernicium&#39;, &#39;Nihonium&#39;, &#39;Flerovium&#39;, &#39;Moscovium&#39;, &#39;Livermorium&#39;, &#39;Tennessine&#39;, &#39;Oganesson&#39;]
+&lt;class &#39;list&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">element_list</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> </span><span class="se">\n</span><span class="s1"> The variable element_list is of class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">element_list</span><span class="p">)</span><span class="si">}</span><span class="s1">,.</span><span class="se">\n</span><span class="s1"> </span><span class="se">\</span>
+<span class="s1">The variable element is of class </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">element</span><span class="p">)</span><span class="si">}</span><span class="s1">. &#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hydrogen
+Helium
+Lithium
+Beryllium
+Boron
+Carbon
+Nitrogen
+Oxygen
+Fluorine
+Neon
+Sodium
+Magnesium
+Aluminium
+Silicon
+Phosphorus
+Sulfur
+Chlorine
+Argon
+Potassium
+Calcium
+Scandium
+Titanium
+Vanadium
+Chromium
+Manganese
+Iron
+Cobalt
+Nickel
+Copper
+Zinc
+Gallium
+Germanium
+Arsenic
+Selenium
+Bromine
+Krypton
+Rubidium
+Strontium
+Yttrium
+Zirconium
+Niobium
+Molybdenum
+Technetium
+Ruthenium
+Rhodium
+Palladium
+Silver
+Cadmium
+Indium
+Tin
+Antimony
+Tellurium
+Iodine
+Xenon
+Caesium
+Barium
+Lanthanum
+Cerium
+Praseodymium
+Neodymium
+Promethium
+Samarium
+Europium
+Gadolinium
+Terbium
+Dysprosium
+Holmium
+Erbium
+Thulium
+Ytterbium
+Lutetium
+Hafnium
+Tantalum
+Tungsten
+Rhenium
+Osmium
+Iridium
+Platinum
+Gold
+Mercury
+Thallium
+Lead
+Bismuth
+Polonium
+Astatine
+Radon
+Francium
+Radium
+Actinium
+Thorium
+Protactinium
+Uranium
+Neptunium
+Plutonium
+Americium
+Curium
+Berkelium
+Californium
+Einsteinium
+Fermium
+Mendelevium
+Nobelium
+Lawrencium
+Rutherfordium
+Dubnium
+Seaborgium
+Bohrium
+Hassium
+Meitnerium
+Darmstadtium
+Roentgenium
+Copernicium
+Nihonium
+Flerovium
+Moscovium
+Livermorium
+Tennessine
+Oganesson
+
+ 
+ The variable element_list is of class &lt;class &#39;list&#39;&gt;,.
+ The variable element is of class &lt;class &#39;str&#39;&gt;. 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># To type on one line:</span>
+<span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">element_list</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;, &#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hydrogen, Helium, Lithium, Beryllium, Boron, Carbon, Nitrogen, Oxygen, Fluorine, Neon, Sodium, Magnesium, Aluminium, Silicon, Phosphorus, Sulfur, Chlorine, Argon, Potassium, Calcium, Scandium, Titanium, Vanadium, Chromium, Manganese, Iron, Cobalt, Nickel, Copper, Zinc, Gallium, Germanium, Arsenic, Selenium, Bromine, Krypton, Rubidium, Strontium, Yttrium, Zirconium, Niobium, Molybdenum, Technetium, Ruthenium, Rhodium, Palladium, Silver, Cadmium, Indium, Tin, Antimony, Tellurium, Iodine, Xenon, Caesium, Barium, Lanthanum, Cerium, Praseodymium, Neodymium, Promethium, Samarium, Europium, Gadolinium, Terbium, Dysprosium, Holmium, Erbium, Thulium, Ytterbium, Lutetium, Hafnium, Tantalum, Tungsten, Rhenium, Osmium, Iridium, Platinum, Gold, Mercury, Thallium, Lead, Bismuth, Polonium, Astatine, Radon, Francium, Radium, Actinium, Thorium, Protactinium, Uranium, Neptunium, Plutonium, Americium, Curium, Berkelium, Californium, Einsteinium, Fermium, Mendelevium, Nobelium, Lawrencium, Rutherfordium, Dubnium, Seaborgium, Bohrium, Hassium, Meitnerium, Darmstadtium, Roentgenium, Copernicium, Nihonium, Flerovium, Moscovium, Livermorium, Tennessine, Oganesson, 
+</pre></div>
+</div>
+</div>
+</div>
+<section id="modulus-2-division-boolean-logic-in-for-loops">
+<h4>Modulus 2 division - Boolean Logic in for loops<a class="headerlink" href="#modulus-2-division-boolean-logic-in-for-loops" title="Link to this heading">#</a></h4>
+<p>If you take the modulus of two you get two values, zero and one. Look at the following code, and note that zero is Boolean False and one is Boolean True</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">list1</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1"> is even&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">num</span> <span class="o">%</span> <span class="mi">2</span> <span class="k">else</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1"> is odd&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 is odd
+2 is even
+3 is odd
+4 is even
+5 is odd
+6 is even
+7 is odd
+8 is even
+9 is odd
+10 is even
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">even_numbers</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">odd_numbers</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">list1</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">num</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">even_numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">odd_numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Even numbers:&quot;</span><span class="p">,</span> <span class="n">even_numbers</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Odd numbers:&quot;</span><span class="p">,</span> <span class="n">odd_numbers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Even numbers: [2, 4, 6, 8, 10]
+Odd numbers: [1, 3, 5, 7, 9]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note, we when we get to Numpy we will learn how to use Boolean masks, which are much more efficient on large data sets than for loops.</p>
+</section>
+</section>
+<section id="numeric-iteration">
+<h3>Numeric Iteration<a class="headerlink" href="#numeric-iteration" title="Link to this heading">#</a></h3>
+<section id="range-start-stop-increment-function">
+<h4>Range(start, stop, increment) function<a class="headerlink" href="#range-start-stop-increment-function" title="Link to this heading">#</a></h4>
+<p>Python provides the built-in range function that that takes three arguments. The default start is zero and the default increment is one.  The stop is exclusive (up to)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+1
+2
+3
+4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+3
+</pre></div>
+</div>
+</div>
+</div>
+<p>The range function does not operate on containers.  In the following code it is generating index numbers based on the number of items in a list, and using the index number to obtain the values of those numbers</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">halogens</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;Cl&quot;</span><span class="p">,</span> <span class="s2">&quot;Br&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;At&quot;</span><span class="p">]</span>
+
+<span class="c1"># Using range() to iterate with indices</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">halogens</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Element </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> index=</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">halogens</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Element 1 index=0: F
+Element 2 index=1: Cl
+Element 3 index=2: Br
+Element 4 index=3: I
+Element 5 index=4: At
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="shorthand-operators-augmented-assignment">
+<h3>Shorthand Operators - Augmented Assignment<a class="headerlink" href="#shorthand-operators-augmented-assignment" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Equivalent to</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">+=</span> <span class="pre">1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">-=</span> <span class="pre">1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">-</span> <span class="pre">1</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*=</span> <span class="pre">2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">*</span> <span class="pre">2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">/=</span> <span class="pre">3</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">/</span> <span class="pre">3</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">//=</span> <span class="pre">2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">//</span> <span class="pre">2</span></code> (floor division)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">%=</span> <span class="pre">5</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">%</span> <span class="pre">5</span></code> (modulus)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">i</span>  <span class="c1"># Adds each number to total</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>  <span class="c1"># 1 + 2 + 3 + 4 + 5 = 15</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15
+</pre></div>
+</div>
+</div>
+</div>
+<section id="random-module">
+<h4>Random Module<a class="headerlink" href="#random-module" title="Link to this heading">#</a></h4>
+<p>The random module creates a series of numbers.  If you use random.seed() you can repeat the same sequence of numbers. We will cover the built-in random module now, but later we will dive into the numpy.random() submodule that is more robust</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+
+<span class="c1"># Set seed for reproducibility</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Generate 10 random floats between 0 and 100, rounded to 2 decimal places</span>
+<span class="n">random_floats</span> <span class="o">=</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">99.99</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+
+<span class="c1"># Print the generated list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random_floats</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[63.94, 2.51, 27.51, 22.33, 73.64, 67.67, 89.21, 8.7, 42.19, 2.99]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">random_floats</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[63.94, 2.51, 27.51, 22.33, 73.64, 67.67, 89.21, 8.7, 42.19, 2.99]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="while-loops">
+<h2>While Loops<a class="headerlink" href="#while-loops" title="Link to this heading">#</a></h2>
+<p>A while loop explicitly depends on a Boolean Expression to terminate.  That is, it runs as long as the expression is True</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span> <span class="o">=</span> <span class="mi">50</span>  <span class="c1"># Start temperature</span>
+<span class="n">boiling_point</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="k">while</span> <span class="n">temperature</span> <span class="o">&lt;</span> <span class="n">boiling_point</span><span class="p">:</span>  <span class="c1"># Boolean condition</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature: </span><span class="si">{</span><span class="n">temperature</span><span class="si">}</span><span class="s2">°C - Not boiling yet.&quot;</span><span class="p">)</span>
+    <span class="n">temperature</span> <span class="o">+=</span> <span class="mi">10</span>  <span class="c1"># Increase temperature</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Boiling point reached!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Temperature: 50°C - Not boiling yet.
+Temperature: 60°C - Not boiling yet.
+Temperature: 70°C - Not boiling yet.
+Temperature: 80°C - Not boiling yet.
+Temperature: 90°C - Not boiling yet.
+Boiling point reached!
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the section on for loops we created a script that determined the phase of a compound at a temperature if the use inserted the melting and boiling points. We used the sys.exit() function to handle the <strong>logic error of the melting point being larger than the boiling point</strong>, which worked, but kicked off an error message. We can now put use this with a while loop and a break control statement.  Note, that this script will continue to ask for the boiling and melting points until you provide ones that make sense.</p>
+<div class="alert alert-info">
+<center></center>Copy the following code to a Jupyter Notebook code cell to execute it</div>center>
+</div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+<span class="c1">#What is the phase of a substance?</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">melting_point</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is the melting point of your substance? &quot;</span><span class="p">))</span>
+        <span class="n">boiling_point</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is the boiling point of your substance? &quot;</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">melting_point</span> <span class="o">&lt;=</span> <span class="n">boiling_point</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Your melting point is greater than the boiling point&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;re-enter both values&quot;</span><span class="p">)</span>
+    
+    <span class="n">temperature</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is the temperature you wish to know the phase at? &quot;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">temperature</span> <span class="o">&lt;=</span> <span class="n">melting_point</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">temperature</span> <span class="o">==</span> <span class="n">melting_point</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is at the melting point, could be solid, liquid, or both coexisting together&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is a solid&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">melting_point</span> <span class="o">&lt;</span> <span class="n">temperature</span> <span class="o">&lt;</span> <span class="n">boiling_point</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Substance is a liquid&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">temperature</span> <span class="o">==</span> <span class="n">boiling_point</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is at the boiling point and could be liquid, gas, or both&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is a gas&quot;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Please enter numeric values for all inputs.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>#3 Branching (Jump) Control</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="jump-control-structures">
+<h1>Jump (Control) Structures<a class="headerlink" href="#jump-control-structures" title="Link to this heading">#</a></h1>
+<p>These are structures that let you jump out of a loop or process based on a condition. They are useful in handling errors.</p>
+<section id="break">
+<h2>break<a class="headerlink" href="#break" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>exits nearest enclosing loop</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;Li&quot;</span><span class="p">,</span> <span class="s2">&quot;Be&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;Li&quot;</span><span class="p">,</span> <span class="s2">&quot;Be&quot;</span><span class="p">,</span> <span class="s2">&quot;Mg&quot;</span><span class="p">}:</span>  <span class="c1"># Boolean condition</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s2"> is a metal. Stopping search.&quot;</span><span class="p">)</span>
+        <span class="k">break</span>  <span class="c1"># Exits loop early</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s2"> is not a metal.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H is not a metal.
+He is not a metal.
+Li is a metal. Stopping search.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="continue">
+<h2>Continue<a class="headerlink" href="#continue" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Na&quot;</span><span class="p">,</span> <span class="s2">&quot;Cl&quot;</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="s2">&quot;Br&quot;</span><span class="p">,</span> <span class="s2">&quot;Ca&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">elements</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">element</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">&quot;Na&quot;</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="s2">&quot;Ca&quot;</span><span class="p">}:</span>  <span class="c1"># Boolean condition</span>
+        <span class="k">continue</span>  <span class="c1"># Skip to the next iteration</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s2"> is a metal.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Na is a metal.
+K is a metal.
+Ca is a metal.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="pass">
+<h2>pass<a class="headerlink" href="#pass" title="Link to this heading">#</a></h2>
+<p>placeholder, useful while developing code</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pH</span> <span class="o">=</span> <span class="mi">7</span>
+
+<span class="k">if</span> <span class="n">pH</span> <span class="o">&lt;</span> <span class="mi">7</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Acidic solution&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">pH</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Basic solution&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">pass</span>  <span class="c1"># Placeholder for future neutral pH case</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="try-except-block">
+<h2>try/except block<a class="headerlink" href="#try-except-block" title="Link to this heading">#</a></h2>
+<p>This is not really a jump type command, but it gives an alternative procedure if a condition occurs.  For example, you could divide by x except if x = zero, or do a mathematical calculation unless the input value is not numerical.  That is “10” and ten, are not numerical values but strings.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">something</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">something</span>
+</pre></div>
+</div>
+<div class="alert alert-info">
+<center></center>Copy the following code to a Jupyter Notebook code cell to execute it, and then give it a non-numeric answer like 10</div>center>
+</div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">temperature</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the temperature in Celsius: &quot;</span><span class="p">))</span>
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid input. Please enter a numerical temperature.&quot;</span><span class="p">)</span>
+    <span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="return">
+<h2>return<a class="headerlink" href="#return" title="Link to this heading">#</a></h2>
+<p>This exits a function and returns a value, which is often assigned to a variable.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="comprehensions">
+<h1>4. Comprehensions<a class="headerlink" href="#comprehensions" title="Link to this heading">#</a></h1>
+<section id="list-comprehensions">
+<h2>List Comprehensions<a class="headerlink" href="#list-comprehensions" title="Link to this heading">#</a></h2>
+<p>A list comprehension is an iterative way to create a new list from an existing data container.  They are often more concise than for loops and are useful for filtering data</p>
+<p><strong>Mathematical Origins: Set-Builder Notation</strong>
+In mathematics, a <strong>set comprehension</strong> is a way of defining sets using a condition or transformation. It follows this notation:</p>
+<div class="math notranslate nohighlight">
+\[
+S = \{ x^2 \mid x \in \mathbb{N}, x &lt; 5 \}
+\]</div>
+<p>Which means:<br />
+“S is the set of all <span class="math notranslate nohighlight">\(( x^2 )\)</span> where <span class="math notranslate nohighlight">\(( x )\)</span> is a natural number and <span class="math notranslate nohighlight">\( x &lt; 5 \)</span>.”</p>
+<p>For example, this would result in:</p>
+<p><span class="math notranslate nohighlight">\(
+S = \{ 0, 1, 4, 9, 16 \}
+\)</span></p>
+<p>Python adopted this idea to create list comprehensions in a way that expresses “building a new list” in a single readable statement.</p>
+<section id="basic-structure">
+<h3>Basic Structure:<a class="headerlink" href="#basic-structure" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">new_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">expression</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">expression</span></code> → Defines how each element should be transformed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">item</span></code> → Represents each element from <code class="docutils literal notranslate"><span class="pre">iterable</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iterable</span></code> → Any container that can be looped over (list, tuple, set, dictionary keys/values, etc.).</p></li>
+</ul>
+<section id="temperature-conversion-for-loop-vs-list-comprehension">
+<h4>Temperature Conversion: For Loop vs. List Comprehension<a class="headerlink" href="#temperature-conversion-for-loop-vs-list-comprehension" title="Link to this heading">#</a></h4>
+<p>In the following we will first convert T Fahrenheit to Celsius, and then use a list comprehension</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using a For Loop</span>
+<span class="n">temps_f</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">104</span><span class="p">]</span>  <span class="c1"># Fahrenheit temperatures</span>
+<span class="n">temps_c</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Empty list for Celsius</span>
+
+<span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">temps_f</span><span class="p">:</span>
+    <span class="n">celsius</span> <span class="o">=</span> <span class="p">(</span><span class="n">temp</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span>  <span class="c1"># Convert to Celsius</span>
+    <span class="n">temps_c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">celsius</span><span class="p">)</span>  <span class="c1"># Append result to list</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">temps_c</span><span class="p">)</span>  <span class="c1"># Output: [0.0, 10.0, 25.0, 40.0]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.0, 10.0, 25.0, 40.0]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using a list comprehension</span>
+<span class="n">temps_f</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">104</span><span class="p">]</span>
+<span class="n">temps_c</span> <span class="o">=</span> <span class="p">[(</span><span class="n">temp</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span> <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">temps_f</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">temps_c</span><span class="p">)</span>  <span class="c1"># Output: [0.0, 10.0, 25.0, 40.0]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.0, 10.0, 25.0, 40.0]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="convert-tuple-to-list">
+<h4>Convert Tuple to list<a class="headerlink" href="#convert-tuple-to-list" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temps_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">104</span><span class="p">)</span>
+<span class="n">temps_c</span> <span class="o">=</span> <span class="p">[(</span><span class="n">temp</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span> <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">temps_tuple</span><span class="p">]</span>  <span class="c1"># Creates a list from a tuple</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">temps_c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.0, 10.0, 25.0, 40.0]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="extract-keys-from-a-dictionary">
+<h4>Extract Keys from a Dictionary<a class="headerlink" href="#extract-keys-from-a-dictionary" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">element_atomic_numbers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;He&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Li&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">element_atomic_numbers</span><span class="p">]</span>  <span class="c1"># Extracts keys as a list</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>  <span class="c1"># Output: [&#39;H&#39;, &#39;He&#39;, &#39;Li&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;H&#39;, &#39;He&#39;, &#39;Li&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-a-set-with-unique-values">
+<h4>Create a Set with Unique Values<a class="headerlink" href="#create-a-set-with-unique-values" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temps_f</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>  <span class="c1"># Contains duplicate 50</span>
+<span class="n">temps_c_set</span> <span class="o">=</span> <span class="p">{(</span><span class="n">temp</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span> <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">temps_f</span><span class="p">}</span>  <span class="c1"># Creates a set (no duplicates)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">temps_c_set</span><span class="p">)</span>  <span class="c1"># Output: {0.0, 10.0, 25.0, 40.0}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0.0, 25.0, 10.0, 40.0}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="filtering">
+<h4>Filtering<a class="headerlink" href="#filtering" title="Link to this heading">#</a></h4>
+<p>Filter out bad temperature values</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temps_f</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">]</span>
+<span class="n">temps_c</span> <span class="o">=</span> <span class="p">[(</span><span class="n">temp</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span> <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">temps_f</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">temps_c</span><span class="p">)</span>  <span class="c1"># Ignores None and &quot;error&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.0, -73.33333333333333, 10.0, 25.0, 40.0]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="if-else-in-list-comprehension">
+<h4>if-else in list comprehension<a class="headerlink" href="#if-else-in-list-comprehension" title="Link to this heading">#</a></h4>
+<p>Conditional Classification</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temps_f</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">104</span><span class="p">]</span>
+<span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Hot&quot;</span> <span class="k">if</span> <span class="n">temp</span> <span class="o">&gt;</span> <span class="mi">75</span> <span class="k">else</span> <span class="s2">&quot;Cold&quot;</span> <span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="n">temps_f</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">categories</span><span class="p">)</span>  <span class="c1"># Output: [&#39;Cold&#39;, &#39;Cold&#39;, &#39;Hot&#39;, &#39;Hot&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Cold&#39;, &#39;Cold&#39;, &#39;Hot&#39;, &#39;Hot&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="acknowledgements">
+<h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">#</a></h1>
+<p>This content was developed with assistance from <a class="reference external" href="https://www.perplexity.ai/">Perplexity AI</a> and <a class="reference external" href="https://chatgpt.com/">Chat GPT</a>. Multiple queries were made during the Fall 2024 and the Spring 2025.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "py4sci"
+        },
+        kernelOptions: {
+            name: "py4sci",
+            path: "./content/module2-oop-data-structures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'py4sci'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02-4-built-in-modules.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">4. Built-In Modules</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5. Logic and Control Structures</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conditionals">1. Conditionals</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-statement">If Statement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else-statement">If-else Statement</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-elif-else-statements">If-elif-else Statements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compound-if-elif-statements">Compound if-elif Statements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#and-conjunction">AND Conjunction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#or-conjunction">OR Conjunction</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nested-if-statements">Nested if Statements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#try-except-error-handling">Try-Except Error Handling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-validation">Logical Validation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#loops">2. Loops</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loops">For Loops</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iteration-over-containers">Iteration over Containers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#modulus-2-division-boolean-logic-in-for-loops">Modulus 2 division - Boolean Logic in for loops</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numeric-iteration">Numeric Iteration</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#range-start-stop-increment-function">Range(start, stop, increment) function</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shorthand-operators-augmented-assignment">Shorthand Operators - Augmented Assignment</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#random-module">Random Module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#while-loops">While Loops</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#jump-control-structures">Jump (Control) Structures</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#break">break</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continue">Continue</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pass">pass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#try-except-block">try/except block</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#return">return</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#comprehensions">4. Comprehensions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#list-comprehensions">List Comprehensions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-structure">Basic Structure:</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature-conversion-for-loop-vs-list-comprehension">Temperature Conversion: For Loop vs. List Comprehension</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-tuple-to-list">Convert Tuple to list</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-keys-from-a-dictionary">Extract Keys from a Dictionary</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-set-with-unique-values">Create a Set with Unique Values</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering">Filtering</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#if-else-in-list-comprehension">if-else in list comprehension</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Robert Belford
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

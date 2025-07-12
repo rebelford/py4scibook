@@ -27,9 +27,13 @@ repository:
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
+
+mathjax: true
 html:
   use_issues_button: true
   use_repository_button: true
+  extra_css:
+    - custom.css
 
 launch_buttons:
   colab_url: https://colab.research.google.com
@@ -37,3 +41,10 @@ launch_buttons:
   jupyterhub_url: https://your-jupyterhub-url.com  # Optional
   notebook_interface: "jupyterlab"  # or "classic"
   thebe: false
+
+parse:
+  myst_enable_extensions:
+    - dollarmath
+    - amsmath
+    - colon_fence
+ nb_execution_show_tb: True  # <- Add this if it's not already present

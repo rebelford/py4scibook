@@ -1,11 +1,25 @@
 format: jb-book
 root: content/index
 chapters:
-  - file: content/module1-setup/01-1-setupcomputer
-  - file: content/module1-setup/01-2-jynbgettingstarted
-  - file: content/module1-setup/01-3-jynb-intro
-  - file: content/module1-setup/01-4-oshardware
-  - file: content/module1-setup/01-5-git
-  - file: content/module1-setup/01-6-oop
-  - file: content/module1-setup/01-7-virtual-environments
-
+- file: content/math-test
+- file: content/module1-setup/README
+  sections:
+    - file: content/module1-setup/01-1-setupcomputer
+    - file: content/module1-setup/01-2-jynbgettingstarted
+    - file: content/module1-setup/01-3-jynb-intro
+    - file: content/module1-setup/01-4-oshardware
+    - file: content/module1-setup/01-5-git
+    - file: content/module1-setup/01-6-oop
+    - file: content/module1-setup/01-7-virtual-environments
+- file: content/module2-oop-data-structures/README
+  sections:
+    - file: content/module2-oop-data-structures/02-1-primitive-data-structures
+    - file: content/module2-oop-data-structures/02-2-py-calculator
+    - file: content/module2-oop-data-structures/02-3-composite-data-structures
+    - file: content/module2-oop-data-structures/02-4-built-in-modules
+    - file: content/module2-oop-data-structures/02-5-control-structures
+    #- file: content/module2-OOPDataStructures/02-6-ExternalDataStructures
+    #- file: content/module2-OOPDataStructures/02-7-DB-ExternalDataStructures
+    #- file: content/module2-OOPDataStructures/02-8-API-ExternalDataStructures
+    #- file: content/module2-OOPDataStructures/02-9-WebScrape-DataStructures
+    #- file: content/module2-OOPDataStructures/02-10-FunctionPackage

@@ -1,0 +1,2311 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3. Composite Data Structures &#8212; Draft Python for Science Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e52fa269" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom-checkpoint.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/module2-oop-data-structures/02-3-composite-data-structures';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4. Built-In Modules" href="02-4-built-in-modules.html" />
+    <link rel="prev" title="2. Python as a Calculator" href="02-2-py-calculator.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Draft Python for Science Book - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Draft Python for Science Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Python for Science
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../math-test.html">In a Markdown cell:</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../module1-setup/README.html">Module 1: Getting Set Up</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-1-setupcomputer.html">1. Setting up your computer</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-2-jynbgettingstarted.html">2: Runnng and Creating Jupyter Notebooks</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-3-jynb-intro.html">3. Overview of Jupyter Notebooks</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-5-git.html">5. Git and GitHub</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-6-oop.html">6. Object Oriented Programming</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-7-virtual-environments.html">7. Virtual Environments</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="README.html">Module 2: Data Structures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="02-1-primitive-data-structures.html">1. Primative Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-2-py-calculator.html">2. Python as a Calculator</a></li>
+
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3. Composite Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-4-built-in-modules.html">4. Built-In Modules</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-5-control-structures.html">5. Logic and Control Structures</a></li>
+
+
+
+
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/rebelford/py4scibook/master?urlpath=lab/tree/docs/content/module2-oop-data-structures/02-3-composite-data-structures.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://your-jupyterhub-url.com/hub/user-redirect/git-pull?repo=https%3A//github.com/rebelford/py4scibook&urlpath=lab/tree/py4scibook/docs/content/module2-oop-data-structures/02-3-composite-data-structures.ipynb&branch=master" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on JupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="JupyterHub logo" src="../../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rebelford/py4scibook/blob/master/docs/content/module2-oop-data-structures/02-3-composite-data-structures.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook/issues/new?title=Issue%20on%20page%20%2Fcontent/module2-oop-data-structures/02-3-composite-data-structures.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/module2-oop-data-structures/02-3-composite-data-structures.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3. Composite Data Structures</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">3. Composite Data Structures</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lists">1. Lists</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ways-of-making-a-list">Ways of making a list</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-square-brackets">1. Using Square Brackets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-constructor">2. list() constructor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-an-empty-list">Create an empty list</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#list-methods">List Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-list-methods">Table of List Methods</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-functions-that-work-on-lists">Built-in Functions That Work on Lists</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-list-methods-and-functions-in-action">Examples of List Methods and Functions in Action</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loop-and-lists">For Loop and Lists</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-lists-and-zip">Combining lists and zip()</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples">2. Tuples</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features-of-tuples">Key Features of Tuples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-tuples">Working with Tuples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-tuple-elements-indexing">1. Accessing Tuple elements (Indexing)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-tuples">2. Slicing Tuples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterating-through-a-tuple">3. Iterating Through a Tuple</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuple-unpacking">4.Tuple Unpacking</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-zip-to-create-tuples">5. Using zip() to Create Tuples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuple-unpacking-and-zip-zipped-data">7. Tuple unpacking and zip(*zipped_data)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sets">3. Sets</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-set">What is a Set?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sets-lists-and-tuples"><strong>Sets, Lists and Tuples</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-set-theory">Introduction to Set Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-set-notation">Basic Set Notation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relationship-to-boolean-algebra">Relationship to Boolean Algebra</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-sets-in-chemistry">Why Use Sets in Chemistry?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-set">Creating a Set</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-methods">Set Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-set-methods">Table of Set Methods</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-operators">Set Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-set-operators">Table of Set Operators</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-that-work-on-sets">Functions That Work on Sets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-functions-that-work-with-sets">Table of Functions that Work with Sets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activities-involving-sets">Activities Involving Sets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-set">1. Create a Set</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identify-unique-elements">2. Identify Unique Elements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-set-operations">3. Basic Set Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-for-subsets-and-supersets">4. Checking for Subsets and Supersets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyze-chemical-reaction">Analyze Chemical Reaction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-reactants-and-products-as-sets">Define Reactants and Products as Sets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sets-and-smiles-strings">Sets and SMILES strings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flammability-using-set-operators">Flammability using Set Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flammability-using-set-methods">Flammability using Set Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-sets-tuples-and-list">Compare Sets, Tuples and List</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-elements">Accessing Elements</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionaries">4. Dictionaries</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-characteristics-of-dictionaries">Key Characteristics of Dictionaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-dictionary">Creating a Dictionary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-curly-braces">1. Using Curly Braces <code class="docutils literal notranslate"><span class="pre">{}</span></code>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-dict-constructor">2. Using <code class="docutils literal notranslate"><span class="pre">dict()</span></code> Constructor:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-zip-and-dict-to-combine-two-lists">3. Using <code class="docutils literal notranslate"><span class="pre">zip()</span></code> and <code class="docutils literal notranslate"><span class="pre">dict</span></code> to Combine Two Lists:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-dictionary-methods">Table of Dictionary Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-dictionaries">Modifying Dictionaries</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-or-updating-items">Adding or Updating Items</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-items">Removing Items</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ontology">Ontology</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-periodic-table-ontology-of-halogens">Creating a Periodic Table Ontology of Halogens</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-define-the-halogens-and-their-properties">Step 1: Define the Halogens and Their Properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-create-a-dictionary-using-zip">Step 2: Create a Dictionary Using <code class="docutils literal notranslate"><span class="pre">zip()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="composite-data-structures">
+<span id="module2-oop-data-structures-02-3-composite-data-structures"></span><h1>3. Composite Data Structures<a class="headerlink" href="#composite-data-structures" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Data Structure</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p></td>
+<td><p>A collection of ordered, mutable items that can hold elements of different types.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tuple</span></code></p></td>
+<td><p>An ordered, immutable sequence of items, which can also hold elements of different types.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set</span></code></p></td>
+<td><p>An unordered collection of unique, immutable items.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dict</span></code></p></td>
+<td><p>A collection of key-value pairs, where keys are unique and immutable, and values are mutable.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="lists">
+<h1>1. Lists<a class="headerlink" href="#lists" title="Link to this heading">#</a></h1>
+<p>A python list is a built-in container style data structure that allows you to store multiple items in a variable.  Lists are *<em>ordered, mutable</em> (changeable) and can <strong>hold elements of different data types</strong>, including other lists. Lists use brackets [ ] to identify them</p>
+<section id="ways-of-making-a-list">
+<h2>Ways of making a list<a class="headerlink" href="#ways-of-making-a-list" title="Link to this heading">#</a></h2>
+<section id="using-square-brackets">
+<h3>1. Using Square Brackets<a class="headerlink" href="#using-square-brackets" title="Link to this heading">#</a></h3>
+<p>noble_gases = [“He”, “Ne”, “Ar”, “Kr”, “Xe”, “Rn”, “Og”]</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">noble_gases</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;Ne&quot;</span><span class="p">,</span> <span class="s2">&quot;Ar&quot;</span><span class="p">,</span> <span class="s2">&quot;Kr&quot;</span><span class="p">,</span> <span class="s2">&quot;Xe&quot;</span><span class="p">,</span> <span class="s2">&quot;Rn&quot;</span><span class="p">,</span> <span class="s2">&quot;Og&quot;</span><span class="p">]</span>
+<span class="n">atomic_masses</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.0026</span><span class="p">,</span> <span class="mf">20.180</span><span class="p">,</span> <span class="mf">39.948</span><span class="p">,</span> <span class="mf">83.798</span><span class="p">,</span> <span class="mf">131.293</span><span class="p">,</span> <span class="mi">222</span><span class="p">,</span> <span class="mi">294</span><span class="p">]</span>  <span class="c1"># g/mol</span>
+<span class="n">atomic_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">86</span><span class="p">,</span> <span class="mi">118</span><span class="p">]</span>  <span class="c1"># Atomic numbers</span>
+<span class="n">boiling_points</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.22</span><span class="p">,</span> <span class="mf">27.07</span><span class="p">,</span> <span class="mf">87.30</span><span class="p">,</span> <span class="mf">119.93</span><span class="p">,</span> <span class="mf">165.03</span><span class="p">,</span> <span class="mf">211.3</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>  <span class="c1"># K (Og unknown)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">noble_gases</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">boiling_points</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;He&#39;, &#39;Ne&#39;, &#39;Ar&#39;, &#39;Kr&#39;, &#39;Xe&#39;, &#39;Rn&#39;, &#39;Og&#39;]
+[4.22, 27.07, 87.3, 119.93, 165.03, 211.3, None]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="list-constructor">
+<h3>2. list() constructor<a class="headerlink" href="#list-constructor" title="Link to this heading">#</a></h3>
+<p>The list() constructor converts a single iterable item like a tuple, set, string into a list.   Here we are converting a tuple into a list, which is why there are two parenthesis.  The inner one is for the tuple, and the other is for the list constructor</p>
+<p>alkanes = list((“Methane”, “Ethane”, “Propane”, “Butane”, “Pentane”,
+“Hexane”, “Heptane”, “Octane”, “Nonane”, “Decane”))</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alkanes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">((</span><span class="s2">&quot;Methane&quot;</span><span class="p">,</span> <span class="s2">&quot;Ethane&quot;</span><span class="p">,</span> <span class="s2">&quot;Propane&quot;</span><span class="p">,</span> <span class="s2">&quot;Butane&quot;</span><span class="p">,</span> <span class="s2">&quot;Pentane&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Hexane&quot;</span><span class="p">,</span> <span class="s2">&quot;Heptane&quot;</span><span class="p">,</span> <span class="s2">&quot;Octane&quot;</span><span class="p">,</span> <span class="s2">&quot;Nonane&quot;</span><span class="p">,</span> <span class="s2">&quot;Decane&quot;</span><span class="p">))</span>
+
+<span class="n">alkane_bp</span> <span class="o">=</span> <span class="nb">list</span><span class="p">((</span><span class="o">-</span><span class="mf">161.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">88.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">42.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">36.1</span><span class="p">,</span>
+                  <span class="mf">68.7</span><span class="p">,</span> <span class="mf">98.4</span><span class="p">,</span> <span class="mf">125.7</span><span class="p">,</span> <span class="mf">150.8</span><span class="p">,</span> <span class="mf">174.1</span><span class="p">))</span>  <span class="c1"># Boiling points in °C</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">alkanes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">alkane_bp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Methane&#39;, &#39;Ethane&#39;, &#39;Propane&#39;, &#39;Butane&#39;, &#39;Pentane&#39;, &#39;Hexane&#39;, &#39;Heptane&#39;, &#39;Octane&#39;, &#39;Nonane&#39;, &#39;Decane&#39;]
+[-161.5, -88.5, -42.1, -0.5, 36.1, 68.7, 98.4, 125.7, 150.8, 174.1]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-an-empty-list">
+<h3>Create an empty list<a class="headerlink" href="#create-an-empty-list" title="Link to this heading">#</a></h3>
+<p>Often we want to add items to a list that starts off as empty, and we need a variable defined as the list.
+my_sum = []</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_sum</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_sum</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;hydrogen&quot;</span><span class="p">,</span> <span class="s2">&quot;helium&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;hydrogen&#39;, &#39;helium&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="list-methods">
+<h2>List Methods<a class="headerlink" href="#list-methods" title="Link to this heading">#</a></h2>
+<section id="table-of-list-methods">
+<h3>Table of List Methods<a class="headerlink" href="#table-of-list-methods" title="Link to this heading">#</a></h3>
+<p>The following table shows commonly used <strong>list methods</strong>, which are functions specific to list objects:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">append(x)</span></code></p></td>
+<td><p>Adds an item <code class="docutils literal notranslate"><span class="pre">x</span></code> to the end of the list.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elements.append(&quot;Beryllium&quot;)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">extend(iterable)</span></code></p></td>
+<td><p>Extends the list by appending elements from an iterable.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elements.extend([&quot;Boron&quot;,</span> <span class="pre">&quot;Carbon&quot;])</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">insert(i,</span> <span class="pre">x)</span></code></p></td>
+<td><p>Inserts item <code class="docutils literal notranslate"><span class="pre">x</span></code> at position <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elements.insert(1,</span> <span class="pre">&quot;Neon&quot;)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">remove(x)</span></code></p></td>
+<td><p>Removes the first occurrence of <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elements.remove(&quot;Helium&quot;)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pop([i])</span></code></p></td>
+<td><p>Removes and returns the item at index <code class="docutils literal notranslate"><span class="pre">i</span></code> (last if unspecified).</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elements.pop(2)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">index(x)</span></code></p></td>
+<td><p>Returns the index of <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elements.index(&quot;Lithium&quot;)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">count(x)</span></code></p></td>
+<td><p>Returns the count of <code class="docutils literal notranslate"><span class="pre">x</span></code> in the list.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elements.count(&quot;Oxygen&quot;)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sort()</span></code></p></td>
+<td><p>Sorts the list in ascending order.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elements.sort()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">reverse()</span></code></p></td>
+<td><p>Reverses the order of elements in the list.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elements.reverse()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">copy()</span></code></p></td>
+<td><p>Returns a shallow copy of the list.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">new_list</span> <span class="pre">=</span> <span class="pre">elements.copy()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">clear()</span></code></p></td>
+<td><p>Removes all elements from the list.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elements.clear()</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="built-in-functions-that-work-on-lists">
+<h2>Built-in Functions That Work on Lists<a class="headerlink" href="#built-in-functions-that-work-on-lists" title="Link to this heading">#</a></h2>
+<p>Python provides several built-in functions that work on lists:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">len(lst)</span></code></p></td>
+<td><p>Returns the number of elements in the list.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">len(elements)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">min(lst)</span></code></p></td>
+<td><p>Returns the smallest element.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">min([3,</span> <span class="pre">1,</span> <span class="pre">4])</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">max(lst)</span></code></p></td>
+<td><p>Returns the largest element.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">max([3,</span> <span class="pre">1,</span> <span class="pre">4])</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sum(lst)</span></code></p></td>
+<td><p>Returns the sum of all elements (if numeric).</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sum([3,</span> <span class="pre">1,</span> <span class="pre">4])</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sorted(lst)</span></code></p></td>
+<td><p>Returns a new sorted list without modifying the original.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sorted(elements)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">list(iterable)</span></code></p></td>
+<td><p>Converts an iterable (like a tuple or string) into a list.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">list(&quot;Chemistry&quot;)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<section id="examples-of-list-methods-and-functions-in-action">
+<h3>Examples of List Methods and Functions in Action<a class="headerlink" href="#examples-of-list-methods-and-functions-in-action" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create and print a list</span>
+<span class="n">molar_mass</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;hydrogen&#39;</span><span class="p">,</span><span class="mf">1.00784</span><span class="p">,</span><span class="s1">&#39;helium&#39;</span><span class="p">,</span><span class="mf">4.002602</span><span class="p">,</span><span class="s1">&#39;lithium&#39;</span><span class="p">,</span> <span class="mf">6.941</span><span class="p">,</span> <span class="s1">&#39;beryllium&#39;</span><span class="p">,</span> <span class="mf">9.012182</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">molar_mass</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;hydrogen&#39;, 1.00784, &#39;helium&#39;, 4.002602, &#39;lithium&#39;, 6.941, &#39;beryllium&#39;, 9.012182]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># determine the length of a list</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">molar_mass</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">molar_mass</span><span class="p">)</span><span class="si">}</span><span class="s2"> items in the list molar_Mass&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
+There are 8 items in the list molar_Mass
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># use indexing to print even items (starting with zero)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">molar_mass</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">molar_mass</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;hydrogen&#39;, &#39;helium&#39;, &#39;lithium&#39;, &#39;beryllium&#39;]
+[1.00784, 4.002602, 6.941, 9.012182]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># summing the masses</span>
+<span class="n">masses</span> <span class="o">=</span> <span class="n">molar_mass</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">masses</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">masses</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">masses</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1.00784, 4.002602, 6.941, 9.012182]
+&lt;class &#39;list&#39;&gt;
+20.963624
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate the average molar mass</span>
+<span class="n">ave</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">molar_mass</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">molar_mass</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ave</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.240906
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">molar_mass</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.240906
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">noble_gases</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;Ne&quot;</span><span class="p">,</span> <span class="s2">&quot;Ar&quot;</span><span class="p">,</span> <span class="s2">&quot;Kr&quot;</span><span class="p">,</span> <span class="s2">&quot;Xe&quot;</span><span class="p">,</span> <span class="s2">&quot;Rn&quot;</span><span class="p">,</span> <span class="s2">&quot;Og&quot;</span><span class="p">]</span>
+<span class="n">ng_atomic_masses</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.0026</span><span class="p">,</span> <span class="mf">20.180</span><span class="p">,</span> <span class="mf">39.948</span><span class="p">,</span> <span class="mf">83.798</span><span class="p">,</span> <span class="mf">131.293</span><span class="p">,</span> <span class="mi">222</span><span class="p">,</span> <span class="mi">294</span><span class="p">]</span>
+<span class="n">ng_atomic_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">86</span><span class="p">,</span> <span class="mi">118</span><span class="p">]</span>  <span class="c1"># Atomic numbers</span>
+<span class="n">ng_boiling_points</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.22</span><span class="p">,</span> <span class="mf">27.07</span><span class="p">,</span> <span class="mf">87.30</span><span class="p">,</span> <span class="mf">119.93</span><span class="p">,</span> <span class="mf">165.03</span><span class="p">,</span> <span class="mf">211.3</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>  <span class="c1"># K (Og unknown)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Noble gases: </span><span class="se">\t</span><span class="si">{</span><span class="n">noble_gases</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">Atomic masses: </span><span class="se">\t</span><span class="si">{</span><span class="n">ng_atomic_masses</span><span class="si">}</span><span class="s2"> </span><span class="se">\</span>
+<span class="se">\n</span><span class="s2">Atomic numbers: </span><span class="si">{</span><span class="n">ng_atomic_numbers</span><span class="si">}</span><span class="se">\n</span><span class="s2">Boiling Points: </span><span class="si">{</span><span class="n">ng_boiling_points</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Noble gases: 	[&#39;He&#39;, &#39;Ne&#39;, &#39;Ar&#39;, &#39;Kr&#39;, &#39;Xe&#39;, &#39;Rn&#39;, &#39;Og&#39;] 
+Atomic masses: 	[4.0026, 20.18, 39.948, 83.798, 131.293, 222, 294] 
+Atomic numbers: [2, 10, 18, 36, 54, 86, 118]
+Boiling Points: [4.22, 27.07, 87.3, 119.93, 165.03, 211.3, None] 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Using Indexing</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; The boiling point of </span><span class="si">{</span><span class="n">noble_gases</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">ng_boiling_points</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> The boiling point of Ne is 27.07
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="for-loop-and-lists">
+<h2>For Loop and Lists<a class="headerlink" href="#for-loop-and-lists" title="Link to this heading">#</a></h2>
+<p>Since a list is iterable, we can set up a for loop to go through each item and pull out a value by its index number.  We will cover loops and other control structures later, but I want you to see how a we can go through each item using its index number</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop through each index and print the name and boiling point</span>
+<span class="n">noble_gases</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;Ne&quot;</span><span class="p">,</span> <span class="s2">&quot;Ar&quot;</span><span class="p">,</span> <span class="s2">&quot;Kr&quot;</span><span class="p">,</span> <span class="s2">&quot;Xe&quot;</span><span class="p">,</span> <span class="s2">&quot;Rn&quot;</span><span class="p">,</span> <span class="s2">&quot;Og&quot;</span><span class="p">]</span>
+<span class="n">ng_boiling_points</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.22</span><span class="p">,</span> <span class="mf">27.07</span><span class="p">,</span> <span class="mf">87.3</span><span class="p">,</span> <span class="mf">119.93</span><span class="p">,</span> <span class="mf">165.03</span><span class="p">,</span> <span class="mf">211.3</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> 
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">noble_gases</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">ng_boiling_points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The boiling point of </span><span class="si">{</span><span class="n">noble_gases</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> is unknown.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The boiling point of </span><span class="si">{</span><span class="n">noble_gases</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> is </span><span class="si">{</span><span class="n">ng_boiling_points</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> K.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The boiling point of He is 4.22 K.
+The boiling point of Ne is 27.07 K.
+The boiling point of Ar is 87.3 K.
+The boiling point of Kr is 119.93 K.
+The boiling point of Xe is 165.03 K.
+The boiling point of Rn is 211.3 K.
+The boiling point of Og is unknown.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="combining-lists-and-zip">
+<h2>Combining lists and zip()<a class="headerlink" href="#combining-lists-and-zip" title="Link to this heading">#</a></h2>
+<p>The following code creates an empty list, then creates a list of tuples (the next topic), and then appends the tuples to the empty list</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">noble_gases</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;Ne&quot;</span><span class="p">,</span> <span class="s2">&quot;Ar&quot;</span><span class="p">,</span> <span class="s2">&quot;Kr&quot;</span><span class="p">,</span> <span class="s2">&quot;Xe&quot;</span><span class="p">,</span> <span class="s2">&quot;Rn&quot;</span><span class="p">,</span> <span class="s2">&quot;Og&quot;</span><span class="p">]</span>
+<span class="n">ng_boiling_points</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.22</span><span class="p">,</span> <span class="mf">27.07</span><span class="p">,</span> <span class="mf">87.3</span><span class="p">,</span> <span class="mf">119.93</span><span class="p">,</span> <span class="mf">165.03</span><span class="p">,</span> <span class="mf">211.3</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> 
+
+<span class="n">combined_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">gas</span><span class="p">,</span> <span class="n">bp</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">noble_gases</span><span class="p">,</span> <span class="n">ng_boiling_points</span><span class="p">):</span>
+    <span class="n">combined_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span>
+    <span class="n">combined_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bp</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">combined_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;He&#39;, 4.22, &#39;Ne&#39;, 27.07, &#39;Ar&#39;, 87.3, &#39;Kr&#39;, 119.93, &#39;Xe&#39;, 165.03, &#39;Rn&#39;, 211.3, &#39;Og&#39;, None]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Before getting into the above code and tuples, lets try and take the average of the molar masses in the above list of repeating symbols and masses.  We could try the following code, but the last value is non-numeric (<strong>None</strong>). In later modules we will see more advanced ways of handling non-numeric values</p>
+<div class="copyable highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The following gives an error due to a non-numeric value in ng_boiling_points</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">combined_list</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span>
+                      <span class="o">&lt;</span><span class="n">div</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;alert alert-info&quot;</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cleaned_molarmass</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">combined_list</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+<span class="n">average</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">cleaned_molarmass</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">average</span><span class="p">)</span>  
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>102.47500000000001
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tuples">
+<h1>2. Tuples<a class="headerlink" href="#tuples" title="Link to this heading">#</a></h1>
+<p>Tuples are a container data type similar to a list, but are <strong>immutable</strong> (unchangeable), that is, once created they can not be changed.  <strong>Tuples are defined with parenthesis()</strong> while <strong>lists are defined with brackets[]</strong>.</p>
+<section id="key-features-of-tuples">
+<h2>Key Features of Tuples<a class="headerlink" href="#key-features-of-tuples" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Immutable</strong> – Cannot be changed after creation.</p></li>
+<li><p><strong>Ordered</strong> – Elements remain in a fixed sequence.</p></li>
+<li><p><strong>Indexed</strong> – Can access elements using indexing (like lists).</p></li>
+<li><p><strong>sliced</strong> - Can be sliced (like lists).</p></li>
+<li><p><strong>Allow duplicates</strong> – Can contain repeated values.</p></li>
+<li><p><strong>Can store multiple data types</strong> – Similar to lists.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">noble_gases</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;Ne&quot;</span><span class="p">,</span> <span class="s2">&quot;Ar&quot;</span><span class="p">,</span> <span class="s2">&quot;Kr&quot;</span><span class="p">,</span> <span class="s2">&quot;Xe&quot;</span><span class="p">,</span> <span class="s2">&quot;Rn&quot;</span><span class="p">,</span> <span class="s2">&quot;Og&quot;</span><span class="p">]</span>
+<span class="n">ng_boiling_points</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.22</span><span class="p">,</span> <span class="mf">27.07</span><span class="p">,</span> <span class="mf">87.3</span><span class="p">,</span> <span class="mf">119.93</span><span class="p">,</span> <span class="mf">165.03</span><span class="p">,</span> <span class="mf">211.3</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+<span class="c1"># Convert zip object to a list of tuples</span>
+<span class="n">zipped_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">noble_gases</span><span class="p">,</span> <span class="n">ng_boiling_points</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Zipped List of Tuples:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">zipped_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Zipped List of Tuples:
+[(&#39;He&#39;, 4.22), (&#39;Ne&#39;, 27.07), (&#39;Ar&#39;, 87.3), (&#39;Kr&#39;, 119.93), (&#39;Xe&#39;, 165.03), (&#39;Rn&#39;, 211.3), (&#39;Og&#39;, None)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tuples from zip(noble_gases, ng_boiling_points):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">pair</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">noble_gases</span><span class="p">,</span> <span class="n">ng_boiling_points</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tuples from zip(noble_gases, ng_boiling_points):
+(&#39;He&#39;, 4.22)
+(&#39;Ne&#39;, 27.07)
+(&#39;Ar&#39;, 87.3)
+(&#39;Kr&#39;, 119.93)
+(&#39;Xe&#39;, 165.03)
+(&#39;Rn&#39;, 211.3)
+(&#39;Og&#39;, None)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="working-with-tuples">
+<h2>Working with Tuples<a class="headerlink" href="#working-with-tuples" title="Link to this heading">#</a></h2>
+<section id="accessing-tuple-elements-indexing">
+<h3>1. Accessing Tuple elements (Indexing)<a class="headerlink" href="#accessing-tuple-elements-indexing" title="Link to this heading">#</a></h3>
+<p>Tuples use zero based indexing</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">noble_gases</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;Ne&quot;</span><span class="p">,</span> <span class="s2">&quot;Ar&quot;</span><span class="p">,</span> <span class="s2">&quot;Kr&quot;</span><span class="p">,</span> <span class="s2">&quot;Xe&quot;</span><span class="p">,</span> <span class="s2">&quot;Rn&quot;</span><span class="p">,</span> <span class="s2">&quot;Og&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">noble_gases</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># &#39;He&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">noble_gases</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># &#39;Og&#39; (Last element)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>He
+Og
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="slicing-tuples">
+<h3>2. Slicing Tuples<a class="headerlink" href="#slicing-tuples" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">noble_gases</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">noble_gases</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>  <span class="c1"># (&#39;Ne&#39;, &#39;Ar&#39;, &#39;Kr&#39;)  -&gt; Extracts elements 1 to 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">noble_gases</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>   <span class="c1"># (&#39;He&#39;, &#39;Ne&#39;, &#39;Ar&#39;)  -&gt; First three elements</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">noble_gases</span><span class="p">[</span><span class="mi">4</span><span class="p">:])</span>   <span class="c1"># (&#39;Xe&#39;, &#39;Rn&#39;, &#39;Og&#39;)  -&gt; From index 4 to end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;He&#39;, &#39;Ne&#39;, &#39;Ar&#39;, &#39;Kr&#39;, &#39;Xe&#39;, &#39;Rn&#39;, &#39;Og&#39;)
+(&#39;Ne&#39;, &#39;Ar&#39;, &#39;Kr&#39;)
+(&#39;He&#39;, &#39;Ne&#39;, &#39;Ar&#39;)
+(&#39;Xe&#39;, &#39;Rn&#39;, &#39;Og&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="iterating-through-a-tuple">
+<h3>3. Iterating Through a Tuple<a class="headerlink" href="#iterating-through-a-tuple" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">gas</span> <span class="ow">in</span> <span class="n">noble_gases</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">gas</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>He
+Ne
+Ar
+Kr
+Xe
+Rn
+Og
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="tuple-unpacking">
+<h3>4.Tuple Unpacking<a class="headerlink" href="#tuple-unpacking" title="Link to this heading">#</a></h3>
+<p>Python allows assigning tuples to multiple variables</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">element1</span><span class="p">,</span> <span class="n">element2</span><span class="p">,</span> <span class="n">element3</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;Li&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">element1</span><span class="p">)</span>  <span class="c1"># H</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">element2</span><span class="p">)</span>  <span class="c1"># He</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">element3</span><span class="p">)</span>  <span class="c1"># Li</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H
+He
+Li
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-zip-to-create-tuples">
+<h3>5. Using zip() to Create Tuples<a class="headerlink" href="#using-zip-to-create-tuples" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">noble_gases</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;Ne&quot;</span><span class="p">,</span> <span class="s2">&quot;Ar&quot;</span><span class="p">,</span> <span class="s2">&quot;Kr&quot;</span><span class="p">,</span> <span class="s2">&quot;Xe&quot;</span><span class="p">,</span> <span class="s2">&quot;Rn&quot;</span><span class="p">,</span> <span class="s2">&quot;Og&quot;</span><span class="p">)</span>
+<span class="n">boiling_points</span> <span class="o">=</span> <span class="p">(</span><span class="mf">4.22</span><span class="p">,</span> <span class="mf">27.07</span><span class="p">,</span> <span class="mf">87.3</span><span class="p">,</span> <span class="mf">119.93</span><span class="p">,</span> <span class="mf">165.03</span><span class="p">,</span> <span class="mf">211.3</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+<span class="n">zipped_data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">noble_gases</span><span class="p">,</span> <span class="n">boiling_points</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">zipped_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;He&#39;, 4.22), (&#39;Ne&#39;, 27.07), (&#39;Ar&#39;, 87.3), (&#39;Kr&#39;, 119.93), (&#39;Xe&#39;, 165.03), (&#39;Rn&#39;, 211.3), (&#39;Og&#39;, None)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Hydrogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Helium&quot;</span><span class="p">,</span> <span class="s2">&quot;Lithium&quot;</span><span class="p">]</span>
+<span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;Li&quot;</span><span class="p">]</span>
+<span class="n">atomic_weights</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.008</span><span class="p">,</span> <span class="mf">4.0026</span><span class="p">,</span> <span class="mf">6.94</span><span class="p">]</span>
+
+<span class="n">zipped_data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">atomic_weights</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">zipped_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Hydrogen&#39;, &#39;H&#39;, 1.008), (&#39;Helium&#39;, &#39;He&#39;, 4.0026), (&#39;Lithium&#39;, &#39;Li&#39;, 6.94)]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="tuple-unpacking-and-zip-zipped-data">
+<h3>7. Tuple unpacking and zip(*zipped_data)<a class="headerlink" href="#tuple-unpacking-and-zip-zipped-data" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m_names</span><span class="p">,</span> <span class="n">m_symbols</span><span class="p">,</span> <span class="n">m_atomic_weights</span><span class="o">=</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">zipped_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m_names</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m_symbols</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m_atomic_weights</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;Hydrogen&#39;, &#39;Helium&#39;, &#39;Lithium&#39;)
+(&#39;H&#39;, &#39;He&#39;, &#39;Li&#39;)
+(1.008, 4.0026, 6.94)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="sets">
+<h1>3. Sets<a class="headerlink" href="#sets" title="Link to this heading">#</a></h1>
+<section id="what-is-a-set">
+<h2>What is a Set?<a class="headerlink" href="#what-is-a-set" title="Link to this heading">#</a></h2>
+<p>A <strong>set</strong> is a built-in Python data type that represents an unordered collection of unique elements. Unlike lists or tuples, sets do not allow duplicate values and are defined using curly braces <code class="docutils literal notranslate"><span class="pre">{}</span></code> or the <code class="docutils literal notranslate"><span class="pre">set()</span></code> constructor.</p>
+<section id="sets-lists-and-tuples">
+<h3><strong>Sets, Lists and Tuples</strong><a class="headerlink" href="#sets-lists-and-tuples" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Lists</strong> are ordered and allow duplicates.</p></li>
+<li><p><strong>Tuples</strong> are ordered and immutable.</p></li>
+<li><p><strong>Sets</strong> are unordered, do not allow duplicates, and enable fast lookups.</p></li>
+</ul>
+</section>
+</section>
+<section id="introduction-to-set-theory">
+<h2>Introduction to Set Theory<a class="headerlink" href="#introduction-to-set-theory" title="Link to this heading">#</a></h2>
+<p>Set theory is a fundamental branch of mathematics that deals with collections of objects, called <strong>elements</strong>. A set is defined as a well-defined collection of distinct objects. In chemistry, we often deal with sets when categorizing elements, compounds, or reaction products.</p>
+<section id="basic-set-notation">
+<h3>Basic Set Notation<a class="headerlink" href="#basic-set-notation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Universal Set (U)</strong>: The set containing all elements under consideration.</p></li>
+<li><p><strong>Subset (⊆)</strong>: A set A is a subset of B if every element in A is also in B.</p></li>
+<li><p><strong>Proper Subset (⊂)</strong>: A subset A of B where A ≠ B.</p></li>
+<li><p><strong>Union (A ∪ B)</strong>: The set containing all elements that belong to either A or B or both.</p></li>
+<li><p><strong>Intersection (A ∩ B)</strong>: The set containing elements common to both A and B.</p></li>
+<li><p><strong>Difference (A - B)</strong>: The set of elements in A but not in B.</p></li>
+<li><p><strong>Complement (A′ or U - A)</strong>: The set of elements not in A but in the universal set U.</p></li>
+</ul>
+</section>
+<section id="relationship-to-boolean-algebra">
+<h3>Relationship to Boolean Algebra<a class="headerlink" href="#relationship-to-boolean-algebra" title="Link to this heading">#</a></h3>
+<p>Set theory is closely related to <strong>Boolean algebra</strong>, which is used in logic and computing. The operations in Boolean algebra resemble set operations:</p>
+<ul class="simple">
+<li><p><strong>Union (A ∪ B) corresponds to logical OR (A OR B).</strong></p></li>
+<li><p><strong>Intersection (A ∩ B) corresponds to logical AND (A AND B).</strong></p></li>
+<li><p><strong>Complement (A′) corresponds to logical NOT (NOT A).</strong></p></li>
+<li><p><strong>Difference (A - B) corresponds to A AND NOT B.</strong></p></li>
+</ul>
+<p>These relationships are particularly useful when working with Venn diagrams, logic circuits, or computational chemistry applications.</p>
+</section>
+</section>
+<section id="why-use-sets-in-chemistry">
+<h2>Why Use Sets in Chemistry?<a class="headerlink" href="#why-use-sets-in-chemistry" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Uniqueness</strong>: Automatically removes duplicate values.</p></li>
+<li><p><strong>Efficient Membership Testing</strong>: Checking if an element is in a set is faster than checking in a list.</p></li>
+<li><p><strong>Set Operations</strong>: Provides powerful operations like union, intersection, and difference, useful in data analysis and scientific computing.</p></li>
+</ul>
+</section>
+<section id="creating-a-set">
+<h2>Creating a Set<a class="headerlink" href="#creating-a-set" title="Link to this heading">#</a></h2>
+<p>You can create a set using curly braces <code class="docutils literal notranslate"><span class="pre">{}</span></code> or the <code class="docutils literal notranslate"><span class="pre">set()</span></code> function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating sets</span>
+<span class="n">chemical_elements</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;Li&quot;</span><span class="p">,</span> <span class="s2">&quot;Be&quot;</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chemical_elements</span><span class="p">)</span>  <span class="c1"># Output: {&#39;H&#39;, &#39;He&#39;, &#39;Li&#39;, &#39;Be&#39;}</span>
+
+<span class="c1"># Using set() constructor</span>
+<span class="n">unique_numbers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unique_numbers</span><span class="p">)</span>  <span class="c1"># Output: {1, 2, 3, 4}</span>
+</pre></div>
+</div>
+</section>
+<section id="set-methods">
+<h2>Set Methods<a class="headerlink" href="#set-methods" title="Link to this heading">#</a></h2>
+<section id="table-of-set-methods">
+<h3>Table of Set Methods<a class="headerlink" href="#table-of-set-methods" title="Link to this heading">#</a></h3>
+<p>Here are some common methods used with sets:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">add(x)</span></code></p></td>
+<td><p>Adds an element <code class="docutils literal notranslate"><span class="pre">x</span></code> to the set.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">remove(x)</span></code></p></td>
+<td><p>Removes <code class="docutils literal notranslate"><span class="pre">x</span></code> from the set (raises an error if <code class="docutils literal notranslate"><span class="pre">x</span></code> is not present).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">discard(x)</span></code></p></td>
+<td><p>Removes <code class="docutils literal notranslate"><span class="pre">x</span></code> if present, but does not raise an error if absent.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pop()</span></code></p></td>
+<td><p>Removes and returns an arbitrary element.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">clear()</span></code></p></td>
+<td><p>Removes all elements from the set.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">copy()</span></code></p></td>
+<td><p>Returns a shallow copy of the set.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">union(set2)</span></code></p></td>
+<td><p>Returns a new set containing all elements from both sets.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">intersection(set2)</span></code></p></td>
+<td><p>Returns a new set with elements common to both sets.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">difference(set2)</span></code></p></td>
+<td><p>Returns a new set with elements in the first set but not in the second.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">symmetric_difference(set2)</span></code></p></td>
+<td><p>Returns a new set with elements in either set but not both.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">issubset(set2)</span></code></p></td>
+<td><p>Checks if the set is a subset of <code class="docutils literal notranslate"><span class="pre">set2</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">issuperset(set2)</span></code></p></td>
+<td><p>Checks if the set is a superset of <code class="docutils literal notranslate"><span class="pre">set2</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="set-operators">
+<h2>Set Operators<a class="headerlink" href="#set-operators" title="Link to this heading">#</a></h2>
+<section id="table-of-set-operators">
+<h3>Table of Set Operators<a class="headerlink" href="#table-of-set-operators" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Symbol</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example Usage</p></th>
+<th class="head"><p>Equivalent Method</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Union</p></td>
+<td><p>`</p></td>
+<td><p>`</p></td>
+<td><p>Combines all unique elements from both sets.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">|</span> <span class="pre">B</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Intersection</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code></p></td>
+<td><p>Retrieves elements common to both sets.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&amp;</span> <span class="pre">B</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A.intersection(B)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Difference</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Returns elements in the first set that are not in the second.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">-</span> <span class="pre">B</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A.difference(B)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Symmetric Difference</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">^</span></code></p></td>
+<td><p>Returns elements in either set, but not in both.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">^</span> <span class="pre">B</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A.symmetric_difference(B)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Subset</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;=</span></code></p></td>
+<td><p>Checks if all elements of the first set are in the second set.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&lt;=</span> <span class="pre">B</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A.issubset(B)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Proper Subset</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code></p></td>
+<td><p>Checks if the first set is a subset of the second set and not equal.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&lt;</span> <span class="pre">B</span></code></p></td>
+<td><p>N/A</p></td>
+</tr>
+<tr class="row-even"><td><p>Superset</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=</span></code></p></td>
+<td><p>Checks if all elements of the second set are in the first set.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&gt;=</span> <span class="pre">B</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A.issuperset(B)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Proper Superset</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code></p></td>
+<td><p>Checks if the first set is a superset of the second set and not equal.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">&gt;</span> <span class="pre">B</span></code></p></td>
+<td><p>N/A</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="functions-that-work-on-sets">
+<h2>Functions That Work on Sets<a class="headerlink" href="#functions-that-work-on-sets" title="Link to this heading">#</a></h2>
+<section id="table-of-functions-that-work-with-sets">
+<h3>Table of Functions that Work with Sets<a class="headerlink" href="#table-of-functions-that-work-with-sets" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">len(set)</span></code></p></td>
+<td><p>Returns the number of elements in the set.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">min(set)</span></code></p></td>
+<td><p>Returns the smallest element (for comparable elements).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">max(set)</span></code></p></td>
+<td><p>Returns the largest element (for comparable elements).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sum(set)</span></code></p></td>
+<td><p>Returns the sum of all elements (for numeric sets).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sorted(set)</span></code></p></td>
+<td><p>Returns a sorted list of elements in the set.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">enumerate(set)</span></code></p></td>
+<td><p>Returns an enumerate object for the set.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="activities-involving-sets">
+<h2>Activities Involving Sets<a class="headerlink" href="#activities-involving-sets" title="Link to this heading">#</a></h2>
+<section id="create-a-set">
+<h3>1. Create a Set<a class="headerlink" href="#create-a-set" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating sets</span>
+<span class="n">chemical_elements</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;Li&quot;</span><span class="p">,</span> <span class="s2">&quot;Be&quot;</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chemical_elements</span><span class="p">)</span>  <span class="c1"># Output: {&#39;H&#39;, &#39;He&#39;, &#39;Li&#39;, &#39;Be&#39;}</span>
+
+<span class="c1"># Using set() constructor</span>
+<span class="n">unique_numbers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unique_numbers</span><span class="p">)</span>  <span class="c1"># Output: {1, 2, 3, 4}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Be&#39;, &#39;Li&#39;, &#39;H&#39;, &#39;He&#39;}
+{1, 2, 3, 4}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chemical_elements</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Index </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">: Element </span><span class="si">{</span><span class="n">element</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index 0: Element Be
+Index 1: Element Li
+Index 2: Element H
+Index 3: Element He
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="identify-unique-elements">
+<h3>2. Identify Unique Elements<a class="headerlink" href="#identify-unique-elements" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">isotopes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;C-12&quot;</span><span class="p">,</span> <span class="s2">&quot;C-13&quot;</span><span class="p">,</span> <span class="s2">&quot;C-12&quot;</span><span class="p">,</span> <span class="s2">&quot;C-14&quot;</span><span class="p">,</span> <span class="s2">&quot;C-13&quot;</span><span class="p">,</span> <span class="s2">&quot;C-14&quot;</span><span class="p">]</span>
+<span class="n">unique_isotopes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">isotopes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">unique_isotopes</span><span class="p">)</span>  <span class="c1"># Expected Output: {&#39;C-12&#39;, &#39;C-13&#39;, &#39;C-14&#39;}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;C-14&#39;, &#39;C-13&#39;, &#39;C-12&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="basic-set-operations">
+<h3>3. Basic Set Operations<a class="headerlink" href="#basic-set-operations" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">group1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Na&quot;</span><span class="p">,</span> <span class="s2">&quot;Mg&quot;</span><span class="p">,</span> <span class="s2">&quot;Al&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">}</span>
+<span class="n">group2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Mg&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="s2">&quot;S&quot;</span><span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Union:&quot;</span><span class="p">,</span> <span class="n">group1</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">group2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intersection:&quot;</span><span class="p">,</span> <span class="n">group1</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">group2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Difference (group1 - group2):&quot;</span><span class="p">,</span> <span class="n">group1</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">group2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Symmetric Difference:&quot;</span><span class="p">,</span> <span class="n">group1</span><span class="o">.</span><span class="n">symmetric_difference</span><span class="p">(</span><span class="n">group2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Union: {&#39;Mg&#39;, &#39;Al&#39;, &#39;Na&#39;, &#39;S&#39;, &#39;P&#39;, &#39;Si&#39;}
+Intersection: {&#39;Mg&#39;, &#39;Si&#39;}
+Difference (group1 - group2): {&#39;Na&#39;, &#39;Al&#39;}
+Symmetric Difference: {&#39;Al&#39;, &#39;Na&#39;, &#39;S&#39;, &#39;P&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="checking-for-subsets-and-supersets">
+<h3>4. Checking for Subsets and Supersets<a class="headerlink" href="#checking-for-subsets-and-supersets" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alkali_metals</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Li&quot;</span><span class="p">,</span> <span class="s2">&quot;Na&quot;</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="s2">&quot;Rb&quot;</span><span class="p">,</span> <span class="s2">&quot;Cs&quot;</span><span class="p">}</span>
+<span class="n">metals</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Li&quot;</span><span class="p">,</span> <span class="s2">&quot;Na&quot;</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="s2">&quot;Rb&quot;</span><span class="p">,</span> <span class="s2">&quot;Cs&quot;</span><span class="p">,</span> <span class="s2">&quot;Mg&quot;</span><span class="p">,</span> <span class="s2">&quot;Al&quot;</span><span class="p">,</span> <span class="s2">&quot;Fe&quot;</span><span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Are alkali metals a subset of metals?&quot;</span><span class="p">,</span> <span class="n">alkali_metals</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">metals</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Are metals a superset of alkali metals?&quot;</span><span class="p">,</span> <span class="n">metals</span><span class="o">.</span><span class="n">issuperset</span><span class="p">(</span><span class="n">alkali_metals</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Are alkali metals a subset of metals? True
+Are metals a superset of alkali metals? True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="analyze-chemical-reaction">
+<h2>Analyze Chemical Reaction<a class="headerlink" href="#analyze-chemical-reaction" title="Link to this heading">#</a></h2>
+<p>-learn how to use union (|), intersection (&amp;), and difference (-) with sets.</p>
+<section id="define-reactants-and-products-as-sets">
+<h3>Define Reactants and Products as Sets<a class="headerlink" href="#define-reactants-and-products-as-sets" title="Link to this heading">#</a></h3>
+<p>We will analyze the combustion of methane (CH₄ + 2O₂ → CO₂ + 2H₂O)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define sets for reactants and products</span>
+<span class="n">reactants</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;CH4&quot;</span><span class="p">,</span> <span class="s2">&quot;O2&quot;</span><span class="p">}</span>
+<span class="n">products</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;CO2&quot;</span><span class="p">,</span> <span class="s2">&quot;H2O&quot;</span><span class="p">}</span>
+
+<span class="c1"># Print them</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reactants:&quot;</span><span class="p">,</span> <span class="n">reactants</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Products:&quot;</span><span class="p">,</span> <span class="n">products</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reactants: {&#39;CH4&#39;, &#39;O2&#39;}
+Products: {&#39;CO2&#39;, &#39;H2O&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find common species between reactants and products</span>
+<span class="n">common_species</span> <span class="o">=</span> <span class="n">reactants</span> <span class="o">&amp;</span> <span class="n">products</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Common species in both reactants and products:&quot;</span><span class="p">,</span> <span class="n">common_species</span><span class="p">)</span>
+
+<span class="c1"># Find species that are in reactants but not in products</span>
+<span class="n">consumed_species</span> <span class="o">=</span> <span class="n">reactants</span> <span class="o">-</span> <span class="n">products</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Species consumed in the reaction:&quot;</span><span class="p">,</span> <span class="n">consumed_species</span><span class="p">)</span>
+
+<span class="c1"># Find species that appear only in products</span>
+<span class="n">formed_species</span> <span class="o">=</span> <span class="n">products</span> <span class="o">-</span> <span class="n">reactants</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Species formed in the reaction:&quot;</span><span class="p">,</span> <span class="n">formed_species</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Common species in both reactants and products: set()
+Species consumed in the reaction: {&#39;CH4&#39;, &#39;O2&#39;}
+Species formed in the reaction: {&#39;CO2&#39;, &#39;H2O&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sets-and-smiles-strings">
+<h2>Sets and SMILES strings<a class="headerlink" href="#sets-and-smiles-strings" title="Link to this heading">#</a></h2>
+<p>SMILES (Simplified Molecular Input Line Entry System) is a line notation (digital nomenclature) used in chemistry to represent molecular structures.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Molecule</p></th>
+<th class="head"><p>Formula</p></th>
+<th class="head"><p>SMILES</p></th>
+<th class="head"><p>Flammability</p></th>
+<th class="head"><p></p></th>
+<th class="head"><p>Molecule</p></th>
+<th class="head"><p>Formula</p></th>
+<th class="head"><p>SMILES</p></th>
+<th class="head"><p>Flammability</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Methane</p></td>
+<td><p>CH₄</p></td>
+<td><p>C</p></td>
+<td><p>Flammable</p></td>
+<td><p></p></td>
+<td><p>Ethane</p></td>
+<td><p>C₂H₆</p></td>
+<td><p>CC</p></td>
+<td><p>Flammable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Water</p></td>
+<td><p>H₂O</p></td>
+<td><p>O</p></td>
+<td><p>Non-flammable</p></td>
+<td><p></p></td>
+<td><p>Hydrogen Peroxide</p></td>
+<td><p>H₂O₂</p></td>
+<td><p>OO</p></td>
+<td><p>Flammable</p></td>
+</tr>
+<tr class="row-even"><td><p>Carbon Dioxide</p></td>
+<td><p>CO₂</p></td>
+<td><p>O=C=O</p></td>
+<td><p>Non-flammable</p></td>
+<td><p></p></td>
+<td><p>Carbon Monoxide</p></td>
+<td><p>CO</p></td>
+<td><p>[C-]#[O+]</p></td>
+<td><p>Flammable</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ethanol</p></td>
+<td><p>C₂H₆O</p></td>
+<td><p>CCO</p></td>
+<td><p>Flammable</p></td>
+<td><p></p></td>
+<td><p>Acetic Acid</p></td>
+<td><p>C₂H₄O₂</p></td>
+<td><p>CC(=O)O</p></td>
+<td><p>Flammable</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>In the following cell we a create two sets, one of flammable chemicals and one of chemicals in a stockroom, with the latter having duplicates.  We then use these to analyze the chemicals in our stockroom with regards to flammability.</p>
+<section id="flammability-using-set-operators">
+<h3>Flammability using Set Operators<a class="headerlink" href="#flammability-using-set-operators" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set of flammable chemicals</span>
+<span class="n">flammable_chemicals</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Methane&quot;</span><span class="p">,</span> <span class="s2">&quot;Ethane&quot;</span><span class="p">,</span> <span class="s2">&quot;Hydrogen Peroxide&quot;</span><span class="p">,</span> <span class="s2">&quot;Carbon Monoxide&quot;</span><span class="p">,</span> <span class="s2">&quot;Ethanol&quot;</span><span class="p">,</span> <span class="s2">&quot;Acetic Acid&quot;</span><span class="p">}</span>
+
+<span class="c1"># List of stockroom chemicals (with duplicates)</span>
+<span class="n">stockroom_chemicals_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Methane&quot;</span><span class="p">,</span> <span class="s2">&quot;Water&quot;</span><span class="p">,</span> <span class="s2">&quot;Ethanol&quot;</span><span class="p">,</span> <span class="s2">&quot;Ethanol&quot;</span><span class="p">,</span> <span class="s2">&quot;Carbon Dioxide&quot;</span><span class="p">,</span> <span class="s2">&quot;Acetic Acid&quot;</span><span class="p">,</span> <span class="s2">&quot;Water&quot;</span><span class="p">]</span>
+
+<span class="c1"># Convert list to set to remove duplicates</span>
+<span class="n">stockroom_chemicals</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stockroom_chemicals_list</span><span class="p">)</span>
+
+<span class="c1"># Identify flammable chemicals in the stockroom</span>
+<span class="n">flammable_in_stockroom</span> <span class="o">=</span> <span class="n">stockroom_chemicals</span> <span class="o">&amp;</span> <span class="n">flammable_chemicals</span>
+
+<span class="c1"># Identify non-flammable chemicals in the stockroom</span>
+<span class="n">non_flammable_in_stockroom</span> <span class="o">=</span> <span class="n">stockroom_chemicals</span> <span class="o">-</span> <span class="n">flammable_chemicals</span>
+
+<span class="c1"># Display results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Flammable chemicals in stockroom:&quot;</span><span class="p">,</span> <span class="n">flammable_in_stockroom</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Non-flammable chemicals in stockroom:&quot;</span><span class="p">,</span> <span class="n">non_flammable_in_stockroom</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flammable chemicals in stockroom: {&#39;Ethanol&#39;, &#39;Methane&#39;, &#39;Acetic Acid&#39;}
+Non-flammable chemicals in stockroom: {&#39;Water&#39;, &#39;Carbon Dioxide&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="flammability-using-set-methods">
+<h3>Flammability using Set Methods<a class="headerlink" href="#flammability-using-set-methods" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Identify flammable chemicals in the stockroom</span>
+<span class="n">flammable_in_stockroom</span> <span class="o">=</span> <span class="n">stockroom_chemicals</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">flammable_chemicals</span><span class="p">)</span>
+
+<span class="c1"># Identify non-flammable chemicals in the stockroom</span>
+<span class="n">non_flammable_in_stockroom</span> <span class="o">=</span> <span class="n">stockroom_chemicals</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">flammable_chemicals</span><span class="p">)</span>
+
+<span class="c1"># Display results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Flammable chemicals in stockroom:&quot;</span><span class="p">,</span> <span class="n">flammable_in_stockroom</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Non-flammable chemicals in stockroom:&quot;</span><span class="p">,</span> <span class="n">non_flammable_in_stockroom</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Flammable chemicals in stockroom: {&#39;Ethanol&#39;, &#39;Methane&#39;, &#39;Acetic Acid&#39;}
+Non-flammable chemicals in stockroom: {&#39;Water&#39;, &#39;Carbon Dioxide&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="compare-sets-tuples-and-list">
+<h1>Compare Sets, Tuples and List<a class="headerlink" href="#compare-sets-tuples-and-list" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a list, tuple, and set of common chemical elements</span>
+<span class="n">chemical_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Hydrogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Oxygen&quot;</span><span class="p">,</span> <span class="s2">&quot;Carbon&quot;</span><span class="p">,</span> <span class="s2">&quot;Nitrogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Oxygen&quot;</span><span class="p">]</span>
+<span class="n">chemical_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Hydrogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Oxygen&quot;</span><span class="p">,</span> <span class="s2">&quot;Carbon&quot;</span><span class="p">,</span> <span class="s2">&quot;Nitrogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Oxygen&quot;</span><span class="p">)</span>
+<span class="n">chemical_set</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Hydrogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Oxygen&quot;</span><span class="p">,</span> <span class="s2">&quot;Carbon&quot;</span><span class="p">,</span> <span class="s2">&quot;Nitrogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Oxygen&quot;</span><span class="p">}</span>
+
+<span class="c1"># Print each collection</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;List:&quot;</span><span class="p">,</span> <span class="n">chemical_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tuple:&quot;</span><span class="p">,</span> <span class="n">chemical_tuple</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Set:&quot;</span><span class="p">,</span> <span class="n">chemical_set</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>List: [&#39;Hydrogen&#39;, &#39;Oxygen&#39;, &#39;Carbon&#39;, &#39;Nitrogen&#39;, &#39;Oxygen&#39;]
+Tuple: (&#39;Hydrogen&#39;, &#39;Oxygen&#39;, &#39;Carbon&#39;, &#39;Nitrogen&#39;, &#39;Oxygen&#39;)
+Set: {&#39;Carbon&#39;, &#39;Hydrogen&#39;, &#39;Nitrogen&#39;, &#39;Oxygen&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<section id="accessing-elements">
+<h2>Accessing Elements<a class="headerlink" href="#accessing-elements" title="Link to this heading">#</a></h2>
+<p>You can use indexing on Lists and Tuples but can not on a set, as a set is unordered.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Access elements from the list and tuple</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First element in list:&quot;</span><span class="p">,</span> <span class="n">chemical_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First element in tuple:&quot;</span><span class="p">,</span> <span class="n">chemical_tuple</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Attempting to access elements in a set (this will cause an error)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First element in set:&quot;</span><span class="p">,</span> <span class="n">chemical_set</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First element in list: Hydrogen
+First element in tuple: Hydrogen
+Error: &#39;set&#39; object is not subscriptable
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note: The last line <code class="docutils literal notranslate"><span class="pre">Error:</span> <span class="pre">'set'</span> <span class="pre">object</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">subscriptable</span></code> is a standardized error message hardcoded into CPython source code. The</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error:&quot;</span><span class="p">,</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>generated this where e is a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code> object and python called the <strong>str</strong>() method which returned the error message.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="dictionaries">
+<h1>4. Dictionaries<a class="headerlink" href="#dictionaries" title="Link to this heading">#</a></h1>
+<p>In Python, a <strong>dictionary</strong> is a built-in data type that allows us to store and retrieve data using a system of <strong>key-value pairs</strong>. Unlike lists, which use numerical indices to access elements, dictionaries use unique <strong>keys</strong> to reference values. This makes them an excellent tool for organizing and retrieving data efficiently</p>
+<section id="key-characteristics-of-dictionaries">
+<h2>Key Characteristics of Dictionaries<a class="headerlink" href="#key-characteristics-of-dictionaries" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Key-Value Pairs</strong>: Each item in a dictionary consists of a <code class="docutils literal notranslate"><span class="pre">key:</span> <span class="pre">value</span></code> pair.</p></li>
+<li><p><strong>Unordered</strong>: Dictionaries do not maintain a fixed order (before Python 3.7, but in newer versions, insertion order is preserved).</p></li>
+<li><p><strong>Mutable</strong>: You can add, update, or remove items.</p></li>
+<li><p><strong>Keys Must Be Unique</strong>: Duplicate keys are not allowed, but values can be duplicated.</p></li>
+<li><p><strong>Keys Must Be Immutable</strong>: Only immutable data types (like strings, numbers, or tuples) can be used as dictionary keys.</p></li>
+<li><p>Values can be numbers, strings, lists, tuples, sets, other dictionaries, essentially any type of python object</p></li>
+</ol>
+</section>
+<section id="creating-a-dictionary">
+<h2>Creating a Dictionary<a class="headerlink" href="#creating-a-dictionary" title="Link to this heading">#</a></h2>
+<p>There are several ways to create a dictionary:</p>
+<section id="using-curly-braces">
+<h3>1. Using Curly Braces <code class="docutils literal notranslate"><span class="pre">{}</span></code>:<a class="headerlink" href="#using-curly-braces" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">elements</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="s2">&quot;Hydrogen&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;He&quot;</span><span class="p">:</span> <span class="s2">&quot;Helium&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;O&quot;</span><span class="p">:</span> <span class="s2">&quot;Oxygen&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="using-dict-constructor">
+<h3>2. Using <code class="docutils literal notranslate"><span class="pre">dict()</span></code> Constructor:<a class="headerlink" href="#using-dict-constructor" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">elements</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">H</span><span class="o">=</span><span class="s2">&quot;Hydrogen&quot;</span><span class="p">,</span> <span class="n">He</span><span class="o">=</span><span class="s2">&quot;Helium&quot;</span><span class="p">,</span> <span class="n">O</span><span class="o">=</span><span class="s2">&quot;Oxygen&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="using-zip-and-dict-to-combine-two-lists">
+<h3>3. Using <code class="docutils literal notranslate"><span class="pre">zip()</span></code> and <code class="docutils literal notranslate"><span class="pre">dict</span></code> to Combine Two Lists:<a class="headerlink" href="#using-zip-and-dict-to-combine-two-lists" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;O&quot;</span><span class="p">]</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Hydrogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Helium&quot;</span><span class="p">,</span> <span class="s2">&quot;Oxygen&quot;</span><span class="p">]</span>
+<span class="n">elements</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">names</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">symbols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;O&quot;</span><span class="p">]</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Hydrogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Helium&quot;</span><span class="p">,</span> <span class="s2">&quot;Oxygen&quot;</span><span class="p">]</span>
+<span class="n">elements</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">names</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;H&#39;: &#39;Hydrogen&#39;, &#39;He&#39;: &#39;Helium&#39;, &#39;O&#39;: &#39;Oxygen&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="table-of-dictionary-methods">
+<h2>Table of Dictionary Methods<a class="headerlink" href="#table-of-dictionary-methods" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dict.keys()</span></code></p></td>
+<td><p>Returns a view of dictionary keys</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dict.values()</span></code></p></td>
+<td><p>Returns a view of dictionary values</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dict.items()</span></code></p></td>
+<td><p>Returns key-value pairs as tuples</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dict.get(key,</span> <span class="pre">default)</span></code></p></td>
+<td><p>Returns value for key or a default if key is missing</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dict.update(other_dict)</span></code></p></td>
+<td><p>Merges another dictionary into the current one</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dict.pop(key)</span></code></p></td>
+<td><p>Removes a key and returns its value</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dict.clear()</span></code></p></td>
+<td><p>Empties the dictionary</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="modifying-dictionaries">
+<h2>Modifying Dictionaries<a class="headerlink" href="#modifying-dictionaries" title="Link to this heading">#</a></h2>
+<section id="adding-or-updating-items">
+<h3>Adding or Updating Items<a class="headerlink" href="#adding-or-updating-items" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">elements</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Carbon&quot;</span>  <span class="c1"># Adding a new key-value pair</span>
+<span class="n">elements</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Oxygen-16&quot;</span>  <span class="c1"># Updating an existing key</span>
+</pre></div>
+</div>
+</section>
+<section id="removing-items">
+<h3>Removing Items<a class="headerlink" href="#removing-items" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">del</span> <span class="n">elements</span><span class="p">[</span><span class="s2">&quot;He&quot;</span><span class="p">]</span>  <span class="c1"># Removes helium</span>
+<span class="n">oxygen</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;O&quot;</span><span class="p">)</span>  <span class="c1"># Removes and returns the value associated with &quot;O&quot;</span>
+</pre></div>
+</div>
+<p>In the .pop(‘key’) method we assigned that value to a new variable</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">elements</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Carbon&quot;</span>  <span class="c1"># Adding a new key-value pair</span>
+<span class="n">elements</span><span class="p">[</span><span class="s2">&quot;O&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Oxygen-16&quot;</span>  <span class="c1"># Updating an existing key</span>
+<span class="k">del</span> <span class="n">elements</span><span class="p">[</span><span class="s1">&#39;He&#39;</span><span class="p">]</span>  <span class="c1"># Removes helium</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;H&#39;: &#39;Hydrogen&#39;, &#39;O&#39;: &#39;Oxygen-16&#39;, &#39;C&#39;: &#39;Carbon&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">oxygen</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;O&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">oxygen</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;H&#39;: &#39;Hydrogen&#39;, &#39;C&#39;: &#39;Carbon&#39;}
+Oxygen-16
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="ontology">
+<h1>Ontology<a class="headerlink" href="#ontology" title="Link to this heading">#</a></h1>
+<p>In <strong>computer science and information science</strong>, an <strong>ontology</strong> is a structured framework that represents knowledge in a way that defines:</p>
+<ul class="simple">
+<li><p><strong>Entities (subjects or objects)</strong></p></li>
+<li><p><strong>Properties (predicates that describe relationships between subjects and objects)</strong></p></li>
+<li><p><strong>Relationships (how subjects, predicates, and objects connect in a logical framework)</strong></p></li>
+</ul>
+<p>A classic ontology model follows a <strong>subject-predicate-object</strong> structure, similar to:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">&quot;Hydrogen&quot;</span> <span class="pre">→</span> <span class="pre">&quot;has</span> <span class="pre">neutron</span> <span class="pre">number&quot;</span> <span class="pre">→</span> <span class="pre">[0,</span> <span class="pre">1,</span> <span class="pre">2]</span></code><br />
+<code class="docutils literal notranslate"><span class="pre">&quot;Oxygen&quot;</span> <span class="pre">→</span> <span class="pre">&quot;has</span> <span class="pre">atomic</span> <span class="pre">number&quot;</span> <span class="pre">→</span> <span class="pre">8</span></code></p>
+</div></blockquote>
+<p>This maps well to a <strong>dictionary of dictionaries</strong> in Python!</p>
+<section id="creating-a-periodic-table-ontology-of-halogens">
+<h2>Creating a Periodic Table Ontology of Halogens<a class="headerlink" href="#creating-a-periodic-table-ontology-of-halogens" title="Link to this heading">#</a></h2>
+<section id="step-1-define-the-halogens-and-their-properties">
+<h3>Step 1: Define the Halogens and Their Properties<a class="headerlink" href="#step-1-define-the-halogens-and-their-properties" title="Link to this heading">#</a></h3>
+<p>We will structure the data using Python lists, then use <code class="docutils literal notranslate"><span class="pre">zip()</span></code> to transform them into a dictionary.</p>
+<p>Here are some basic properties of the halogens:</p>
+<ul class="simple">
+<li><p>Element symbols</p></li>
+<li><p>Atomic numbers</p></li>
+<li><p>Atomic masses (g/mol)</p></li>
+<li><p>Electronegativity</p></li>
+<li><p>Boiling points (Kelvin)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List of halogen symbols</span>
+<span class="n">halogens</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;Cl&quot;</span><span class="p">,</span> <span class="s2">&quot;Br&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;At&quot;</span><span class="p">,</span> <span class="s2">&quot;Ts&quot;</span><span class="p">]</span>
+
+<span class="c1"># Atomic numbers</span>
+<span class="n">atomic_numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">85</span><span class="p">,</span> <span class="mi">117</span><span class="p">]</span>
+
+<span class="c1"># Atomic masses (g/mol)</span>
+<span class="n">atomic_masses</span> <span class="o">=</span> <span class="p">[</span><span class="mf">18.998</span><span class="p">,</span> <span class="mf">35.45</span><span class="p">,</span> <span class="mf">79.904</span><span class="p">,</span> <span class="mf">126.90</span><span class="p">,</span> <span class="mi">210</span><span class="p">,</span> <span class="mi">294</span><span class="p">]</span>
+
+<span class="c1"># Electronegativity (Pauling scale)</span>
+<span class="n">electronegativities</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.98</span><span class="p">,</span> <span class="mf">3.16</span><span class="p">,</span> <span class="mf">2.96</span><span class="p">,</span> <span class="mf">2.66</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>  <span class="c1"># Ts unknown</span>
+
+<span class="c1"># Boiling points (K)</span>
+<span class="n">boiling_points</span> <span class="o">=</span> <span class="p">[</span><span class="mf">85.03</span><span class="p">,</span> <span class="mf">239.11</span><span class="p">,</span> <span class="mf">332.0</span><span class="p">,</span> <span class="mf">457.4</span><span class="p">,</span> <span class="mi">610</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>  <span class="c1"># Ts unknown</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;halogens = </span><span class="si">{</span><span class="n">halogens</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">atomic number = </span><span class="si">{</span><span class="n">atomic_numbers</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">atomic_masses = </span><span class="si">{</span><span class="n">atomic_masses</span><span class="si">}</span><span class="s2"> </span><span class="se">\</span>
+<span class="se">\n</span><span class="s2">electronegativities = </span><span class="si">{</span><span class="n">electronegativities</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>halogens = [&#39;F&#39;, &#39;Cl&#39;, &#39;Br&#39;, &#39;I&#39;, &#39;At&#39;, &#39;Ts&#39;] 
+atomic number = [9, 17, 35, 53, 85, 117] 
+atomic_masses = [18.998, 35.45, 79.904, 126.9, 210, 294] 
+electronegativities = [3.98, 3.16, 2.96, 2.66, 2.2, None]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-create-a-dictionary-using-zip">
+<h3>Step 2: Create a Dictionary Using <code class="docutils literal notranslate"><span class="pre">zip()</span></code><a class="headerlink" href="#step-2-create-a-dictionary-using-zip" title="Link to this heading">#</a></h3>
+<p>We now use <code class="docutils literal notranslate"><span class="pre">zip()</span></code> to create a dictionary where:</p>
+<ul class="simple">
+<li><p>The keys are element symbols (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;F&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;Cl&quot;</span></code>, etc.).</p></li>
+<li><p>The values are dictionaries containing properties.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use zip to pair each element with its properties</span>
+<span class="n">halogen_properties</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">halogens</span><span class="p">,</span> <span class="n">atomic_numbers</span><span class="p">,</span> <span class="n">atomic_masses</span><span class="p">,</span> <span class="n">electronegativities</span><span class="p">,</span> <span class="n">boiling_points</span><span class="p">)</span>
+
+<span class="c1"># Create a dictionary of dictionaries</span>
+<span class="n">halogen_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">element</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;atomic_number&quot;</span><span class="p">:</span> <span class="n">num</span><span class="p">,</span>
+        <span class="s2">&quot;atomic_mass&quot;</span><span class="p">:</span> <span class="n">mass</span><span class="p">,</span>
+        <span class="s2">&quot;electronegativity&quot;</span><span class="p">:</span> <span class="n">en</span><span class="p">,</span>
+        <span class="s2">&quot;boiling_point&quot;</span><span class="p">:</span> <span class="n">bp</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">element</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">mass</span><span class="p">,</span> <span class="n">en</span><span class="p">,</span> <span class="n">bp</span> <span class="ow">in</span> <span class="n">halogen_properties</span>
+<span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">halogen_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;F&#39;: {&#39;atomic_number&#39;: 9, &#39;atomic_mass&#39;: 18.998, &#39;electronegativity&#39;: 3.98, &#39;boiling_point&#39;: 85.03}, &#39;Cl&#39;: {&#39;atomic_number&#39;: 17, &#39;atomic_mass&#39;: 35.45, &#39;electronegativity&#39;: 3.16, &#39;boiling_point&#39;: 239.11}, &#39;Br&#39;: {&#39;atomic_number&#39;: 35, &#39;atomic_mass&#39;: 79.904, &#39;electronegativity&#39;: 2.96, &#39;boiling_point&#39;: 332.0}, &#39;I&#39;: {&#39;atomic_number&#39;: 53, &#39;atomic_mass&#39;: 126.9, &#39;electronegativity&#39;: 2.66, &#39;boiling_point&#39;: 457.4}, &#39;At&#39;: {&#39;atomic_number&#39;: 85, &#39;atomic_mass&#39;: 210, &#39;electronegativity&#39;: 2.2, &#39;boiling_point&#39;: 610}, &#39;Ts&#39;: {&#39;atomic_number&#39;: 117, &#39;atomic_mass&#39;: 294, &#39;electronegativity&#39;: None, &#39;boiling_point&#39;: None}}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print all properties of Fluorine</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;halogen_dict[F] = </span><span class="si">{</span><span class="n">halogen_dict</span><span class="p">[</span><span class="s2">&quot;F&quot;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Get just the boiling point of Iodine</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Iodine&#39;s boiling point: </span><span class="si">{</span><span class="n">halogen_dict</span><span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">][</span><span class="s1">&#39;boiling_point&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> K</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check if Astatine has a known electronegativity</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Astatine&#39;s electronegativity: </span><span class="si">{</span><span class="n">halogen_dict</span><span class="p">[</span><span class="s1">&#39;At&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;electronegativity&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Unknown&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>halogen_dict[F] = {&#39;atomic_number&#39;: 9, &#39;atomic_mass&#39;: 18.998, &#39;electronegativity&#39;: 3.98, &#39;boiling_point&#39;: 85.03}
+
+Iodine&#39;s boiling point: 457.4 K
+
+Astatine&#39;s electronegativity: 2.2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="acknowledgements">
+<h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">#</a></h1>
+<p>This content was developed with assistance from <a class="reference external" href="https://www.perplexity.ai/">Perplexity AI</a> and <a class="reference external" href="https://chatgpt.com/">Chat GPT</a>. Multiple queries were made during the Fall 2024 and the Spring 2025.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "py4sci"
+        },
+        kernelOptions: {
+            name: "py4sci",
+            path: "./content/module2-oop-data-structures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'py4sci'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02-2-py-calculator.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2. Python as a Calculator</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02-4-built-in-modules.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4. Built-In Modules</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">3. Composite Data Structures</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#lists">1. Lists</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ways-of-making-a-list">Ways of making a list</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-square-brackets">1. Using Square Brackets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-constructor">2. list() constructor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-an-empty-list">Create an empty list</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#list-methods">List Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-list-methods">Table of List Methods</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-functions-that-work-on-lists">Built-in Functions That Work on Lists</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-list-methods-and-functions-in-action">Examples of List Methods and Functions in Action</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#for-loop-and-lists">For Loop and Lists</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-lists-and-zip">Combining lists and zip()</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tuples">2. Tuples</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features-of-tuples">Key Features of Tuples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-tuples">Working with Tuples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-tuple-elements-indexing">1. Accessing Tuple elements (Indexing)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slicing-tuples">2. Slicing Tuples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iterating-through-a-tuple">3. Iterating Through a Tuple</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuple-unpacking">4.Tuple Unpacking</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-zip-to-create-tuples">5. Using zip() to Create Tuples</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuple-unpacking-and-zip-zipped-data">7. Tuple unpacking and zip(*zipped_data)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sets">3. Sets</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-a-set">What is a Set?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sets-lists-and-tuples"><strong>Sets, Lists and Tuples</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-set-theory">Introduction to Set Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-set-notation">Basic Set Notation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relationship-to-boolean-algebra">Relationship to Boolean Algebra</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-sets-in-chemistry">Why Use Sets in Chemistry?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-set">Creating a Set</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-methods">Set Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-set-methods">Table of Set Methods</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-operators">Set Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-set-operators">Table of Set Operators</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions-that-work-on-sets">Functions That Work on Sets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-functions-that-work-with-sets">Table of Functions that Work with Sets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activities-involving-sets">Activities Involving Sets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-set">1. Create a Set</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identify-unique-elements">2. Identify Unique Elements</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-set-operations">3. Basic Set Operations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-for-subsets-and-supersets">4. Checking for Subsets and Supersets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analyze-chemical-reaction">Analyze Chemical Reaction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-reactants-and-products-as-sets">Define Reactants and Products as Sets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sets-and-smiles-strings">Sets and SMILES strings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flammability-using-set-operators">Flammability using Set Operators</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flammability-using-set-methods">Flammability using Set Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-sets-tuples-and-list">Compare Sets, Tuples and List</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-elements">Accessing Elements</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dictionaries">4. Dictionaries</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-characteristics-of-dictionaries">Key Characteristics of Dictionaries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-dictionary">Creating a Dictionary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-curly-braces">1. Using Curly Braces <code class="docutils literal notranslate"><span class="pre">{}</span></code>:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-dict-constructor">2. Using <code class="docutils literal notranslate"><span class="pre">dict()</span></code> Constructor:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-zip-and-dict-to-combine-two-lists">3. Using <code class="docutils literal notranslate"><span class="pre">zip()</span></code> and <code class="docutils literal notranslate"><span class="pre">dict</span></code> to Combine Two Lists:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-dictionary-methods">Table of Dictionary Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modifying-dictionaries">Modifying Dictionaries</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-or-updating-items">Adding or Updating Items</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-items">Removing Items</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ontology">Ontology</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-periodic-table-ontology-of-halogens">Creating a Periodic Table Ontology of Halogens</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-define-the-halogens-and-their-properties">Step 1: Define the Halogens and Their Properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-create-a-dictionary-using-zip">Step 2: Create a Dictionary Using <code class="docutils literal notranslate"><span class="pre">zip()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Robert Belford
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
