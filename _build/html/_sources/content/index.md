@@ -19,3 +19,7 @@ This interactive Jupyter Book is designed to guide you through foundational conc
 - {ref}`module2-oop-data-structures/02-3-composite-data-structures` — Composite Data Structures
 - {ref}`module2-oop-data-structures/02-4-built-in-modules` — Built-in Modules
 - {ref}`module2-oop-data-structures/02-5-control-structures` — Control Structures
+- {ref}`module2-oop-data-structures/02-6-external-data-structures` — External Data Structures
+- {ref}`module2-oop-data-structures/02-7-db-external-data-structures` — Brief Intro do Databases
+- {ref}`module2-oop-data-structures/02-8-api-external-data-structures` — Data and APIs
+- {ref}`module2-oop-data-structures/02-9-webscrape-external-data-structures` — Web Scraping

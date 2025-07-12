@@ -8,8 +8,12 @@ logo: logo.png
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  execute_notebooks: force
+  execute_notebooks: cache # was force
   nb_execution_show_tb: True  # <- Add this if it's not already present
+
+#exclude_patterns:
+#  - content/module1-setup/*.ipynb
+#  - content/module2-oop-data-structures/*.ipynb
 
 # Define the name of the latex output file for PDF builds
 latex:

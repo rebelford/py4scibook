@@ -18,8 +18,8 @@ chapters:
     - file: content/module2-oop-data-structures/02-3-composite-data-structures
     - file: content/module2-oop-data-structures/02-4-built-in-modules
     - file: content/module2-oop-data-structures/02-5-control-structures
-    #- file: content/module2-OOPDataStructures/02-6-ExternalDataStructures
-    #- file: content/module2-OOPDataStructures/02-7-DB-ExternalDataStructures
-    #- file: content/module2-OOPDataStructures/02-8-API-ExternalDataStructures
-    #- file: content/module2-OOPDataStructures/02-9-WebScrape-DataStructures
+    - file: content/module2-oop-data-structures/02-6-external-data-structures
+    - file: content/module2-oop-data-structures/02-7-db-external-data-structures
+    - file: content/module2-oop-data-structures/02-8-api-external-data-structures
+    - file: content/module2-oop-data-structures/02-9-webscrape-external-data-structures
     #- file: content/module2-OOPDataStructures/02-10-FunctionPackage

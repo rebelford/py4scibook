@@ -1,0 +1,2947 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>8. APIs as External Data Structures &#8212; Draft Python for Science Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e52fa269" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom-checkpoint.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/module2-oop-data-structures/02-8-api-external-data-structures';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="9. WebScraping as External Data Structures" href="02-9-webscrape-external-data-structures.html" />
+    <link rel="prev" title="7. Databases as External Data Structures" href="02-7-db-external-data-structures.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Draft Python for Science Book - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Draft Python for Science Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Python for Science
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../math-test.html">In a Markdown cell:</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../module1-setup/README.html">Module 1: Getting Set Up</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-1-setupcomputer.html">1. Setting up your computer</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-2-jynbgettingstarted.html">2: Runnng and Creating Jupyter Notebooks</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-3-jynb-intro.html">3. Overview of Jupyter Notebooks</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-5-git.html">5. Git and GitHub</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-6-oop.html">6. Object Oriented Programming</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-7-virtual-environments.html">7. Virtual Environments</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="README.html">Module 2: Data Structures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="02-1-primitive-data-structures.html">1. Primative Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-2-py-calculator.html">2. Python as a Calculator</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-3-composite-data-structures.html">3. Composite Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-4-built-in-modules.html">4. Built-In Modules</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-5-control-structures.html">5. Logic and Control Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-6-external-data-structures.html">6. External Data Structures</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-7-db-external-data-structures.html">7. Databases as External Data Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">8. APIs as External Data Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-9-webscrape-external-data-structures.html">9. WebScraping as External Data Structures</a></li>
+
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/rebelford/py4scibook/master?urlpath=lab/tree/docs/content/module2-oop-data-structures/02-8-api-external-data-structures.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://your-jupyterhub-url.com/hub/user-redirect/git-pull?repo=https%3A//github.com/rebelford/py4scibook&urlpath=lab/tree/py4scibook/docs/content/module2-oop-data-structures/02-8-api-external-data-structures.ipynb&branch=master" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on JupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="JupyterHub logo" src="../../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rebelford/py4scibook/blob/master/docs/content/module2-oop-data-structures/02-8-api-external-data-structures.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook/issues/new?title=Issue%20on%20page%20%2Fcontent/module2-oop-data-structures/02-8-api-external-data-structures.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/module2-oop-data-structures/02-8-api-external-data-structures.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>8. APIs as External Data Structures</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">8. APIs as External Data Structures</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#application-program-interfaces-apis">1. Application Program Interfaces (APIs)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-overview-of-apis">1.1: Brief Overview of APIs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-api-architectures">1.2: Overview of API Architectures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#restful-apis-representational-state-transfer">RESTful APIs (Representational State Transfer)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soap-apis-simple-object-access-protocol">SOAP APIs (Simple Object Access Protocol)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphql-apis">GraphQL APIs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sparql-endpoints">SPARQL Endpoints</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemical-databases-with-restful-apis">1.3 Chemical Databases with RESTful APIs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemical-databases-with-sparql-endpoints">1.4 Chemical Databases with SPARQL Endpoints</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#requests-module">2. Requests Module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-requests-from-conda-forge">2.1: Installing <code class="docutils literal notranslate"><span class="pre">requests</span></code> from conda-forge</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#http-request-methods">2.2: HTTP Request Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#response-object-methods">2.3: Response Object Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#response-object-attributes">2.4: Response Object Attributes</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pubchem-pug-rest-api">3. PubChem PUG Rest API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shortest-code">3.1 The Shortest Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulating-pug-rest-request-urls-using-variables">3.2 Formulating PUG REST request URLs using variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-multiple-requests-with-a-loop">3.3 Making multiple requests with a loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-multiple-properties-for-a-compound">3.4: Getting multiple properties for a compound</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pubchem-pug-view-api">4. PubChem PUG View API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-pug-and-pug-view">Comparing PUG and PUG View</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-complete-json">4.1: Downloading complete JSON</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-melting-points">4.2 Extract Melting Points</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-pandas-dataframe-of-experimental-properties">4.3 Create Pandas DataFrame of Experimental Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-database-with-8-tables">4.4 Create a DataBase with 8 tables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-df-head">print df head</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-database-tables">Print database tables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-field-details-for-each-table">Print field details for each table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-first-15-values-of-each-table">Extract first 15 values of each table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#query-each-table-for-boiling-points">Query each table for boiling points</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="apis-as-external-data-structures">
+<span id="module2-oop-data-structures-02-8-api-external-data-structures"></span><h1>8. APIs as External Data Structures<a class="headerlink" href="#apis-as-external-data-structures" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="application-program-interfaces-apis">
+<h1>1. Application Program Interfaces (APIs)<a class="headerlink" href="#application-program-interfaces-apis" title="Link to this heading">#</a></h1>
+<p>APIs allow computers to obtain data from networked databases and web APIs are a valuable way to obtain chemical data</p>
+<section id="brief-overview-of-apis">
+<h2>1.1: Brief Overview of APIs<a class="headerlink" href="#brief-overview-of-apis" title="Link to this heading">#</a></h2>
+<p>We will use Application Program Interfaces (APIs) throughout this course as they enable software programs to communicate with each other. The API defines a set of rules that allow the two programs to communicate with each other, and when that communication involves external data structures the API defines:</p>
+<p><strong>1. Endpoint (Exposes Data)</strong></p>
+<ul class="simple">
+<li><p>The URL where the API listens.</p></li>
+<li><p>Example: <code class="docutils literal notranslate"><span class="pre">https://query.wikidata.org/sparql</span></code></p></li>
+</ul>
+<p><strong>2. Request/Response Model (How Data is Sent and Received)</strong></p>
+<ul class="simple">
+<li><p>Defines the protocol and request method.</p></li>
+<li><p><strong>REST APIs</strong>: <code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">POST</span></code> over HTTP.</p></li>
+<li><p><strong>SPARQL APIs</strong>: SPARQL Query over HTTP (<code class="docutils literal notranslate"><span class="pre">GET</span></code>/<code class="docutils literal notranslate"><span class="pre">POST</span></code>).</p></li>
+<li><p><strong>Database APIs</strong>: SQL queries over TCP/IP.</p></li>
+</ul>
+<p><strong>3. Data Format (How Data is Structured)</strong></p>
+<ul class="simple">
+<li><p><strong>REST APIs</strong>: JSON, XML, CSV.</p></li>
+<li><p><strong>SPARQL APIs</strong>: SPARQL-JSON, RDF/XML, Turtle, N-Triples.</p></li>
+<li><p><strong>Databases</strong>: Tabular data (Relational Tables).</p></li>
+<li><p><strong>GraphQL APIs</strong>: JSON (Custom queries).</p></li>
+</ul>
+</section>
+<section id="overview-of-api-architectures">
+<h2>1.2: Overview of API Architectures<a class="headerlink" href="#overview-of-api-architectures" title="Link to this heading">#</a></h2>
+<p>APIs generally follow different architectures, but the most relevant for chemical data retrieval include:</p>
+<section id="restful-apis-representational-state-transfer">
+<h3>RESTful APIs (Representational State Transfer)<a class="headerlink" href="#restful-apis-representational-state-transfer" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The most common API architecture for chemical databases.</p></li>
+<li><p>Work with SQL and NoSQL Databases</p></li>
+<li><p>Uses standard HTTP methods:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span></code>: Retrieve data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">POST</span></code>: Send data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PUT</span></code>: Update data</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DELETE</span></code>: Remove data</p></li>
+</ul>
+</li>
+<li><p>Data is typically returned in JSON, XML, or CSV formats.</p></li>
+<li><p>Example: <strong>PubChem REST API</strong></p></li>
+</ul>
+</section>
+<section id="soap-apis-simple-object-access-protocol">
+<h3>SOAP APIs (Simple Object Access Protocol)<a class="headerlink" href="#soap-apis-simple-object-access-protocol" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Older, more rigid format using XML-based requests.</p></li>
+<li><p>Less common in modern web services but still used in large, legacy systems.</p></li>
+</ul>
+</section>
+<section id="graphql-apis">
+<h3>GraphQL APIs<a class="headerlink" href="#graphql-apis" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Mostly work with NoSQL Databases</p></li>
+<li><p>Allows users to request specific fields instead of predefined responses.</p></li>
+<li><p>More flexible than REST but less common in chemical informatics.</p></li>
+</ul>
+</section>
+<section id="sparql-endpoints">
+<h3>SPARQL Endpoints<a class="headerlink" href="#sparql-endpoints" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Work with RDF/Triple Stores</p></li>
+<li><p>Used for querying structured chemical databases (e.g., <strong>ChEMBL</strong>).</p></li>
+<li><p>Based on semantic web principles.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="chemical-databases-with-restful-apis">
+<h2>1.3 Chemical Databases with RESTful APIs<a class="headerlink" href="#chemical-databases-with-restful-apis" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Database</p></th>
+<th class="head"><p>Nature of Data</p></th>
+<th class="head"><p>API Access</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest">PubChem</a></p></td>
+<td><p>Chemical compounds, properties, bioactivity</p></td>
+<td><p><a class="reference external" href="https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest">PUG REST API</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://www.ebi.ac.uk/chembl/">ChEMBL</a></p></td>
+<td><p>Bioactive molecules, drug-like properties</p></td>
+<td><p><a class="reference external" href="https://www.ebi.ac.uk/chembl/api/data/docs">REST API</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="http://www.chemspider.com/">ChemSpider</a></p></td>
+<td><p>Chemical structures, spectral data, identifiers</p></td>
+<td><p><a class="reference external" href="http://www.chemspider.com/AboutServices.aspx">API Access</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://cactus.nci.nih.gov/chemical/structure">Cactus NCI Resolver</a></p></td>
+<td><p>Structure-based identifier resolution</p></td>
+<td><p><a class="reference external" href="https://cactus.nci.nih.gov/chemical/structure">REST API</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://www.rcsb.org/">RCSB PDB</a></p></td>
+<td><p>Protein structures, small molecule interactions</p></td>
+<td><p><a class="reference external" href="https://data.rcsb.org/redoc/">REST API</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://www.ebi.ac.uk/unichem/">Unichem</a></p></td>
+<td><p>Cross-references between chemical databases</p></td>
+<td><p><a class="reference external" href="https://www.ebi.ac.uk/unichem/rest">REST API</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://cts.fiehnlab.ucdavis.edu/">Chemical Translation Service (CTS)</a></p></td>
+<td><p>Chemical identifier conversion</p></td>
+<td><p><a class="reference external" href="https://cts.fiehnlab.ucdavis.edu/static/swagger-ui/index.html">API Access</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="chemical-databases-with-sparql-endpoints">
+<h2>1.4 Chemical Databases with SPARQL Endpoints<a class="headerlink" href="#chemical-databases-with-sparql-endpoints" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Database</p></th>
+<th class="head"><p>Nature of Data</p></th>
+<th class="head"><p>SPARQL Endpoint</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://www.ebi.ac.uk/chembl/">ChEMBL</a></p></td>
+<td><p>Bioactive molecules, drug discovery</p></td>
+<td><p><a class="reference external" href="https://www.ebi.ac.uk/rdf/services/chembl/sparql">SPARQL Endpoint</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="http://drugbank.bio2rdf.org/">Bio2RDF DrugBank</a></p></td>
+<td><p>Drugs, mechanisms, metabolism</p></td>
+<td><p><a class="reference external" href="http://drugbank.bio2rdf.org/sparql">SPARQL Endpoint</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://www.ebi.ac.uk/chebi/">RDF ChEBI</a></p></td>
+<td><p>Molecular entities, biological roles</p></td>
+<td><p><a class="reference external" href="https://www.ebi.ac.uk/rdf/services/chebi/sparql">SPARQL Endpoint</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://www.wikipathways.org/">WikiPathways</a></p></td>
+<td><p>Metabolic and signaling pathways</p></td>
+<td><p><a class="reference external" href="https://sparql.wikipathways.org/">SPARQL Endpoint</a></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://sparql.uniprot.org/">Uniprot</a></p></td>
+<td><p>Protein sequence and functional information</p></td>
+<td><p><a class="reference external" href="https://sparql.uniprot.org/">SPARQL Endpoint</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://www.openphacts.org/">Open PHACTS</a></p></td>
+<td><p>Drug discovery, pharmacology data</p></td>
+<td><p><a class="reference external" href="https://www.openphacts.org/2-uncategorised/123-spaql-endpoints">SPARQL Endpoint</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="requests-module">
+<h1>2. Requests Module<a class="headerlink" href="#requests-module" title="Link to this heading">#</a></h1>
+<p>The <strong><code class="docutils literal notranslate"><span class="pre">requests</span></code></strong> module is a popular Python library for making <strong>HTTP requests</strong> to interact with web services and REST APIs. It simplifies sending <strong>GET</strong>, <strong>POST</strong>, <strong>PUT</strong>, and <strong>DELETE</strong> requests while handling <strong>cookies, authentication, headers, and timeouts</strong>.</p>
+<section id="installing-requests-from-conda-forge">
+<h2>2.1: Installing <code class="docutils literal notranslate"><span class="pre">requests</span></code> from conda-forge<a class="headerlink" href="#installing-requests-from-conda-forge" title="Link to this heading">#</a></h2>
+<p>To install <code class="docutils literal notranslate"><span class="pre">requests</span></code> using Conda, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>YourEnvironmentYouWantToUse
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>requests
+</pre></div>
+</div>
+<p>To verify the installation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="http-request-methods">
+<h2>2.2: HTTP Request Methods<a class="headerlink" href="#http-request-methods" title="Link to this heading">#</a></h2>
+<p>These functions are part of the <code class="docutils literal notranslate"><span class="pre">requests</span></code> module and are used to <strong>initiate an HTTP request</strong>. When you call one of these methods (like <code class="docutils literal notranslate"><span class="pre">get</span></code>, <code class="docutils literal notranslate"><span class="pre">post</span></code>, etc.), you’re instructing your program to communicate with a web API.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">requests.get(url,</span> <span class="pre">params={},</span> <span class="pre">headers={})</span></code></p></td>
+<td><p>Sends a GET request (retrieves data).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">requests.post(url,</span> <span class="pre">data={},</span> <span class="pre">json={},</span> <span class="pre">headers={})</span></code></p></td>
+<td><p>Sends a POST request (submits data).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">requests.put(url,</span> <span class="pre">data={},</span> <span class="pre">headers={})</span></code></p></td>
+<td><p>Sends a PUT request (updates data).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">requests.patch(url,</span> <span class="pre">data={},</span> <span class="pre">headers={})</span></code></p></td>
+<td><p>Sends a PATCH request (partially updates data).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">requests.delete(url,</span> <span class="pre">headers={})</span></code></p></td>
+<td><p>Sends a DELETE request (removes data).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">requests.head(url,</span> <span class="pre">headers={})</span></code></p></td>
+<td><p>Sends a HEAD request (retrieves headers only).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">requests.options(url,</span> <span class="pre">headers={})</span></code></p></td>
+<td><p>Checks allowed HTTP methods for the given URL.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">requests.request(method,</span> <span class="pre">url,</span> <span class="pre">**kwargs)</span></code></p></td>
+<td><p>Generic function for sending any HTTP request.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="response-object-methods">
+<h2>2.3: Response Object Methods<a class="headerlink" href="#response-object-methods" title="Link to this heading">#</a></h2>
+<p>Once you have a Response object (from calling a request method), these are <strong>functions available on that object</strong>. They help you to <strong>process and interpret the response</strong>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.json()</span></code></p></td>
+<td><p>Converts the response body to a JSON object (if applicable).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.raise_for_status()</span></code></p></td>
+<td><p>Raises an HTTP error if the response contains an error code.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.iter_content(chunk_size=1024)</span></code></p></td>
+<td><p>Iterates over response data in chunks.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.iter_lines()</span></code></p></td>
+<td><p>Iterates over response text line by line.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="response-object-attributes">
+<h2>2.4: Response Object Attributes<a class="headerlink" href="#response-object-attributes" title="Link to this heading">#</a></h2>
+<p>These are the <strong>data attributes</strong> of the Response object. They provide direct access to various pieces of information that came back from the server.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.status_code</span></code></p></td>
+<td><p>Returns the HTTP response code (e.g., 200, 404).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.text</span></code></p></td>
+<td><p>Returns the response body as a string.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.content</span></code></p></td>
+<td><p>Returns the response body as raw bytes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.headers</span></code></p></td>
+<td><p>Returns the response headers as a dictionary.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.url</span></code></p></td>
+<td><p>Returns the final URL (useful for redirects).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.encoding</span></code></p></td>
+<td><p>Returns or sets the response text encoding.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.cookies</span></code></p></td>
+<td><p>Returns cookies from the response.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pubchem-pug-rest-api">
+<h1>3. PubChem PUG Rest API<a class="headerlink" href="#pubchem-pug-rest-api" title="Link to this heading">#</a></h1>
+<p>Please note that much of this material is adapted from the <a class="reference external" href="https://chem.libretexts.org/Courses/Intercollegiate_Courses/Cheminformatics/01%3A_Introduction/1.10%3A_Python_Assignment_1">first assignment</a> of the <a class="reference external" href="https://chem.libretexts.org/Courses/Intercollegiate_Courses/Cheminformatics">2019 Cheminformatics OLCC</a>.</p>
+<section id="the-shortest-code">
+<h2>3.1 The Shortest Code<a class="headerlink" href="#the-shortest-code" title="Link to this heading">#</a></h2>
+<p>If you click the following two links you will get the formula and molecular weight of water</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/water/property/MolecularFormula/txt">https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/water/property/MolecularFormula/txt</a></p></li>
+<li><p><a class="reference external" href="https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/water/property/MolecularWeight/txt">https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/water/property/MolecularWeight/txt</a>
+With the requests module we can perform the same operation.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="n">ethanol_MW</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ethanol/property/MolecularWeight/txt&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ethanol_MW</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="n">ethanol_MW</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/ethanol/property/MolecularWeight/txt&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ethanol_MW</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>46.07
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="formulating-pug-rest-request-urls-using-variables">
+<h2>3.2 Formulating PUG REST request URLs using variables<a class="headerlink" href="#formulating-pug-rest-request-urls-using-variables" title="Link to this heading">#</a></h2>
+<p>The URL can be broken into 4 components</p>
+<ul class="simple">
+<li><p>PROLOG - Common to all PUG REST requests</p></li>
+<li><p>INPUT - Identifiers of interest</p></li>
+<li><p>OPERATION - What to do with the input</p></li>
+<li><p>OUTPUT - Desired Output Format</p></li>
+</ul>
+<p><img alt="image.png" src="../../_images/eb7b4314-dac0-4339-9d32-15dd74c7752d.png" /></p>
+<p>This can be encoded into four different variables (<code class="docutils literal notranslate"><span class="pre">pugrest</span></code>, <code class="docutils literal notranslate"><span class="pre">pugin</span></code>, <code class="docutils literal notranslate"><span class="pre">pugoper</span></code>, <code class="docutils literal notranslate"><span class="pre">pugout</span></code>) and combined into a new variable <code class="docutils literal notranslate"><span class="pre">url</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pugrest</span> <span class="o">=</span> <span class="s2">&quot;https://pubchem.ncbi.nlm.nih.gov/rest/pug&quot;</span>
+<span class="n">pugin</span>   <span class="o">=</span> <span class="s2">&quot;compound/name/water&quot;</span>
+<span class="n">pugoper</span> <span class="o">=</span> <span class="s2">&quot;property/MolecularFormula&quot;</span>
+<span class="n">pugout</span>  <span class="o">=</span> <span class="s2">&quot;txt&quot;</span>
+
+<span class="n">url</span>     <span class="o">=</span> <span class="n">pugrest</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">pugin</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">pugoper</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">pugout</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pugrest</span> <span class="o">=</span> <span class="s2">&quot;https://pubchem.ncbi.nlm.nih.gov/rest/pug&quot;</span>
+<span class="n">pugin</span>   <span class="o">=</span> <span class="s2">&quot;compound/name/water&quot;</span>
+<span class="n">pugoper</span> <span class="o">=</span> <span class="s2">&quot;property/MolecularFormula&quot;</span>
+<span class="n">pugout</span>  <span class="o">=</span> <span class="s2">&quot;txt&quot;</span>
+
+<span class="n">url</span>     <span class="o">=</span> <span class="n">pugrest</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">pugin</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">pugoper</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">pugout</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/water/property/MolecularFormula/txt
+</pre></div>
+</div>
+</div>
+</div>
+<p>As these are strings we can use the join() function on a list of the variables where the “/” character is the separator</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="p">[</span><span class="n">pugrest</span><span class="p">,</span> <span class="n">pugin</span><span class="p">,</span> <span class="n">pugoper</span><span class="p">,</span> <span class="n">pugout</span><span class="p">]</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="s1">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="p">[</span><span class="n">pugrest</span><span class="p">,</span> <span class="n">pugin</span><span class="p">,</span> <span class="n">pugoper</span><span class="p">,</span> <span class="n">pugout</span><span class="p">]</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/water/property/MolecularFormula/txt
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have the url, we can pass it to the .get function</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H2O
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="making-multiple-requests-with-a-loop">
+<h2>3.3 Making multiple requests with a loop<a class="headerlink" href="#making-multiple-requests-with-a-loop" title="Link to this heading">#</a></h2>
+<p>Note, the API returns a a string of numeric values and the units were not taken from the api</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;cytosine&#39;</span><span class="p">,</span> <span class="s1">&#39;benzene&#39;</span><span class="p">,</span> <span class="s1">&#39;motrin&#39;</span><span class="p">,</span> <span class="s1">&#39;aspirin&#39;</span><span class="p">,</span> <span class="s1">&#39;zolpidem&#39;</span> <span class="p">]</span>
+
+<span class="n">pugrest</span> <span class="o">=</span> <span class="s2">&quot;https://pubchem.ncbi.nlm.nih.gov/rest/pug&quot;</span>
+<span class="n">pugoper</span> <span class="o">=</span> <span class="s2">&quot;property/MolecularWeight&quot;</span>
+<span class="n">pugout</span>  <span class="o">=</span> <span class="s2">&quot;txt&quot;</span>
+
+<span class="k">for</span> <span class="n">myname</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>    <span class="c1"># loop over each element in the &quot;names&quot; list</span>
+    
+    <span class="n">pugin</span> <span class="o">=</span> <span class="s2">&quot;compound/name/&quot;</span> <span class="o">+</span> <span class="n">myname</span>
+    
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="p">[</span><span class="n">pugrest</span><span class="p">,</span> <span class="n">pugin</span><span class="p">,</span> <span class="n">pugoper</span><span class="p">,</span> <span class="n">pugout</span><span class="p">]</span> <span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">myname</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(),</span><span class="s1">&#39;g/mol&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">myname</span><span class="p">))</span>
+
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cytosine : 111.10 g/mol &lt;class &#39;str&#39;&gt;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>benzene : 78.11 g/mol &lt;class &#39;str&#39;&gt;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>motrin : 206.28 g/mol &lt;class &#39;str&#39;&gt;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>aspirin : 180.16 g/mol &lt;class &#39;str&#39;&gt;
+zolpidem : 307.4 g/mol &lt;class &#39;str&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Warning:</strong> When you make a lot of programmatic access requests using a loop, you should limit your request rate to or below <strong>five requests per second</strong>.  Please read the following document to learn more about PubChem’s usage policies:
+https://pubchemdocs.ncbi.nlm.nih.gov/programmatic-access$_RequestVolumeLimitations<br>
+<strong>Violation of usage policies</strong> may result in the user being <strong>temporarily blocked</strong> from accessing PubChem (or NCBI) resources**
+In the for-loop example above, we have only five input chemical names to process, so it is not likely to violate the five-requests-per-second limit.  However, if you have thousands of names to process, the above code will exceed the limit (considering that this kind of requests usually finish very quickly).  Therefore, the request rate should be adjusted by using the <strong><code class="docutils literal notranslate"><span class="pre">sleep()</span></code></strong> function in the <strong><code class="docutils literal notranslate"><span class="pre">time</span></code></strong> module.  For simplicity, let’s suppose that you have 12 chemical names to process (in reality, you could have much more to process).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="n">names</span> <span class="o">=</span> <span class="p">[</span> <span class="s1">&#39;water&#39;</span><span class="p">,</span> <span class="s1">&#39;benzene&#39;</span><span class="p">,</span> <span class="s1">&#39;methanol&#39;</span><span class="p">,</span> <span class="s1">&#39;ethene&#39;</span><span class="p">,</span> <span class="s1">&#39;ethanol&#39;</span><span class="p">,</span> \
+          <span class="s1">&#39;propene&#39;</span><span class="p">,</span><span class="s1">&#39;1-propanol&#39;</span><span class="p">,</span> <span class="s1">&#39;2-propanol&#39;</span><span class="p">,</span> <span class="s1">&#39;butadiene&#39;</span><span class="p">,</span> <span class="s1">&#39;1-butanol&#39;</span><span class="p">,</span> \
+          <span class="s1">&#39;2-butanol&#39;</span><span class="p">,</span> <span class="s1">&#39;tert-butanol&#39;</span><span class="p">]</span>
+
+<span class="n">pugrest</span> <span class="o">=</span> <span class="s2">&quot;https://pubchem.ncbi.nlm.nih.gov/rest/pug&quot;</span>
+<span class="n">pugoper</span> <span class="o">=</span> <span class="s2">&quot;property/SMILES&quot;</span>
+<span class="n">pugout</span>  <span class="o">=</span> <span class="s2">&quot;txt&quot;</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)):</span>    <span class="c1"># loop over each index (position) in the &quot;names&quot; list</span>
+    
+    <span class="n">pugin</span> <span class="o">=</span> <span class="s2">&quot;compound/name/&quot;</span> <span class="o">+</span> <span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>    <span class="c1"># names[i] = the ith element in the names list.</span>
+    
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="p">[</span><span class="n">pugrest</span><span class="p">,</span> <span class="n">pugin</span><span class="p">,</span> <span class="n">pugoper</span><span class="p">,</span> <span class="n">pugout</span><span class="p">]</span> <span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">4</span> <span class="p">)</span> <span class="p">:</span>  <span class="c1"># the % is the modulo operator and returns the remainder of a calculation (if i = 4, 9, ...)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>water : O
+
+benzene : C1=CC=CC=C1
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>methanol : CO
+
+ethene : C=C
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ethanol : CCO
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>propene : CC=C
+
+1-propanol : CCCO
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-propanol : CC(C)O
+
+butadiene : C=CC=C
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1-butanol : CCCCO
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-butanol : CCC(C)O
+
+tert-butanol : CC(C)(C)O
+</pre></div>
+</div>
+</div>
+</div>
+<p>There are three things noteworthy in the above example (compared to the previous examples with the five chemical name queries).</p>
+<ul class="simple">
+<li><p>First, the for loop interates from 0 to [<code class="docutils literal notranslate"><span class="pre">len(names)</span></code> − 1], that is, [0, 1, 2, 3, …,11].</p></li>
+<li><p>The variable <code class="docutils literal notranslate"><span class="pre">i</span></code> is used (in <code class="docutils literal notranslate"><span class="pre">names[i]</span></code>) to generate the input part (<code class="docutils literal notranslate"><span class="pre">pugin</span></code>) of the PUG-REST request URL.</p></li>
+<li><p>The variable <code class="docutils literal notranslate"><span class="pre">i</span></code> is used (in the <code class="docutils literal notranslate"><span class="pre">if</span></code> sentence) to stop the program for one second for every five requests.</p></li>
+</ul>
+<p>It should be noted that the request volumn limit can be lowered through the dynamic traffic control at times of excessive load (https://pubchemdocs.ncbi.nlm.nih.gov/dynamic-request-throttling).  Throttling information is provided in the HTTP header response, indicating the system-load state and the per-user limits.  Based on this throttling information, the user should moderate the speed at which requests are sent to PubChem.</p>
+</section>
+<section id="getting-multiple-properties-for-a-compound">
+<h2>3.4: Getting multiple properties for a compound<a class="headerlink" href="#getting-multiple-properties-for-a-compound" title="Link to this heading">#</a></h2>
+<p>All the examples we have seen in this notebook retrieved a single molecular property for a single compound (although we were able to get a desired property for a group of compounds using a for loop).  However, it is possible to get multiple properties for multiple compounds with a single request.</p>
+<p>The following example retrieves the hydrogen-bond donor count, hydrogen-bond acceptor count, XLogP, TPSA for 5 compounds (represented by PubChem Compound IDs (CIDs) in a comma-separated values (CSV) format.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pugrest</span> <span class="o">=</span> <span class="s2">&quot;https://pubchem.ncbi.nlm.nih.gov/rest/pug&quot;</span>
+<span class="n">pugin</span>   <span class="o">=</span> <span class="s2">&quot;compound/cid/4485,4499,5026,5734,8082&quot;</span>
+<span class="n">pugoper</span> <span class="o">=</span> <span class="s2">&quot;property/HBondDonorCount,HBondDonorCount,XLogP,TPSA&quot;</span>
+<span class="n">pugout</span>  <span class="o">=</span> <span class="s2">&quot;csv&quot;</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="p">[</span><span class="n">pugrest</span><span class="p">,</span> <span class="n">pugin</span><span class="p">,</span> <span class="n">pugoper</span><span class="p">,</span> <span class="n">pugout</span><span class="p">]</span> <span class="p">)</span>   <span class="c1"># Construct the URL</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>   <span class="c1"># Print &quot;-&quot; 30 times (to print a line for readability)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/4485,4499,5026,5734,8082/property/HBondDonorCount,HBondDonorCount,XLogP,TPSA/csv
+------------------------------
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;CID&quot;,&quot;HBondDonorCount&quot;,&quot;HBondDonorCount&quot;,&quot;XLogP&quot;,&quot;TPSA&quot;
+4485,1,1,2.200,110.0
+4499,1,1,3.300,110.0
+5026,1,1,4.300,123.0
+5734,1,1,0.2,94.6
+8082,1,1,0.800,12.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>PubChem has a standard time limit of <strong>30 seconds per request</strong>.  When you try to retrieve too many properties for too many compounds with a single request, it can take longer than the 30-second limit and a time-out error will be returned.  Therefore, you may need to split the compound list into smaller chunks and process one chunk at a time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cids</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">443422</span><span class="p">,</span>  <span class="mi">72301</span><span class="p">,</span>   <span class="mi">8082</span><span class="p">,</span>    <span class="mi">4485</span><span class="p">,</span>    <span class="mi">5353740</span><span class="p">,</span> <span class="mi">5282230</span><span class="p">,</span> <span class="mi">5282138</span><span class="p">,</span> <span class="mi">1547484</span><span class="p">,</span> <span class="mi">941361</span><span class="p">,</span> <span class="mi">5734</span><span class="p">,</span>  \
+         <span class="mi">5494</span><span class="p">,</span>    <span class="mi">5422</span><span class="p">,</span>    <span class="mi">5417</span><span class="p">,</span>    <span class="mi">5290</span><span class="p">,</span>    <span class="mi">5245</span><span class="p">,</span>    <span class="mi">5026</span><span class="p">,</span>    <span class="mi">4746</span><span class="p">,</span>    <span class="mi">4507</span><span class="p">,</span>    <span class="mi">4499</span><span class="p">,</span>   <span class="mi">4497</span><span class="p">,</span>  \
+         <span class="mi">4494</span><span class="p">,</span>    <span class="mi">4474</span><span class="p">,</span>    <span class="mi">4418</span><span class="p">,</span>    <span class="mi">4386</span><span class="p">,</span>    <span class="mi">4009</span><span class="p">,</span>    <span class="mi">4008</span><span class="p">,</span>    <span class="mi">3949</span><span class="p">,</span>    <span class="mi">3926</span><span class="p">,</span>    <span class="mi">3878</span><span class="p">,</span>   <span class="mi">3784</span><span class="p">,</span>  \
+         <span class="mi">3698</span><span class="p">,</span>    <span class="mi">3547</span><span class="p">,</span>    <span class="mi">3546</span><span class="p">,</span>    <span class="mi">3336</span><span class="p">,</span>    <span class="mi">3333</span><span class="p">,</span>    <span class="mi">3236</span><span class="p">,</span>    <span class="mi">3076</span><span class="p">,</span>    <span class="mi">2585</span><span class="p">,</span>    <span class="mi">2520</span><span class="p">,</span>   <span class="mi">2351</span><span class="p">,</span>  \
+         <span class="mi">2312</span><span class="p">,</span>    <span class="mi">2162</span><span class="p">,</span>    <span class="mi">1236</span><span class="p">,</span>    <span class="mi">1234</span><span class="p">,</span>    <span class="mi">292331</span><span class="p">,</span>  <span class="mi">275182</span><span class="p">,</span>  <span class="mi">235244</span><span class="p">,</span>  <span class="mi">108144</span><span class="p">,</span>  <span class="mi">104972</span><span class="p">,</span> <span class="mi">77157</span><span class="p">,</span> \
+         <span class="mi">5942250</span><span class="p">,</span> <span class="mi">5311217</span><span class="p">,</span> <span class="mi">4564402</span><span class="p">,</span> <span class="mi">4715169</span><span class="p">,</span> <span class="mi">5311501</span><span class="p">]</span>
+
+<span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="k">if</span> <span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">cids</span><span class="p">)</span> <span class="o">%</span> <span class="n">chunk_size</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">:</span> <span class="c1"># check if total number of cids is divisible by 10 with no remainder</span>
+    <span class="n">num_chunks</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cids</span><span class="p">)</span> <span class="o">//</span> <span class="n">chunk_size</span> <span class="c1"># sets number of chunks</span>
+<span class="k">else</span> <span class="p">:</span> <span class="c1"># if divide by 10 results in remainder</span>
+    <span class="n">num_chunks</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cids</span><span class="p">)</span> <span class="o">//</span> <span class="n">chunk_size</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># add one more chunk</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# Number of CIDs:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cids</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;# Number of chunks:&quot;</span><span class="p">,</span> <span class="n">num_chunks</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># Number of CIDs: 55
+# Number of chunks: 6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pugrest</span> <span class="o">=</span> <span class="s2">&quot;https://pubchem.ncbi.nlm.nih.gov/rest/pug&quot;</span>
+<span class="n">pugoper</span> <span class="o">=</span> <span class="s2">&quot;property/HBondDonorCount,HBondAcceptorCount,XLogP,TPSA&quot;</span>
+<span class="n">pugout</span>  <span class="o">=</span> <span class="s2">&quot;csv&quot;</span>
+
+<span class="n">csv</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>   <span class="c1">#sets a variable called csv to save the comma separated output</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_chunks</span><span class="p">)</span> <span class="p">:</span> <span class="c1"># sets number of requests to number of data chunks as determined above</span>
+    
+    <span class="n">idx1</span> <span class="o">=</span> <span class="n">chunk_size</span> <span class="o">*</span> <span class="n">i</span>        <span class="c1"># sets a variable for a moving window of cids to start in a data chunk</span>
+    <span class="n">idx2</span> <span class="o">=</span> <span class="n">chunk_size</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># sets a variable for a moving window of cids to end in a data chunk</span>
+
+    <span class="n">pugin</span> <span class="o">=</span> <span class="s2">&quot;compound/cid/&quot;</span> <span class="o">+</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">cids</span><span class="p">[</span><span class="n">idx1</span><span class="p">:</span><span class="n">idx2</span><span class="p">]</span> <span class="p">])</span> <span class="c1"># build pug input for chunks of data</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="p">[</span><span class="n">pugrest</span><span class="p">,</span> <span class="n">pugin</span><span class="p">,</span> <span class="n">pugoper</span><span class="p">,</span> <span class="n">pugout</span><span class="p">]</span> <span class="p">)</span>   <span class="c1"># Construct the URL</span>
+    
+    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">:</span> <span class="c1"># if this is the first request, store result in empty csv variable</span>
+        <span class="n">csv</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">text</span> 
+    <span class="k">else</span> <span class="p">:</span>          <span class="c1"># if this is a subsequent request, add the request to the csv variable adding a new line between chunks</span>
+        <span class="n">csv</span> <span class="o">=</span> <span class="n">csv</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> 
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">4</span><span class="p">):</span>  
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">csv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;CID&quot;,&quot;HBondDonorCount&quot;,&quot;HBondAcceptorCount&quot;,&quot;XLogP&quot;,&quot;TPSA&quot;
+443422,0,5,3.1,40.2
+72301,0,5,3.2,40.2
+8082,1,1,0.800,12.0
+4485,1,7,2.200,110.0
+5353740,2,5,3.5,76.0
+5282230,2,5,3.2,84.9
+5282138,1,8,4.400,120.0
+1547484,0,2,5.800,6.5
+941361,0,4,6.000,6.5
+5734,1,5,0.2,94.6
+5494,0,6,5.0,57.2
+5422,0,8,6.4,61.9
+5417,0,5,3.2,40.2
+5290,2,5,2.6,62.2
+5245,5,8,-3.1,148.0
+5026,1,8,4.300,123.0
+4746,1,1,6.8,12.0
+4507,1,7,2.900,110.0
+4499,1,7,3.300,110.0
+4497,1,8,3.100,120.0
+4494,1,8,2.900,134.0
+4474,1,8,3.800,114.0
+4418,1,5,4.100,45.2
+4386,2,3,4.400,49.3
+4009,2,5,3.5,76.0
+4008,1,9,5.600,117.0
+3949,0,7,4.9,34.2
+3926,1,5,6.0,35.6
+3878,2,5,1.4,90.7
+3784,1,8,4.300,104.0
+3698,2,3,-0.2,68.0
+3547,1,5,1.0,70.7
+3546,3,5,-0.5,132.0
+3336,1,1,5.5,12.0
+3333,1,5,3.900,64.6
+3236,0,2,3.8,20.3
+3076,0,6,3.1,84.4
+2585,3,5,4.200,75.7
+2520,0,6,3.800,64.0
+2351,0,3,5.3,15.7
+2312,0,2,4.6,12.5
+2162,2,7,3.000,99.9
+1236,1,8,6.800,114.0
+1234,0,7,3.800,73.2
+292331,2,3,3.900,49.3
+275182,1,8,6.1,72.9
+235244,1,8,6.7,72.9
+108144,2,5,3.9,117.0
+104972,1,6,3.300,72.7
+77157,1,4,3.2,49.8
+5942250,2,5,3.5,76.0
+5311217,1,7,4.500,90.9
+4564402,0,4,4.1,45.5
+4715169,2,3,-1.6,63.3
+5311501,0,4,4.4,43.7
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="c1"># PubChem API URL to fetch properties for benzene (CID = 241)</span>
+<span class="n">cid</span> <span class="o">=</span> <span class="mi">241</span>
+<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/</span><span class="si">{</span><span class="n">cid</span><span class="si">}</span><span class="s2">/property/MolecularWeight,SMILES/JSON&quot;</span>
+
+<span class="c1"># Make GET request</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="c1"># Check response status</span>
+<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>  <span class="c1"># Parse JSON response</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error:&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;PropertyTable&#39;: {&#39;Properties&#39;: [{&#39;CID&#39;: 241, &#39;MolecularWeight&#39;: &#39;78.11&#39;, &#39;SMILES&#39;: &#39;C1=CC=CC=C1&#39;}]}}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Can you identify the data structures returned by the above script?</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pubchem-pug-view-api">
+<h1>4. PubChem PUG View API<a class="headerlink" href="#pubchem-pug-view-api" title="Link to this heading">#</a></h1>
+<p>The PUG View API offers a “view” of a compound’s data that mirrors the narrative descriptions on the PubChem website. This includes sections like summaries, descriptions, and other annotations sourced from scientific literature or curated databases. Instead of raw computed values like you get from the PUG API, you get text-based information.</p>
+<section id="comparing-pug-and-pug-view">
+<h2>Comparing PUG and PUG View<a class="headerlink" href="#comparing-pug-and-pug-view" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>PUG API:</strong></p>
+<ul>
+<li><p><strong>Data Type:</strong> Computed values, identifiers, molecular properties, etc.</p></li>
+<li><p><strong>Format:</strong> Structured numeric data suitable for computational analysis.</p></li>
+<li><p><strong>Usage:</strong> Ideal when you need precise, algorithm-derived metrics.</p></li>
+</ul>
+</li>
+<li><p><strong>PUG View API:</strong></p>
+<ul>
+<li><p><strong>Data Type:</strong> Curated, narrative, literature-derived textual information.</p></li>
+<li><p><strong>Format:</strong> Human-readable summaries and descriptions.</p></li>
+<li><p><strong>Usage:</strong> Best for applications where you want to present users with contextual and descriptive content.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="downloading-complete-json">
+<h2>4.1: Downloading complete JSON<a class="headerlink" href="#downloading-complete-json" title="Link to this heading">#</a></h2>
+<p>In this activity we will download the complete json file for benzene</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>  <span class="c1"># For filename sanitization</span>
+
+<span class="c1"># Example CID for Benzene</span>
+<span class="n">cid</span> <span class="o">=</span> 	<span class="mi">241</span>
+<span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/</span><span class="si">{</span><span class="n">cid</span><span class="si">}</span><span class="s2">/JSON&quot;</span>
+
+<span class="c1"># Define the directory structure</span>
+<span class="n">pubchem_json_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data/pubchem_data/full_json&quot;</span><span class="p">)</span>  <span class="c1"># Parent directory</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">pubchem_json_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Ensure directories exist</span>
+
+<span class="c1"># Make GET request</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="c1"># Check response status</span>
+<span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    
+    <span class="c1"># Extract the chemical name (title)</span>
+    <span class="n">chemical_name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Record&quot;</span><span class="p">][</span><span class="s2">&quot;RecordTitle&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>  <span class="c1"># Example: &quot;Benzene&quot;</span>
+    
+    <span class="c1"># Sanitize the filename (remove special characters, spaces)</span>
+    <span class="n">chemical_name_clean</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^a-zA-Z0-9_-]&#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="n">chemical_name</span><span class="p">)</span>  <span class="c1"># Replace special chars with &quot;_&quot;</span>
+    
+    <span class="c1"># Construct the full file path</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">chemical_name_clean</span><span class="si">}</span><span class="s2">.json&quot;</span>
+    <span class="n">chemical_json_datapath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pubchem_json_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+    <span class="c1"># Save JSON data to a file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">chemical_json_datapath</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data saved to </span><span class="si">{</span><span class="n">chemical_json_datapath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error:&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data saved to /home/rebelford/data/pubchem_data/full_json/benzene.json
+</pre></div>
+</div>
+</div>
+</div>
+<p>Navigate to the folder /data/pubchem_data/full_json/ and open the file benzene.json (you can do this using the file browser of your jupyter lab and then in another browser window open the PubChem <a class="reference external" href="https://pubchem.ncbi.nlm.nih.gov/compound/Benzene">datapage for Benzene</a>, and compare the two</p>
+<p><img alt="image.png" src="../../_images/9f659ca5-333c-4466-97a3-72970905f314.png" /></p>
+<p>Screenshot of PubChem web interface with melting point data on Benzene</p>
+<p><img alt="image.png" src="../../_images/951c0216-9a20-4280-a933-aeb8344241d2.png" /></p>
+<p>Screen shot showing schema of json file for Benzene that we just downloaded and how to get the first experimental melting point.</p>
+</section>
+<section id="extract-melting-points">
+<h2>4.2 Extract Melting Points<a class="headerlink" href="#extract-melting-points" title="Link to this heading">#</a></h2>
+<p>Here we take the json file generated from pug_view for benzene and extract the melting points from the 6 sources.  Note how they have different units.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># Define the path to your JSON file</span>
+<span class="n">pubchem_json_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data/pubchem_data/full_json/&quot;</span><span class="p">)</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;benzene.json&quot;</span>  <span class="c1"># Replace with your actual filename if different</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pubchem_json_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+<span class="c1"># Open and load the JSON file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+
+
+<span class="c1"># Navigate the JSON structure to find &quot;Melting Point&quot; under &quot;Experimental Properties&quot;</span>
+<span class="n">melting_points</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Record&quot;</span><span class="p">][</span><span class="s2">&quot;Section&quot;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">section</span><span class="p">[</span><span class="s2">&quot;TOCHeading&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Chemical and Physical Properties&quot;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">subsection</span> <span class="ow">in</span> <span class="n">section</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Section&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+            <span class="k">if</span> <span class="n">subsection</span><span class="p">[</span><span class="s2">&quot;TOCHeading&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Experimental Properties&quot;</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">prop_section</span> <span class="ow">in</span> <span class="n">subsection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Section&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+                    <span class="k">if</span> <span class="n">prop_section</span><span class="p">[</span><span class="s2">&quot;TOCHeading&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Melting Point&quot;</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">prop_section</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Information&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+                            <span class="k">if</span> <span class="s2">&quot;Value&quot;</span> <span class="ow">in</span> <span class="n">info</span> <span class="ow">and</span> <span class="s2">&quot;StringWithMarkup&quot;</span> <span class="ow">in</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;Value&quot;</span><span class="p">]:</span>
+                                <span class="n">melting_points</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;Value&quot;</span><span class="p">][</span><span class="s2">&quot;StringWithMarkup&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;String&quot;</span><span class="p">])</span>
+
+
+<span class="c1"># Print extracted melting point values</span>
+<span class="k">if</span> <span class="n">melting_points</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Melting Points (All Available Sources):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">melting_points</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">mp</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Melting Points (All Available Sources):
+1. 41.9 °F (NTP, 1992)
+2. 5.558 °C
+3. 5.5 °C
+4. 6 °C
+5. 41.9 °F
+6. 42 °F
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-pandas-dataframe-of-experimental-properties">
+<h2>4.3 Create Pandas DataFrame of Experimental Properties<a class="headerlink" href="#create-pandas-dataframe-of-experimental-properties" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+
+<span class="c1"># Define the path to your JSON file</span>
+<span class="n">pubchem_json_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data/pubchem_data/full_json/&quot;</span><span class="p">)</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;benzene.json&quot;</span>  <span class="c1"># Replace with your actual filename if different</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pubchem_json_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
+
+<span class="c1"># Open and load the JSON file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+
+<span class="c1"># Dictionary to store extracted data</span>
+<span class="n">property_data</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Navigate the JSON structure to find &quot;Experimental Properties&quot;</span>
+<span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Record&quot;</span><span class="p">][</span><span class="s2">&quot;Section&quot;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">section</span><span class="p">[</span><span class="s2">&quot;TOCHeading&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Chemical and Physical Properties&quot;</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">subsection</span> <span class="ow">in</span> <span class="n">section</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Section&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+            <span class="k">if</span> <span class="n">subsection</span><span class="p">[</span><span class="s2">&quot;TOCHeading&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Experimental Properties&quot;</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">prop_section</span> <span class="ow">in</span> <span class="n">subsection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Section&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+                    <span class="n">property_name</span> <span class="o">=</span> <span class="n">prop_section</span><span class="p">[</span><span class="s2">&quot;TOCHeading&quot;</span><span class="p">]</span>
+                    <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+                        
+                    <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">prop_section</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Information&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+                        <span class="k">if</span> <span class="s2">&quot;Value&quot;</span> <span class="ow">in</span> <span class="n">info</span> <span class="ow">and</span> <span class="s2">&quot;StringWithMarkup&quot;</span> <span class="ow">in</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;Value&quot;</span><span class="p">]:</span>
+                            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;Value&quot;</span><span class="p">][</span><span class="s2">&quot;StringWithMarkup&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;String&quot;</span><span class="p">])</span>
+
+ 
+                    <span class="c1"># Store in dictionary</span>
+                    <span class="n">property_data</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span>
+
+<span class="c1"># Convert extracted data to Pandas DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">property_data</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+
+<span class="c1"># Display the DataFrame in Jupyter Notebook</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="c1"># Save DataFrame to CSV file</span>
+<span class="n">csv_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;~/data/pubchem_data/cid_</span><span class="si">{</span><span class="n">cid</span><span class="si">}</span><span class="s2">_experimental_properties.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Experimental properties saved to CSV: </span><span class="si">{</span><span class="n">csv_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+                               
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Physical Description</th>
+      <th>Color/Form</th>
+      <th>Odor</th>
+      <th>Taste</th>
+      <th>Boiling Point</th>
+      <th>Melting Point</th>
+      <th>Flash Point</th>
+      <th>Solubility</th>
+      <th>Density</th>
+      <th>Vapor Density</th>
+      <th>...</th>
+      <th>Viscosity</th>
+      <th>Heat of Combustion</th>
+      <th>Heat of Vaporization</th>
+      <th>Surface Tension</th>
+      <th>Ionization Potential</th>
+      <th>Odor Threshold</th>
+      <th>Refractive Index</th>
+      <th>Relative Evaporation Rate</th>
+      <th>Kovats Retention Index</th>
+      <th>Other Experimental Properties</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Benzene appears as a clear colorless liquid wi...</td>
+      <td>Clear, colorless liquid</td>
+      <td>Aromatic odor</td>
+      <td>Taste threshold in water is 0.5-4.5 mg/l.</td>
+      <td>176.2 °F at 760 mmHg (NTP, 1992)</td>
+      <td>41.9 °F (NTP, 1992)</td>
+      <td>12 °F (NTP, 1992)</td>
+      <td>1 to 5 mg/mL at 64 °F (NTP, 1992)</td>
+      <td>0.879 at 68 °F (USCG, 1999) - Less dense than ...</td>
+      <td>2.77 (NTP, 1992) - Heavier than air; will sink...</td>
+      <td>...</td>
+      <td>0.604 mPa.s at 25 °C</td>
+      <td>-3267.6 kJ/mol (liquid)</td>
+      <td>33.83 kJ/mol at 25 °C</td>
+      <td>28.22 mN/m at 25 °C</td>
+      <td>9.24 eV</td>
+      <td>Odor Threshold Low: 34.0 [ppm]</td>
+      <td>Index of refraction: 1.5011 at 20 °C/D</td>
+      <td>2.8 (Ether = 1)</td>
+      <td>None</td>
+      <td>Conversion factors: 1 mg/cu m = 0.31 ppm; 1 pp...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Gas or Vapor, Liquid; Liquid</td>
+      <td>Orthorhombic prisms or liquid</td>
+      <td>Gasoline-like odor; rather pleasant aromatic o...</td>
+      <td>None</td>
+      <td>80.08 °C</td>
+      <td>5.558 °C</td>
+      <td>12 °F</td>
+      <td>In water, 1.79X10+3 mg/L at 25 °C</td>
+      <td>0.8756 g/cu cm at 20 °C</td>
+      <td>2.8 (Air = 1)</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>9.24 eV</td>
+      <td>4.68 PPM</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>Blood/air partition coefficient is 7.8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Colorless to light-yellow liquid with an aroma...</td>
+      <td>Colorless to light-yellow liquid [Note: A soli...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>80.00 to 81.00 °C. @ 760.00 mm Hg</td>
+      <td>5.5 °C</td>
+      <td>12 °F (-11 °C) Closed Cup</td>
+      <td>Miscible with alcohol, chloroform, ether, carb...</td>
+      <td>SPECIFIC DISPERSION 189.6; DENSITY OF SATURATE...</td>
+      <td>Relative vapor density  (air = 1): 2.7</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>In air: 4.9 mg/cu m (characteristic odor), in ...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>Sublimes -30 to 5 °C</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Liquid</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>80 °C</td>
+      <td>6 °C</td>
+      <td>-11.0 °C (12.2 °F) (Closed cup)</td>
+      <td>Miscible with ethanol, ethyl ether, acetone, c...</td>
+      <td>Relative density (water = 1): 0.88</td>
+      <td>2.77</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>distinct odor: 310 mg/cu m= 90 ppm</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>Heat of fusion = 9.87 KJ/mol</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>COLOURLESS LIQUID WITH CHARACTERISTIC ODOUR.</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>176.2 °F</td>
+      <td>41.9 °F</td>
+      <td>-11 °C c.c.</td>
+      <td>1.79 mg/mL</td>
+      <td>0.88</td>
+      <td>None</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>human odor perception: 3.0 mg/cu m=1 ppm</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>For more Other Experimental Properties (Comple...</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Highly flammable colorless to light-yellow liq...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>176 °F</td>
+      <td>42 °F</td>
+      <td>12 °F</td>
+      <td>Solubility in water, g/100ml at 25 °C: 0.18</td>
+      <td>0.88</td>
+      <td>None</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Colorless to light-yellow liquid with an aroma...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>12 °F</td>
+      <td>0.07%</td>
+      <td>None</td>
+      <td>None</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Clear, colorless to light yellow liquid at roo...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>...</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 25 columns</p>
+</div></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Experimental properties saved to CSV: /home/rebelford/data/pubchem_data/cid_241_experimental_properties.csv
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-a-database-with-8-tables">
+<h2>4.4 Create a DataBase with 8 tables<a class="headerlink" href="#create-a-database-with-8-tables" title="Link to this heading">#</a></h2>
+<p>In this activity we will download and save a json file for the smallest 8 linear alkanes, then convert it to a dataframe and save each as a csv file,  and then combine them into a database, with each alkane having a separate table.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># Define alkanes and their PubChem CIDs</span>
+<span class="n">alkanes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;methane&quot;</span><span class="p">:</span> <span class="mi">297</span><span class="p">,</span>
+    <span class="s2">&quot;ethane&quot;</span><span class="p">:</span> <span class="mi">6324</span><span class="p">,</span>
+    <span class="s2">&quot;propane&quot;</span><span class="p">:</span> <span class="mi">6334</span><span class="p">,</span>
+    <span class="s2">&quot;butane&quot;</span><span class="p">:</span> <span class="mi">7843</span><span class="p">,</span>
+    <span class="s2">&quot;pentane&quot;</span><span class="p">:</span> <span class="mi">8003</span><span class="p">,</span>
+    <span class="s2">&quot;hexane&quot;</span><span class="p">:</span> <span class="mi">8058</span><span class="p">,</span>
+    <span class="s2">&quot;heptane&quot;</span><span class="p">:</span> <span class="mi">8900</span><span class="p">,</span>
+    <span class="s2">&quot;octane&quot;</span><span class="p">:</span> <span class="mi">356</span>
+<span class="p">}</span>
+
+<span class="c1"># Define SQLite database</span>
+<span class="n">alkane_properties_db_datapath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data/pubchem_data/alkane_properties.db&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">alkane_properties_db_datapath</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Connect to SQLite</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">alkane_properties_db_datapath</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="c1"># Create a summary table for all alkanes</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">CREATE TABLE IF NOT EXISTS alkanes_summary (</span>
+<span class="s2">    id INTEGER PRIMARY KEY AUTOINCREMENT,</span>
+<span class="s2">    alkane TEXT UNIQUE,</span>
+<span class="s2">    cid INTEGER,</span>
+<span class="s2">    FOREIGN KEY(cid) REFERENCES properties(cid)</span>
+<span class="s2">)</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># Iterate through each alkane and fetch data from PubChem</span>
+<span class="k">for</span> <span class="n">alkane</span><span class="p">,</span> <span class="n">cid</span> <span class="ow">in</span> <span class="n">alkanes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fetching data for </span><span class="si">{</span><span class="n">alkane</span><span class="si">}</span><span class="s2"> (CID: </span><span class="si">{</span><span class="n">cid</span><span class="si">}</span><span class="s2">)...&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># PubChem API URL</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/</span><span class="si">{</span><span class="n">cid</span><span class="si">}</span><span class="s2">/JSON&quot;</span>
+
+    <span class="c1"># Send GET request (with delay to avoid hitting API limits)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Add delay to avoid excessive requests</span>
+
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
+        <span class="c1"># Save full JSON file (for debugging)</span>
+        <span class="n">json_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;~/data/pubchem_data/</span><span class="si">{</span><span class="n">alkane</span><span class="si">}</span><span class="s2">.json&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data saved to: </span><span class="si">{</span><span class="n">json_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Extract properties</span>
+        <span class="n">property_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Record&quot;</span><span class="p">][</span><span class="s2">&quot;Section&quot;</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">section</span><span class="p">[</span><span class="s2">&quot;TOCHeading&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Chemical and Physical Properties&quot;</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">subsection</span> <span class="ow">in</span> <span class="n">section</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Section&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+                    <span class="k">if</span> <span class="n">subsection</span><span class="p">[</span><span class="s2">&quot;TOCHeading&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Experimental Properties&quot;</span><span class="p">:</span>
+                        <span class="k">for</span> <span class="n">prop_section</span> <span class="ow">in</span> <span class="n">subsection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Section&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+                            <span class="n">property_name</span> <span class="o">=</span> <span class="n">prop_section</span><span class="p">[</span><span class="s2">&quot;TOCHeading&quot;</span><span class="p">]</span>
+                            <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+                            <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">prop_section</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Information&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+                                <span class="k">if</span> <span class="s2">&quot;Value&quot;</span> <span class="ow">in</span> <span class="n">info</span> <span class="ow">and</span> <span class="s2">&quot;StringWithMarkup&quot;</span> <span class="ow">in</span> <span class="n">info</span><span class="p">[</span><span class="s2">&quot;Value&quot;</span><span class="p">]:</span>
+                                    <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">info</span><span class="p">[</span><span class="s2">&quot;Value&quot;</span><span class="p">][</span><span class="s2">&quot;StringWithMarkup&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;String&quot;</span><span class="p">])</span>
+                            
+                            <span class="c1"># Convert numerical properties to float where possible</span>
+                            <span class="n">cleaned_values</span> <span class="o">=</span> <span class="p">[]</span>
+                            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+                                <span class="k">try</span><span class="p">:</span>
+                                    <span class="n">num_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># Extract first numeric value</span>
+                                    <span class="n">cleaned_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num_value</span><span class="p">)</span>
+                                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                                    <span class="n">cleaned_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>  <span class="c1"># Keep as string if conversion fails</span>
+
+                            <span class="n">property_data</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">cleaned_values</span>
+        <span class="c1"># Convert data to Pandas DataFrame</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">property_data</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+
+        <span class="c1"># Save DataFrame as CSV (optional)</span>
+        <span class="n">csv_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;~/data/pubchem_data/</span><span class="si">{</span><span class="n">alkane</span><span class="si">}</span><span class="s2">_experimental_properties.csv&quot;</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">csv_path</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Experimental properties saved to CSV: </span><span class="si">{</span><span class="n">csv_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Create SQLite table for this alkane</span>
+        <span class="n">create_table_query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        CREATE TABLE IF NOT EXISTS </span><span class="si">{</span><span class="n">alkane</span><span class="si">}</span><span class="s2"> (</span>
+<span class="s2">            id INTEGER PRIMARY KEY AUTOINCREMENT,</span>
+<span class="s2">            property TEXT,</span>
+<span class="s2">            value TEXT</span>
+<span class="s2">        )</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">create_table_query</span><span class="p">)</span>
+
+        <span class="c1"># Insert data into SQLite table</span>
+        <span class="k">for</span> <span class="n">prop</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">property_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span>
+                <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;INSERT INTO </span><span class="si">{</span><span class="n">alkane</span><span class="si">}</span><span class="s2"> (property, value) VALUES (?, ?)&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+
+        <span class="c1"># Add entry to summary table</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT OR IGNORE INTO alkanes_summary (alkane, cid) VALUES (?, ?)&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">alkane</span><span class="p">,</span> <span class="n">cid</span><span class="p">))</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data for </span><span class="si">{</span><span class="n">alkane</span><span class="si">}</span><span class="s2"> stored in SQLite.&quot;</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error retrieving data for </span><span class="si">{</span><span class="n">alkane</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Commit and close SQLite connection</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All data stored successfully in SQLite.&quot;</span><span class="p">)</span>
+                            
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fetching data for methane (CID: 297)...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data saved to: /home/rebelford/data/pubchem_data/methane.json
+Experimental properties saved to CSV: /home/rebelford/data/pubchem_data/methane_experimental_properties.csv
+Data for methane stored in SQLite.
+Fetching data for ethane (CID: 6324)...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data saved to: /home/rebelford/data/pubchem_data/ethane.json
+Experimental properties saved to CSV: /home/rebelford/data/pubchem_data/ethane_experimental_properties.csv
+Data for ethane stored in SQLite.
+Fetching data for propane (CID: 6334)...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data saved to: /home/rebelford/data/pubchem_data/propane.json
+Experimental properties saved to CSV: /home/rebelford/data/pubchem_data/propane_experimental_properties.csv
+Data for propane stored in SQLite.
+Fetching data for butane (CID: 7843)...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data saved to: /home/rebelford/data/pubchem_data/butane.json
+Experimental properties saved to CSV: /home/rebelford/data/pubchem_data/butane_experimental_properties.csv
+Data for butane stored in SQLite.
+Fetching data for pentane (CID: 8003)...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data saved to: /home/rebelford/data/pubchem_data/pentane.json
+Experimental properties saved to CSV: /home/rebelford/data/pubchem_data/pentane_experimental_properties.csv
+Data for pentane stored in SQLite.
+Fetching data for hexane (CID: 8058)...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data saved to: /home/rebelford/data/pubchem_data/hexane.json
+Experimental properties saved to CSV: /home/rebelford/data/pubchem_data/hexane_experimental_properties.csv
+Data for hexane stored in SQLite.
+Fetching data for heptane (CID: 8900)...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data saved to: /home/rebelford/data/pubchem_data/heptane.json
+Experimental properties saved to CSV: /home/rebelford/data/pubchem_data/heptane_experimental_properties.csv
+Data for heptane stored in SQLite.
+Fetching data for octane (CID: 356)...
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data saved to: /home/rebelford/data/pubchem_data/octane.json
+Experimental properties saved to CSV: /home/rebelford/data/pubchem_data/octane_experimental_properties.csv
+Data for octane stored in SQLite.
+All data stored successfully in SQLite.
+</pre></div>
+</div>
+</div>
+</div>
+<section id="print-df-head">
+<h3>print df head<a class="headerlink" href="#print-df-head" title="Link to this heading">#</a></h3>
+<p>Now lets print the head of the dataframe, and note how we lost the units</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                                Physical Description        Color/Form  \
+0  N-octane is a colorless liquid with an odor of...  Colorless liquid   
+1                               Liquid; Gas or Vapor      Clear liquid   
+2  Colorless liquid with a gasoline-like odor; [N...              None   
+3                                             Liquid              None   
+4       COLOURLESS LIQUID WITH CHARACTERISTIC ODOUR.              None   
+
+            Odor Boiling Point Melting Point Flash Point  \
+0  Gasoline-like         258.1         -70.2        56.0   
+1           None        125.62        -56.73        56.0   
+2           None         125.0         -56.8        72.0   
+3           None         126.0         -56.8        13.0   
+4           None         258.0         -70.0        56.0   
+
+                                          Solubility  \
+0                                            0.00007   
+1                       In water, 0.66 mg/L at 25 °C   
+2  Soluble in ethyl ether; miscible with ethanol,...   
+3  Miscible with benzene, petroleum ether, gasoli...   
+4                                            0.00066   
+
+                              Density  \
+0                               0.703   
+1                              0.6986   
+2  Relative density (water = 1): 0.70   
+3                                 0.7   
+4                                 0.7   
+
+                             Vapor Density  \
+0                                     3.86   
+1  Relative vapor density  (air = 1): 3.94   
+2                                     None   
+3                                     None   
+4                                     None   
+
+                       Vapor Pressure  ... Viscosity  \
+0                                10.0  ...    0.5151   
+1                                14.1  ...      None   
+2                                14.1  ...      None   
+3  Vapor pressure, kPa at 20 °C: 1.33  ...      None   
+4                                10.0  ...      None   
+
+                                         Corrosivity  \
+0  Will attack some forms of plastics, rubber, an...   
+1                                               None   
+2                                               None   
+3                                               None   
+4                                               None   
+
+                               Heat of Combustion Heat of Vaporization  \
+0  1,302.7 kg cal/g mol wt at 760 mm Hg and 20 °C                41.49   
+1                                            None                 None   
+2                                            None                 None   
+3                                            None                 None   
+4                                            None                 None   
+
+  Surface Tension Ionization Potential                  Odor Threshold  \
+0           21.14                 9.82  Odor Threshold Low: 15.0 [ppm]   
+1            None                 9.82                             4.0   
+2            None                 None                           150.0   
+3            None                 None                           725.0   
+4            None                 None                            None   
+
+                         Refractive Index Kovats Retention Index  \
+0  Index of refraction: 1.3944 at 25 °C/D                   None   
+1    Index of refraction: 1.3974 at 20 °C                   None   
+2                                    None                   None   
+3                                    None                   None   
+4                                    None                   None   
+
+                       Other Experimental Properties  
+0            Conversion factor: 1 ppm = 4.67 mg/cu m  
+1                       Ionization potential: 9.9 eV  
+2                           Freezing point: -56.5 °C  
+3                                   Dipole moment: 0  
+4  For more Other Experimental Properties (Comple...  
+
+[5 rows x 23 columns]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="print-database-tables">
+<h3>Print database tables<a class="headerlink" href="#print-database-tables" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">alkane_properties_db_datapath</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT name FROM sqlite_master WHERE type=&#39;table&#39;;&quot;</span><span class="p">)</span>
+<span class="n">tables</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tables in the database:&quot;</span><span class="p">,</span> <span class="n">tables</span><span class="p">)</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tables in the database: [(&#39;alkanes_summary&#39;,), (&#39;sqlite_sequence&#39;,), (&#39;methane&#39;,), (&#39;ethane&#39;,), (&#39;propane&#39;,), (&#39;butane&#39;,), (&#39;pentane&#39;,), (&#39;hexane&#39;,), (&#39;heptane&#39;,), (&#39;octane&#39;,)]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="print-field-details-for-each-table">
+<h3>Print field details for each table<a class="headerlink" href="#print-field-details-for-each-table" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+
+<span class="c1"># Replace with the actual path to your database file</span>
+<span class="c1">#db_path = &quot;alkane_properties_db_datapath&quot;</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">alkane_properties_db_datapath</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="c1"># Retrieve the list of tables from sqlite_master</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT name FROM sqlite_master WHERE type=&#39;table&#39;&quot;</span><span class="p">)</span>
+<span class="n">tables</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+    <span class="n">table_name</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Table: </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Get information about the table&#39;s columns</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PRAGMA table_info(</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    
+    <span class="k">if</span> <span class="n">columns</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fields:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+            <span class="c1"># col returns: (cid, name, type, notnull, dflt_value, pk)</span>
+            <span class="n">cid</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">col_type</span><span class="p">,</span> <span class="n">notnull</span><span class="p">,</span> <span class="n">dflt_value</span><span class="p">,</span> <span class="n">pk</span> <span class="o">=</span> <span class="n">col</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">col_type</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  No column information available.&quot;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">()</span>  <span class="c1"># Newline for better separation</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Table: alkanes_summary
+Fields:
+  - id (INTEGER)
+  - alkane (TEXT)
+  - cid (INTEGER)
+
+Table: sqlite_sequence
+Fields:
+  - name ()
+  - seq ()
+
+Table: methane
+Fields:
+  - id (INTEGER)
+  - property (TEXT)
+  - value (TEXT)
+
+Table: ethane
+Fields:
+  - id (INTEGER)
+  - property (TEXT)
+  - value (TEXT)
+
+Table: propane
+Fields:
+  - id (INTEGER)
+  - property (TEXT)
+  - value (TEXT)
+
+Table: butane
+Fields:
+  - id (INTEGER)
+  - property (TEXT)
+  - value (TEXT)
+
+Table: pentane
+Fields:
+  - id (INTEGER)
+  - property (TEXT)
+  - value (TEXT)
+
+Table: hexane
+Fields:
+  - id (INTEGER)
+  - property (TEXT)
+  - value (TEXT)
+
+Table: heptane
+Fields:
+  - id (INTEGER)
+  - property (TEXT)
+  - value (TEXT)
+
+Table: octane
+Fields:
+  - id (INTEGER)
+  - property (TEXT)
+  - value (TEXT)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="extract-first-15-values-of-each-table">
+<h3>Extract first 15 values of each table<a class="headerlink" href="#extract-first-15-values-of-each-table" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+
+<span class="c1"># Replace with the actual path to your database file</span>
+<span class="c1">#db_path = &quot;alkane_properties_db_datapath&quot;</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">alkane_properties_db_datapath</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="c1"># Retrieve list of tables</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT name FROM sqlite_master WHERE type=&#39;table&#39;&quot;</span><span class="p">)</span>
+<span class="n">tables</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+    <span class="n">table_name</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Table: </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Optionally, print column headers:</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;PRAGMA table_info(</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="n">columns_info</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">columns_info</span><span class="p">:</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns_info</span><span class="p">]</span>  <span class="c1"># col[1] is the column name</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">columns</span><span class="p">))</span>
+    
+    <span class="c1"># Get the first 5 rows</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SELECT * FROM </span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2"> LIMIT 15&quot;</span><span class="p">)</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+    
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>  <span class="c1"># extra newline for clarity between tables</span>
+
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Table: alkanes_summary
+id	alkane	cid
+(1, &#39;methane&#39;, 297)
+(2, &#39;ethane&#39;, 6324)
+(3, &#39;propane&#39;, 6334)
+(4, &#39;butane&#39;, 7843)
+(5, &#39;pentane&#39;, 8003)
+(6, &#39;hexane&#39;, 8058)
+(7, &#39;heptane&#39;, 8900)
+(8, &#39;octane&#39;, 356)
+
+Table: sqlite_sequence
+name	seq
+(&#39;methane&#39;, 456)
+(&#39;alkanes_summary&#39;, 64)
+(&#39;ethane&#39;, 400)
+(&#39;propane&#39;, 592)
+(&#39;butane&#39;, 552)
+(&#39;pentane&#39;, 608)
+(&#39;hexane&#39;, 600)
+(&#39;heptane&#39;, 552)
+(&#39;octane&#39;, 584)
+
+Table: methane
+id	property	value
+(1, &#39;Physical Description&#39;, &#39;Methane is a colorless odorless gas. It is also known as marsh gas or methyl hydride. It is easily ignited. The vapors are lighter than air. Under prolonged exposure to fire or intense heat the containers may rupture violently and rocket. It is used in making other chemicals and as a constituent of the fuel, natural gas.&#39;)
+(2, &#39;Physical Description&#39;, &#39;Methane is a colorless odorless gas. It is also known as marsh gas or methyl hydride. It is easily ignited. The vapors are lighter than air. Under prolonged exposure to fire or intense heat the containers may rupture violently and rocket. It is used in making other chemicals and as a constituent of the fuel, natural gas.&#39;)
+(3, &#39;Physical Description&#39;, &#39;Methane, refrigerated liquid (cryogenic liquid) is a colorless odorless liquid. Flammable. Water insoluble.&#39;)
+(4, &#39;Physical Description&#39;, &#39;Natural gas, refrigerated liquid (cryogenic liquid) appears as a flammable liquefied gaseous mixture of straight chain hydrocarbons, predominately methane.&#39;)
+(5, &#39;Physical Description&#39;, &#39;Natural gas, [compressed] appears as a flammable gaseous mixture of straight chain hydrocarbons, predominately compressed methane.&#39;)
+(6, &#39;Physical Description&#39;, &#39;Gas or Vapor; Liquid&#39;)
+(7, &#39;Physical Description&#39;, &#39;Colorless, odorless gas; [Merck Index] Vapor density = 0.554 (lighter than air); [HSDB]&#39;)
+(8, &#39;Physical Description&#39;, &#39;Liquid&#39;)
+(9, &#39;Physical Description&#39;, &#39;COLOURLESS ODOURLESS COMPRESSED OR LIQUEFIED GAS.&#39;)
+(10, &#39;Color/Form&#39;, &#39;Colorless gas&#39;)
+(11, &#39;Odor&#39;, &#39;Odorless&#39;)
+(12, &#39;Odor&#39;, &#39;Weak odor&#39;)
+(13, &#39;Taste&#39;, &#39;Tasteless&#39;)
+(14, &#39;Boiling Point&#39;, &#39;-258.0&#39;)
+(15, &#39;Boiling Point&#39;, &#39;-258.7&#39;)
+
+Table: ethane
+id	property	value
+(1, &#39;Physical Description&#39;, &#39;Ethane appears as a colorless odorless gas. It is easily ignited. The vapors are heavier than air. It can asphyxiate by the displacement of air. Under prolonged exposure to fire or intense heat the containers may rupture violently and rocket. Contact with the liquid may cause frostbite.&#39;)
+(2, &#39;Physical Description&#39;, &#39;Ethane, refrigerated liquid appears as a colorless odorless very cold liquid. Boils at -88.6 °C. Easily ignited and a flame can flash back to the source of a leak very easily. Vapors are heavier than air. Vapors can asphyxiate by the displacement of air from enclosed spaces. Direct contact can cause frostbite. Contact of very cold liquid with water may result in vigorous or violent boiling. If the water is hot, there is the possibility that a liquid &quot;superheat&quot; explosion may occur. Pressures may build to dangerous levels if liquid gas contacts water in a closed container. Under prolonged exposure to fire or intense heat the containers may rupture violently and rocket. Used in manufacturing other chemicals.&#39;)
+(3, &#39;Physical Description&#39;, &#39;Liquid; Gas or Vapor&#39;)
+(4, &#39;Physical Description&#39;, &#39;Colorless, odorless gas; [Merck Index]&#39;)
+(5, &#39;Physical Description&#39;, &#39;COLOURLESS COMPRESSED LIQUEFIED GAS. ODOURLESS WHEN PURE.&#39;)
+(6, &#39;Color/Form&#39;, &#39;Colorless gas&#39;)
+(7, &#39;Odor&#39;, &#39;Odorless&#39;)
+(8, &#39;Boiling Point&#39;, &#39;-127.5&#39;)
+(9, &#39;Boiling Point&#39;, &#39;-88.6&#39;)
+(10, &#39;Boiling Point&#39;, &#39;-89.0&#39;)
+(11, &#39;Melting Point&#39;, &#39;-279.9&#39;)
+(12, &#39;Melting Point&#39;, &#39;-182.794&#39;)
+(13, &#39;Melting Point&#39;, &#39;-183.0&#39;)
+(14, &#39;Flash Point&#39;, &#39;-211.0&#39;)
+(15, &#39;Flash Point&#39;, &#39;-211.0&#39;)
+
+Table: propane
+id	property	value
+(1, &#39;Physical Description&#39;, &#39;Propane appears as a colorless gas with a faint petroleum-like odor. It is shipped as a liquefied gas under its vapor pressure. For transportation it may be stenched. Contact with the unconfined liquid can cause frostbite by evaporative cooling. Easily ignited. The vapors are heavier than air and a flame can flash back to the source of leak very easily. The leak may be either a liquid or vapor leak. The vapors can asphyxiate by the displacement of air. Under prolonged exposure to fire or heat the containers may rupture violently and rocket.&#39;)
+(2, &#39;Physical Description&#39;, &#39;NKRA; Gas or Vapor; Gas or Vapor, Liquid; Liquid&#39;)
+(3, &#39;Physical Description&#39;, &#39;Colourless gas or liquid with mild, characteristic odour&#39;)
+(4, &#39;Physical Description&#39;, &#39;Colorless, odorless gas. [Note: A foul-smelling odorant is often added when used for fuel purposes. Shipped as a liquefied compressed gas.]; [NIOSH] Vapor density = 1.56 (heavier than air); [HSDB]&#39;)
+(5, &#39;Physical Description&#39;, &#39;Liquid&#39;)
+(6, &#39;Physical Description&#39;, &#39;ODOURLESS COLOURLESS COMPRESSED LIQUEFIED GAS.&#39;)
+(7, &#39;Physical Description&#39;, &#39;Colorless, odorless gas.&#39;)
+(8, &#39;Physical Description&#39;, &#39;Colorless, odorless gas. [Note: A foul-smelling odorant is often added when used for fuel purposes. Shipped as a liquefied compressed gas.]&#39;)
+(9, &#39;Color/Form&#39;, &#39;Colorless gas [Shipped as a liquefied compressed gas].&#39;)
+(10, &#39;Odor&#39;, &#39;Odorless [Note: A foul smelling odorant is often added when used for fuel purposes].&#39;)
+(11, &#39;Boiling Point&#39;, &#39;-43.8&#39;)
+(12, &#39;Boiling Point&#39;, &#39;-42.1&#39;)
+(13, &#39;Boiling Point&#39;, &#39;-42.0&#39;)
+(14, &#39;Boiling Point&#39;, &#39;-44.0&#39;)
+(15, &#39;Boiling Point&#39;, &#39;-44.0&#39;)
+
+Table: butane
+id	property	value
+(1, &#39;Physical Description&#39;, &#39;Butane is a colorless gas with a faint petroleum-like odor. For transportation it may be stenched. It is shipped as a liquefied gas under its vapor pressure. Contact with the liquid can cause frostbite. It is easily ignited. Its vapors are heavier than air. Any leak can be either liquid or vapor. Under prolonged exposure to fire or intense heat the containers may rupture violently and rocket. It is used as a fuel, an aerosol propellant, in cigarette lighters, and to make other chemicals.&#39;)
+(2, &#39;Physical Description&#39;, &#39;Gas or Vapor, Liquid; Liquid; NKRA; Gas or Vapor&#39;)
+(3, &#39;Physical Description&#39;, &#39;Colourless gas or liquid with mild, characteristic odour&#39;)
+(4, &#39;Physical Description&#39;, &#39;Colorless gas with a gasoline-like or natural gas odor; Note: Shipped as a liquefied compressed gas. A liquid below 31 degrees F; [NIOSH] Vapor density = 2.07 (heavier than air); [HSDB]&#39;)
+(5, &#39;Physical Description&#39;, &#39;ODOURLESS COLOURLESS COMPRESSED LIQUEFIED GAS.&#39;)
+(6, &#39;Physical Description&#39;, &#39;Colorless gas with a gasoline-like or natural gas odor.&#39;)
+(7, &#39;Physical Description&#39;, &#39;Colorless gas with a gasoline-like or natural gas odor. [Note: Shipped as a liquefied compressed gas. A liquid below 31 °F.]&#39;)
+(8, &#39;Color/Form&#39;, &#39;Colorless gas [Note: Shipped as a liquefied compressed gas. A liquid below 31 degrees F]&#39;)
+(9, &#39;Odor&#39;, &#39;Faint, disagreeable odor&#39;)
+(10, &#39;Boiling Point&#39;, &#39;31.1&#39;)
+(11, &#39;Boiling Point&#39;, &#39;-0.5&#39;)
+(12, &#39;Boiling Point&#39;, &#39;-0.5&#39;)
+(13, &#39;Boiling Point&#39;, &#39;31.0&#39;)
+(14, &#39;Boiling Point&#39;, &#39;31.0&#39;)
+(15, &#39;Melting Point&#39;, &#39;-217.1&#39;)
+
+Table: pentane
+id	property	value
+(1, &#39;Physical Description&#39;, &#39;N-pentane appears as a clear colorless liquid with a petroleum-like odor. Flash point 57 °F. Boiling point 97 °F. Less dense than water and insoluble in water. Hence floats on water. Vapors are heavier than air.&#39;)
+(2, &#39;Physical Description&#39;, &#39;Liquid; Pellets or Large Crystals; Gas or Vapor&#39;)
+(3, &#39;Physical Description&#39;, &#39;Colorless liquid with a gasoline-like odor; Note: A gas above 97 degrees F. May be utilized as a fuel; [NIOSH] Clear colorless liquid; [Sigma-Aldrich MSDS]&#39;)
+(4, &#39;Physical Description&#39;, &#39;Liquid&#39;)
+(5, &#39;Physical Description&#39;, &#39;COLOURLESS LIQUID WITH CHARACTERISTIC ODOUR.&#39;)
+(6, &#39;Physical Description&#39;, &#39;Colorless liquid with a gasoline-like odor.&#39;)
+(7, &#39;Physical Description&#39;, &#39;Colorless liquid with a gasoline-like odor. [Note: A gas above 97 °F. May be utilized as a fuel.]&#39;)
+(8, &#39;Color/Form&#39;, &#39;Colorless liquid [Note: A gas above 97 degrees F. May be utilized as a fuel].&#39;)
+(9, &#39;Odor&#39;, &#39;Pleasant&#39;)
+(10, &#39;Odor&#39;, &#39;Gasoline-like odor&#39;)
+(11, &#39;Boiling Point&#39;, &#39;97.0&#39;)
+(12, &#39;Boiling Point&#39;, &#39;36.06&#39;)
+(13, &#39;Boiling Point&#39;, &#39;36.0&#39;)
+(14, &#39;Boiling Point&#39;, &#39;36.0&#39;)
+(15, &#39;Boiling Point&#39;, &#39;97.0&#39;)
+
+Table: hexane
+id	property	value
+(1, &#39;Physical Description&#39;, &#39;N-hexane is a clear colorless liquids with a petroleum-like odor. Flash points -9 °F. Less dense than water and insoluble in water. Vapors heavier than air. Used as a solvent, paint thinner, and chemical reaction medium.&#39;)
+(2, &#39;Physical Description&#39;, &#39;Other Solid; Gas or Vapor, Liquid; Liquid&#39;)
+(3, &#39;Physical Description&#39;, &#39;Colorless liquid with a gasoline-like odor; [NIOSH]&#39;)
+(4, &#39;Physical Description&#39;, &#39;Liquid&#39;)
+(5, &#39;Physical Description&#39;, &#39;VOLATILE COLOURLESS LIQUID WITH CHARACTERISTIC ODOUR.&#39;)
+(6, &#39;Physical Description&#39;, &#39;Colorless liquid with a gasoline-like odor.&#39;)
+(7, &#39;Physical Description&#39;, &#39;Colorless liquid with a gasoline-like odor.&#39;)
+(8, &#39;Color/Form&#39;, &#39;Liquid&#39;)
+(9, &#39;Color/Form&#39;, &#39;Colorless, very volatile liquid&#39;)
+(10, &#39;Odor&#39;, &#39;Gasoline-like odor&#39;)
+(11, &#39;Boiling Point&#39;, &#39;156.0&#39;)
+(12, &#39;Boiling Point&#39;, &#39;68.73&#39;)
+(13, &#39;Boiling Point&#39;, &#39;68.7&#39;)
+(14, &#39;Boiling Point&#39;, &#39;69.0&#39;)
+(15, &#39;Boiling Point&#39;, &#39;156.0&#39;)
+
+Table: heptane
+id	property	value
+(1, &#39;Physical Description&#39;, &#39;N-heptane is a clear colorless liquids with a petroleum-like odor. Flash point 25 °F. Less dense than water and insoluble in water. Vapors heavier than air.&#39;)
+(2, &#39;Physical Description&#39;, &#39;Liquid&#39;)
+(3, &#39;Physical Description&#39;, &#39;Colorless liquid with a gasoline-like odor; [NIOSH]&#39;)
+(4, &#39;Physical Description&#39;, &#39;Liquid&#39;)
+(5, &#39;Physical Description&#39;, &#39;VOLATILE COLOURLESS LIQUID WITH CHARACTERISTIC ODOUR.&#39;)
+(6, &#39;Physical Description&#39;, &#39;Colorless liquid with a gasoline-like odor.&#39;)
+(7, &#39;Physical Description&#39;, &#39;Colorless liquid with a gasoline-like odor.&#39;)
+(8, &#39;Color/Form&#39;, &#39;Colorless liquid&#39;)
+(9, &#39;Odor&#39;, &#39;Gasoline-like odor&#39;)
+(10, &#39;Boiling Point&#39;, &#39;209.1&#39;)
+(11, &#39;Boiling Point&#39;, &#39;98.38&#39;)
+(12, &#39;Boiling Point&#39;, &#39;98.0&#39;)
+(13, &#39;Boiling Point&#39;, &#39;98.4&#39;)
+(14, &#39;Boiling Point&#39;, &#39;209.0&#39;)
+(15, &#39;Boiling Point&#39;, &#39;209.0&#39;)
+
+Table: octane
+id	property	value
+(1, &#39;Physical Description&#39;, &#39;N-octane is a colorless liquid with an odor of gasoline. Less dense than water and insoluble in water. Hence floats on water. Produces irritating vapor.&#39;)
+(2, &#39;Physical Description&#39;, &#39;Liquid; Gas or Vapor&#39;)
+(3, &#39;Physical Description&#39;, &#39;Colorless liquid with a gasoline-like odor; [NIOSH]&#39;)
+(4, &#39;Physical Description&#39;, &#39;Liquid&#39;)
+(5, &#39;Physical Description&#39;, &#39;COLOURLESS LIQUID WITH CHARACTERISTIC ODOUR.&#39;)
+(6, &#39;Physical Description&#39;, &#39;Colorless liquid with a gasoline-like odor.&#39;)
+(7, &#39;Physical Description&#39;, &#39;Colorless liquid with a gasoline-like odor.&#39;)
+(8, &#39;Color/Form&#39;, &#39;Colorless liquid&#39;)
+(9, &#39;Color/Form&#39;, &#39;Clear liquid&#39;)
+(10, &#39;Odor&#39;, &#39;Gasoline-like&#39;)
+(11, &#39;Boiling Point&#39;, &#39;258.1&#39;)
+(12, &#39;Boiling Point&#39;, &#39;125.62&#39;)
+(13, &#39;Boiling Point&#39;, &#39;125.0&#39;)
+(14, &#39;Boiling Point&#39;, &#39;126.0&#39;)
+(15, &#39;Boiling Point&#39;, &#39;258.0&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+
+
+<span class="c1"># Connect to SQLite</span>
+<span class="n">db_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data/pubchem_data/alkane_properties.db&quot;</span><span class="p">)</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="n">highest_bp</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">highest_bp_alkane</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="c1"># Loop through each alkane table to find boiling points</span>
+<span class="k">for</span> <span class="n">alkane</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;methane&quot;</span><span class="p">,</span> <span class="s2">&quot;ethane&quot;</span><span class="p">,</span> <span class="s2">&quot;propane&quot;</span><span class="p">,</span> <span class="s2">&quot;butane&quot;</span><span class="p">,</span> <span class="s2">&quot;pentane&quot;</span><span class="p">,</span> <span class="s2">&quot;hexane&quot;</span><span class="p">,</span> <span class="s2">&quot;heptane&quot;</span><span class="p">,</span> <span class="s2">&quot;octane&quot;</span><span class="p">]:</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT value FROM </span><span class="si">{</span><span class="n">alkane</span><span class="si">}</span>
+<span class="s2">    WHERE property = &#39;Boiling Point&#39;</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    <span class="n">boiling_points</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">bp</span> <span class="ow">in</span> <span class="n">boiling_points</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">bp_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">bp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># ✅ No need to split, it&#39;s already a float</span>
+            <span class="k">if</span> <span class="n">highest_bp</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">bp_value</span> <span class="o">&gt;</span> <span class="n">highest_bp</span><span class="p">:</span>
+                <span class="n">highest_bp</span> <span class="o">=</span> <span class="n">bp_value</span>
+                <span class="n">highest_bp_alkane</span> <span class="o">=</span> <span class="n">alkane</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>  <span class="c1"># Ignore invalid values</span>
+
+<span class="c1"># Display the correct highest boiling point</span>
+<span class="k">if</span> <span class="n">highest_bp_alkane</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The alkane with the highest boiling point is: </span><span class="si">{</span><span class="n">highest_bp_alkane</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">highest_bp</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No valid boiling point data found.&quot;</span><span class="p">)</span>
+
+<span class="c1"># Close connection</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The alkane with the highest boiling point is: Octane (258.1)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="query-each-table-for-boiling-points">
+<h3>Query each table for boiling points<a class="headerlink" href="#query-each-table-for-boiling-points" title="Link to this heading">#</a></h3>
+<p>*<strong>Note, without units this data is uesless and needs to be cleaned up!</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+
+<span class="c1"># Connect to SQLite</span>
+<span class="n">db_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data/pubchem_data/alkane_properties.db&quot;</span><span class="p">)</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">db_path</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="c1"># Check stored boiling points</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Stored Boiling Points in SQLite:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">alkane</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;methane&quot;</span><span class="p">,</span> <span class="s2">&quot;ethane&quot;</span><span class="p">,</span> <span class="s2">&quot;propane&quot;</span><span class="p">,</span> <span class="s2">&quot;butane&quot;</span><span class="p">,</span> <span class="s2">&quot;pentane&quot;</span><span class="p">,</span> <span class="s2">&quot;hexane&quot;</span><span class="p">,</span> <span class="s2">&quot;heptane&quot;</span><span class="p">,</span> <span class="s2">&quot;octane&quot;</span><span class="p">]:</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    SELECT property, value FROM </span><span class="si">{</span><span class="n">alkane</span><span class="si">}</span>
+<span class="s2">    WHERE property = &#39;Boiling Point&#39;</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+    <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">alkane</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2"> Boiling Points:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  - </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Should print only numeric values in °C</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="c1"># Close connection</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Stored Boiling Points in SQLite:
+
+Methane Boiling Points:
+  - -258.0
+  - -258.7
+  - -161.5
+  - -161.0
+  - -258.0
+  - -258.7
+  - -161.5
+  - -161.0
+  - -258.0
+  - -258.7
+  - -161.5
+  - -161.0
+  - -258.0
+  - -258.7
+  - -161.5
+  - -161.0
+  - -258.0
+  - -258.7
+  - -161.5
+  - -161.0
+  - -258.0
+  - -258.7
+  - -161.5
+  - -161.0
+  - -258.0
+  - -258.7
+  - -161.5
+  - -161.0
+  - -258.0
+  - -258.7
+  - -161.5
+  - -161.0
+----------------------------------------
+Ethane Boiling Points:
+  - -127.5
+  - -88.6
+  - -89.0
+  - -127.5
+  - -88.6
+  - -89.0
+  - -127.5
+  - -88.6
+  - -89.0
+  - -127.5
+  - -88.6
+  - -89.0
+  - -127.5
+  - -88.6
+  - -89.0
+  - -127.5
+  - -88.6
+  - -89.0
+  - -127.5
+  - -88.6
+  - -89.0
+  - -127.5
+  - -88.6
+  - -89.0
+----------------------------------------
+Propane Boiling Points:
+  - -43.8
+  - -42.1
+  - -42.0
+  - -44.0
+  - -44.0
+  - -43.8
+  - -42.1
+  - -42.0
+  - -44.0
+  - -44.0
+  - -43.8
+  - -42.1
+  - -42.0
+  - -44.0
+  - -44.0
+  - -43.8
+  - -42.1
+  - -42.0
+  - -44.0
+  - -44.0
+  - -43.8
+  - -42.1
+  - -42.0
+  - -44.0
+  - -44.0
+  - -43.8
+  - -42.1
+  - -42.0
+  - -44.0
+  - -44.0
+  - -43.8
+  - -42.1
+  - -42.0
+  - -44.0
+  - -44.0
+  - -43.8
+  - -42.1
+  - -42.0
+  - -44.0
+  - -44.0
+----------------------------------------
+Butane Boiling Points:
+  - 31.1
+  - -0.5
+  - -0.5
+  - 31.0
+  - 31.0
+  - 31.1
+  - -0.5
+  - -0.5
+  - 31.0
+  - 31.0
+  - 31.1
+  - -0.5
+  - -0.5
+  - 31.0
+  - 31.0
+  - 31.1
+  - -0.5
+  - -0.5
+  - 31.0
+  - 31.0
+  - 31.1
+  - -0.5
+  - -0.5
+  - 31.0
+  - 31.0
+  - 31.1
+  - -0.5
+  - -0.5
+  - 31.0
+  - 31.0
+  - 31.1
+  - -0.5
+  - -0.5
+  - 31.0
+  - 31.0
+  - 31.1
+  - -0.5
+  - -0.5
+  - 31.0
+  - 31.0
+----------------------------------------
+Pentane Boiling Points:
+  - 97.0
+  - 36.06
+  - 36.0
+  - 36.0
+  - 97.0
+  - 97.0
+  - 97.0
+  - 36.06
+  - 36.0
+  - 36.0
+  - 97.0
+  - 97.0
+  - 97.0
+  - 36.06
+  - 36.0
+  - 36.0
+  - 97.0
+  - 97.0
+  - 97.0
+  - 36.06
+  - 36.0
+  - 36.0
+  - 97.0
+  - 97.0
+  - 97.0
+  - 36.06
+  - 36.0
+  - 36.0
+  - 97.0
+  - 97.0
+  - 97.0
+  - 36.06
+  - 36.0
+  - 36.0
+  - 97.0
+  - 97.0
+  - 97.0
+  - 36.06
+  - 36.0
+  - 36.0
+  - 97.0
+  - 97.0
+  - 97.0
+  - 36.06
+  - 36.0
+  - 36.0
+  - 97.0
+  - 97.0
+----------------------------------------
+Hexane Boiling Points:
+  - 156.0
+  - 68.73
+  - 68.7
+  - 69.0
+  - 156.0
+  - 156.0
+  - 156.0
+  - 68.73
+  - 68.7
+  - 69.0
+  - 156.0
+  - 156.0
+  - 156.0
+  - 68.73
+  - 68.7
+  - 69.0
+  - 156.0
+  - 156.0
+  - 156.0
+  - 68.73
+  - 68.7
+  - 69.0
+  - 156.0
+  - 156.0
+  - 156.0
+  - 68.73
+  - 68.7
+  - 69.0
+  - 156.0
+  - 156.0
+  - 156.0
+  - 68.73
+  - 68.7
+  - 69.0
+  - 156.0
+  - 156.0
+  - 156.0
+  - 68.73
+  - 68.7
+  - 69.0
+  - 156.0
+  - 156.0
+  - 156.0
+  - 68.73
+  - 68.7
+  - 69.0
+  - 156.0
+  - 156.0
+----------------------------------------
+Heptane Boiling Points:
+  - 209.1
+  - 98.38
+  - 98.0
+  - 98.4
+  - 209.0
+  - 209.0
+  - 209.1
+  - 98.38
+  - 98.0
+  - 98.4
+  - 209.0
+  - 209.0
+  - 209.1
+  - 98.38
+  - 98.0
+  - 98.4
+  - 209.0
+  - 209.0
+  - 209.1
+  - 98.38
+  - 98.0
+  - 98.4
+  - 209.0
+  - 209.0
+  - 209.1
+  - 98.38
+  - 98.0
+  - 98.4
+  - 209.0
+  - 209.0
+  - 209.1
+  - 98.38
+  - 98.0
+  - 98.4
+  - 209.0
+  - 209.0
+  - 209.1
+  - 98.38
+  - 98.0
+  - 98.4
+  - 209.0
+  - 209.0
+  - 209.1
+  - 98.38
+  - 98.0
+  - 98.4
+  - 209.0
+  - 209.0
+----------------------------------------
+Octane Boiling Points:
+  - 258.1
+  - 125.62
+  - 125.0
+  - 126.0
+  - 258.0
+  - 258.0
+  - 258.1
+  - 125.62
+  - 125.0
+  - 126.0
+  - 258.0
+  - 258.0
+  - 258.1
+  - 125.62
+  - 125.0
+  - 126.0
+  - 258.0
+  - 258.0
+  - 258.1
+  - 125.62
+  - 125.0
+  - 126.0
+  - 258.0
+  - 258.0
+  - 258.1
+  - 125.62
+  - 125.0
+  - 126.0
+  - 258.0
+  - 258.0
+  - 258.1
+  - 125.62
+  - 125.0
+  - 126.0
+  - 258.0
+  - 258.0
+  - 258.1
+  - 125.62
+  - 125.0
+  - 126.0
+  - 258.0
+  - 258.0
+  - 258.1
+  - 125.62
+  - 125.0
+  - 126.0
+  - 258.0
+  - 258.0
+----------------------------------------
+</pre></div>
+</div>
+</div>
+</div>
+<p>The issue is we lost the units</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="acknowledgements">
+<h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">#</a></h1>
+<p>This content was developed with assistance from <a class="reference external" href="https://www.perplexity.ai/">Perplexity AI</a> and <a class="reference external" href="https://chatgpt.com/">Chat GPT</a>. Multiple queries were made during the Fall 2024 and the Spring 2025.</p>
+<p>The PUG-rest API content was borrowed extensively from the <a class="reference external" href="https://chem.libretexts.org/Courses/Intercollegiate_Courses/Cheminformatics">2019 Cheminformatics OLCC LibreTexts</a> and special acknowledgement goes to Sunghwan Kim for developing the original content.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "py4sci"
+        },
+        kernelOptions: {
+            name: "py4sci",
+            path: "./content/module2-oop-data-structures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'py4sci'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02-7-db-external-data-structures.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">7. Databases as External Data Structures</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02-9-webscrape-external-data-structures.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">9. WebScraping as External Data Structures</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">8. APIs as External Data Structures</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#application-program-interfaces-apis">1. Application Program Interfaces (APIs)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#brief-overview-of-apis">1.1: Brief Overview of APIs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-api-architectures">1.2: Overview of API Architectures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#restful-apis-representational-state-transfer">RESTful APIs (Representational State Transfer)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soap-apis-simple-object-access-protocol">SOAP APIs (Simple Object Access Protocol)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#graphql-apis">GraphQL APIs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sparql-endpoints">SPARQL Endpoints</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemical-databases-with-restful-apis">1.3 Chemical Databases with RESTful APIs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chemical-databases-with-sparql-endpoints">1.4 Chemical Databases with SPARQL Endpoints</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#requests-module">2. Requests Module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installing-requests-from-conda-forge">2.1: Installing <code class="docutils literal notranslate"><span class="pre">requests</span></code> from conda-forge</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#http-request-methods">2.2: HTTP Request Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#response-object-methods">2.3: Response Object Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#response-object-attributes">2.4: Response Object Attributes</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pubchem-pug-rest-api">3. PubChem PUG Rest API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shortest-code">3.1 The Shortest Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulating-pug-rest-request-urls-using-variables">3.2 Formulating PUG REST request URLs using variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-multiple-requests-with-a-loop">3.3 Making multiple requests with a loop</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-multiple-properties-for-a-compound">3.4: Getting multiple properties for a compound</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pubchem-pug-view-api">4. PubChem PUG View API</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-pug-and-pug-view">Comparing PUG and PUG View</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-complete-json">4.1: Downloading complete JSON</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-melting-points">4.2 Extract Melting Points</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-pandas-dataframe-of-experimental-properties">4.3 Create Pandas DataFrame of Experimental Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-database-with-8-tables">4.4 Create a DataBase with 8 tables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-df-head">print df head</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-database-tables">Print database tables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#print-field-details-for-each-table">Print field details for each table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extract-first-15-values-of-each-table">Extract first 15 values of each table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#query-each-table-for-boiling-points">Query each table for boiling points</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Robert Belford
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
