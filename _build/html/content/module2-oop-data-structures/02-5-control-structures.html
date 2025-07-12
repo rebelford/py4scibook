@@ -1020,13 +1020,43 @@ The molar mass you entered is: 0.098g/mol
 </div>
 </div>
 </div>
-</section>
+<div class="alert alert-info">
+<center>Copy the following code to a Jupyter Notebook code cell to execute it</center>
+</div></section>
 <section id="logical-validation">
 <h3>Logical Validation<a class="headerlink" href="#logical-validation" title="Link to this heading">#</a></h3>
 <p>The above error was a type error in the sense that non-numeric input was given.  But what if the numeric value of the melting point is higher than the boiling point?  This would be nonsense, and we could use a boolean if to terminate the code.  To do this we need to use the built-in sys module.  Note, this gives us an error message.  In the next section we will learn how to use loops, and how a <strong>while True: loop</strong> is a <strong>better way</strong> to do this.</p>
-<div class="alert alert-info">
-<center></center>Copy the following code to a Jupyter Notebook code cell to execute it</div>center>
-</div></section>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>  <span class="c1"># Import sys module for exiting the script</span>
+
+<span class="c1"># What is the phase of a substance?</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">melting_point</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is the melting point of your substance? &quot;</span><span class="p">))</span>
+    <span class="n">boiling_point</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is the boiling point of your substance? &quot;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">melting_point</span> <span class="o">&gt;</span> <span class="n">boiling_point</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: The boiling point must be greater than or equal to the melting point.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>  <span class="c1"># Terminates the script if MP &gt; BP</span>
+
+    <span class="n">temperature</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What is the temperature you wish to know the phase at? &quot;</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">temperature</span> <span class="o">&lt;=</span> <span class="n">melting_point</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">temperature</span> <span class="o">==</span> <span class="n">melting_point</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is at the melting point, could be solid, liquid, or both coexisting together&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is a solid&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">melting_point</span> <span class="o">&lt;</span> <span class="n">temperature</span> <span class="o">&lt;</span> <span class="n">boiling_point</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Substance is a liquid&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">temperature</span> <span class="o">==</span> <span class="n">boiling_point</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is at the boiling point and could be liquid, gas, or both&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is a gas&quot;</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: Please enter numeric values for all inputs.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="loops">
@@ -1447,7 +1477,7 @@ Boiling point reached!
 </div>
 <p>In the section on for loops we created a script that determined the phase of a compound at a temperature if the use inserted the melting and boiling points. We used the sys.exit() function to handle the <strong>logic error of the melting point being larger than the boiling point</strong>, which worked, but kicked off an error message. We can now put use this with a while loop and a break control statement.  Note, that this script will continue to ask for the boiling and melting points until you provide ones that make sense.</p>
 <div class="alert alert-info">
-<center></center>Copy the following code to a Jupyter Notebook code cell to execute it</div>center>
+<center>Copy the following code to a Jupyter Notebook code cell to execute it</center>
 </div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1">#What is the phase of a substance?</span>
 <span class="k">try</span><span class="p">:</span>
@@ -1563,7 +1593,7 @@ Ca is a metal.
 </pre></div>
 </div>
 <div class="alert alert-info">
-<center></center>Copy the following code to a Jupyter Notebook code cell to execute it, and then give it a non-numeric answer like 10</div>center>
+<center>Copy the following code to a Jupyter Notebook code cell to execute it, and then give it a non-numeric answer like 10</center>
 </div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
     <span class="n">temperature</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the temperature in Celsius: &quot;</span><span class="p">))</span>
 <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>

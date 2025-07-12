@@ -9,6 +9,7 @@ logo: logo.png
 # See https://jupyterbook.org/content/execute.html
 execute:
   execute_notebooks: force
+  nb_execution_show_tb: True  # <- Add this if it's not already present
 
 # Define the name of the latex output file for PDF builds
 latex:
@@ -47,4 +48,4 @@ parse:
     - dollarmath
     - amsmath
     - colon_fence
- nb_execution_show_tb: True  # <- Add this if it's not already present
+ 
