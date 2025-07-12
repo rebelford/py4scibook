@@ -1,0 +1,1779 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2. Python as a Calculator &#8212; Draft Python for Science Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e52fa269" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom-checkpoint.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/module2-oop-data-structures/02-2-py-calculator';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. Composite Data Structures" href="02-3-composite-data-structures.html" />
+    <link rel="prev" title="1. Primative Data Structures" href="02-1-primitive-data-structures.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Draft Python for Science Book - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Draft Python for Science Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Python for Science
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../math-test.html">In a Markdown cell:</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../module1-setup/README.html">Module 1: Getting Set Up</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-1-setupcomputer.html">1. Setting up your computer</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-2-jynbgettingstarted.html">2: Runnng and Creating Jupyter Notebooks</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-3-jynb-intro.html">3. Overview of Jupyter Notebooks</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-5-git.html">5. Git and GitHub</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-6-oop.html">6. Object Oriented Programming</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-7-virtual-environments.html">7. Virtual Environments</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="README.html">Module 2: Data Structures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="02-1-primitive-data-structures.html">1. Primative Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2. Python as a Calculator</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-3-composite-data-structures.html">3. Composite Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-4-built-in-modules.html">4. Built-In Modules</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-5-control-structures.html">5. Logic and Control Structures</a></li>
+
+
+
+
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/rebelford/py4scibook/master?urlpath=lab/tree/docs/content/module2-oop-data-structures/02-2-py-calculator.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://your-jupyterhub-url.com/hub/user-redirect/git-pull?repo=https%3A//github.com/rebelford/py4scibook&urlpath=lab/tree/py4scibook/docs/content/module2-oop-data-structures/02-2-py-calculator.ipynb&branch=master" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on JupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="JupyterHub logo" src="../../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rebelford/py4scibook/blob/master/docs/content/module2-oop-data-structures/02-2-py-calculator.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook/issues/new?title=Issue%20on%20page%20%2Fcontent/module2-oop-data-structures/02-2-py-calculator.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/module2-oop-data-structures/02-2-py-calculator.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2. Python as a Calculator</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2. Python as a Calculator</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-math-with-python">Basic Math with Python</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-types-of-numbers">three types of numbers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operators">Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#division">Division</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-division">Integer  Division</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#floor-and-modulus">Floor and Modulus</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-and-exponentiation">Multiplication and Exponentiation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#math-module">Math module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-common-math-functions">Table of Common Math functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symbolic-math">Symbolic Math</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-numbers-computers-struggle-to-represent"><strong>Types of Numbers Computers Struggle to Represent</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-advanced-math-functions">Table of Advanced Math Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-reserved-words">Python Reserved Words</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-between-builtins-and-keyword-modules">2. Difference Between <code class="docutils literal notranslate"><span class="pre">builtins</span></code> and <code class="docutils literal notranslate"><span class="pre">keyword</span></code> Modules</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#programmatic-extracting-reserved-words">Programmatic Extracting Reserved Words</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="python-as-a-calculator">
+<span id="module2-oop-data-structures-02-2-py-calculator"></span><h1>2. Python as a Calculator<a class="headerlink" href="#python-as-a-calculator" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="basic-math-with-python">
+<h1>Basic Math with Python<a class="headerlink" href="#basic-math-with-python" title="Link to this heading">#</a></h1>
+<section id="three-types-of-numbers">
+<h2>three types of numbers<a class="headerlink" href="#three-types-of-numbers" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Float</p></li>
+<li><p>Integer</p></li>
+<li><p>Complex</p></li>
+</ul>
+</section>
+<section id="operators">
+<h2>Operators<a class="headerlink" href="#operators" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>(+) Addition (returns float or integer)</p></li>
+<li><p>(-) Subtraction (returns float or integer)</p></li>
+<li><p>(*) (returns float or integer)</p></li>
+<li><p>(**) exponentiation (returns float or integer)</p></li>
+<li><p>(/) Division returns floats</p></li>
+<li><p>(//) Floor or Integer Division returns quotient as an integer</p></li>
+<li><p>(%) modulus returns remainder</p></li>
+</ul>
+<p>note: the equal sign is really the assignment operator, and when we write x=9/3 what we are doing is assigning the value of the division of 9 by 3 to the variable x.  We then pass x as an argument to the print() function.  The print function is a standard function of python and so we do not need to import a module to access it.</p>
+<section id="division">
+<h3>Division<a class="headerlink" href="#division" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39; Division return float values</span>
+<span class="sd">Here we use the equal sign to assign a value to the variable x </span>
+<span class="sd">and then pass it to the print function to print the value of x.&#39;&#39;&#39;</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">9</span><span class="o">/</span><span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="mi">9</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.0
+&lt;class &#39;int&#39;&gt;
+&lt;class &#39;int&#39;&gt;
+&lt;class &#39;float&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the next cell we format our output using the <a class="reference external" href="https://www.w3schools.com/python/python_string_formatting.asp">f-string format technique</a>.  The form of this technique is:</p>
+<p><strong>print(f”write what you want with {variables} in curly brackets”)</strong></p>
+<p><strong>Note the ‘\n\ ‘</strong> at the end of the second line of code</p>
+<ul class="simple">
+<li><p>the “\n” places a new line in the print output (remove it and see what happens)</p></li>
+<li><p>the second “” in “\n” lets us continue the code on a second line (remove it and see what happens).  You can move the second line of code up to the first and it will work again.</p></li>
+</ul>
+<p><strong>Note</strong> how we could even operate on the variable within the f-string</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Division return float values</span>
+<span class="c1">#Here we use the f-string to format the output, where the variables are placed in {}.</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">9</span><span class="o">/</span><span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;x = 9/3 = </span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">you an even operate on a variable, for example </span><span class="se">\n\</span>
+<span class="s2">x/3 = </span><span class="si">{</span><span class="n">x</span><span class="o">/</span><span class="mi">3</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">or print out the quotient type, which is </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x = 9/3 = 3.0,
+you an even operate on a variable, for example 
+x/3 = 1.0 
+or print out the quotient type, which is &lt;class &#39;float&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="integer-division">
+<h3>Integer  Division<a class="headerlink" href="#integer-division" title="Link to this heading">#</a></h3>
+<section id="floor-and-modulus">
+<h4>Floor and Modulus<a class="headerlink" href="#floor-and-modulus" title="Link to this heading">#</a></h4>
+<p>In the next cell we will look at Integer division, which returns the Floor (quotient) and modulus (remainder)</p>
+<div>
+<img src="images/00be6873-8fa9-45bf-ada3-c109b6381832.png" width="400"/>
+</div>
+Note: this is commonly written as dividend ÷ divisor or $\frac{dividend}{divisor}$<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#The modulus (%) returns the remainder, which is an integer</span>
+<span class="n">z</span> <span class="o">=</span> <span class="mi">9</span><span class="o">%</span><span class="k">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;9%3 = </span><span class="si">{</span><span class="n">z</span><span class="si">}</span><span class="s2">, for which the modulus (remainder) is </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="mi">7</span><span class="o">%</span><span class="k">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;7%3 = </span><span class="si">{</span><span class="n">z</span><span class="si">}</span><span class="s2">, for which the modulus (remainder) is </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9%3 = 0, for which the modulus (remainder) is &lt;class &#39;int&#39;&gt;
+7%3 = 1, for which the modulus (remainder) is &lt;class &#39;int&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="multiplication-and-exponentiation">
+<h3>Multiplication and Exponentiation<a class="headerlink" href="#multiplication-and-exponentiation" title="Link to this heading">#</a></h3>
+<p>Can result in either integers or floats</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># multiplication can give integers or floats</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;2*3 = </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="se">\n</span><span class="s2">for which the product is </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;2.0*3 = </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="se">\n</span><span class="s2">for which the product is </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2*3 = 6
+for which the product is &lt;class &#39;int&#39;&gt;
+
+2.0*3 = 6.0
+for which the product is &lt;class &#39;float&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Exponentiation can give integers or floats</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;2**3 = </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="se">\n</span><span class="s2">for which the result is </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">e</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">**</span><span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;2.0**3 = </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n</span><span class="s2">for which the result is </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mf">3.0</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;2**3.0 = </span><span class="si">{</span><span class="n">f</span><span class="si">}</span><span class="se">\n</span><span class="s2">for which the result is </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2**3 = 8
+for which the result is &lt;class &#39;int&#39;&gt;
+
+2.0**3 = 8.0
+for which the result is &lt;class &#39;float&#39;&gt;
+
+2**3.0 = 8.0
+for which the result is &lt;class &#39;float&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="math-module">
+<h2>Math module<a class="headerlink" href="#math-module" title="Link to this heading">#</a></h2>
+<p>The math module is a built-in module that comes with your installation of python. When you start Python it is not loaded into memory and you need to import it before you can use it with the statement:</p>
+<p><strong>import math</strong></p>
+<section id="table-of-common-math-functions">
+<h3>Table of Common Math functions<a class="headerlink" href="#table-of-common-math-functions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method/Constant</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.ceil(x)</span></code></p></td>
+<td><p>Returns the smallest integer greater than or equal to x</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.floor(x)</span></code></p></td>
+<td><p>Returns the largest integer less than or equal to x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.fabs(x)</span></code></p></td>
+<td><p>Returns the absolute value of x</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.factorial(x)</span></code></p></td>
+<td><p>Returns the factorial of x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.gcd(a,</span> <span class="pre">b)</span></code></p></td>
+<td><p>Returns the greatest common divisor of a and b</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.exp(x)</span></code></p></td>
+<td><p>Returns e raised to the power of x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.log(x[,</span> <span class="pre">base])</span></code></p></td>
+<td><p>Returns the logarithm of x to the given base (default is e)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.log10(x)</span></code></p></td>
+<td><p>Returns the base-10 logarithm of x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.pow(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p>Returns x raised to the power of y</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.sqrt(x)</span></code></p></td>
+<td><p>Returns the square root of x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.sin(x)</span></code></p></td>
+<td><p>Returns the sine of x (x in radians)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.cos(x)</span></code></p></td>
+<td><p>Returns the cosine of x (x in radians)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.tan(x)</span></code></p></td>
+<td><p>Returns the tangent of x (x in radians)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.degrees(x)</span></code></p></td>
+<td><p>Converts angle x from radians to degrees</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.radians(x)</span></code></p></td>
+<td><p>Converts angle x from degrees to radians</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.pi</span></code></p></td>
+<td><p>Mathematical constant pi (3.141592…)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.e</span></code></p></td>
+<td><p>Mathematical constant e (2.718281…)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="n">pH</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mf">1e-7</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pH</span><span class="p">)</span>
+<span class="n">pH</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mf">1E-7</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pH</span><span class="p">)</span>
+<span class="n">pH</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">10</span><span class="o">**-</span><span class="mi">7</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pH</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.0
+7.0
+7.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Henderson-Hasselbalch equation$<span class="math notranslate nohighlight">\(
+pH = pK_a + \log\left(\frac{\text{conjugate base}}{\text{acid}}\right)\)</span>$</p>
+<div class="alert alert-info">  
+<center>Uncomment this code in the following cell when you transfer to a Jupyter Notebook</center> 
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#c_base=float(input(&quot;Enter the concentration of conjugate base&quot;))</span>
+<span class="c1">#c_acid=float(input(&quot;Enter the concentration of the acid&quot;))</span>
+<span class="c1">#K_a = float(input(&quot;Enter acid dissociation constant&quot;))</span>
+</pre></div>
+</div>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_base</span><span class="o">=</span><span class="mf">.1</span>
+<span class="n">c_acid</span><span class="o">=</span><span class="mf">.1</span>
+<span class="n">K_a</span><span class="o">=</span><span class="mf">0.0001</span>
+<span class="c1"># Uncomment the following three lines</span>
+<span class="c1">#c_base=float(input(&quot;Enter the concentration of conjugate base&quot;))</span>
+<span class="c1">#c_acid=float(input(&quot;Enter the concentration of the acid&quot;))</span>
+<span class="c1">#K_a = float(input(&quot;Enter acid dissociation constant&quot;))</span>
+<span class="n">pH</span> <span class="o">=</span> <span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">K_a</span><span class="p">)</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">c_base</span><span class="o">/</span><span class="n">c_acid</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">pH</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.0
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Note: Trigometric functions operate on radians and not degrees</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mi">180</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mi">90</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.141592653589793
+3.141592653589793
+1.0
+1.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">m</span>
+<span class="n">sin_90</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">cos_90</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The sin of 90 degrees is </span><span class="si">{</span><span class="n">sin_90</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The cos of 90 degrees is </span><span class="si">{</span><span class="n">cos_90</span><span class="si">}</span><span class="s2"> which is </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">cos_90</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The sin of 90 degrees is 1.0
+The cos of 90 degrees is 6.123233995736766e-17 which is &lt;class &#39;float&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>But the cosine of 90 degrees is zero and the issue is how floats are stored on a computer.  So this is a very small number</p>
+<p>In the next cell we create a <strong>user-defined function</strong> to deal with this. Just like built-in or third party functions a user-defined function must have brackets and can be passed an argument. In python a function is a block of code using the following syntax where the function block is the code indented 4 spaces after the colon
+<img alt="image.png" src="../../_images/1b861252-b095-467a-8607-6eb2593d898f.png" /></p>
+<p>In the following code we return an integer zero if the value of the absolute value of the cosine of the angle is less than <span class="math notranslate nohighlight">\(10^{-14}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">m</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cos_fct</span><span class="p">(</span><span class="n">angle</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-14</span> <span class="k">else</span> <span class="n">result</span>
+
+<span class="n">a</span><span class="o">=</span> <span class="n">cos_fct</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Output: 0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+&lt;class &#39;int&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>To return a float we simply change 0 to 0.0</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fcos_fct</span><span class="p">(</span><span class="n">angle</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mf">0.0</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-14</span> <span class="k">else</span> <span class="n">result</span>
+
+<span class="n">a</span><span class="o">=</span> <span class="n">fcos_fct</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># Output: 0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0
+&lt;class &#39;float&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note,there is more than one way to express scientific notation</p>
+</section>
+</section>
+<section id="symbolic-math">
+<h2>Symbolic Math<a class="headerlink" href="#symbolic-math" title="Link to this heading">#</a></h2>
+<p>We will have a future module using the symbolic math module.  The following code will not work unless you install the Sympy.  So to review</p>
+<ol class="arabic simple">
+<li><p><strong>Open Terminal</strong></p></li>
+<li><p><strong>Activate your Environment</strong>
+<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">YOUR-ENVIRONMENT</span></code></p></li>
+<li><p><strong>Install Sympy with conda-forge</strong>
+<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">install</span> <span class="pre">-c</span> <span class="pre">conda-forge</span> <span class="pre">sympy</span></code></p></li>
+</ol>
+<p>You should install this now just to refresh your memory on how to install packages, and we will be spending time in the future using sympy.  But Sympy allows you to exactly represent numbers like the irrational <span class="math notranslate nohighlight">\(\pi\)</span> or repeating decimals like <span class="math notranslate nohighlight">\(\frac{1}{3}\)</span>, or numbers that can be properly computed like the <span class="math notranslate nohighlight">\(\cos(\pi/2)\)</span></p>
+<section id="types-of-numbers-computers-struggle-to-represent">
+<h3><strong>Types of Numbers Computers Struggle to Represent</strong><a class="headerlink" href="#types-of-numbers-computers-struggle-to-represent" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Issue</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Repeating Decimals</strong></p></td>
+<td><p>$<span class="math notranslate nohighlight">\(1/3 = 0.\overline{3}\)</span>$</p></td>
+<td><p>Infinite repeating pattern truncated to finite bits.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Irrational Numbers</strong></p></td>
+<td><p>$<span class="math notranslate nohighlight">\(\pi, \sqrt{2}\)</span>$</p></td>
+<td><p>Non-repeating, non-terminating decimals approximated to finite bits.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Exact Symbolic Results</strong></p></td>
+<td><p>$<span class="math notranslate nohighlight">\(\cos(\pi/2) = 0\)</span>$</p></td>
+<td><p>Requires symbolic computation to avoid numerical errors.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sympy</span>
+
+<span class="n">angle</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+&lt;class &#39;sympy.core.numbers.Zero&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note from the above that we imported a new class of object from the sympy module.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_result</span> <span class="o">=</span> <span class="n">result</span><span class="o">+</span><span class="mf">2.3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">new_result</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.30000000000000
+&lt;class &#39;sympy.core.numbers.Float&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">as_float</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">as_float</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">as_float</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">as_float</span> <span class="o">+</span> <span class="mf">2.3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">as_float</span> <span class="o">+</span> <span class="mf">2.3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0
+&lt;class &#39;float&#39;&gt;
+2.3
+&lt;class &#39;float&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="table-of-advanced-math-functions">
+<h3>Table of Advanced Math Functions<a class="headerlink" href="#table-of-advanced-math-functions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method/Constant</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.acos(x)</span></code></p></td>
+<td><p>Returns the arc cosine of x in radians</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.acosh(x)</span></code></p></td>
+<td><p>Returns the inverse hyperbolic cosine of x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.asin(x)</span></code></p></td>
+<td><p>Returns the arc sine of x in radians</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.asinh(x)</span></code></p></td>
+<td><p>Returns the inverse hyperbolic sine of x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.atan(x)</span></code></p></td>
+<td><p>Returns the arc tangent of x in radians</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.atan2(y,</span> <span class="pre">x)</span></code></p></td>
+<td><p>Returns the arc tangent of y/x in radians</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.atanh(x)</span></code></p></td>
+<td><p>Returns the inverse hyperbolic tangent of x</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.comb(n,</span> <span class="pre">k)</span></code></p></td>
+<td><p>Returns the number of ways to choose k items from n items</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.copysign(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p>Returns x with the sign of y</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.cosh(x)</span></code></p></td>
+<td><p>Returns the hyperbolic cosine of x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.dist(p,</span> <span class="pre">q)</span></code></p></td>
+<td><p>Returns the Euclidean distance between two points p and q</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.erf(x)</span></code></p></td>
+<td><p>Returns the error function at x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.erfc(x)</span></code></p></td>
+<td><p>Returns the complementary error function at x</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.expm1(x)</span></code></p></td>
+<td><p>Returns e^x - 1</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.fmod(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p>Returns the remainder of x/y</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.frexp(x)</span></code></p></td>
+<td><p>Returns the mantissa and exponent of x as a pair</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.gamma(x)</span></code></p></td>
+<td><p>Returns the gamma function at x</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.hypot(*coordinates)</span></code></p></td>
+<td><p>Returns the Euclidean norm, sqrt(sum(x^2 for x in coordinates))</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.isclose(a,</span> <span class="pre">b,</span> <span class="pre">*,</span> <span class="pre">rel_tol,</span> <span class="pre">abs_tol)</span></code></p></td>
+<td><p>Returns True if a is close in value to b</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.isfinite(x)</span></code></p></td>
+<td><p>Returns True if x is neither an infinity nor a NaN</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.isinf(x)</span></code></p></td>
+<td><p>Returns True if x is a positive or negative infinity</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.isnan(x)</span></code></p></td>
+<td><p>Returns True if x is a NaN</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.isqrt(n)</span></code></p></td>
+<td><p>Returns the integer square root of n</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.ldexp(x,</span> <span class="pre">i)</span></code></p></td>
+<td><p>Returns x * (2^i)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.lgamma(x)</span></code></p></td>
+<td><p>Returns the natural logarithm of the absolute value of the gamma function at x</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.modf(x)</span></code></p></td>
+<td><p>Returns the fractional and integer parts of x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.nextafter(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p>Returns the next floating-point value after x towards y</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.perm(n,</span> <span class="pre">k=None)</span></code></p></td>
+<td><p>Returns the number of ways to arrange k items from n items</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.prod(iterable,</span> <span class="pre">*,</span> <span class="pre">start=1)</span></code></p></td>
+<td><p>Returns the product of all elements in the iterable</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.remainder(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p>Returns the IEEE 754-style remainder of x with respect to y</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.sinh(x)</span></code></p></td>
+<td><p>Returns the hyperbolic sine of x</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.tanh(x)</span></code></p></td>
+<td><p>Returns the hyperbolic tangent of x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.trunc(x)</span></code></p></td>
+<td><p>Returns the truncated integer value of x</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.ulp(x)</span></code></p></td>
+<td><p>Returns the value of the least significant bit of the float x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.inf</span></code></p></td>
+<td><p>A floating-point positive infinity</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.nan</span></code></p></td>
+<td><p>A floating-point “not a number” (NaN) value</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.tau</span></code></p></td>
+<td><p>Mathematical constant tau (6.283185…), which is 2π</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="variables">
+<h1>Variables<a class="headerlink" href="#variables" title="Link to this heading">#</a></h1>
+<p>You name a variable with the assignment operator (equal sign) and it is best practice to have a space on both sides of the operator so <code class="docutils literal notranslate"><span class="pre">var</span> <span class="pre">=</span> <span class="pre">1</span></code>.</p>
+<section id="python-reserved-words">
+<h2>Python Reserved Words<a class="headerlink" href="#python-reserved-words" title="Link to this heading">#</a></h2>
+<p>In python there are two types of words that should not be used as names, and these can be found in the builtin module and keyword modules.</p>
+<ul class="simple">
+<li><p><strong>Builtins</strong> are objects that have global namespace, like ‘print<code class="docutils literal notranslate"><span class="pre">,</span> <span class="pre">'type</span></code>, <code class="docutils literal notranslate"><span class="pre">list</span></code> and <code class="docutils literal notranslate"><span class="pre">int',</span> <span class="pre">which</span> <span class="pre">means</span> <span class="pre">the</span> <span class="pre">name</span> <span class="pre">is</span> <span class="pre">mapped</span> <span class="pre">to</span> <span class="pre">object.</span>&#160;&#160; <span class="pre">You</span> <span class="pre">can</span> <span class="pre">override</span> <span class="pre">them</span> <span class="pre">and</span> <span class="pre">so</span> <span class="pre">if</span> <span class="pre">you</span> <span class="pre">use</span> <span class="pre">them</span> <span class="pre">in</span> <span class="pre">a</span> <span class="pre">variable</span> <span class="pre">assignment</span> <span class="pre">operation</span> <span class="pre">they</span> <span class="pre">will</span> <span class="pre">no</span> <span class="pre">longer</span> <span class="pre">have</span> <span class="pre">their</span> <span class="pre">builtin</span> <span class="pre">object</span> <span class="pre">properties.</span>&#160; <span class="pre">The</span> <span class="pre">following</span> <span class="pre">code</span> <span class="pre">will</span> <span class="pre">destroy</span> <span class="pre">the</span> <span class="pre">print</span> <span class="pre">function</span></code>print = 3`</p></li>
+<li><p><strong>Keywords</strong> are part of the python syntax and can not be overridden, but they are different in the sense that they are not python objects and so do not have a namespace.  There is no object <code class="docutils literal notranslate"><span class="pre">if</span></code>, but there is an object <code class="docutils literal notranslate"><span class="pre">print</span></code> and it is a function, and there is an object <code class="docutils literal notranslate"><span class="pre">list</span></code> and it is a class type.</p></li>
+</ul>
+<section id="difference-between-builtins-and-keyword-modules">
+<h3>2. Difference Between <code class="docutils literal notranslate"><span class="pre">builtins</span></code> and <code class="docutils literal notranslate"><span class="pre">keyword</span></code> Modules<a class="headerlink" href="#difference-between-builtins-and-keyword-modules" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">builtins</span></code> Module</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">keyword</span></code> Module</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Purpose</strong></p></td>
+<td><p>Provides globally available functions, types, and exceptions</p></td>
+<td><p>Tracks reserved words that are part of Python syntax</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Contains</strong></p></td>
+<td><p>Functions (<code class="docutils literal notranslate"><span class="pre">print</span></code>, <code class="docutils literal notranslate"><span class="pre">len</span></code>), types (<code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code>), constants (<code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">None</span></code>), exceptions (<code class="docutils literal notranslate"><span class="pre">ValueError</span></code>)</p></td>
+<td><p>Reserved keywords like <code class="docutils literal notranslate"><span class="pre">if</span></code>, <code class="docutils literal notranslate"><span class="pre">def</span></code>, <code class="docutils literal notranslate"><span class="pre">class</span></code>, <code class="docutils literal notranslate"><span class="pre">return</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Global Namespace?</strong></p></td>
+<td><p>✅ Yes, all built-ins are in the global namespace</p></td>
+<td><p>❌ No, keywords are part of syntax, not objects</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Can Override Names?</strong></p></td>
+<td><p>❌ Should not, but possible (e.g., <code class="docutils literal notranslate"><span class="pre">list</span> <span class="pre">=</span> <span class="pre">[1,2,3]</span></code>)</p></td>
+<td><p>❌ No, keywords cannot be used as variable names</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Where Used?</strong></p></td>
+<td><p>Used as callable functions, types, constants</p></td>
+<td><p>Used by the Python interpreter to define structure</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Keywords</p></th>
+<th class="head"><p>Built-in Functions</p></th>
+<th class="head"><p>Built-in Constants</p></th>
+<th class="head"><p>Built-in Types</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>and</p></td>
+<td><p>abs</p></td>
+<td><p>False</p></td>
+<td><p>bool</p></td>
+</tr>
+<tr class="row-odd"><td><p>as</p></td>
+<td><p>all</p></td>
+<td><p>None</p></td>
+<td><p>dict</p></td>
+</tr>
+<tr class="row-even"><td><p>assert</p></td>
+<td><p>any</p></td>
+<td><p>True</p></td>
+<td><p>float</p></td>
+</tr>
+<tr class="row-odd"><td><p>break</p></td>
+<td><p>bin</p></td>
+<td><p>NotImplemented</p></td>
+<td><p>int</p></td>
+</tr>
+<tr class="row-even"><td><p>class</p></td>
+<td><p>chr</p></td>
+<td><p>Ellipsis</p></td>
+<td><p>list</p></td>
+</tr>
+<tr class="row-odd"><td><p>continue</p></td>
+<td><p>dir</p></td>
+<td><p></p></td>
+<td><p>set</p></td>
+</tr>
+<tr class="row-even"><td><p>def</p></td>
+<td><p>enumerate</p></td>
+<td><p></p></td>
+<td><p>str</p></td>
+</tr>
+<tr class="row-odd"><td><p>del</p></td>
+<td><p>eval</p></td>
+<td><p></p></td>
+<td><p>tuple</p></td>
+</tr>
+<tr class="row-even"><td><p>elif</p></td>
+<td><p>filter</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>else</p></td>
+<td><p>format</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>except</p></td>
+<td><p>input</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>finally</p></td>
+<td><p>len</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>for</p></td>
+<td><p>max</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>from</p></td>
+<td><p>min</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>global</p></td>
+<td><p>open</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>if</p></td>
+<td><p>print</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>import</p></td>
+<td><p>range</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>in</p></td>
+<td><p>round</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>is</p></td>
+<td><p>sum</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>lambda</p></td>
+<td><p>type</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>nonlocal</p></td>
+<td><p>zip</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>not</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>or</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>pass</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>raise</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>return</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>try</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>while</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>with</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>yield</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># to generate the reserved keywords from the keyword module</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">keyword</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">keyword</span><span class="o">.</span><span class="n">kwlist</span><span class="p">)</span>  <span class="c1"># List of reserved keywords</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;False&#39;, &#39;None&#39;, &#39;True&#39;, &#39;and&#39;, &#39;as&#39;, &#39;assert&#39;, &#39;async&#39;, &#39;await&#39;, &#39;break&#39;, &#39;class&#39;, &#39;continue&#39;, &#39;def&#39;, &#39;del&#39;, &#39;elif&#39;, &#39;else&#39;, &#39;except&#39;, &#39;finally&#39;, &#39;for&#39;, &#39;from&#39;, &#39;global&#39;, &#39;if&#39;, &#39;import&#39;, &#39;in&#39;, &#39;is&#39;, &#39;lambda&#39;, &#39;nonlocal&#39;, &#39;not&#39;, &#39;or&#39;, &#39;pass&#39;, &#39;raise&#39;, &#39;return&#39;, &#39;try&#39;, &#39;while&#39;, &#39;with&#39;, &#39;yield&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># to generate a python list of builtin names</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">builtins</span>
+
+<span class="c1"># Get all built-in functions</span>
+<span class="n">builtin_functions</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">builtins</span><span class="p">)</span> <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">builtins</span><span class="p">,</span> <span class="n">name</span><span class="p">))]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">builtin_functions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;ArithmeticError&#39;, &#39;AssertionError&#39;, &#39;AttributeError&#39;, &#39;BaseException&#39;, &#39;BlockingIOError&#39;, &#39;BrokenPipeError&#39;, &#39;BufferError&#39;, &#39;BytesWarning&#39;, &#39;ChildProcessError&#39;, &#39;ConnectionAbortedError&#39;, &#39;ConnectionError&#39;, &#39;ConnectionRefusedError&#39;, &#39;ConnectionResetError&#39;, &#39;DeprecationWarning&#39;, &#39;EOFError&#39;, &#39;EncodingWarning&#39;, &#39;EnvironmentError&#39;, &#39;Exception&#39;, &#39;FileExistsError&#39;, &#39;FileNotFoundError&#39;, &#39;FloatingPointError&#39;, &#39;FutureWarning&#39;, &#39;GeneratorExit&#39;, &#39;IOError&#39;, &#39;ImportError&#39;, &#39;ImportWarning&#39;, &#39;IndentationError&#39;, &#39;IndexError&#39;, &#39;InterruptedError&#39;, &#39;IsADirectoryError&#39;, &#39;KeyError&#39;, &#39;KeyboardInterrupt&#39;, &#39;LookupError&#39;, &#39;MemoryError&#39;, &#39;ModuleNotFoundError&#39;, &#39;NameError&#39;, &#39;NotADirectoryError&#39;, &#39;NotImplementedError&#39;, &#39;OSError&#39;, &#39;OverflowError&#39;, &#39;PendingDeprecationWarning&#39;, &#39;PermissionError&#39;, &#39;ProcessLookupError&#39;, &#39;RecursionError&#39;, &#39;ReferenceError&#39;, &#39;ResourceWarning&#39;, &#39;RuntimeError&#39;, &#39;RuntimeWarning&#39;, &#39;StopAsyncIteration&#39;, &#39;StopIteration&#39;, &#39;SyntaxError&#39;, &#39;SyntaxWarning&#39;, &#39;SystemError&#39;, &#39;SystemExit&#39;, &#39;TabError&#39;, &#39;TimeoutError&#39;, &#39;TypeError&#39;, &#39;UnboundLocalError&#39;, &#39;UnicodeDecodeError&#39;, &#39;UnicodeEncodeError&#39;, &#39;UnicodeError&#39;, &#39;UnicodeTranslateError&#39;, &#39;UnicodeWarning&#39;, &#39;UserWarning&#39;, &#39;ValueError&#39;, &#39;Warning&#39;, &#39;ZeroDivisionError&#39;, &#39;__build_class__&#39;, &#39;__import__&#39;, &#39;__loader__&#39;, &#39;abs&#39;, &#39;aiter&#39;, &#39;all&#39;, &#39;anext&#39;, &#39;any&#39;, &#39;ascii&#39;, &#39;bin&#39;, &#39;bool&#39;, &#39;breakpoint&#39;, &#39;bytearray&#39;, &#39;bytes&#39;, &#39;callable&#39;, &#39;chr&#39;, &#39;classmethod&#39;, &#39;compile&#39;, &#39;complex&#39;, &#39;copyright&#39;, &#39;credits&#39;, &#39;delattr&#39;, &#39;dict&#39;, &#39;dir&#39;, &#39;display&#39;, &#39;divmod&#39;, &#39;enumerate&#39;, &#39;eval&#39;, &#39;exec&#39;, &#39;execfile&#39;, &#39;filter&#39;, &#39;float&#39;, &#39;format&#39;, &#39;frozenset&#39;, &#39;get_ipython&#39;, &#39;getattr&#39;, &#39;globals&#39;, &#39;hasattr&#39;, &#39;hash&#39;, &#39;help&#39;, &#39;hex&#39;, &#39;id&#39;, &#39;input&#39;, &#39;int&#39;, &#39;isinstance&#39;, &#39;issubclass&#39;, &#39;iter&#39;, &#39;len&#39;, &#39;license&#39;, &#39;list&#39;, &#39;locals&#39;, &#39;map&#39;, &#39;max&#39;, &#39;memoryview&#39;, &#39;min&#39;, &#39;next&#39;, &#39;object&#39;, &#39;oct&#39;, &#39;open&#39;, &#39;ord&#39;, &#39;pow&#39;, &#39;print&#39;, &#39;property&#39;, &#39;range&#39;, &#39;repr&#39;, &#39;reversed&#39;, &#39;round&#39;, &#39;runfile&#39;, &#39;set&#39;, &#39;setattr&#39;, &#39;slice&#39;, &#39;sorted&#39;, &#39;staticmethod&#39;, &#39;str&#39;, &#39;sum&#39;, &#39;super&#39;, &#39;tuple&#39;, &#39;type&#39;, &#39;vars&#39;, &#39;zip&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="programmatic-extracting-reserved-words">
+<h2>Programmatic Extracting Reserved Words<a class="headerlink" href="#programmatic-extracting-reserved-words" title="Link to this heading">#</a></h2>
+<p>The following returns reserved keywords.  We will soon be going over how this code works.  Note that in the builtin module there are internal or private objects whose name is preceded by an underscore and are not used in programming, so these are not reserved, and omitted by the following script.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">keyword</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">builtins</span>
+
+<span class="c1"># Get all Python keywords</span>
+<span class="n">python_keywords</span> <span class="o">=</span> <span class="n">keyword</span><span class="o">.</span><span class="n">kwlist</span>
+
+<span class="c1"># Get all built-in functions and objects</span>
+<span class="n">builtin_names</span> <span class="o">=</span> <span class="nb">dir</span><span class="p">(</span><span class="n">builtins</span><span class="p">)</span>
+
+<span class="c1"># Filter out private builtins (those starting with &#39;_&#39;)</span>
+<span class="n">builtin_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">builtin_names</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)]</span>
+
+<span class="c1"># Combine both lists</span>
+<span class="n">reserved_words</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">python_keywords</span> <span class="o">+</span> <span class="n">builtin_names</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reserved words that cannot be used as variable names:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--------------------------------------------------&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">reserved_words</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reserved words that cannot be used as variable names:
+--------------------------------------------------
+ArithmeticError
+AssertionError
+AttributeError
+BaseException
+BlockingIOError
+BrokenPipeError
+BufferError
+BytesWarning
+ChildProcessError
+ConnectionAbortedError
+ConnectionError
+ConnectionRefusedError
+ConnectionResetError
+DeprecationWarning
+EOFError
+Ellipsis
+EncodingWarning
+EnvironmentError
+Exception
+False
+FileExistsError
+FileNotFoundError
+FloatingPointError
+FutureWarning
+GeneratorExit
+IOError
+ImportError
+ImportWarning
+IndentationError
+IndexError
+InterruptedError
+IsADirectoryError
+KeyError
+KeyboardInterrupt
+LookupError
+MemoryError
+ModuleNotFoundError
+NameError
+None
+NotADirectoryError
+NotImplemented
+NotImplementedError
+OSError
+OverflowError
+PendingDeprecationWarning
+PermissionError
+ProcessLookupError
+RecursionError
+ReferenceError
+ResourceWarning
+RuntimeError
+RuntimeWarning
+StopAsyncIteration
+StopIteration
+SyntaxError
+SyntaxWarning
+SystemError
+SystemExit
+TabError
+TimeoutError
+True
+TypeError
+UnboundLocalError
+UnicodeDecodeError
+UnicodeEncodeError
+UnicodeError
+UnicodeTranslateError
+UnicodeWarning
+UserWarning
+ValueError
+Warning
+ZeroDivisionError
+abs
+aiter
+all
+and
+anext
+any
+as
+ascii
+assert
+async
+await
+bin
+bool
+break
+breakpoint
+bytearray
+bytes
+callable
+chr
+class
+classmethod
+compile
+complex
+continue
+copyright
+credits
+def
+del
+delattr
+dict
+dir
+display
+divmod
+elif
+else
+enumerate
+eval
+except
+exec
+execfile
+filter
+finally
+float
+for
+format
+from
+frozenset
+get_ipython
+getattr
+global
+globals
+hasattr
+hash
+help
+hex
+id
+if
+import
+in
+input
+int
+is
+isinstance
+issubclass
+iter
+lambda
+len
+license
+list
+locals
+map
+max
+memoryview
+min
+next
+nonlocal
+not
+object
+oct
+open
+or
+ord
+pass
+pow
+print
+property
+raise
+range
+repr
+return
+reversed
+round
+runfile
+set
+setattr
+slice
+sorted
+staticmethod
+str
+sum
+super
+try
+tuple
+type
+vars
+while
+with
+yield
+zip
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="acknowledgements">
+<h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">#</a></h1>
+<p>This content was developed with assistance from <a class="reference external" href="https://www.perplexity.ai/">Perplexity AI</a> and <a class="reference external" href="https://chatgpt.com/">Chat GPT</a>. Multiple queries were made during the Fall 2024 and the Spring 2025.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "py4sci"
+        },
+        kernelOptions: {
+            name: "py4sci",
+            path: "./content/module2-oop-data-structures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'py4sci'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02-1-primitive-data-structures.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1. Primative Data Structures</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02-3-composite-data-structures.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3. Composite Data Structures</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2. Python as a Calculator</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-math-with-python">Basic Math with Python</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#three-types-of-numbers">three types of numbers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operators">Operators</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#division">Division</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#integer-division">Integer  Division</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#floor-and-modulus">Floor and Modulus</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplication-and-exponentiation">Multiplication and Exponentiation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#math-module">Math module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-common-math-functions">Table of Common Math functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symbolic-math">Symbolic Math</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-numbers-computers-struggle-to-represent"><strong>Types of Numbers Computers Struggle to Represent</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-advanced-math-functions">Table of Advanced Math Functions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#variables">Variables</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-reserved-words">Python Reserved Words</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-between-builtins-and-keyword-modules">2. Difference Between <code class="docutils literal notranslate"><span class="pre">builtins</span></code> and <code class="docutils literal notranslate"><span class="pre">keyword</span></code> Modules</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#programmatic-extracting-reserved-words">Programmatic Extracting Reserved Words</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Robert Belford
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1350 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>4. Built-In Modules &#8212; Draft Python for Science Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e52fa269" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom-checkpoint.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/module2-oop-data-structures/02-4-built-in-modules';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5. Logic and Control Structures" href="02-5-control-structures.html" />
+    <link rel="prev" title="3. Composite Data Structures" href="02-3-composite-data-structures.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Draft Python for Science Book - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Draft Python for Science Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Python for Science
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../math-test.html">In a Markdown cell:</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../module1-setup/README.html">Module 1: Getting Set Up</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-1-setupcomputer.html">1. Setting up your computer</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-2-jynbgettingstarted.html">2: Runnng and Creating Jupyter Notebooks</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-3-jynb-intro.html">3. Overview of Jupyter Notebooks</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-5-git.html">5. Git and GitHub</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-6-oop.html">6. Object Oriented Programming</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-7-virtual-environments.html">7. Virtual Environments</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="README.html">Module 2: Data Structures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="02-1-primitive-data-structures.html">1. Primative Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-2-py-calculator.html">2. Python as a Calculator</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-3-composite-data-structures.html">3. Composite Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">4. Built-In Modules</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-5-control-structures.html">5. Logic and Control Structures</a></li>
+
+
+
+
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/rebelford/py4scibook/master?urlpath=lab/tree/docs/content/module2-oop-data-structures/02-4-built-in-modules.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://your-jupyterhub-url.com/hub/user-redirect/git-pull?repo=https%3A//github.com/rebelford/py4scibook&urlpath=lab/tree/py4scibook/docs/content/module2-oop-data-structures/02-4-built-in-modules.ipynb&branch=master" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on JupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="JupyterHub logo" src="../../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rebelford/py4scibook/blob/master/docs/content/module2-oop-data-structures/02-4-built-in-modules.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook/issues/new?title=Issue%20on%20page%20%2Fcontent/module2-oop-data-structures/02-4-built-in-modules.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/module2-oop-data-structures/02-4-built-in-modules.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>4. Built-In Modules</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4. Built-In Modules</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-built-in-modules">Table of Built-In Modules</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#math-module">Math Module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-common-math-functions">Table of Common Math functions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-module">Random Module</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#statistics-module">Statistics Module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-statistics-methods">Table Statistics Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-normally-distributed-data-set">Create Normally Distributed Data Set</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-arithmetic-average">Mean (Arithmetic Average)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#median-middle-value">Median (Middle Value)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mode-most-frequent-value">Mode (Most Frequent Value)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multimode-all-most-frequent-values">Multimode (All Most Frequent Values)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-sample">Variance (Sample)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-deviation-sample">Standard Deviation (Sample)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#population-variance-standard-deviation">Population Variance &amp; Standard Deviation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantiles">Quantiles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-mean">Geometric Mean</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-and-covariance-optional-intro">Correlation and Covariance (Optional Intro)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-math-cmath-module">Complex Math <code class="docutils literal notranslate"><span class="pre">cmath</span></code> Module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-common-cmath-functions">Table of Common cmath Functions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="built-in-modules">
+<span id="module2-oop-data-structures-02-4-built-in-modules"></span><h1>4. Built-In Modules<a class="headerlink" href="#built-in-modules" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="table-of-built-in-modules">
+<h1>Table of Built-In Modules<a class="headerlink" href="#table-of-built-in-modules" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Module</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math</span></code></p></td>
+<td><p>Provides basic mathematical functions like <code class="docutils literal notranslate"><span class="pre">sqrt</span></code>, <code class="docutils literal notranslate"><span class="pre">sin</span></code>, and <code class="docutils literal notranslate"><span class="pre">cos</span></code>, as well as constants like <code class="docutils literal notranslate"><span class="pre">pi</span></code> and <code class="docutils literal notranslate"><span class="pre">e</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cmath</span></code></p></td>
+<td><p>Provides basic complex mathematical functions to deal with complex number</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">random</span></code></p></td>
+<td><p>Offers functionality for generating random numbers, shuffling sequences, and picking random items from lists.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">os</span></code></p></td>
+<td><p>Enables interaction with the operating system, such as working with files, directories, and environment variables.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sys</span></code></p></td>
+<td><p>Gives access to system-specific parameters and functions, including command-line arguments and the Python runtime.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">time</span></code></p></td>
+<td><p>Provides time-related functions, like getting the current time, pausing execution (<code class="docutils literal notranslate"><span class="pre">sleep</span></code>), or measuring performance.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">datetime</span></code></p></td>
+<td><p>Supplies classes for manipulating dates and times, including formatting and arithmetic with time objects.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">re</span></code></p></td>
+<td><p>Implements regular expression operations for string searching, matching, and substitution.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">json</span></code></p></td>
+<td><p>Lets you read and write JSON (JavaScript Object Notation) data for easy data serialization and sharing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">csv</span></code></p></td>
+<td><p>Simplifies reading and writing CSV (Comma-Separated Values) files.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Statistcs</span></code></p></td>
+<td><p>Statistics methods and functions.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="math-module">
+<h1>Math Module<a class="headerlink" href="#math-module" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>The math module is a built-in module that comes with your installation of python. When you start Python it is not loaded into memory and you need to import it before you can use it with the statement:</p>
+<p><strong>import math</strong></p>
+</section>
+<section id="table-of-common-math-functions">
+<h2>Table of Common Math functions<a class="headerlink" href="#table-of-common-math-functions" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method/Constant</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.ceil(x)</span></code></p></td>
+<td><p>Returns the smallest integer greater than or equal to x</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.floor(x)</span></code></p></td>
+<td><p>Returns the largest integer less than or equal to x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.fabs(x)</span></code></p></td>
+<td><p>Returns the absolute value of x</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.factorial(x)</span></code></p></td>
+<td><p>Returns the factorial of x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.gcd(a,</span> <span class="pre">b)</span></code></p></td>
+<td><p>Returns the greatest common divisor of a and b</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.exp(x)</span></code></p></td>
+<td><p>Returns e raised to the power of x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.log(x[,</span> <span class="pre">base])</span></code></p></td>
+<td><p>Returns the logarithm of x to the given base (default is e)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.log10(x)</span></code></p></td>
+<td><p>Returns the base-10 logarithm of x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.pow(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p>Returns x raised to the power of y</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.sqrt(x)</span></code></p></td>
+<td><p>Returns the square root of x</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.sin(x)</span></code></p></td>
+<td><p>Returns the sine of x (x in radians)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.cos(x)</span></code></p></td>
+<td><p>Returns the cosine of x (x in radians)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.tan(x)</span></code></p></td>
+<td><p>Returns the tangent of x (x in radians)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.degrees(x)</span></code></p></td>
+<td><p>Converts angle x from radians to degrees</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.radians(x)</span></code></p></td>
+<td><p>Converts angle x from degrees to radians</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">math.pi</span></code></p></td>
+<td><p>Mathematical constant pi (3.141592…)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">math.e</span></code></p></td>
+<td><p>Mathematical constant e (2.718281…)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="random-module">
+<h1>Random Module<a class="headerlink" href="#random-module" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function/Method</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">random.random()</span></code></p></td>
+<td><p>Returns a random float between 0 and 1.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">random.random()</span> <span class="pre">→</span> <span class="pre">0.6734</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">random.uniform(a,</span> <span class="pre">b)</span></code></p></td>
+<td><p>Returns a random float between <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">random.uniform(10,</span> <span class="pre">20)</span> <span class="pre">→</span> <span class="pre">15.738</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">random.randint(a,</span> <span class="pre">b)</span></code></p></td>
+<td><p>Returns a random integer between <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> (inclusive).</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">random.randint(1,</span> <span class="pre">6)</span> <span class="pre">→</span> <span class="pre">4</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">random.randrange(start,</span> <span class="pre">stop,</span> <span class="pre">step)</span></code></p></td>
+<td><p>Returns a random integer from <code class="docutils literal notranslate"><span class="pre">range(start,</span> <span class="pre">stop,</span> <span class="pre">step)</span></code>.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">random.randrange(0,</span> <span class="pre">10,</span> <span class="pre">2)</span> <span class="pre">→</span> <span class="pre">4</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">random.choice(seq)</span></code></p></td>
+<td><p>Returns a random element from a non-empty sequence.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">random.choice(['H',</span> <span class="pre">'He',</span> <span class="pre">'Li'])</span> <span class="pre">→</span> <span class="pre">'Li'</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">random.choices(seq,</span> <span class="pre">k=n)</span></code></p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">n</span></code> random elements from <code class="docutils literal notranslate"><span class="pre">seq</span></code>, with replacement.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">random.choices(['H',</span> <span class="pre">'He',</span> <span class="pre">'Li'],</span> <span class="pre">k=2)</span> <span class="pre">→</span> <span class="pre">['He',</span> <span class="pre">'Li']</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">random.sample(seq,</span> <span class="pre">k=n)</span></code></p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">n</span></code> unique random elements from <code class="docutils literal notranslate"><span class="pre">seq</span></code> (no replacement).</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">random.sample(range(10),</span> <span class="pre">k=3)</span> <span class="pre">→</span> <span class="pre">[2,</span> <span class="pre">7,</span> <span class="pre">5]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">random.shuffle(seq)</span></code></p></td>
+<td><p>Shuffles a list <strong>in place</strong>.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">random.shuffle(my_list)</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">random.seed(n)</span></code></p></td>
+<td><p>Initializes the random number generator for reproducibility.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">random.seed(42)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">random.gauss(mu,</span> <span class="pre">sigma)</span></code></p></td>
+<td><p>Generates a random number from a normal distribution with mean <code class="docutils literal notranslate"><span class="pre">mu</span></code> and standard deviation <code class="docutils literal notranslate"><span class="pre">sigma</span></code>.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">random.gauss(0,</span> <span class="pre">1)</span> <span class="pre">→</span> <span class="pre">0.456</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">random.expovariate(lambd)</span></code></p></td>
+<td><p>Returns a random number from an exponential distribution with rate parameter <code class="docutils literal notranslate"><span class="pre">lambd</span></code>.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">random.expovariate(1.5)</span> <span class="pre">→</span> <span class="pre">0.762</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">random.betavariate(alpha,</span> <span class="pre">beta)</span></code></p></td>
+<td><p>Returns a random number from a Beta distribution.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">random.betavariate(2,</span> <span class="pre">5)</span> <span class="pre">→</span> <span class="pre">0.23</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+
+<span class="c1"># Seeding for reproducibility</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Generate random float</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random float (0-1):&quot;</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+
+<span class="c1"># Generate random integer</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random integer (1-10):&quot;</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># Generate a random float in a range</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random float (10-20):&quot;</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+
+<span class="c1"># Random choice from a list</span>
+<span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;He&#39;</span><span class="p">,</span> <span class="s1">&#39;Li&#39;</span><span class="p">,</span> <span class="s1">&#39;Be&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random element:&quot;</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">elements</span><span class="p">))</span>
+
+<span class="c1"># Random sample (without replacement)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random sample of 3 elements:&quot;</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># Shuffle a list</span>
+<span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shuffled elements:&quot;</span><span class="p">,</span> <span class="n">elements</span><span class="p">)</span>
+
+<span class="c1"># Normal distribution</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random number from normal distribution (mean=0, std=1):&quot;</span><span class="p">,</span> <span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Random float (0-1): 0.6394267984578837
+Random integer (1-10): 1
+Random float (10-20): 17.41550499759833
+Random element: He
+Random sample of 3 elements: [&#39;He&#39;, &#39;B&#39;, &#39;Li&#39;]
+Shuffled elements: [&#39;Be&#39;, &#39;He&#39;, &#39;Li&#39;, &#39;B&#39;, &#39;H&#39;]
+Random number from normal distribution (mean=0, std=1): 0.4347603342594289
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="statistics-module">
+<h1>Statistics Module<a class="headerlink" href="#statistics-module" title="Link to this heading">#</a></h1>
+<section id="id1">
+<h2>Overview<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>The statistics module is part of Pythons standard (built-in) library and is useful for small data sets.  We will be using Numpy and Pandas for larger data sets.  But first things first.</p>
+</section>
+<section id="table-statistics-methods">
+<h2>Table Statistics Methods<a class="headerlink" href="#table-statistics-methods" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.mean(data)</span></code></p></td>
+<td><p>Returns the arithmetic mean of a numeric dataset.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.median(data)</span></code></p></td>
+<td><p>Returns the median (middle value) of numeric data.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.median_low(data)</span></code></p></td>
+<td><p>Returns the lower median of numeric data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.median_high(data)</span></code></p></td>
+<td><p>Returns the higher median of numeric data.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.mode(data)</span></code></p></td>
+<td><p>Returns the most common value in a dataset.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.multimode(data)</span></code></p></td>
+<td><p>Returns a list of the most frequently occurring values.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.variance(data,</span> <span class="pre">xbar=None)</span></code></p></td>
+<td><p>Returns the sample variance of a dataset.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.stdev(data,</span> <span class="pre">xbar=None)</span></code></p></td>
+<td><p>Returns the sample standard deviation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.pvariance(data,</span> <span class="pre">mu=None)</span></code></p></td>
+<td><p>Returns the population variance.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.pstdev(data,</span> <span class="pre">mu=None)</span></code></p></td>
+<td><p>Returns the population standard deviation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.fmean(data)</span></code></p></td>
+<td><p>Returns the arithmetic mean as a floating-point number (faster than <code class="docutils literal notranslate"><span class="pre">mean()</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.geometric_mean(data)</span></code></p></td>
+<td><p>Returns the geometric mean of positive numbers.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.harmonic_mean(data)</span></code></p></td>
+<td><p>Returns the harmonic mean of positive numbers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.quantiles(data,</span> <span class="pre">n=4,</span> <span class="pre">method='exclusive')</span></code></p></td>
+<td><p>Divides data into equal intervals (default is quartiles).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.correlation(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p>Computes Pearson’s correlation coefficient between two datasets.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.covariance(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p>Computes the covariance between two datasets.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.linear_regression(x,</span> <span class="pre">y)</span></code></p></td>
+<td><p>Computes slope and intercept of simple linear regression.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.normalvariate(mu,</span> <span class="pre">sigma)</span></code></p></td>
+<td><p>Returns a random float from a normal distribution.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">statistics.gauss(mu,</span> <span class="pre">sigma)</span></code></p></td>
+<td><p>Generates a random number based on the Gaussian distribution.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
+<section id="create-normally-distributed-data-set">
+<h3>Create Normally Distributed Data Set<a class="headerlink" href="#create-normally-distributed-data-set" title="Link to this heading">#</a></h3>
+<p>The following code will generate 100 datapoints with a random gaussian distribution centered around 50 and plot it using matplotlib</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Set seed for reproducibility</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+
+<span class="c1"># Generate 100 data points with a normal distribution (mean = 50, stdev = 10)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">gauss</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]</span>
+
+<span class="c1"># Optional: Round values for simpler interpretation</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+
+<span class="c1"># Preview first 10 values</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Histogram of Normally Distributed Data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Value&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[56.13, 53.24, 42.97, 70.28, 34.04, 50.38, 59.64, 57.02, 56.71, 39.86]
+</pre></div>
+</div>
+<img alt="../../_images/cbb59dbdea62593602e89041c38b5f7a6b6ea16290fa88194a1ec3e926ead98a.png" src="../../_images/cbb59dbdea62593602e89041c38b5f7a6b6ea16290fa88194a1ec3e926ead98a.png" />
+</div>
+</div>
+</section>
+<section id="mean-arithmetic-average">
+<h3>Mean (Arithmetic Average)<a class="headerlink" href="#mean-arithmetic-average" title="Link to this heading">#</a></h3>
+<p><strong>The mean</strong> is the sum of all numbers in the dataset divided by the number of values. It gives a sense of the “typical” value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">statistics</span>
+
+<span class="n">mean_value</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean: </span><span class="si">{</span><span class="n">mean_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean: 49.4651
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="median-middle-value">
+<h3>Median (Middle Value)<a class="headerlink" href="#median-middle-value" title="Link to this heading">#</a></h3>
+<p><strong>The median</strong> is the middle value in a sorted list. If there’s an even number of values, it’s the average of the two middle ones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">median_value</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Median: </span><span class="si">{</span><span class="n">median_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Median: 50.33
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="mode-most-frequent-value">
+<h3>Mode (Most Frequent Value)<a class="headerlink" href="#mode-most-frequent-value" title="Link to this heading">#</a></h3>
+<p><strong>The mode</strong> is the most commonly occurring value in the dataset. A dataset can have more than one mode (bimodal, multimodal).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mode_value</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">mode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mode: </span><span class="si">{</span><span class="n">mode_value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mode: 52.66
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="multimode-all-most-frequent-values">
+<h3>Multimode (All Most Frequent Values)<a class="headerlink" href="#multimode-all-most-frequent-values" title="Link to this heading">#</a></h3>
+<p><strong>Multimode</strong> returns a list of all values that appear with the highest frequency. Useful if there are ties. This returns a list</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">multimode_values</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">multimode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multimode: </span><span class="si">{</span><span class="n">multimode_values</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">multimode_values</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Multimode: [52.66]
+&lt;class &#39;list&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="variance-sample">
+<h3>Variance (Sample)<a class="headerlink" href="#variance-sample" title="Link to this heading">#</a></h3>
+<p><strong>Sample variance</strong> measures how spread out the data is from the mean. Higher variance means more spread.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_variance</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">variance</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample Variance: </span><span class="si">{</span><span class="n">sample_variance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample Variance: 112.42942120202021
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="standard-deviation-sample">
+<h3>Standard Deviation (Sample)<a class="headerlink" href="#standard-deviation-sample" title="Link to this heading">#</a></h3>
+<p><strong>Standard deviation</strong> is the square root of variance. It tells us the typical distance of values from the mean.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_stdev</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">stdev</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sample Standard Deviation: </span><span class="si">{</span><span class="n">sample_stdev</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample Standard Deviation: 10.603274079359648
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="population-variance-standard-deviation">
+<h3>Population Variance &amp; Standard Deviation<a class="headerlink" href="#population-variance-standard-deviation" title="Link to this heading">#</a></h3>
+<p>If your dataset represents the entire population (not a sample), use <code class="docutils literal notranslate"><span class="pre">pvariance()</span></code> and <code class="docutils literal notranslate"><span class="pre">pstdev()</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">population_variance</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">pvariance</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">population_stdev</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">pstdev</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Population Variance: </span><span class="si">{</span><span class="n">population_variance</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Population Standard Deviation: </span><span class="si">{</span><span class="n">population_stdev</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Population Variance: 111.30512699
+Population Standard Deviation: 10.550124501161113
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="quantiles">
+<h3>Quantiles<a class="headerlink" href="#quantiles" title="Link to this heading">#</a></h3>
+<p><strong>Quantiles</strong> divide your data into equal-sized intervals. For example, quartiles divide the data into 4 parts.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">quartiles</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">quantiles</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Quartiles: </span><span class="si">{</span><span class="n">quartiles</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Quartiles: [43.53, 50.33, 54.805]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="geometric-mean">
+<h3>Geometric Mean<a class="headerlink" href="#geometric-mean" title="Link to this heading">#</a></h3>
+<p><strong>The geometric mean</strong> is used for data that multiplies over time (e.g., growth rates). It’s the nth root of the product of the data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo_mean</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">geometric_mean</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Geometric Mean: </span><span class="si">{</span><span class="n">geo_mean</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Geometric Mean: 48.25233824320789
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="correlation-and-covariance-optional-intro">
+<h2>Correlation and Covariance (Optional Intro)<a class="headerlink" href="#correlation-and-covariance-optional-intro" title="Link to this heading">#</a></h2>
+<p><strong>Correlation</strong> shows how two variables move together. +1 is perfect positive, -1 is perfect negative, 0 is no relation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate a second variable (y) that tracks x with some noise</span>
+<span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">25</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="o">+</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+
+<span class="n">corr</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">correlation</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">cov</span> <span class="o">=</span> <span class="n">statistics</span><span class="o">.</span><span class="n">covariance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correlation: </span><span class="si">{</span><span class="n">corr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Covariance: </span><span class="si">{</span><span class="n">cov</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Correlation: 0.9514448415358394
+Covariance: 113.6918302929293
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="complex-math-cmath-module">
+<h1>Complex Math <code class="docutils literal notranslate"><span class="pre">cmath</span></code> Module<a class="headerlink" href="#complex-math-cmath-module" title="Link to this heading">#</a></h1>
+<section id="id2">
+<h2>Overview<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Purpose:</strong> Perform mathematical operations on complex numbers, such as trigonometric, logarithmic, and exponential functions.</p></li>
+<li><p><strong>Key Difference from <code class="docutils literal notranslate"><span class="pre">math</span></code>:</strong> While the <code class="docutils literal notranslate"><span class="pre">math</span></code> module raises errors for invalid operations on real numbers (e.g., square root of a negative number), <code class="docutils literal notranslate"><span class="pre">cmath</span></code> seamlessly handles such cases by returning a complex result.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="table-of-common-cmath-functions">
+<h2>Table of Common cmath Functions<a class="headerlink" href="#table-of-common-cmath-functions" title="Link to this heading">#</a></h2>
+<p>Below is a table of common functions available in the <code class="docutils literal notranslate"><span class="pre">cmath</span></code> module that are not directly accessible with standard Python operations:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Function</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cmath.sqrt(z)</span></code></p></td>
+<td><p>Returns the square root of the complex number <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cmath.exp(z)</span></code></p></td>
+<td><p>Returns the exponential of the complex number <code class="docutils literal notranslate"><span class="pre">z</span></code> (<code class="docutils literal notranslate"><span class="pre">e**z</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cmath.log(z,</span> <span class="pre">base)</span></code></p></td>
+<td><p>Returns the natural logarithm (base <code class="docutils literal notranslate"><span class="pre">e</span></code>) of <code class="docutils literal notranslate"><span class="pre">z</span></code>. Optionally, you can specify a different base.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cmath.log10(z)</span></code></p></td>
+<td><p>Returns the base-10 logarithm of <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cmath.phase(z)</span></code></p></td>
+<td><p>Returns the phase (angle in radians) of <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cmath.polar(z)</span></code></p></td>
+<td><p>Returns a tuple <code class="docutils literal notranslate"><span class="pre">(r,</span> <span class="pre">phi)</span></code> where <code class="docutils literal notranslate"><span class="pre">r</span></code> is the magnitude and <code class="docutils literal notranslate"><span class="pre">phi</span></code> is the phase of <code class="docutils literal notranslate"><span class="pre">z</span></code> in polar form.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cmath.rect(r,</span> <span class="pre">phi)</span></code></p></td>
+<td><p>Converts polar coordinates <code class="docutils literal notranslate"><span class="pre">(r,</span> <span class="pre">phi)</span></code> to a complex number in rectangular form.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cmath.sin(z)</span></code></p></td>
+<td><p>Returns the sine of <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cmath.cos(z)</span></code></p></td>
+<td><p>Returns the cosine of <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cmath.tan(z)</span></code></p></td>
+<td><p>Returns the tangent of <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cmath.asin(z)</span></code></p></td>
+<td><p>Returns the inverse sine of <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cmath.acos(z)</span></code></p></td>
+<td><p>Returns the inverse cosine of <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cmath.atan(z)</span></code></p></td>
+<td><p>Returns the inverse tangent of <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cmath.sinh(z)</span></code></p></td>
+<td><p>Returns the hyperbolic sine of <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cmath.cosh(z)</span></code></p></td>
+<td><p>Returns the hyperbolic cosine of <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cmath.tanh(z)</span></code></p></td>
+<td><p>Returns the hyperbolic tangent of <code class="docutils literal notranslate"><span class="pre">z</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="acknowledgements">
+<h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">#</a></h1>
+<p>This content was developed with assistance from <a class="reference external" href="https://www.perplexity.ai/">Perplexity AI</a> and <a class="reference external" href="https://chatgpt.com/">Chat GPT</a>. Multiple queries were made during the Fall 2024 and the Spring 2025.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "py4sci"
+        },
+        kernelOptions: {
+            name: "py4sci",
+            path: "./content/module2-oop-data-structures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'py4sci'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02-3-composite-data-structures.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">3. Composite Data Structures</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02-5-control-structures.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">5. Logic and Control Structures</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">4. Built-In Modules</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-built-in-modules">Table of Built-In Modules</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#math-module">Math Module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-common-math-functions">Table of Common Math functions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#random-module">Random Module</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#statistics-module">Statistics Module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-statistics-methods">Table Statistics Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-normally-distributed-data-set">Create Normally Distributed Data Set</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-arithmetic-average">Mean (Arithmetic Average)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#median-middle-value">Median (Middle Value)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mode-most-frequent-value">Mode (Most Frequent Value)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multimode-all-most-frequent-values">Multimode (All Most Frequent Values)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-sample">Variance (Sample)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-deviation-sample">Standard Deviation (Sample)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#population-variance-standard-deviation">Population Variance &amp; Standard Deviation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quantiles">Quantiles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-mean">Geometric Mean</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-and-covariance-optional-intro">Correlation and Covariance (Optional Intro)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-math-cmath-module">Complex Math <code class="docutils literal notranslate"><span class="pre">cmath</span></code> Module</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-common-cmath-functions">Table of Common cmath Functions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Robert Belford
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

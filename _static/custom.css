@@ -1,0 +1,10 @@
+/* Make long plain-text cell outputs scrollable */
+.output pre {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: auto;
+    white-space: pre;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 0.5em;
+}

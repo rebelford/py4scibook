@@ -32,9 +32,11 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e52fa269" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom-checkpoint.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -182,7 +184,10 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01-1-setupcomputer.html">1. Setting up your computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math-test.html">In a Markdown cell:</a></li>
+
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="README.html">Module 1: Getting Set Up</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01-1-setupcomputer.html">1. Setting up your computer</a></li>
 
 
 
@@ -194,7 +199,7 @@
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2: Runnng and Creating Jupyter Notebooks</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2: Runnng and Creating Jupyter Notebooks</a></li>
 
 
 
@@ -204,23 +209,17 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="01-3-jynb-intro.html">3. Overview of Jupyter Notebooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-3-jynb-intro.html">3. Overview of Jupyter Notebooks</a></li>
 
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="01-5-git.html">5. Git and GitHub</a></li>
-
-
-
-
-
-
+<li class="toctree-l2"><a class="reference internal" href="01-5-git.html">5. Git and GitHub</a></li>
 
 
 
@@ -228,7 +227,13 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="01-6-oop.html">6. Object Oriented Programming</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="01-6-oop.html">6. Object Oriented Programming</a></li>
 
 
 
@@ -236,8 +241,46 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="01-7-virtual-environments.html">7. Virtual Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-7-virtual-environments.html">7. Virtual Environments</a></li>
 
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../module2-oop-data-structures/README.html">Module 2: Data Structures</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-1-primitive-data-structures.html">1. Primative Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-2-py-calculator.html">2. Python as a Calculator</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-3-composite-data-structures.html">3. Composite Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-4-built-in-modules.html">4. Built-In Modules</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-5-control-structures.html">5. Logic and Control Structures</a></li>
+
+
+
+
+
+</ul>
+</details></li>
 </ul>
 
     </div>
@@ -580,7 +623,7 @@ document.write(`
 <h1>1. Starting Jupyter Lab<a class="headerlink" href="#starting-jupyter-lab" title="Link to this heading">#</a></h1>
 <p>Jupyter Lab is actually a web application that runs on your browser. Jupyter Lab allows you to run multiple Jupyter notebooks concurrently.</p>
 <ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Lab</span></code> - starts the Jupyter Lab server, which is a Python application. This will provide you with a url on your local host that starts with something like <a class="reference external" href="http://localhost:8888/lab/tree">http://localhost:8888/lab/tree</a>…</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Lab</span></code> - starts the Jupyter Lab server, which is a Python application. This will provide you with a url on your local host that starts with something like http://localhost:8888/lab/tree…</p></li>
 <li><p>Paste the URL into the address bar of your browser and open the page.</p></li>
 <li><p>If this is the first time it will ask you to pick a kernel. When you pick the kernel:</p>
 <ul class="simple">
