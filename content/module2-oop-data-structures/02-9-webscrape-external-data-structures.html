@@ -1,0 +1,1011 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>9. WebScraping as External Data Structures &#8212; Draft Python for Science Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e52fa269" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom-checkpoint.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/module2-oop-data-structures/02-9-webscrape-external-data-structures';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="8. APIs as External Data Structures" href="02-8-api-external-data-structures.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Draft Python for Science Book - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Draft Python for Science Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Python for Science
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../math-test.html">In a Markdown cell:</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../module1-setup/README.html">Module 1: Getting Set Up</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-1-setupcomputer.html">1. Setting up your computer</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-2-jynbgettingstarted.html">2: Runnng and Creating Jupyter Notebooks</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-3-jynb-intro.html">3. Overview of Jupyter Notebooks</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-5-git.html">5. Git and GitHub</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-6-oop.html">6. Object Oriented Programming</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-7-virtual-environments.html">7. Virtual Environments</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="README.html">Module 2: Data Structures</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="02-1-primitive-data-structures.html">1. Primative Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-2-py-calculator.html">2. Python as a Calculator</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-3-composite-data-structures.html">3. Composite Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-4-built-in-modules.html">4. Built-In Modules</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-5-control-structures.html">5. Logic and Control Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-6-external-data-structures.html">6. External Data Structures</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-7-db-external-data-structures.html">7. Databases as External Data Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02-8-api-external-data-structures.html">8. APIs as External Data Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">9. WebScraping as External Data Structures</a></li>
+
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/rebelford/py4scibook/master?urlpath=lab/tree/docs/content/module2-oop-data-structures/02-9-webscrape-external-data-structures.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://your-jupyterhub-url.com/hub/user-redirect/git-pull?repo=https%3A//github.com/rebelford/py4scibook&urlpath=lab/tree/py4scibook/docs/content/module2-oop-data-structures/02-9-webscrape-external-data-structures.ipynb&branch=master" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on JupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="JupyterHub logo" src="../../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rebelford/py4scibook/blob/master/docs/content/module2-oop-data-structures/02-9-webscrape-external-data-structures.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook/issues/new?title=Issue%20on%20page%20%2Fcontent/module2-oop-data-structures/02-9-webscrape-external-data-structures.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/module2-oop-data-structures/02-9-webscrape-external-data-structures.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>9. WebScraping as External Data Structures</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">9. WebScraping as External Data Structures</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#web-scraping-and-databases-a-hybrid-approach">Web Scraping and Databases: A Hybrid Approach</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#web-scraping-as-a-data-acquisition-method">Web Scraping as a Data Acquisition Method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#web-scraping-vs-apis">Web Scraping vs. APIs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#web-scraping-as-a-bridge-from-classical-literature-to-structured-data">Web Scraping as a Bridge from Classical Literature to Structured Data</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-your-env">2. Setting up your env</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="webscraping-as-external-data-structures">
+<span id="module2-oop-data-structures-02-9-webscrape-external-data-structures"></span><h1>9. WebScraping as External Data Structures<a class="headerlink" href="#webscraping-as-external-data-structures" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="web-scraping-and-databases-a-hybrid-approach">
+<h1>Web Scraping and Databases: A Hybrid Approach<a class="headerlink" href="#web-scraping-and-databases-a-hybrid-approach" title="Link to this heading">#</a></h1>
+<p>While web scraping is often used to extract data for immediate use, it does not store it. A powerful workflow would be:</p>
+<ul class="simple">
+<li><p><strong>Scrape data</strong> from online sources.</p></li>
+<li><p><strong>Store it in a structured database (SQL or NoSQL)</strong> for long-term analysis.</p></li>
+<li><p><strong>Query it later</strong> instead of repeatedly scraping.</p></li>
+</ul>
+<section id="web-scraping-as-a-data-acquisition-method">
+<h2>Web Scraping as a Data Acquisition Method<a class="headerlink" href="#web-scraping-as-a-data-acquisition-method" title="Link to this heading">#</a></h2>
+<p>Web scraping is a method of extracting <strong>external data</strong> from structured or semi-structured sources on the web and transforming it into a usable format. Unlike databases or file storage, web scraping <strong>does not inherently store data</strong>—it is a way to retrieve and structure data from the web dynamically. It allows access to <strong>data stored in HTML web pages</strong> that might not be available via an API.</p>
+<section id="web-scraping-vs-apis">
+<h3>Web Scraping vs. APIs<a class="headerlink" href="#web-scraping-vs-apis" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Web Scraping</p></th>
+<th class="head"><p>APIs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Access</strong></p></td>
+<td><p>Extracts data from web pages (HTML tables, text, lists)</p></td>
+<td><p>Queries structured data from a service (often JSON or XML)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Structure</strong></p></td>
+<td><p>Often semi-structured (needs parsing)</p></td>
+<td><p>Well-structured</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Reliability</strong></p></td>
+<td><p>Pages may change, breaking the scraper</p></td>
+<td><p>More stable (unless API changes)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Use Case</strong></p></td>
+<td><p>Extracting tables, research data, metadata from articles</p></td>
+<td><p>Accessing structured datasets (PubChem, NCBI, weather data)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Thus, <strong>web scraping is an alternative to APIs when structured access is unavailable</strong>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="web-scraping-as-a-bridge-from-classical-literature-to-structured-data">
+<h2>Web Scraping as a Bridge from Classical Literature to Structured Data<a class="headerlink" href="#web-scraping-as-a-bridge-from-classical-literature-to-structured-data" title="Link to this heading">#</a></h2>
+<p>Scientific data has historically been communicated through <strong>journal articles, textbooks, and reports</strong>. Many modern scientific knowledge repositories (e.g., Wikipedia, research databases) still store information in text-based formats rather than structured databases. Web scraping allows you to:</p>
+<ul class="simple">
+<li><p>Extract <strong>tabular data</strong> (like chemical properties from Wikipedia or patents).</p></li>
+<li><p>Retrieve <strong>text-based metadata</strong> (such as author names, abstracts, and citations).</p></li>
+<li><p>Collect <strong>non-tabular structured information</strong> (like structured web pages with lists of elements).</p></li>
+</ul>
+<p>By applying <strong>text parsing, table extraction, and structured storage</strong>, web scraping allows researchers to <strong>convert human-readable content into machine-readable data</strong>.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="setting-up-your-env">
+<h1>2. Setting up your env<a class="headerlink" href="#setting-up-your-env" title="Link to this heading">#</a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>your-webscrape-env
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>beautifulsoup4<span class="w"> </span>requests<span class="w"> </span>lxml
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">beautifulsoup4</span></code>: The core parsing library.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">requests</span></code>: To fetch web pages.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lxml</span></code>: A fast and efficient HTML/XML parser (optional but recommended for performance).</p></li>
+</ul>
+<p>the image below shows how I set up a webscrape environment while also connecting the kernel to Jupyter lab runninig in the base env.</p>
+<p><img alt="image.png" src="../../_images/fc552991-8a5b-45ce-8133-7017720724df.png" /></p>
+<p>Webscrape a wikipedia element box</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bs4</span><span class="w"> </span><span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>  <span class="c1"># &lt;- make sure this is at the top of your script</span>
+
+<span class="c1"># Define the directory and file path</span>
+<span class="n">wikipedia_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data/wikipedia/&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">wikipedia_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Ensure the directory exists</span>
+
+<span class="n">carbon_wikipedia_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">wikipedia_dir</span><span class="p">,</span> <span class="s2">&quot;carbon_data.json&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">scrape_infobox</span><span class="p">(</span><span class="n">element_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Scrapes the Wikipedia infobox for a given element and returns a dictionary of properties.&quot;&quot;&quot;</span>
+    
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://en.wikipedia.org/wiki/</span><span class="si">{</span><span class="n">element_name</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Find the Infobox element</span>
+    <span class="n">infobox</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;infobox&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Dictionary to store element properties</span>
+    <span class="n">element_data</span> <span class="o">=</span> <span class="p">{}</span>
+
+
+    <span class="c1"># Loop through table rows and extract key-value pairs</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">infobox</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;tr&#39;</span><span class="p">):</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;th&#39;</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;td&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">header</span> <span class="ow">and</span> <span class="n">value</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="n">strip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Get property name</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">strip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Extract value, keeping spaces</span>
+            <span class="n">element_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="c1"># Add provenance metadata</span>
+    <span class="n">element_data</span><span class="p">[</span><span class="s2">&quot;_source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;Wikipedia_URL&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
+        <span class="s2">&quot;Scraped_from&quot;</span><span class="p">:</span> <span class="s2">&quot;Wikipedia Infobox Element&quot;</span><span class="p">,</span>
+        <span class="c1">#&quot;Scraped_on&quot;: requests.get(&quot;https://worldtimeapi.org/api/timezone/Etc/UTC&quot;).json()[&#39;datetime&#39;]</span>
+        <span class="s2">&quot;Scraped_on&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;Z&quot;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="n">element_name</span><span class="p">:</span> <span class="n">element_data</span><span class="p">}</span>
+
+<span class="c1"># Scrape data for Hydrogen</span>
+<span class="n">carbon_data</span> <span class="o">=</span> <span class="n">scrape_infobox</span><span class="p">(</span><span class="s2">&quot;Carbon&quot;</span><span class="p">)</span>
+
+<span class="c1"># Save JSON data to file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">carbon_wikipedia_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">carbon_data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data saved successfully to: </span><span class="si">{</span><span class="n">carbon_wikipedia_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data saved successfully to: /home/rebelford/data/wikipedia/carbon_data.json
+</pre></div>
+</div>
+</div>
+</div>
+<p>Print out the available properties for hydrogen</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="c1"># Define file path</span>
+<span class="n">wikipedia_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data/wikipedia/&quot;</span><span class="p">)</span>
+<span class="n">hydrogen_wikipedia_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">wikipedia_dir</span><span class="p">,</span> <span class="s2">&quot;hydrogen_data.json&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load the JSON file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">hydrogen_wikipedia_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">hydrogen_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># Extract Hydrogen properties</span>
+<span class="n">hydrogen_properties</span> <span class="o">=</span> <span class="n">hydrogen_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Hydrogen&quot;</span><span class="p">,</span> <span class="p">{})</span>
+
+<span class="c1"># Print all keys (property names)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Properties available for Hydrogen:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">hydrogen_properties</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># Print value for a specific key (&quot;Named by&quot;) with provenance</span>
+<span class="n">key_to_lookup</span> <span class="o">=</span> <span class="s2">&quot;Named by&quot;</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">hydrogen_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key_to_lookup</span><span class="p">,</span> <span class="s2">&quot;Property not found&quot;</span><span class="p">)</span>
+
+<span class="n">source_url</span> <span class="o">=</span> <span class="n">hydrogen_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;_source&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Wikipedia_URL&quot;</span><span class="p">,</span> <span class="s2">&quot;Unknown Source&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key_to_lookup</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(Source: </span><span class="si">{</span><span class="n">source_url</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Properties available for Hydrogen:
+- Appearance
+- 
+- Atomic number(Z)
+- Group
+- Period
+- Block
+- Electron configuration
+- Electrons per shell
+- PhaseatSTP
+- Melting point
+- Boiling point
+- Density(at STP)
+- when liquid (atm.p.)
+- when liquid (atb.p.)
+- Triple point
+- Critical point
+- Heat of fusion
+- Heat of vaporization
+- Molar heat capacity
+- P(Pa)
+- atT(K)
+- Oxidation states
+- Electronegativity
+- Ionization energies
+- Covalent radius
+- Van der Waals radius
+- Natural occurrence
+- Crystal structure
+- Lattice constants
+- Thermal conductivity
+- Magnetic ordering
+- Molar magnetic susceptibility
+- Speed of sound
+- CAS Number
+- Discoveryand first isolation
+- Named by
+- Recognized as anelementby
+- Main isotopes
+- 1H
+- 2H
+- 3H
+- _source
+
+
+Named by: Property not found
+(Source: https://en.wikipedia.org/wiki/Hydrogen)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Scrape the chem infoboxes of the halogens</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bs4</span><span class="w"> </span><span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span>
+
+<span class="c1"># Define the list of halogens (either names or symbols)</span>
+<span class="n">halogens</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Fluorine&quot;</span><span class="p">,</span> <span class="s2">&quot;Chlorine&quot;</span><span class="p">,</span> <span class="s2">&quot;Bromine&quot;</span><span class="p">,</span> <span class="s2">&quot;Iodine&quot;</span><span class="p">,</span> <span class="s2">&quot;Astatine&quot;</span><span class="p">]</span>
+
+<span class="c1"># Define file path for saving the scraped data</span>
+<span class="n">wikipedia_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data/wikipedia/&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">wikipedia_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Ensure directory exists</span>
+<span class="n">halogens_wikipedia_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">wikipedia_dir</span><span class="p">,</span> <span class="s2">&quot;halogens_data.json&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">scrape_infobox</span><span class="p">(</span><span class="n">element_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Scrapes the Wikipedia infobox for a given element and returns a dictionary of properties.&quot;&quot;&quot;</span>
+    
+    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://en.wikipedia.org/wiki/</span><span class="si">{</span><span class="n">element_name</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Find the Infobox element</span>
+    <span class="n">infobox</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;infobox&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Dictionary to store element properties</span>
+    <span class="n">element_data</span> <span class="o">=</span> <span class="p">{}</span>
+   
+
+    <span class="c1"># Loop through table rows and extract key-value pairs</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">infobox</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;tr&#39;</span><span class="p">):</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;th&#39;</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;td&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">header</span> <span class="ow">and</span> <span class="n">value</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">header</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="n">strip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Get property name</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">strip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Extract value, preserving spaces</span>
+            <span class="n">element_data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="c1"># Add provenance metadata</span>
+    <span class="n">element_data</span><span class="p">[</span><span class="s2">&quot;_source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;Wikipedia_URL&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
+        <span class="s2">&quot;Scraped_from&quot;</span><span class="p">:</span> <span class="s2">&quot;Wikipedia Infobox Element&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Scraped_on&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>  <span class="c1"># UTC time with explicit timezone</span>
+    <span class="p">}</span>
+  
+    <span class="k">return</span> <span class="p">{</span><span class="n">element_name</span><span class="p">:</span> <span class="n">element_data</span><span class="p">}</span>
+
+
+<span class="c1"># Create dictionary of dictionaries for all halogens</span>
+<span class="n">halogens_data</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">halogens</span><span class="p">:</span>
+    <span class="n">halogens_data</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">scrape_infobox</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
+
+<span class="c1"># Save JSON data to file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">halogens_wikipedia_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">halogens_data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data saved successfully to: </span><span class="si">{</span><span class="n">halogens_wikipedia_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data saved successfully to: /home/rebelford/data/wikipedia/halogens_data.json
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now go to user-home/data/wikipedia/ and open the json file for halogens and explore</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "webscrape"
+        },
+        kernelOptions: {
+            name: "webscrape",
+            path: "./content/module2-oop-data-structures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'webscrape'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02-8-api-external-data-structures.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">8. APIs as External Data Structures</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">9. WebScraping as External Data Structures</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#web-scraping-and-databases-a-hybrid-approach">Web Scraping and Databases: A Hybrid Approach</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#web-scraping-as-a-data-acquisition-method">Web Scraping as a Data Acquisition Method</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#web-scraping-vs-apis">Web Scraping vs. APIs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#web-scraping-as-a-bridge-from-classical-literature-to-structured-data">Web Scraping as a Bridge from Classical Literature to Structured Data</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-your-env">2. Setting up your env</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Robert Belford
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
