@@ -1,0 +1,2468 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>5. Seaborn Part 1 &#8212; Draft Python for Science Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e52fa269" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom-checkpoint.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/module3-packages1/03-5-seaborn';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="7. Seaborn Part 2" href="03-6-seaborn.html" />
+    <link rel="prev" title="4. MatPlotLib" href="03-4-matplotlib.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Draft Python for Science Book - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Draft Python for Science Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Python for Science
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../math-test.html">In a Markdown cell:</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../module1-setup/README.html">Module 1: Getting Set Up</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-1-setupcomputer.html">1. Setting up your computer</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-2-jynbgettingstarted.html">2: Runnng and Creating Jupyter Notebooks</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-3-jynb-intro.html">3. Overview of Jupyter Notebooks</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-5-git.html">5. Git and GitHub</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-6-oop.html">6. Object Oriented Programming</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-7-virtual-environments.html">7. Virtual Environments</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../module2-oop-data-structures/README.html">Module 2: Data Structures</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-1-primitive-data-structures.html">1. Primative Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-2-py-calculator.html">2. Python as a Calculator</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-3-composite-data-structures.html">3. Composite Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-4-built-in-modules.html">4. Built-In Modules</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-5-control-structures.html">5. Logic and Control Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-6-external-data-structures.html">6. External Data Structures</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-7-db-external-data-structures.html">7. Databases as External Data Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-8-api-external-data-structures.html">8. APIs as External Data Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-9-webscrape-external-data-structures.html">9. WebScraping as External Data Structures</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="README.html">Module 3: Packages</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="03-1-numpy.html">1. NumPy</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-2-pandas.html">2. Pandas</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-3-xarray.html">3. Xarray</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-4-matplotlib.html">4. MatPlotLib</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">5. Seaborn Part 1</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-6-seaborn.html">7. Seaborn Part 2</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-7-seaborn.html">7. Seaborn Part 3</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-8-scipy.html">8. SciPy</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-9-rdkit.html">9. RDKit</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-10-rdkit-descriptors.html">10. RDKit and Descriptors</a></li>
+
+
+
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/rebelford/py4scibook/master?urlpath=lab/tree/docs/content/module3-packages1/03-5-seaborn.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://your-jupyterhub-url.com/hub/user-redirect/git-pull?repo=https%3A//github.com/rebelford/py4scibook&urlpath=lab/tree/py4scibook/docs/content/module3-packages1/03-5-seaborn.ipynb&branch=master" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on JupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="JupyterHub logo" src="../../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rebelford/py4scibook/blob/master/docs/content/module3-packages1/03-5-seaborn.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook/issues/new?title=Issue%20on%20page%20%2Fcontent/module3-packages1/03-5-seaborn.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/module3-packages1/03-5-seaborn.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>5. Seaborn Part 1</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5. Seaborn Part 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn-vs-matplotlib">Seaborn vs. Matplotlib</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-seaborn">Install Seaborn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-with-pandas-dataframes">Integration with Pandas DataFrames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-data-sets">Built-in Data Sets</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn-objects">2. Seaborn Objects</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#major-classes">2.1 Major Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-functions">2.2 General Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-functions">2.3 Plotting Functions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn-plots">3. Seaborn Plots</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relational-plots">3.1 Relational Plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatterplot-sns-scatterplot">Scatterplot: sns.scatterplot()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#line-plot-sns-lineplot">Line Plot: sns.lineplot()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relation-plots-faceting-sns-realplot">Relation Plots + Faceting: sns.realplot()</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-functions">3.2 Distribution Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms-sns-histplot">Histograms: sns.histplot()</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subplots-vs-faceted-plots">Subplots vs. Faceted Plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subplots-matplotlib-s-plt-subplot">Subplots (Matplotlib’s plt.subplot())</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#facets-seaborn-s-facetgrid">Facets (Seaborn’s FacetGrid)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kde-kernel-density-estimate">KDE (Kernel Density Estimate)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecdf-estimated-cumulative-distribution-function">ECDF (Estimated Cumulative Distribution Function)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-grid-sns-displot">Distribution Grid (sns.displot())</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rug-plot">Rug Plot</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="seaborn-part-1">
+<span id="module3-packages1-03-5-seaborn"></span><h1>5. Seaborn Part 1<a class="headerlink" href="#seaborn-part-1" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
+<p>Seaborn is a Python data visualization library built on top of Matplotlib. It integrates well with Numpy Arrays and Pandas DataFrames and has built in support for statistics visualizations.</p>
+<section id="seaborn-vs-matplotlib">
+<h2>Seaborn vs. Matplotlib<a class="headerlink" href="#seaborn-vs-matplotlib" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Matplotlib</p></th>
+<th class="head"><p>Seaborn</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Level</p></td>
+<td><p>Low-level (more control, more code)</p></td>
+<td><p>High-level (less code, more automation)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ease of Use</p></td>
+<td><p>Requires more setup and manual styling</p></td>
+<td><p>Easy, concise functions with polished defaults</p></td>
+</tr>
+<tr class="row-even"><td><p>Integration with Pandas</p></td>
+<td><p>Good, but often needs manual setup</p></td>
+<td><p>Excellent, designed for DataFrames</p></td>
+</tr>
+<tr class="row-odd"><td><p>Plot Types</p></td>
+<td><p>Wide variety, customizable</p></td>
+<td><p>Focused on statistical plots and enhanced visuals</p></td>
+</tr>
+<tr class="row-even"><td><p>Default Style</p></td>
+<td><p>Basic (needs customization for polish)</p></td>
+<td><p>Beautiful, color-optimized themes out of the box</p></td>
+</tr>
+<tr class="row-odd"><td><p>Best Use Cases</p></td>
+<td><p>Custom, detailed visualizations</p></td>
+<td><p>Exploratory Data Analysis (EDA), fast, clean visuals</p></td>
+</tr>
+<tr class="row-even"><td><p>Customization</p></td>
+<td><p>Maximum control over every element</p></td>
+<td><p>Customizable, but inherits from Matplotlib</p></td>
+</tr>
+<tr class="row-odd"><td><p>Performance</p></td>
+<td><p>Very efficient for all types of plots</p></td>
+<td><p>Slightly higher overhead (due to additional processing)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="install-seaborn">
+<h2>Install Seaborn<a class="headerlink" href="#install-seaborn" title="Link to this heading">#</a></h2>
+<p>Open Ubuntu:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># if you are not in your environment activate with</span>
+conda<span class="w"> </span>activate<span class="w"> </span>YOUR_ENVIRONMENT
+conda<span class="w"> </span>install<span class="w"> </span>seaborn<span class="w"> </span>seaborn-base
+</pre></div>
+</div>
+</section>
+<section id="integration-with-pandas-dataframes">
+<h2>Integration with Pandas DataFrames<a class="headerlink" href="#integration-with-pandas-dataframes" title="Link to this heading">#</a></h2>
+<p>Through keyword parameters Seaborn extracts title of variables in DataFrames and uses them as plot labels.  It does not do this with Numpy Arrays.  Note</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Concentration&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span>
+    <span class="s2">&quot;Absorbance&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.60</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Concentration&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Absorbance&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;Concentration&#39;, ylabel=&#39;Absorbance&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/62edef6ea77c3231bb37c5b525ebed770e40bdb27de86203a64fb03a51fe3d5f.png" src="../../_images/62edef6ea77c3231bb37c5b525ebed770e40bdb27de86203a64fb03a51fe3d5f.png" />
+</div>
+</div>
+<p>If you want to plot two plots from a code cell you can integrate it with Numpy and use the plt.show() function.  The only difference between the two plots is the order of the arguments that are passed as parameters, and since these are keyword and not positional, the order does not matter</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Sample DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Concentration&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span>
+    <span class="s2">&quot;Absorbance&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.60</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="c1"># Create side-by-side subplots</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>  <span class="c1"># 1 row, 2 columns</span>
+
+<span class="c1"># First plot (standard order)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Concentration&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Absorbance&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Plot 1: Standard Order&quot;</span><span class="p">)</span>
+
+<span class="c1"># Second plot (reordered keyword arguments)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Concentration&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Absorbance&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Plot 2: Reordered Arguments&quot;</span><span class="p">)</span>
+
+<span class="c1"># Adjust layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b667aa6bc681d5f9745d962ba9611ec187760a02d0978d00c087a951d9d0d9d8.png" src="../../_images/b667aa6bc681d5f9745d962ba9611ec187760a02d0978d00c087a951d9d0d9d8.png" />
+</div>
+</div>
+</section>
+<section id="built-in-data-sets">
+<h2>Built-in Data Sets<a class="headerlink" href="#built-in-data-sets" title="Link to this heading">#</a></h2>
+<p>Seaborn also comes with built-in data sets.  These data sets are not downloaded when you install Seaborn but accessed through this github <a class="github reference external" href="https://github.com/mwaskom/seaborn-data">mwaskom/seaborn-data</a> To get a list of the available datasets use the <code class="docutils literal notranslate"><span class="pre">sns.get_dataset_names()</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">get_dataset_names</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;anagrams&#39;, &#39;anscombe&#39;, &#39;attention&#39;, &#39;brain_networks&#39;, &#39;car_crashes&#39;, &#39;diamonds&#39;, &#39;dots&#39;, &#39;dowjones&#39;, &#39;exercise&#39;, &#39;flights&#39;, &#39;fmri&#39;, &#39;geyser&#39;, &#39;glue&#39;, &#39;healthexp&#39;, &#39;iris&#39;, &#39;mpg&#39;, &#39;penguins&#39;, &#39;planets&#39;, &#39;seaice&#39;, &#39;taxis&#39;, &#39;tips&#39;, &#39;titanic&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>To load a dataset from the seaborn-data github into a pandas dataframe use</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df_name</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The following command creates a dataframe called tips from the tips.csv file in the github</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">tips</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   total_bill   tip     sex smoker  day    time  size
+0       16.99  1.01  Female     No  Sun  Dinner     2
+1       10.34  1.66    Male     No  Sun  Dinner     3
+2       21.01  3.50    Male     No  Sun  Dinner     3
+3       23.68  3.31    Male     No  Sun  Dinner     2
+4       24.59  3.61  Female     No  Sun  Dinner     4
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>To plot the dataframe you simply choose the plot type and pass it the parameters</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;smoker&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;smoker&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="s2">&quot;size&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;total_bill&#39;, ylabel=&#39;tip&#39;&gt;
+</pre></div>
+</div>
+<img alt="../../_images/b04b2c430a0dced9403b7bdd727b8662ed77c1305c035acb153d9267bd4a302d.png" src="../../_images/b04b2c430a0dced9403b7bdd727b8662ed77c1305c035acb153d9267bd4a302d.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="seaborn-objects">
+<h1>2. Seaborn Objects<a class="headerlink" href="#seaborn-objects" title="Link to this heading">#</a></h1>
+<section id="major-classes">
+<h2>2.1 Major Classes<a class="headerlink" href="#major-classes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Class Object</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sns.FacetGrid</span></code></p></td>
+<td><p>Creates a grid of plots for <strong>multivariate visualizations</strong> (e.g., small multiples).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sns.PairGrid</span></code></p></td>
+<td><p>Similar to <code class="docutils literal notranslate"><span class="pre">FacetGrid</span></code>, but optimized for <strong>pairwise relationships</strong> between variables.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sns.JointGrid</span></code></p></td>
+<td><p>Creates <strong>joint plots</strong> with <strong>marginal plots</strong> (e.g., scatter + histograms).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sns.axes_style</span></code></p></td>
+<td><p>Manages <strong>plot aesthetics and themes</strong> (context, style, palette).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sns.color_palette</span></code></p></td>
+<td><p>Manages and customizes <strong>color schemes</strong>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sns.MovingAverage</span></code></p></td>
+<td><p>Utility for <strong>smoothing data</strong> (less common).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sns.objects.Plot</span></code></p></td>
+<td><p>Introduced in Seaborn v0.12+: A <strong>new object-oriented API</strong> for building plots.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="general-functions">
+<h2>2.2 General Functions<a class="headerlink" href="#general-functions" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function Type</p></th>
+<th class="head"><p>Function Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Plotting (general)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.plotting_context()</span></code></p></td>
+<td><p>Sets font sizes and spacing for different contexts (e.g., “notebook”).</p></td>
+</tr>
+<tr class="row-odd"><td><p>Plotting (style)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.set_style()</span></code></p></td>
+<td><p>Sets background, grid, and overall plot style.</p></td>
+</tr>
+<tr class="row-even"><td><p>Plotting (theme)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.set_theme()</span></code></p></td>
+<td><p>Sets Seaborn’s default aesthetics in one call.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Color management</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.set_palette()</span></code></p></td>
+<td><p>Sets color palette globally.</p></td>
+</tr>
+<tr class="row-even"><td><p>Data loading</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.load_dataset()</span></code></p></td>
+<td><p>Loads example datasets from Seaborn’s GitHub repo.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Display options</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.despine()</span></code></p></td>
+<td><p>Removes axis spines for a cleaner look.</p></td>
+</tr>
+<tr class="row-even"><td><p>Utility</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.palplot()</span></code></p></td>
+<td><p>Visualizes color palettes.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Object plotting (new API)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.objects.Plot()</span></code></p></td>
+<td><p>New plotting API introduced in Seaborn 0.12 (OOP approach).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="plotting-functions">
+<h2>2.3 Plotting Functions<a class="headerlink" href="#plotting-functions" title="Link to this heading">#</a></h2>
+<p>Before diving into Seaborn Plot Functions lets look at the types of plots</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="head"><p>Purpose / What It Shows</p></th>
+<th class="head"><p>Data Type</p></th>
+<th class="head"><p>Common Applications</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Relational</strong></p></td>
+<td><p>Shows <strong>relationships between variables</strong> (especially numeric).</p></td>
+<td><p>Numeric vs. Numeric</p></td>
+<td><p>Trends, correlations, comparisons over time or concentration, etc.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Distribution</strong></p></td>
+<td><p>Shows <strong>how data is distributed</strong> (e.g., shape, spread, outliers).</p></td>
+<td><p>One or two Numeric variables</p></td>
+<td><p>Understanding variability, skewness, normality, multimodal distributions.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Categorical</strong></p></td>
+<td><p>Compares <strong>numeric values across categories</strong>; explores <strong>group differences</strong>.</p></td>
+<td><p>Categorical vs. Numeric</p></td>
+<td><p>Comparing experiments, groups, or chemical compounds.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Regression</strong></p></td>
+<td><p>Shows <strong>relationships with fitted models</strong> (linear or nonlinear).</p></td>
+<td><p>Numeric vs. Numeric</p></td>
+<td><p>Model fitting (e.g., Beer’s Law), trends with confidence intervals.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Matrix/Grid</strong></p></td>
+<td><p>Visualizes <strong>entire datasets or relationships between many variables</strong> at once.</p></td>
+<td><p>Multivariate (many variables)</p></td>
+<td><p>Correlation matrices, similarity heatmaps, clustering analyses.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Multivariate</strong></p></td>
+<td><p>Combines multiple visualizations to explore <strong>multiple variables at the same time</strong>.</p></td>
+<td><p>Numeric + Categorical (often mixed)</p></td>
+<td><p>Detailed variable relationships, outlier detection, density visualization.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Plot Type</p></th>
+<th class="head"><p>Seaborn Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Relational</strong></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Scatter Plot</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.scatterplot()</span></code></p></td>
+<td><p>Shows relationship between two numeric variables.</p></td>
+</tr>
+<tr class="row-even"><td><p>Line Plot</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.lineplot()</span></code></p></td>
+<td><p>Shows trends over a continuous variable (e.g., time).</p></td>
+</tr>
+<tr class="row-odd"><td><p>Relational (multi-plot)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.relplot()</span></code></p></td>
+<td><p>High-level interface for <code class="docutils literal notranslate"><span class="pre">scatterplot</span></code> or <code class="docutils literal notranslate"><span class="pre">lineplot</span></code> + facets.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Distribution</strong></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Histogram</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.histplot()</span></code></p></td>
+<td><p>Visualizes distribution of a variable.</p></td>
+</tr>
+<tr class="row-even"><td><p>KDE Plot</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.kdeplot()</span></code></p></td>
+<td><p>Smooth density estimate of a variable.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ECDF Plot</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.ecdfplot()</span></code></p></td>
+<td><p>Empirical cumulative distribution function.</p></td>
+</tr>
+<tr class="row-even"><td><p>Distribution Grid</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.displot()</span></code></p></td>
+<td><p>High-level histogram/KDE with facets.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Rug Plot</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.rugplot()</span></code></p></td>
+<td><p>Small ticks at data points to show distribution.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Categorical</strong></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Box Plot</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.boxplot()</span></code></p></td>
+<td><p>Shows distributions with quartiles and outliers.</p></td>
+</tr>
+<tr class="row-even"><td><p>Violin Plot</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.violinplot()</span></code></p></td>
+<td><p>Combines KDE with box plot.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Strip Plot</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.stripplot()</span></code></p></td>
+<td><p>Individual data points, possibly jittered.</p></td>
+</tr>
+<tr class="row-even"><td><p>Swarm Plot</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.swarmplot()</span></code></p></td>
+<td><p>Adjusts points to avoid overlap (non-overlapping stripplot).</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bar Plot</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.barplot()</span></code></p></td>
+<td><p>Aggregated values (e.g., mean) with error bars.</p></td>
+</tr>
+<tr class="row-even"><td><p>Count Plot</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.countplot()</span></code></p></td>
+<td><p>Counts occurrences in categories.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Categorical (multi-plot)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.catplot()</span></code></p></td>
+<td><p>High-level interface for all categorical plots + facets.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Regression</strong></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Regression Plot</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.regplot()</span></code></p></td>
+<td><p>Scatterplot with regression line.</p></td>
+</tr>
+<tr class="row-even"><td><p>Logistic Regression</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.lmplot()</span></code></p></td>
+<td><p>High-level regplot + facets (linear model plot).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Matrix/Grid/Heatmap</strong></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Heatmap</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.heatmap()</span></code></p></td>
+<td><p>Color-coded matrix, e.g., correlations.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Clustermap</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.clustermap()</span></code></p></td>
+<td><p>Heatmap with clustering of rows/columns.</p></td>
+</tr>
+<tr class="row-even"><td><p>Pairwise Plots</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.pairplot()</span></code></p></td>
+<td><p>Matrix of scatterplots and histograms for multiple variables.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Multivariate/Joint</strong></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Joint Plot</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.jointplot()</span></code></p></td>
+<td><p>Combines scatterplot with histograms/KDEs (uses JointGrid).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>New API (v0.12+)</strong></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Plot Object</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sns.objects.Plot()</span></code></p></td>
+<td><p>New object-oriented plotting system.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="seaborn-plots">
+<h1>3. Seaborn Plots<a class="headerlink" href="#seaborn-plots" title="Link to this heading">#</a></h1>
+<p>First we will load the pubchem periodic table into a dataframe that we will call df, just to keep it short.  We created this in module 02-6_ExternalDataStructures.  If you look at the file PubChemElements_all.csv you will see that the second column is the symbols (index number 1) and the following code reads the file and sets the symbols as indices</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">periodictable_csv_datapath</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The file path we are using was created in module 02-6 and you can download the periodic table directly as a csv from PubChem: <a class="reference external" href="https://pubchem.ncbi.nlm.nih.gov/periodic-table/">https://pubchem.ncbi.nlm.nih.gov/periodic-table/</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">base_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data&quot;</span><span class="p">)</span>  <span class="c1"># Parent directory</span>
+<span class="n">pubchem_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_data_dir</span><span class="p">,</span> <span class="s2">&quot;pubchem_data&quot;</span><span class="p">)</span>  <span class="c1"># Subdirectory for PubChem</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">pubchem_data_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Ensure directories exist</span>
+<span class="n">periodictable_csv_datapath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pubchem_data_dir</span><span class="p">,</span> <span class="s2">&quot;PubChemElements_all.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">periodictable_csv_datapath</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AtomicNumber</th>
+      <th>Name</th>
+      <th>AtomicMass</th>
+      <th>CPKHexColor</th>
+      <th>ElectronConfiguration</th>
+      <th>Electronegativity</th>
+      <th>AtomicRadius</th>
+      <th>IonizationEnergy</th>
+      <th>ElectronAffinity</th>
+      <th>OxidationStates</th>
+      <th>StandardState</th>
+      <th>MeltingPoint</th>
+      <th>BoilingPoint</th>
+      <th>Density</th>
+      <th>GroupBlock</th>
+      <th>YearDiscovered</th>
+    </tr>
+    <tr>
+      <th>Symbol</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>H</th>
+      <td>1</td>
+      <td>Hydrogen</td>
+      <td>1.008000</td>
+      <td>FFFFFF</td>
+      <td>1s1</td>
+      <td>2.20</td>
+      <td>120.0</td>
+      <td>13.598</td>
+      <td>0.754</td>
+      <td>+1, -1</td>
+      <td>Gas</td>
+      <td>13.81</td>
+      <td>20.28</td>
+      <td>0.000090</td>
+      <td>Nonmetal</td>
+      <td>1766</td>
+    </tr>
+    <tr>
+      <th>He</th>
+      <td>2</td>
+      <td>Helium</td>
+      <td>4.002600</td>
+      <td>D9FFFF</td>
+      <td>1s2</td>
+      <td>NaN</td>
+      <td>140.0</td>
+      <td>24.587</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>Gas</td>
+      <td>0.95</td>
+      <td>4.22</td>
+      <td>0.000179</td>
+      <td>Noble gas</td>
+      <td>1868</td>
+    </tr>
+    <tr>
+      <th>Li</th>
+      <td>3</td>
+      <td>Lithium</td>
+      <td>7.000000</td>
+      <td>CC80FF</td>
+      <td>[He]2s1</td>
+      <td>0.98</td>
+      <td>182.0</td>
+      <td>5.392</td>
+      <td>0.618</td>
+      <td>+1</td>
+      <td>Solid</td>
+      <td>453.65</td>
+      <td>1615.00</td>
+      <td>0.534000</td>
+      <td>Alkali metal</td>
+      <td>1817</td>
+    </tr>
+    <tr>
+      <th>Be</th>
+      <td>4</td>
+      <td>Beryllium</td>
+      <td>9.012183</td>
+      <td>C2FF00</td>
+      <td>[He]2s2</td>
+      <td>1.57</td>
+      <td>153.0</td>
+      <td>9.323</td>
+      <td>NaN</td>
+      <td>+2</td>
+      <td>Solid</td>
+      <td>1560.00</td>
+      <td>2744.00</td>
+      <td>1.850000</td>
+      <td>Alkaline earth metal</td>
+      <td>1798</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>5</td>
+      <td>Boron</td>
+      <td>10.810000</td>
+      <td>FFB5B5</td>
+      <td>[He]2s2 2p1</td>
+      <td>2.04</td>
+      <td>192.0</td>
+      <td>8.298</td>
+      <td>0.277</td>
+      <td>+3</td>
+      <td>Solid</td>
+      <td>2348.00</td>
+      <td>4273.00</td>
+      <td>2.370000</td>
+      <td>Metalloid</td>
+      <td>1808</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="relational-plots">
+<h2>3.1 Relational Plots<a class="headerlink" href="#relational-plots" title="Link to this heading">#</a></h2>
+<section id="scatterplot-sns-scatterplot">
+<h3>Scatterplot: sns.scatterplot()<a class="headerlink" href="#scatterplot-sns-scatterplot" title="Link to this heading">#</a></h3>
+<p>First run the following code and see the type of data in the dataframe</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;GroupBlock&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;StandardState&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;AtomicNumber&#39;, &#39;Name&#39;, &#39;AtomicMass&#39;, &#39;CPKHexColor&#39;,
+       &#39;ElectronConfiguration&#39;, &#39;Electronegativity&#39;, &#39;AtomicRadius&#39;,
+       &#39;IonizationEnergy&#39;, &#39;ElectronAffinity&#39;, &#39;OxidationStates&#39;,
+       &#39;StandardState&#39;, &#39;MeltingPoint&#39;, &#39;BoilingPoint&#39;, &#39;Density&#39;,
+       &#39;GroupBlock&#39;, &#39;YearDiscovered&#39;],
+      dtype=&#39;object&#39;)
+[&#39;Nonmetal&#39; &#39;Noble gas&#39; &#39;Alkali metal&#39; &#39;Alkaline earth metal&#39; &#39;Metalloid&#39;
+ &#39;Halogen&#39; &#39;Post-transition metal&#39; &#39;Transition metal&#39; &#39;Lanthanide&#39;
+ &#39;Actinide&#39;]
+[&#39;Gas&#39; &#39;Solid&#39; &#39;Liquid&#39; &#39;Expected to be a Solid&#39; &#39;Expected to be a Gas&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Load the DataFrame (assuming index_col=0 is used for symbols)</span>
+<span class="c1">#df = pd.read_csv(&quot;pubchem_periodic_table.csv&quot;, index_col=0)</span>
+
+<span class="c1"># Set Seaborn style</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create scatterplot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">scatter</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;AtomicMass&quot;</span><span class="p">,</span>           <span class="c1"># Column from DataFrame for X-axis</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;BoilingPoint&quot;</span><span class="p">,</span>         <span class="c1"># Column from DataFrame for Y-axis</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;GroupBlock&quot;</span><span class="p">,</span>         <span class="c1"># Column for color-coding (legend)</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;StandardState&quot;</span><span class="p">,</span>    <span class="c1"># Column for marker style (legend)</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>                    <span class="c1"># Marker size</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span>         <span class="c1"># Border color around markers</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Scatterplot: Atomic Mass vs. Boiling Point&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Atomic Mass (g/mol)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Boiling Point (K)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">borderaxespad</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b09d8b46c5c126b819bc0545acc7c9aaea1bf0a997c443dd4486ab7540c7e8f1.png" src="../../_images/b09d8b46c5c126b819bc0545acc7c9aaea1bf0a997c443dd4486ab7540c7e8f1.png" />
+</div>
+</div>
+<p>OK, what happened?
+In the following code we defined what we plotted in the scatter plot and seaborn set up the plot, legend and all!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scatter</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;AtomicMass&quot;</span><span class="p">,</span>           <span class="c1"># Column from DataFrame for X-axis</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;BoilingPoint&quot;</span><span class="p">,</span>         <span class="c1"># Column from DataFrame for Y-axis</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;GroupBlock&quot;</span><span class="p">,</span>         <span class="c1"># Column for color-coding (legend)</span>
+    <span class="n">style</span><span class="o">=</span><span class="s2">&quot;StandardState&quot;</span><span class="p">,</span>    <span class="c1"># Column for marker style (legend)</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>                    <span class="c1"># Marker size</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span>         <span class="c1"># Border color around markers</span>
+<span class="p">)</span>
+
+</pre></div>
+</div>
+</section>
+<section id="line-plot-sns-lineplot">
+<h3>Line Plot: sns.lineplot()<a class="headerlink" href="#line-plot-sns-lineplot" title="Link to this heading">#</a></h3>
+<p>A <strong>line plot connects the points</strong> if you want to do a best fit you need to run a regression type plot. Here we are using annotations instead of a legend</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;AtomicMass&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;BoilingPoint&quot;</span><span class="p">,</span>
+    <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span>
+<span class="p">)</span>
+
+<span class="c1"># Annotate each point with the element symbol</span>
+<span class="k">for</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;AtomicMass&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;BoilingPoint&quot;</span><span class="p">],</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Boiling Point vs. Atomic Mass&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Atomic Mass (g/mol)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Boiling Point (K)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/759d5180d93489ba889c58ca79251681aa414d190d0ff49817dcb40bcf70ed88.png" src="../../_images/759d5180d93489ba889c58ca79251681aa414d190d0ff49817dcb40bcf70ed88.png" />
+</div>
+</div>
+<p>Now filter for halogens
+Note the annotations for Cl and Br are covered by the line. This is controlled by the following line of code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;AtomicMass&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;BoilingPoint&quot;</span><span class="p">],</span> <span class="n">symbol</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>We can make custom offsets with a dictionary</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Custom offsets: symbol → (x_offset, y_offset)</span>
+<span class="n">offsets</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="s1">&#39;Cl&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">),</span>   <span class="c1"># Lower Cl</span>
+    <span class="s1">&#39;Br&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">),</span>   <span class="c1"># Lower Br</span>
+    <span class="s1">&#39;I&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="s1">&#39;At&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="s1">&#39;Ts&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Annotate with controlled placement</span>
+<span class="k">for</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">halogens_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">x_offset</span><span class="p">,</span> <span class="n">y_offset</span> <span class="o">=</span> <span class="n">offsets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>  <span class="c1"># Default offset if missing</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+        <span class="n">row</span><span class="p">[</span><span class="s2">&quot;AtomicMass&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">x_offset</span><span class="p">,</span>
+        <span class="n">row</span><span class="p">[</span><span class="s2">&quot;BoilingPoint&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">y_offset</span><span class="p">,</span>
+        <span class="n">symbol</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filter for Halogens</span>
+<span class="n">halogens_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;GroupBlock&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Halogen&quot;</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">halogens_df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;AtomicMass&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;BoilingPoint&quot;</span><span class="p">,</span>
+    <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span>
+<span class="p">)</span>
+
+<span class="c1"># Custom offsets: symbol → (x_offset, y_offset)</span>
+<span class="n">offsets</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="s1">&#39;Cl&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">),</span>   <span class="c1"># Lower Cl</span>
+    <span class="s1">&#39;Br&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">),</span>   <span class="c1"># Lower Br</span>
+    <span class="s1">&#39;I&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="s1">&#39;At&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="s1">&#39;Ts&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Annotate with controlled placement</span>
+<span class="k">for</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">halogens_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">x_offset</span><span class="p">,</span> <span class="n">y_offset</span> <span class="o">=</span> <span class="n">offsets</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>  <span class="c1"># Default offset if missing</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+        <span class="n">row</span><span class="p">[</span><span class="s2">&quot;AtomicMass&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">x_offset</span><span class="p">,</span>
+        <span class="n">row</span><span class="p">[</span><span class="s2">&quot;BoilingPoint&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">y_offset</span><span class="p">,</span>
+        <span class="n">symbol</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span>
+    <span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Boiling Point vs. Atomic Mass for Halogens (Annotated)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Atomic Mass (g/mol)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Boiling Point (K)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/eaa19b97be9b7042fb89263392655583aa816fe6806418a9695f02b217944daf.png" src="../../_images/eaa19b97be9b7042fb89263392655583aa816fe6806418a9695f02b217944daf.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the line connecting all halogens (gray line)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">halogens_df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;AtomicMass&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;BoilingPoint&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>      <span class="c1"># Single line color</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">marker</span><span class="o">=</span><span class="kc">None</span>        <span class="c1"># No markers in lineplot here</span>
+<span class="p">)</span>
+
+<span class="c1"># Overlay scatter points with unique shapes for each halogen</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">halogens_df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;AtomicMass&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;BoilingPoint&quot;</span><span class="p">,</span>
+    <span class="n">style</span><span class="o">=</span><span class="n">halogens_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>   <span class="c1"># Different shape for each element</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="n">legend</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Boiling Point vs. Atomic Mass for Halogens (Shape Legend)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Atomic Mass (g/mol)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Boiling Point (K)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Element&quot;</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f42c99405f715fc6765d63e3ce3b9cf2c88c61961b72aa647b8275e15e306ec6.png" src="../../_images/f42c99405f715fc6765d63e3ce3b9cf2c88c61961b72aa647b8275e15e306ec6.png" />
+</div>
+</div>
+</section>
+<section id="relation-plots-faceting-sns-realplot">
+<h3>Relation Plots + Faceting: sns.realplot()<a class="headerlink" href="#relation-plots-faceting-sns-realplot" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Faceting</strong> is splitting the data set into subsets and creating subplots for the subsets, all within one figure</p></li>
+<li><p>relplot() is a figure level function that allows you to make multiple scatter or line plots</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Set style</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+
+<span class="c1"># relplot: Boiling Point vs. Atomic Mass, faceted by GroupBlock with individual scales</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;AtomicMass&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;BoilingPoint&quot;</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">,</span>
+    <span class="n">col</span><span class="o">=</span><span class="s2">&quot;GroupBlock&quot;</span><span class="p">,</span>
+    <span class="n">col_wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">aspect</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="c1">#facet_kws={&#39;sharex&#39;: False, &#39;sharey&#39;: False}  # Independent axes</span>
+<span class="p">)</span>
+
+<span class="c1"># Rotate x-axis labels safely</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># Set common title</span>
+<span class="n">g</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.92</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Boiling Point vs. Atomic Mass Faceted by GroupBlock (Independent Scales)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/04b69b05a2a8a2c02749f717244cf1b85ab0f83aac75cf3261ed9732c56534db.png" src="../../_images/04b69b05a2a8a2c02749f717244cf1b85ab0f83aac75cf3261ed9732c56534db.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Clean the StandardState values</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;CleanState&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;StandardState&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span>
+    <span class="s2">&quot;expected solid&quot;</span><span class="p">:</span> <span class="s2">&quot;Solid&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;expected gas&quot;</span><span class="p">:</span> <span class="s2">&quot;Gas&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;expected liquid&quot;</span><span class="p">:</span> <span class="s2">&quot;Liquid&quot;</span>
+<span class="p">})</span>
+
+<span class="c1"># Set style</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+
+<span class="c1"># relplot with hue by CleanState (phase)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">relplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;AtomicMass&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;BoilingPoint&quot;</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;CleanState&quot;</span><span class="p">,</span>             <span class="c1"># Color by cleaned phase</span>
+    <span class="n">col</span><span class="o">=</span><span class="s2">&quot;GroupBlock&quot;</span><span class="p">,</span>
+    <span class="n">col_wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">aspect</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
+    <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="n">facet_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;sharex&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;sharey&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>  <span class="c1"># Independent scales</span>
+<span class="p">)</span>
+
+<span class="c1"># Rotate x-axis labels</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># Set title</span>
+<span class="n">g</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.92</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Boiling Point vs. Atomic Mass Faceted by GroupBlock (Colored by Phase)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/df676acb9e1cb76b029f7b6d7ad8c4134c1d275075c3050085e57a3fdf1a8fb2.png" src="../../_images/df676acb9e1cb76b029f7b6d7ad8c4134c1d275075c3050085e57a3fdf1a8fb2.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="distribution-functions">
+<h2>3.2 Distribution Functions<a class="headerlink" href="#distribution-functions" title="Link to this heading">#</a></h2>
+<section id="histograms-sns-histplot">
+<h3>Histograms: sns.histplot()<a class="headerlink" href="#histograms-sns-histplot" title="Link to this heading">#</a></h3>
+<p>Show distribution of a single variable by dividing it into bins and showing how many times it appears in a bin.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;AtomicMass&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;skyblue&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Histogram: Distribution of Atomic Mass (Periodic Table)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Atomic Mass (g/mol)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of Elements&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b446d50aaf8f17b09b4894bdb022742128c93b38100eaf6a3ce87cf2d6a0cc2d.png" src="../../_images/b446d50aaf8f17b09b4894bdb022742128c93b38100eaf6a3ce87cf2d6a0cc2d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;AtomicMass&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;GroupBlock&quot;</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Histogram: Atomic Mass by GroupBlock&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Atomic Mass (g/mol)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of Elements&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/56cd1d8a8c819887f6bccd05dd5b84df381f8b56938f73d3062ca609009c45e3.png" src="../../_images/56cd1d8a8c819887f6bccd05dd5b84df381f8b56938f73d3062ca609009c45e3.png" />
+</div>
+</div>
+<p>Now lets make</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create 3 rows x 2 columns grid</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+<span class="c1"># --- Row 1: Electronegativity ---</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Electronegativity&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+             <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;skyblue&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Electronegativity Distribution&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Electronegativity&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;GroupBlock&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span>
+             <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Electronegativity by GroupBlock&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- Row 2: Ionization Energy ---</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;IonizationEnergy&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+             <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightgreen&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Ionization Energy Distribution&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;IonizationEnergy&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;GroupBlock&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span>
+             <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Ionization Energy by GroupBlock&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- Row 3: Electron Affinity ---</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;ElectronAffinity&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+             <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;salmon&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Electron Affinity Distribution&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;ElectronAffinity&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;GroupBlock&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span>
+             <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Electron Affinity by GroupBlock&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Count&quot;</span><span class="p">)</span>
+
+<span class="c1"># Rotate x-axis labels for clarity</span>
+<span class="k">for</span> <span class="n">ax_row</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">ax_row</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># Adjust layout and common title</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Distribution of Electronegativity, Ionization Energy, and Electron Affinity&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b8eb1cef5192751480f0ff5dccb0ab43ce473dcf8b6c78888657a50fca0c054a.png" src="../../_images/b8eb1cef5192751480f0ff5dccb0ab43ce473dcf8b6c78888657a50fca0c054a.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="subplots-vs-faceted-plots">
+<h2>Subplots vs. Faceted Plots<a class="headerlink" href="#subplots-vs-faceted-plots" title="Link to this heading">#</a></h2>
+<section id="subplots-matplotlib-s-plt-subplot">
+<h3>Subplots (Matplotlib’s plt.subplot())<a class="headerlink" href="#subplots-matplotlib-s-plt-subplot" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Each subplot is independent</p></li>
+<li><p>Mixed subplot types</p></li>
+</ul>
+</section>
+<section id="facets-seaborn-s-facetgrid">
+<h3>Facets (Seaborn’s FacetGrid)<a class="headerlink" href="#facets-seaborn-s-facetgrid" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>used in relplot(), catplot()..</p></li>
+<li><p>you give Seaborn variable to facet (roe= , col= , hue=)</p></li>
+<li><p>Faceting is data driven</p></li>
+<li><p>Limited to one plot type at a time across all facets</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Subplots (<code class="docutils literal notranslate"><span class="pre">plt.subplots</span></code>)</p></th>
+<th class="head"><p>Facets (<code class="docutils literal notranslate"><span class="pre">relplot</span></code>, <code class="docutils literal notranslate"><span class="pre">FacetGrid</span></code>)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Control</p></td>
+<td><p>Full manual control (plot type, data)</p></td>
+<td><p>Auto-splits data by variable, same plot type</p></td>
+</tr>
+<tr class="row-odd"><td><p>Data Management</p></td>
+<td><p>You manage what data goes in each plot</p></td>
+<td><p>Seaborn handles data splitting and plotting</p></td>
+</tr>
+<tr class="row-even"><td><p>Flexibility</p></td>
+<td><p>Any combination of plots and data</p></td>
+<td><p>One plot type, applied to data subsets</p></td>
+</tr>
+<tr class="row-odd"><td><p>Use Case</p></td>
+<td><p>Mixed plots, advanced layouts</p></td>
+<td><p>Comparing same plot across groups (facets)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="kde-kernel-density-estimate">
+<h3>KDE (Kernel Density Estimate)<a class="headerlink" href="#kde-kernel-density-estimate" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Smoothed version of a histogram</p></li>
+<li><p>best for continuous not discrete data</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Electronegativity&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;skyblue&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;KDE Plot: Electronegativity Distribution&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Electronegativity&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ca7d290a9b9b5d41db3b066fff19dceb54ab3c3fe1e2135a66cbade2d22593e4.png" src="../../_images/ca7d290a9b9b5d41db3b066fff19dceb54ab3c3fe1e2135a66cbade2d22593e4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Electronegativity&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightgray&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Histogram (Density) + KDE: Electronegativity&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Electronegativity&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5e31b4f669b1fe7016a363ff6061f1e1cb2654e53ed317e07469f02d8661c162.png" src="../../_images/5e31b4f669b1fe7016a363ff6061f1e1cb2654e53ed317e07469f02d8661c162.png" />
+</div>
+</div>
+<p>KDE and histogram with dual scales</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create figure and primary axis (left)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Plot KDE on ax1 (left Y-axis)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Electronegativity&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Density (KDE)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create secondary axis (right)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+
+<span class="c1"># Plot histogram on ax2 (right Y-axis) with raw counts</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Electronegativity&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Count (Histogram)&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+
+<span class="c1"># Titles and labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Electronegativity: KDE vs. Histogram with Dual Y-Axis&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Electronegativity&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2c1d1c2ddfcb8137e2be8d9170b45073fca897e311e069d216c185ccf3d86fbe.png" src="../../_images/2c1d1c2ddfcb8137e2be8d9170b45073fca897e311e069d216c185ccf3d86fbe.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Filter data to key GroupBlocks</span>
+<span class="n">groups</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Alkali metal&quot;</span><span class="p">,</span> <span class="s2">&quot;Halogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Noble gas&quot;</span><span class="p">]</span>
+<span class="n">filtered_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;GroupBlock&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">groups</span><span class="p">)]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">filtered_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;IonizationEnergy&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;GroupBlock&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;KDE Plot: Ionization Energy by GroupBlock&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Ionization Energy (eV)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/71d961adde210cfcae4ba55a5439fd183c25db56ec950532aec09be44f6d3883.png" src="../../_images/71d961adde210cfcae4ba55a5439fd183c25db56ec950532aec09be44f6d3883.png" />
+</div>
+</div>
+</section>
+<section id="ecdf-estimated-cumulative-distribution-function">
+<h3>ECDF (Estimated Cumulative Distribution Function)<a class="headerlink" href="#ecdf-estimated-cumulative-distribution-function" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Simulated data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;compound&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;alkane&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;alcohol&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s1">&#39;boiling_point&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">36</span><span class="p">,</span> <span class="mi">69</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">124</span><span class="p">,</span> <span class="mi">152</span><span class="p">,</span> <span class="mi">174</span><span class="p">,</span> <span class="mi">196</span><span class="p">,</span> <span class="mi">216</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">97</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">138</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">178</span><span class="p">,</span> <span class="mi">198</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># ECDF plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">ecdfplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;boiling_point&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;compound&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Boiling Point (°C)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cumulative Probability&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;ECDF of Boiling Points: Alkanes vs. Alcohols&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d6f1c7c07a218b5c1769b3a9139be714b99c6683ec652a2d445017752cb8651f.png" src="../../_images/d6f1c7c07a218b5c1769b3a9139be714b99c6683ec652a2d445017752cb8651f.png" />
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>compound</th>
+      <th>boiling_point</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>alkane</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>alkane</td>
+      <td>69</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>alkane</td>
+      <td>98</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>alkane</td>
+      <td>124</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>alkane</td>
+      <td>152</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>alkane</td>
+      <td>174</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>alkane</td>
+      <td>196</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>alkane</td>
+      <td>216</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>alcohol</td>
+      <td>65</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>alcohol</td>
+      <td>78</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>alcohol</td>
+      <td>97</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>alcohol</td>
+      <td>117</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>alcohol</td>
+      <td>138</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>alcohol</td>
+      <td>158</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>alcohol</td>
+      <td>178</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>alcohol</td>
+      <td>198</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Simulate molar mass data (g/mol)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Polymer A: Narrow distribution, centered at 100,000 g/mol</span>
+<span class="n">poly_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100_000</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">5_000</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="c1"># Polymer B: Broad distribution, centered at 100,000 g/mol</span>
+<span class="n">poly_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">100_000</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">20_000</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="c1"># Combine into DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;molar_mass&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">poly_a</span><span class="p">,</span> <span class="n">poly_b</span><span class="p">]),</span>
+    <span class="s1">&#39;polymer&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">500</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">500</span>
+<span class="p">})</span>
+
+<span class="c1"># Optional: Clean up any negative values (can happen with normal distribution)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;molar_mass&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># ECDF plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">ecdfplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;molar_mass&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;polymer&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">110_000</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;110,000 g/mol&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Molar Mass (g/mol)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;110,000 g/mol&quot;</span><span class="p">,</span>
+             <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">110_000</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
+             <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">112_000</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">),</span>
+             <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">),</span>
+             <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cumulative Probability&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;ECDF of Molar Mass Distribution in Polymers A and B&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/0b35b9841d0a3cbdfe6c2f6db09f8889532e039e98e47353dea64f774b28d03b.png" src="../../_images/0b35b9841d0a3cbdfe6c2f6db09f8889532e039e98e47353dea64f774b28d03b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Seed for reproducibility</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Simulate pKa values</span>
+<span class="n">strong_acids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>     <span class="c1"># Strong acids: pKa &lt; 1</span>
+<span class="n">weak_acids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>       <span class="c1"># Weak acids: pKa ~ 3–9</span>
+
+<span class="c1"># Combine into DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;pKa&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">strong_acids</span><span class="p">,</span> <span class="n">weak_acids</span><span class="p">]),</span>
+    <span class="s1">&#39;acid_type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Strong&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">strong_acids</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;Weak&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">weak_acids</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1"># Filter out any unrealistic pKa values</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;pKa&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;pKa&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">)]</span>
+
+<span class="c1"># Plot ECDF</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">ecdfplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;pKa&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;acid_type&#39;</span><span class="p">)</span>
+
+<span class="c1"># Add physiological pH reference line</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">7.4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Physiological pH (7.4)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Annotation</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;Physiological pH = 7.4&quot;</span><span class="p">,</span>
+             <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mf">7.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
+             <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mf">8.5</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">),</span>
+             <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">arrowstyle</span><span class="o">=</span><span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">),</span>
+             <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+
+<span class="c1"># Labels and legend</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;pKa&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cumulative Probability&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;ECDF of pKa Values: Strong vs. Weak Acids&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Acid Type&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/23acbff7c87a7c7f85be9081b6c7cad4e0af22d0568c2999c40a52cc9a7dc6eb.png" src="../../_images/23acbff7c87a7c7f85be9081b6c7cad4e0af22d0568c2999c40a52cc9a7dc6eb.png" />
+</div>
+</div>
+</section>
+<section id="distribution-grid-sns-displot">
+<h3>Distribution Grid (sns.displot())<a class="headerlink" href="#distribution-grid-sns-displot" title="Link to this heading">#</a></h3>
+<p>Allows faceted histograms, it is essentially a combination of sns.histplot() + sns.FacetGrid()</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">base_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data&quot;</span><span class="p">)</span>  <span class="c1"># Parent directory</span>
+<span class="n">pubchem_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_data_dir</span><span class="p">,</span> <span class="s2">&quot;pubchem_data&quot;</span><span class="p">)</span>  <span class="c1"># Subdirectory for PubChem</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">pubchem_data_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Ensure directories exist</span>
+<span class="n">periodictable_csv_datapath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pubchem_data_dir</span><span class="p">,</span> <span class="s2">&quot;PubChemElements_all.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">periodictable_csv_datapath</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="c1"># Replace this with your actual DataFrame if needed</span>
+<span class="c1">#df = pd.read_csv(&quot;~/data/pubchem_periodic_table.csv&quot;)  # or use your in-memory version</span>
+
+<span class="c1"># Drop NaNs if necessary</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;AtomicRadius&quot;</span><span class="p">,</span> <span class="s2">&quot;GroupBlock&quot;</span><span class="p">])</span>
+
+<span class="c1"># Create the displot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+            <span class="n">x</span><span class="o">=</span><span class="s2">&quot;AtomicRadius&quot;</span><span class="p">,</span>
+            <span class="n">col</span><span class="o">=</span><span class="s2">&quot;GroupBlock&quot;</span><span class="p">,</span>       <span class="c1"># faceted by block</span>
+            <span class="n">col_wrap</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>        <span class="c1"># wrap into a 2-column grid</span>
+            <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+            <span class="n">height</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+            <span class="n">aspect</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Distribution of Atomic Radii by Periodic Table Block&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        AtomicNumber       Name  AtomicMass CPKHexColor ElectronConfiguration  \
+Symbol                                                                          
+H                  1   Hydrogen    1.008000      FFFFFF                   1s1   
+He                 2     Helium    4.002600      D9FFFF                   1s2   
+Li                 3    Lithium    7.000000      CC80FF               [He]2s1   
+Be                 4  Beryllium    9.012183      C2FF00               [He]2s2   
+B                  5      Boron   10.810000      FFB5B5           [He]2s2 2p1   
+
+        Electronegativity  AtomicRadius  IonizationEnergy  ElectronAffinity  \
+Symbol                                                                        
+H                    2.20         120.0            13.598             0.754   
+He                    NaN         140.0            24.587               NaN   
+Li                   0.98         182.0             5.392             0.618   
+Be                   1.57         153.0             9.323               NaN   
+B                    2.04         192.0             8.298             0.277   
+
+       OxidationStates StandardState  MeltingPoint  BoilingPoint   Density  \
+Symbol                                                                       
+H               +1, -1           Gas         13.81         20.28  0.000090   
+He                   0           Gas          0.95          4.22  0.000179   
+Li                  +1         Solid        453.65       1615.00  0.534000   
+Be                  +2         Solid       1560.00       2744.00  1.850000   
+B                   +3         Solid       2348.00       4273.00  2.370000   
+
+                  GroupBlock YearDiscovered  
+Symbol                                       
+H                   Nonmetal           1766  
+He                 Noble gas           1868  
+Li              Alkali metal           1817  
+Be      Alkaline earth metal           1798  
+B                  Metalloid           1808  
+</pre></div>
+</div>
+<img alt="../../_images/e439cd5ff18993819fcf6549b2d9d16c103b0d9eece903f29d81188fae098ab9.png" src="../../_images/e439cd5ff18993819fcf6549b2d9d16c103b0d9eece903f29d81188fae098ab9.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">periodictable_csv_datapath</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Replace this with your actual DataFrame if needed</span>
+<span class="c1">#df = pd.read_csv(&quot;~/data/pubchem_periodic_table.csv&quot;)  # or use your in-memory version</span>
+
+<span class="c1"># Drop NaNs if necessary</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;AtomicRadius&quot;</span><span class="p">,</span> <span class="s2">&quot;GroupBlock&quot;</span><span class="p">])</span>
+
+<span class="c1"># Create the displot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+            <span class="n">x</span><span class="o">=</span><span class="s2">&quot;AtomicRadius&quot;</span><span class="p">,</span>
+            <span class="n">col</span><span class="o">=</span><span class="s2">&quot;GroupBlock&quot;</span><span class="p">,</span>       <span class="c1"># faceted by block</span>
+            <span class="n">col_wrap</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>        <span class="c1"># wrap into a 2-column grid</span>
+            <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+            <span class="n">height</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span>
+            <span class="n">aspect</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Distribution of Atomic Radii by Periodic Table Block&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ec397edb897cba8b59b235fee608049ed8c1fc072ec4551b4f94b7187451cf33.png" src="../../_images/ec397edb897cba8b59b235fee608049ed8c1fc072ec4551b4f94b7187451cf33.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Load data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">periodictable_csv_datapath</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Drop missing values</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;AtomicRadius&quot;</span><span class="p">,</span> <span class="s2">&quot;GroupBlock&quot;</span><span class="p">])</span>
+
+<span class="c1"># Create the displot and assign it to g</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+                <span class="n">x</span><span class="o">=</span><span class="s2">&quot;AtomicRadius&quot;</span><span class="p">,</span>
+                <span class="n">col</span><span class="o">=</span><span class="s2">&quot;GroupBlock&quot;</span><span class="p">,</span>       <span class="c1"># Facet by GroupBlock</span>
+                <span class="n">col_wrap</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+                <span class="n">height</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span>
+                <span class="n">aspect</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="c1"># Remove &quot;GroupBlock = &quot; from titles</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_titles</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{col_name}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Title and layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Distribution of Atomic Radii by Periodic Table Block&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c89ebda74c6bc5279c473652b0497f468cfb952b7ca85b37d21e49859bb37b85.png" src="../../_images/c89ebda74c6bc5279c473652b0497f468cfb952b7ca85b37d21e49859bb37b85.png" />
+</div>
+</div>
+</section>
+<section id="rug-plot">
+<h3>Rug Plot<a class="headerlink" href="#rug-plot" title="Link to this heading">#</a></h3>
+<p>Here we are plotting the KDE, which is a probablity density function with a rug plot under it
+$<span class="math notranslate nohighlight">\(
+\int_{-\infty}^{\infty} f(x) \, dx = 1
+\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Load periodic table data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">periodictable_csv_datapath</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Clean data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;IonizationEnergy&quot;</span><span class="p">])</span>
+
+<span class="c1"># Plot KDE with rug</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;IonizationEnergy&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">rugplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;IonizationEnergy&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+
+<span class="c1"># Labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of First Ionization Energies (eV)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Ionization Energy (eV)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/be996b19c76b47a6d68313c1c754b02c4751a215cf6cb94218d1d1056ae419d9.png" src="../../_images/be996b19c76b47a6d68313c1c754b02c4751a215cf6cb94218d1d1056ae419d9.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Load and clean the data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">periodictable_csv_datapath</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;IonizationEnergy&quot;</span><span class="p">,</span> <span class="s2">&quot;GroupBlock&quot;</span><span class="p">])</span>
+
+<span class="c1"># Plot KDE and rug, grouped by GroupBlock</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;IonizationEnergy&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;GroupBlock&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">rugplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;IonizationEnergy&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;GroupBlock&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+
+<span class="c1"># Labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;First Ionization Energy by Periodic Table Group Block&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Ionization Energy (eV)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f0212c338a87baed42bf27e9af995e86f8a0760bcb44f0158a3222e9d33af769.png" src="../../_images/f0212c338a87baed42bf27e9af995e86f8a0760bcb44f0158a3222e9d33af769.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="acknowledgements">
+<h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">#</a></h1>
+<p>This content was developed with assistance from <a class="reference external" href="https://www.perplexity.ai/">Perplexity AI</a> and <a class="reference external" href="https://chatgpt.com/">Chat GPT</a>. Multiple queries were made during the Fall 2024 and the Spring 2025.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "py4sci"
+        },
+        kernelOptions: {
+            name: "py4sci",
+            path: "./content/module3-packages1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'py4sci'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03-4-matplotlib.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">4. MatPlotLib</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03-6-seaborn.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">7. Seaborn Part 2</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5. Seaborn Part 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn-vs-matplotlib">Seaborn vs. Matplotlib</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-seaborn">Install Seaborn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-with-pandas-dataframes">Integration with Pandas DataFrames</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#built-in-data-sets">Built-in Data Sets</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn-objects">2. Seaborn Objects</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#major-classes">2.1 Major Classes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-functions">2.2 General Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-functions">2.3 Plotting Functions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn-plots">3. Seaborn Plots</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relational-plots">3.1 Relational Plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scatterplot-sns-scatterplot">Scatterplot: sns.scatterplot()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#line-plot-sns-lineplot">Line Plot: sns.lineplot()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#relation-plots-faceting-sns-realplot">Relation Plots + Faceting: sns.realplot()</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-functions">3.2 Distribution Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms-sns-histplot">Histograms: sns.histplot()</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subplots-vs-faceted-plots">Subplots vs. Faceted Plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subplots-matplotlib-s-plt-subplot">Subplots (Matplotlib’s plt.subplot())</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#facets-seaborn-s-facetgrid">Facets (Seaborn’s FacetGrid)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kde-kernel-density-estimate">KDE (Kernel Density Estimate)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ecdf-estimated-cumulative-distribution-function">ECDF (Estimated Cumulative Distribution Function)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-grid-sns-displot">Distribution Grid (sns.displot())</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rug-plot">Rug Plot</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Robert Belford
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1998 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>7. Seaborn Part 3 &#8212; Draft Python for Science Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e52fa269" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom-checkpoint.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/module3-packages1/03-7-seaborn';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="8. SciPy" href="03-8-scipy.html" />
+    <link rel="prev" title="7. Seaborn Part 2" href="03-6-seaborn.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Draft Python for Science Book - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Draft Python for Science Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Python for Science
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../math-test.html">In a Markdown cell:</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../module1-setup/README.html">Module 1: Getting Set Up</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-1-setupcomputer.html">1. Setting up your computer</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-2-jynbgettingstarted.html">2: Runnng and Creating Jupyter Notebooks</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-3-jynb-intro.html">3. Overview of Jupyter Notebooks</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-5-git.html">5. Git and GitHub</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-6-oop.html">6. Object Oriented Programming</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-7-virtual-environments.html">7. Virtual Environments</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../module2-oop-data-structures/README.html">Module 2: Data Structures</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-1-primitive-data-structures.html">1. Primative Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-2-py-calculator.html">2. Python as a Calculator</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-3-composite-data-structures.html">3. Composite Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-4-built-in-modules.html">4. Built-In Modules</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-5-control-structures.html">5. Logic and Control Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-6-external-data-structures.html">6. External Data Structures</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-7-db-external-data-structures.html">7. Databases as External Data Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-8-api-external-data-structures.html">8. APIs as External Data Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-9-webscrape-external-data-structures.html">9. WebScraping as External Data Structures</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="README.html">Module 3: Packages</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="03-1-numpy.html">1. NumPy</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-2-pandas.html">2. Pandas</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-3-xarray.html">3. Xarray</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-4-matplotlib.html">4. MatPlotLib</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-5-seaborn.html">5. Seaborn Part 1</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-6-seaborn.html">7. Seaborn Part 2</a></li>
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">7. Seaborn Part 3</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-8-scipy.html">8. SciPy</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-9-rdkit.html">9. RDKit</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-10-rdkit-descriptors.html">10. RDKit and Descriptors</a></li>
+
+
+
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/rebelford/py4scibook/master?urlpath=lab/tree/docs/content/module3-packages1/03-7-seaborn.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://your-jupyterhub-url.com/hub/user-redirect/git-pull?repo=https%3A//github.com/rebelford/py4scibook&urlpath=lab/tree/py4scibook/docs/content/module3-packages1/03-7-seaborn.ipynb&branch=master" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on JupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="JupyterHub logo" src="../../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rebelford/py4scibook/blob/master/docs/content/module3-packages1/03-7-seaborn.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook/issues/new?title=Issue%20on%20page%20%2Fcontent/module3-packages1/03-7-seaborn.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/module3-packages1/03-7-seaborn.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>7. Seaborn Part 3</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">7. Seaborn Part 3</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn-plots-cont">3. Seaborn Plots (cont)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-plots">3.4 Regression Plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-plot-sns-regplot">Regression Plot (sns.regplot())</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistics-regression-sns-lmplot">Logistics Regression (sns.lmplot())</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmaps-grids">3.5 Heatmaps/grids</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmaps">Heatmaps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cluster-map">Cluster Map</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-dendogram">Understanding the dendogram</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#clutermap-and-euclidean-distance">clutermap() and Euclidean distance</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pair-plots-sns-pairplot">Pair Plots (sns.pairplot())</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-plot-sns-jointplot">Joint Plot (sns.jointplot())</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="seaborn-part-3">
+<span id="module3-packages1-03-7-seaborn"></span><h1>7. Seaborn Part 3<a class="headerlink" href="#seaborn-part-3" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="seaborn-plots-cont">
+<h1>3. Seaborn Plots (cont)<a class="headerlink" href="#seaborn-plots-cont" title="Link to this heading">#</a></h1>
+<section id="regression-plots">
+<h2>3.4 Regression Plots<a class="headerlink" href="#regression-plots" title="Link to this heading">#</a></h2>
+<section id="regression-plot-sns-regplot">
+<h3>Regression Plot (sns.regplot())<a class="headerlink" href="#regression-plot-sns-regplot" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Plots scatter points of your data.</p></li>
+<li><p>Overlays a linear regression line (by default).</p></li>
+<li><p>Uses NumPy and SciPy internally to calculate the least squares best fit line.
+$<span class="math notranslate nohighlight">\(
+y = mx + b
+\)</span>$</p></li>
+</ul>
+<p>Where:</p>
+<ul class="simple">
+<li><p>m is the slope.</p></li>
+<li><p>b is the intercept.</p></li>
+</ul>
+<p>It finds the line that minimizes the squared vertical distances (errors) from the data points to the line:
+$<span class="math notranslate nohighlight">\(
+\min \sum (y_i - (mx_i + b))^2
+\)</span>$</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Seaborn Option</p></th>
+<th class="head"><p>Method Used</p></th>
+<th class="head"><p>Function Called</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">order=1</span></code> (default)</p></td>
+<td><p>Linear regression</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scipy.stats.linregress()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">order</span> <span class="pre">&gt;</span> <span class="pre">1</span></code></p></td>
+<td><p>Polynomial regression</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">numpy.polyfit()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lowess=True</span></code></p></td>
+<td><p>Locally weighted smoothing</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">statsmodels.nonparametric.lowess()</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>lowess = LOcally WEighted Scatterplot Smoothing</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">x</span></code></p></td>
+<td><p>str or array</p></td>
+<td><p>Variable for x-axis</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">y</span></code></p></td>
+<td><p>str or array</p></td>
+<td><p>Variable for y-axis</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">data</span></code></p></td>
+<td><p>DataFrame</p></td>
+<td><p>Data source containing <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fit_reg</span></code></p></td>
+<td><p>bool</p></td>
+<td><p>Whether to draw the regression line (<code class="docutils literal notranslate"><span class="pre">True</span></code> by default)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ci</span></code></p></td>
+<td><p>int or None</p></td>
+<td><p>Size of confidence interval in percent (default=95). Use <code class="docutils literal notranslate"><span class="pre">None</span></code> to hide.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_boot</span></code></p></td>
+<td><p>int</p></td>
+<td><p>Number of bootstrap samples to estimate <code class="docutils literal notranslate"><span class="pre">ci</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">line_kws</span></code></p></td>
+<td><p>dict</p></td>
+<td><p>Keyword args for customizing the regression line (e.g., color, linewidth)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">scatter_kws</span></code></p></td>
+<td><p>dict</p></td>
+<td><p>Keyword args for customizing the scatterplot (e.g., s=size, alpha)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">order</span></code></p></td>
+<td><p>int</p></td>
+<td><p>Degree of polynomial regression (1 = linear)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">logx</span></code></p></td>
+<td><p>bool</p></td>
+<td><p>Set <code class="docutils literal notranslate"><span class="pre">True</span></code> for log-scale x-axis</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">x_jitter</span></code></p></td>
+<td><p>float</p></td>
+<td><p>Add jitter to x-values to reduce overlap</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">y_jitter</span></code></p></td>
+<td><p>float</p></td>
+<td><p>Add jitter to y-values</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">truncate</span></code></p></td>
+<td><p>bool</p></td>
+<td><p>Whether to truncate the regression line to data range</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dropna</span></code></p></td>
+<td><p>bool</p></td>
+<td><p>Whether to ignore missing values</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lowess</span></code></p></td>
+<td><p>bool</p></td>
+<td><p>Fit a nonparametric LOWESS regression curve</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">color</span></code></p></td>
+<td><p>str</p></td>
+<td><p>Color for both points and line</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ax</span></code></p></td>
+<td><p>matplotlib.axes</p></td>
+<td><p>Existing axis to draw the plot on</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">alkanes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Alkane&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Methane&quot;</span><span class="p">,</span> <span class="s2">&quot;Ethane&quot;</span><span class="p">,</span> <span class="s2">&quot;Propane&quot;</span><span class="p">,</span> <span class="s2">&quot;Butane&quot;</span><span class="p">,</span> <span class="s2">&quot;Pentane&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;Hexane&quot;</span><span class="p">,</span> <span class="s2">&quot;Heptane&quot;</span><span class="p">,</span> <span class="s2">&quot;Octane&quot;</span><span class="p">,</span> <span class="s2">&quot;Nonane&quot;</span><span class="p">,</span> <span class="s2">&quot;Decane&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Carbons&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)),</span>
+    <span class="s2">&quot;MolarMass&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">16.04</span><span class="p">,</span> <span class="mf">30.07</span><span class="p">,</span> <span class="mf">44.10</span><span class="p">,</span> <span class="mf">58.12</span><span class="p">,</span> <span class="mf">72.15</span><span class="p">,</span>
+                  <span class="mf">86.18</span><span class="p">,</span> <span class="mf">100.21</span><span class="p">,</span> <span class="mf">114.23</span><span class="p">,</span> <span class="mf">128.26</span><span class="p">,</span> <span class="mf">142.29</span><span class="p">],</span>
+    <span class="s2">&quot;BoilingPoint&quot;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">161.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">88.6</span><span class="p">,</span> <span class="o">-</span><span class="mf">42.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">36.1</span><span class="p">,</span>
+                     <span class="mf">68.7</span><span class="p">,</span> <span class="mf">98.4</span><span class="p">,</span> <span class="mf">125.6</span><span class="p">,</span> <span class="mf">150.8</span><span class="p">,</span> <span class="mf">174.1</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+
+<span class="c1"># Regression plot: Boiling Point vs. Molar Mass</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">alkanes</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;MolarMass&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;BoilingPoint&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Boiling Point vs. Molar Mass for Linear Alkanes&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Molar Mass (g/mol)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Boiling Point (°C)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e50282af7a850924db15e38dfeb82806fac7569808f16c11ca0750d87cdd00af.png" src="../../_images/e50282af7a850924db15e38dfeb82806fac7569808f16c11ca0750d87cdd00af.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">linregress</span>
+
+<span class="c1"># Extract x and y data from your DataFrame</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">alkanes</span><span class="p">[</span><span class="s2">&quot;MolarMass&quot;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">alkanes</span><span class="p">[</span><span class="s2">&quot;BoilingPoint&quot;</span><span class="p">]</span>
+
+<span class="c1"># Perform linear regression</span>
+<span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> <span class="n">linregress</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Print slope and intercept</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Slope: </span><span class="si">{</span><span class="n">slope</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intercept: </span><span class="si">{</span><span class="n">intercept</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R²: </span><span class="si">{</span><span class="n">r_value</span><span class="o">**</span><span class="mi">2</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p value: </span><span class="si">{</span><span class="n">p_value</span><span class="o">**</span><span class="mi">2</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, if p value &lt;0.05 slope is statistically significant&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;std_err: </span><span class="si">{</span><span class="n">std_err</span><span class="o">**</span><span class="mi">2</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, (smaller the better)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Slope: 2.534
+Intercept: -164.469
+R²: 0.972
+p value: 0.000, if p value &lt;0.05 slope is statistically significant
+std_err: 0.023, (smaller the better)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Create the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Annotate with equation</span>
+<span class="n">equation</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;y = </span><span class="si">{</span><span class="n">slope</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">x + </span><span class="si">{</span><span class="n">intercept</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s2">R² = </span><span class="si">{</span><span class="n">r_value</span><span class="o">**</span><span class="mi">2</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="n">equation</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s2">&quot;round&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">))</span>
+
+<span class="c1"># Labels</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Boiling Point vs. Molar Mass for Linear Alkanes&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Molar Mass (g/mol)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Boiling Point (°C)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/db80c405aa3a637d8e1d33c87513883ab1bd5eda87079f9031b06b2ae772d453.png" src="../../_images/db80c405aa3a637d8e1d33c87513883ab1bd5eda87079f9031b06b2ae772d453.png" />
+</div>
+</div>
+</section>
+<section id="logistics-regression-sns-lmplot">
+<h3>Logistics Regression (sns.lmplot())<a class="headerlink" href="#logistics-regression-sns-lmplot" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Carbon Atoms</p></th>
+<th class="head"><p>Alkane</p></th>
+<th class="head"><p>Molar Mass (g/mol)</p></th>
+<th class="head"><p>Boiling Point (°C)</p></th>
+<th class="head"><p>Alcohol</p></th>
+<th class="head"><p>Molar Mass (g/mol)</p></th>
+<th class="head"><p>Boiling Point (°C)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Methane</p></td>
+<td><p>16.04</p></td>
+<td><p>-161.5</p></td>
+<td><p>Methanol</p></td>
+<td><p>32.04</p></td>
+<td><p>64.7</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Ethane</p></td>
+<td><p>30.07</p></td>
+<td><p>-88.6</p></td>
+<td><p>Ethanol</p></td>
+<td><p>46.07</p></td>
+<td><p>78.4</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Propane</p></td>
+<td><p>44.10</p></td>
+<td><p>-42.1</p></td>
+<td><p>1-Propanol</p></td>
+<td><p>60.10</p></td>
+<td><p>97.0</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Butane</p></td>
+<td><p>58.12</p></td>
+<td><p>-0.5</p></td>
+<td><p>1-Butanol</p></td>
+<td><p>74.12</p></td>
+<td><p>117.7</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Pentane</p></td>
+<td><p>72.15</p></td>
+<td><p>36.1</p></td>
+<td><p>1-Pentanol</p></td>
+<td><p>88.15</p></td>
+<td><p>137.9</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Hexane</p></td>
+<td><p>86.18</p></td>
+<td><p>68.7</p></td>
+<td><p>1-Hexanol</p></td>
+<td><p>102.18</p></td>
+<td><p>157.5</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>Heptane</p></td>
+<td><p>100.21</p></td>
+<td><p>98.4</p></td>
+<td><p>1-Heptanol</p></td>
+<td><p>116.21</p></td>
+<td><p>176.9</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>Octane</p></td>
+<td><p>114.23</p></td>
+<td><p>125.7</p></td>
+<td><p>1-Octanol</p></td>
+<td><p>130.23</p></td>
+<td><p>195.0</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>Nonane</p></td>
+<td><p>128.26</p></td>
+<td><p>150.8</p></td>
+<td><p>1-Nonanol</p></td>
+<td><p>144.26</p></td>
+<td><p>212.6</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>Decane</p></td>
+<td><p>142.29</p></td>
+<td><p>174.0</p></td>
+<td><p>1-Decanol</p></td>
+<td><p>158.29</p></td>
+<td><p>229.7</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Data preparation</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;CarbonAtoms&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;MolarMass&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">16.04</span><span class="p">,</span> <span class="mf">30.07</span><span class="p">,</span> <span class="mf">44.10</span><span class="p">,</span> <span class="mf">58.12</span><span class="p">,</span> <span class="mf">72.15</span><span class="p">,</span> <span class="mf">86.18</span><span class="p">,</span> <span class="mf">100.21</span><span class="p">,</span> <span class="mf">114.23</span><span class="p">,</span> <span class="mf">128.26</span><span class="p">,</span> <span class="mf">142.29</span><span class="p">,</span>
+                  <span class="mf">32.04</span><span class="p">,</span> <span class="mf">46.07</span><span class="p">,</span> <span class="mf">60.10</span><span class="p">,</span> <span class="mf">74.12</span><span class="p">,</span> <span class="mf">88.15</span><span class="p">,</span> <span class="mf">102.18</span><span class="p">,</span> <span class="mf">116.21</span><span class="p">,</span> <span class="mf">130.23</span><span class="p">,</span> <span class="mf">144.26</span><span class="p">,</span> <span class="mf">158.29</span><span class="p">],</span>
+    <span class="s1">&#39;BoilingPoint&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">161.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">88.6</span><span class="p">,</span> <span class="o">-</span><span class="mf">42.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">36.1</span><span class="p">,</span> <span class="mf">68.7</span><span class="p">,</span> <span class="mf">98.4</span><span class="p">,</span> <span class="mf">125.7</span><span class="p">,</span> <span class="mf">150.8</span><span class="p">,</span> <span class="mf">174.0</span><span class="p">,</span>
+                     <span class="mf">64.7</span><span class="p">,</span> <span class="mf">78.4</span><span class="p">,</span> <span class="mf">97.0</span><span class="p">,</span> <span class="mf">117.7</span><span class="p">,</span> <span class="mf">137.9</span><span class="p">,</span> <span class="mf">157.5</span><span class="p">,</span> <span class="mf">176.9</span><span class="p">,</span> <span class="mf">195.0</span><span class="p">,</span> <span class="mf">212.6</span><span class="p">,</span> <span class="mf">229.7</span><span class="p">],</span>
+    <span class="s1">&#39;CompoundType&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Alkane&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span>
+<span class="p">}</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Plotting</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;MolarMass&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;BoilingPoint&#39;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;CompoundType&#39;</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">aspect</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+    <span class="n">markers</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">],</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;muted&#39;</span><span class="p">,</span>
+    <span class="n">ci</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+
+<span class="c1"># Titles and labels</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_axis_labels</span><span class="p">(</span><span class="s1">&#39;Molar Mass (g/mol)&#39;</span><span class="p">,</span> <span class="s1">&#39;Boiling Point (°C)&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Boiling Point vs. Molar Mass for Alkanes and Primary Alcohols&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+
+<span class="c1"># Show plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/8afe77d740c35bf1d8463b466331f81123abdc9306a335f71f083ae3258c5550.png" src="../../_images/8afe77d740c35bf1d8463b466331f81123abdc9306a335f71f083ae3258c5550.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">linregress</span>
+
+<span class="c1"># Prepare the data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;CarbonAtoms&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">&#39;MolarMass&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">16.04</span><span class="p">,</span> <span class="mf">30.07</span><span class="p">,</span> <span class="mf">44.10</span><span class="p">,</span> <span class="mf">58.12</span><span class="p">,</span> <span class="mf">72.15</span><span class="p">,</span> <span class="mf">86.18</span><span class="p">,</span> <span class="mf">100.21</span><span class="p">,</span> <span class="mf">114.23</span><span class="p">,</span> <span class="mf">128.26</span><span class="p">,</span> <span class="mf">142.29</span><span class="p">,</span>
+                  <span class="mf">32.04</span><span class="p">,</span> <span class="mf">46.07</span><span class="p">,</span> <span class="mf">60.10</span><span class="p">,</span> <span class="mf">74.12</span><span class="p">,</span> <span class="mf">88.15</span><span class="p">,</span> <span class="mf">102.18</span><span class="p">,</span> <span class="mf">116.21</span><span class="p">,</span> <span class="mf">130.23</span><span class="p">,</span> <span class="mf">144.26</span><span class="p">,</span> <span class="mf">158.29</span><span class="p">],</span>
+    <span class="s1">&#39;BoilingPoint&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">161.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">88.6</span><span class="p">,</span> <span class="o">-</span><span class="mf">42.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">36.1</span><span class="p">,</span> <span class="mf">68.7</span><span class="p">,</span> <span class="mf">98.4</span><span class="p">,</span> <span class="mf">125.7</span><span class="p">,</span> <span class="mf">150.8</span><span class="p">,</span> <span class="mf">174.0</span><span class="p">,</span>
+                     <span class="mf">64.7</span><span class="p">,</span> <span class="mf">78.4</span><span class="p">,</span> <span class="mf">97.0</span><span class="p">,</span> <span class="mf">117.7</span><span class="p">,</span> <span class="mf">137.9</span><span class="p">,</span> <span class="mf">157.5</span><span class="p">,</span> <span class="mf">176.9</span><span class="p">,</span> <span class="mf">195.0</span><span class="p">,</span> <span class="mf">212.6</span><span class="p">,</span> <span class="mf">229.7</span><span class="p">],</span>
+    <span class="s1">&#39;CompoundType&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Alkane&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;Alcohol&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span>
+<span class="p">}</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Perform regression analysis for each compound type</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">compound</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Alkane&#39;</span><span class="p">,</span> <span class="s1">&#39;Alcohol&#39;</span><span class="p">]:</span>
+    <span class="n">subset</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;CompoundType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">compound</span><span class="p">]</span>
+    <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">r_value</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">std_err</span> <span class="o">=</span> <span class="n">linregress</span><span class="p">(</span><span class="n">subset</span><span class="p">[</span><span class="s1">&#39;MolarMass&#39;</span><span class="p">],</span> <span class="n">subset</span><span class="p">[</span><span class="s1">&#39;BoilingPoint&#39;</span><span class="p">])</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">compound</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;slope&#39;</span><span class="p">:</span> <span class="n">slope</span><span class="p">,</span>
+        <span class="s1">&#39;intercept&#39;</span><span class="p">:</span> <span class="n">intercept</span><span class="p">,</span>
+        <span class="s1">&#39;r_squared&#39;</span><span class="p">:</span> <span class="n">r_value</span><span class="o">**</span><span class="mi">2</span>
+    <span class="p">}</span>
+
+<span class="c1"># Create the plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;MolarMass&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;BoilingPoint&#39;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;CompoundType&#39;</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">aspect</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+    <span class="n">markers</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">],</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;muted&#39;</span><span class="p">,</span>
+    <span class="n">ci</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+
+<span class="c1"># Annotate regression equations</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">ax</span>  <span class="c1"># Get the Matplotlib Axes object</span>
+<span class="n">text_y</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Alkane&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span>
+    <span class="s1">&#39;Alcohol&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">70</span>
+<span class="p">}</span>
+<span class="k">for</span> <span class="n">compound</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">compound</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="s2">$y = </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;slope&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">x + </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;intercept&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$</span><span class="se">\n</span><span class="s2">$R^2 = </span><span class="si">{</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;r_squared&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">$&quot;</span>
+    <span class="n">x_pos</span> <span class="o">=</span> <span class="mi">90</span> <span class="k">if</span> <span class="n">compound</span> <span class="o">==</span> <span class="s2">&quot;Alkane&quot;</span> <span class="k">else</span> <span class="mi">105</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x_pos</span><span class="p">,</span> <span class="n">text_y</span><span class="p">[</span><span class="n">compound</span><span class="p">],</span> <span class="n">label</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s2">&quot;round&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">))</span>
+
+<span class="c1"># Final plot tweaks</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_axis_labels</span><span class="p">(</span><span class="s1">&#39;Molar Mass (g/mol)&#39;</span><span class="p">,</span> <span class="s1">&#39;Boiling Point (°C)&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Boiling Point vs. Molar Mass for Alkanes and Primary Alcohols&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/583f5c3a2a52ce49856341deaed1d2a6d33175c285ecf955ba3f732913eb2517.png" src="../../_images/583f5c3a2a52ce49856341deaed1d2a6d33175c285ecf955ba3f732913eb2517.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="heatmaps-grids">
+<h2>3.5 Heatmaps/grids<a class="headerlink" href="#heatmaps-grids" title="Link to this heading">#</a></h2>
+<section id="heatmaps">
+<h3>Heatmaps<a class="headerlink" href="#heatmaps" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># Set path to your aquation.csv file</span>
+<span class="n">aquation_csv_datapath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data/spectra/aquation.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step 1: Load the CSV</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">aquation_csv_datapath</span><span class="p">)</span>
+
+<span class="c1"># Step 2: Promote first row to column headers (time values in minutes)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Step 3: Rename first column to &quot;Wavelength&quot; and set it as index</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="s2">&quot;Wavelength&quot;</span><span class="p">})</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Wavelength&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Step 4: Convert all values to numeric (in case of any formatting issues)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+
+<span class="c1"># Optional: Sort index just in case</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+
+<span class="c1"># Step 5: Plot the heatmap</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;magma&quot;</span><span class="p">,</span>
+    <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Absorbance&#39;</span><span class="p">},</span>
+    <span class="n">xticklabels</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>  <span class="c1"># Show every 10th time point on x-axis</span>
+    <span class="n">yticklabels</span><span class="o">=</span><span class="mi">10</span>   <span class="c1"># Show every 10th wavelength on y-axis</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Time-Resolved UV-VIS Absorbance Heatmap&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (minutes)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Wavelength (nm)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b4bbde8dcdd6e532a2ebe738cd10ac1f571b90f74c36e5f70cd295397db1da56.png" src="../../_images/b4bbde8dcdd6e532a2ebe738cd10ac1f571b90f74c36e5f70cd295397db1da56.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># Load PubChem periodic table data</span>
+<span class="n">periodictable_csv_datapath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data/pubchem_data/PubChemElements_all.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">periodictable_csv_datapath</span><span class="p">)</span>
+
+<span class="c1"># Build periodic table layout (main group + transition elements)</span>
+<span class="n">pt_layout</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># Period 1</span>
+    <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="s2">&quot;He&quot;</span><span class="p">),</span>
+    <span class="c1"># Period 2</span>
+    <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Li&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Be&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="s2">&quot;N&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="s2">&quot;O&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="s2">&quot;Ne&quot;</span><span class="p">),</span>
+    <span class="c1"># Period 3</span>
+    <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Na&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Mg&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="s2">&quot;Al&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="s2">&quot;P&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="s2">&quot;S&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="s2">&quot;Cl&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="s2">&quot;Ar&quot;</span><span class="p">),</span>
+    <span class="c1"># Period 4</span>
+    <span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Ca&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;Sc&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;Ti&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;V&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;Cr&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;Mn&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">26</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;Fe&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">27</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;Co&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;Ni&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">29</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;Cu&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;Zn&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">31</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="s2">&quot;Ga&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="s2">&quot;Ge&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">33</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="s2">&quot;As&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">34</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="s2">&quot;Se&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="s2">&quot;Br&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="s2">&quot;Kr&quot;</span><span class="p">),</span>
+    <span class="c1"># Period 5</span>
+    <span class="p">(</span><span class="mi">37</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Rb&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">38</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Sr&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">39</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;Zr&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">41</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;Nb&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;Mo&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">43</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;Tc&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">44</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;Ru&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;Rh&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">46</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;Pd&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">47</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;Ag&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">48</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;Cd&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">49</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="s2">&quot;In&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="s2">&quot;Sn&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">51</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="s2">&quot;Sb&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">52</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="s2">&quot;Te&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">53</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">54</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="s2">&quot;Xe&quot;</span><span class="p">),</span>
+    <span class="c1"># Period 6 (no lanthanides)</span>
+    <span class="p">(</span><span class="mi">55</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Cs&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">56</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Ba&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">72</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;Hf&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">73</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;Ta&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">74</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;W&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;Re&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">76</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;Os&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">77</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;Ir&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">78</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;Pt&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">79</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;Au&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;Hg&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">81</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="s2">&quot;Tl&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">82</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="s2">&quot;Pb&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">83</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="s2">&quot;Bi&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">84</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="s2">&quot;Po&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">85</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="s2">&quot;At&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">86</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="s2">&quot;Rn&quot;</span><span class="p">),</span>
+    <span class="c1"># Period 7 (no actinides)</span>
+    <span class="p">(</span><span class="mi">87</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Fr&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">88</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Ra&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">104</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;Rf&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">105</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;Db&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">106</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;Sg&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">107</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;Bh&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">108</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s2">&quot;Hs&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">109</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="s2">&quot;Mt&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">110</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;Ds&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="s2">&quot;Rg&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">112</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="s2">&quot;Cn&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">113</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="s2">&quot;Nh&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">114</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="s2">&quot;Fl&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">115</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="s2">&quot;Mc&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">116</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="s2">&quot;Lv&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">117</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="s2">&quot;Ts&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">118</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="s2">&quot;Og&quot;</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># Create layout DataFrame</span>
+<span class="n">template_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pt_layout</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;AtomicNumber&quot;</span><span class="p">,</span> <span class="s2">&quot;Group&quot;</span><span class="p">,</span> <span class="s2">&quot;Symbol&quot;</span><span class="p">])</span>
+<span class="n">template_df</span><span class="p">[</span><span class="s2">&quot;Period&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Fill with placeholder</span>
+
+<span class="c1"># Assign periods by atomic number range</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">rng</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">18</span><span class="p">),</span> <span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">36</span><span class="p">),</span> <span class="p">(</span><span class="mi">37</span><span class="p">,</span> <span class="mi">54</span><span class="p">),</span> <span class="p">(</span><span class="mi">55</span><span class="p">,</span> <span class="mi">86</span><span class="p">),</span> <span class="p">(</span><span class="mi">87</span><span class="p">,</span> <span class="mi">118</span><span class="p">)],</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">template_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">template_df</span><span class="p">[</span><span class="s2">&quot;AtomicNumber&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">rng</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">template_df</span><span class="p">[</span><span class="s2">&quot;AtomicNumber&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">rng</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="s2">&quot;Period&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
+
+<span class="c1"># Merge with PubChem electronegativity data</span>
+<span class="n">merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">template_df</span><span class="p">,</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;AtomicNumber&quot;</span><span class="p">,</span> <span class="s2">&quot;Electronegativity&quot;</span><span class="p">]],</span> <span class="n">on</span><span class="o">=</span><span class="s2">&quot;AtomicNumber&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create 7x18 grid</span>
+<span class="n">heatmap_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">19</span><span class="p">))</span>
+<span class="n">label_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">19</span><span class="p">))</span>
+
+<span class="c1"># Populate grid with electronegativity and element symbol</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">merged</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">period</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;Period&quot;</span><span class="p">])</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;Group&quot;</span><span class="p">])</span>
+    <span class="n">heatmap_data</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">period</span><span class="p">,</span> <span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;Electronegativity&quot;</span><span class="p">]</span>
+    <span class="n">label_data</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">period</span><span class="p">,</span> <span class="n">group</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;Symbol&quot;</span><span class="p">]</span>
+
+<span class="c1"># Plot the heatmap</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+    <span class="n">heatmap_data</span><span class="p">,</span>
+    <span class="n">annot</span><span class="o">=</span><span class="n">label_data</span><span class="p">,</span>
+    <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">linecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span>
+    <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Electronegativity&#39;</span><span class="p">},</span>
+    <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">mask</span><span class="o">=</span><span class="n">heatmap_data</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Electronegativity Heatmap of the Periodic Table (excluding Lanthanides/Actinides)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Group&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Period&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2a81c4e2c841735dcf444ad175f5ca19f183d20f44fb98f3933c3cb313ea1bf5.png" src="../../_images/2a81c4e2c841735dcf444ad175f5ca19f183d20f44fb98f3933c3cb313ea1bf5.png" />
+</div>
+</div>
+</section>
+<section id="cluster-map">
+<h3>Cluster Map<a class="headerlink" href="#cluster-map" title="Link to this heading">#</a></h3>
+<p>Cluster maps utilize a dendogram, which is a dichotomous tree</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="c1"># Step 1: Define simplified chemistry dataset with Xenon replacing Helium</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Element&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Li&quot;</span><span class="p">,</span> <span class="s2">&quot;Na&quot;</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="s2">&quot;Rb&quot;</span><span class="p">,</span>             <span class="c1"># Alkali metals</span>
+        <span class="s2">&quot;Be&quot;</span><span class="p">,</span> <span class="s2">&quot;Mg&quot;</span><span class="p">,</span> <span class="s2">&quot;Ca&quot;</span><span class="p">,</span> <span class="s2">&quot;Sr&quot;</span><span class="p">,</span>            <span class="c1"># Alkaline earth metals</span>
+        <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;Cl&quot;</span><span class="p">,</span> <span class="s2">&quot;Br&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span>              <span class="c1"># Halogens</span>
+        <span class="s2">&quot;Ne&quot;</span><span class="p">,</span> <span class="s2">&quot;Ar&quot;</span><span class="p">,</span> <span class="s2">&quot;Kr&quot;</span><span class="p">,</span> <span class="s2">&quot;Xe&quot;</span>             <span class="c1"># Noble gases</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Group&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Alkali&quot;</span><span class="p">,</span> <span class="s2">&quot;Alkali&quot;</span><span class="p">,</span> <span class="s2">&quot;Alkali&quot;</span><span class="p">,</span> <span class="s2">&quot;Alkali&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">,</span> <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">,</span> <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">,</span> <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Halogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Halogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Halogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Halogen&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;NobleGas&quot;</span><span class="p">,</span> <span class="s2">&quot;NobleGas&quot;</span><span class="p">,</span> <span class="s2">&quot;NobleGas&quot;</span><span class="p">,</span> <span class="s2">&quot;NobleGas&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Valence_s&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Valence_p&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># Step 2: Create DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Element&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Step 3: Extract features and standardize</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Valence_s&quot;</span><span class="p">,</span> <span class="s2">&quot;Valence_p&quot;</span><span class="p">]]</span>
+<span class="n">scaled</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+<span class="n">scaled_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">scaled</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">features</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Step 4: Create color map for row labels</span>
+<span class="n">group_colors</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Alkali&quot;</span><span class="p">:</span> <span class="s2">&quot;#d62728&quot;</span><span class="p">,</span>         <span class="c1"># red</span>
+    <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">:</span> <span class="s2">&quot;#1f77b4&quot;</span><span class="p">,</span>  <span class="c1"># blue</span>
+    <span class="s2">&quot;Halogen&quot;</span><span class="p">:</span> <span class="s2">&quot;#2ca02c&quot;</span><span class="p">,</span>        <span class="c1"># green</span>
+    <span class="s2">&quot;NobleGas&quot;</span><span class="p">:</span> <span class="s2">&quot;#9467bd&quot;</span>        <span class="c1"># purple</span>
+<span class="p">}</span>
+<span class="n">row_colors</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Group&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">group_colors</span><span class="p">)</span>
+
+<span class="c1"># Step 5: Create clustermap with row colors</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span>
+    <span class="n">scaled_df</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;vlag&quot;</span><span class="p">,</span>
+    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">row_cluster</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">col_cluster</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">row_colors</span><span class="o">=</span><span class="n">row_colors</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Clustermap of Elements by Valence Shell Configuration&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d19e99e127779e00159f526f862c9e1270658680e3772bc23c6046227b455d19.png" src="../../_images/d19e99e127779e00159f526f862c9e1270658680e3772bc23c6046227b455d19.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
+<span class="p">]</span>
+
+<span class="n">std_dev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Standard Deviation:&quot;</span><span class="p">,</span> <span class="n">std_dev</span><span class="p">)</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean:&quot;</span><span class="p">,</span> <span class="n">mean</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;z-score for valence_s alkali metal: </span><span class="si">{</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">/</span><span class="n">std_dev</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;z-score for valence_s all others: </span><span class="si">{</span><span class="p">(</span><span class="mi">2</span><span class="o">-</span><span class="n">mean</span><span class="p">)</span><span class="o">/</span><span class="n">std_dev</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Standard Deviation: 0.4330127018922193
+Mean: 1.75
+z-score for valence_s alkali metal: -1.73
+z-score for valence_s all others: 0.58
+</pre></div>
+</div>
+</div>
+</div>
+<section id="understanding-the-dendogram">
+<h4>Understanding the dendogram<a class="headerlink" href="#understanding-the-dendogram" title="Link to this heading">#</a></h4>
+<p>These are <strong>standardized values</strong> (z-scores), meaning:
+$<span class="math notranslate nohighlight">\(
+z = \frac{x - \text{mean}}{\text{std dev}}
+\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(
+z = \frac{x - \mu}{\sigma}
+\)</span>$
+You divide by the standard deviation to normalize the value so that large data sets do not weigh more (there are only 2 electrons in the s orbitals but up to 6 in the p, so the difference between a value and the mean can be larger for the p)</p>
+<p>We are only showing the z values for each of the two features (valence_s and valence_p electrons) and in the next code cell we will add a third feature column for the total configuration</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="c1"># Step 1: Define dataset with valence features</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Element&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Li&quot;</span><span class="p">,</span> <span class="s2">&quot;Na&quot;</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="s2">&quot;Rb&quot;</span><span class="p">,</span>             <span class="c1"># Alkali metals</span>
+        <span class="s2">&quot;Be&quot;</span><span class="p">,</span> <span class="s2">&quot;Mg&quot;</span><span class="p">,</span> <span class="s2">&quot;Ca&quot;</span><span class="p">,</span> <span class="s2">&quot;Sr&quot;</span><span class="p">,</span>            <span class="c1"># Alkaline earth metals</span>
+        <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;Cl&quot;</span><span class="p">,</span> <span class="s2">&quot;Br&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span>              <span class="c1"># Halogens</span>
+        <span class="s2">&quot;Ne&quot;</span><span class="p">,</span> <span class="s2">&quot;Ar&quot;</span><span class="p">,</span> <span class="s2">&quot;Kr&quot;</span><span class="p">,</span> <span class="s2">&quot;Xe&quot;</span>             <span class="c1"># Noble gases</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Group&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Alkali&quot;</span><span class="p">,</span> <span class="s2">&quot;Alkali&quot;</span><span class="p">,</span> <span class="s2">&quot;Alkali&quot;</span><span class="p">,</span> <span class="s2">&quot;Alkali&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">,</span> <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">,</span> <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">,</span> <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Halogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Halogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Halogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Halogen&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;NobleGas&quot;</span><span class="p">,</span> <span class="s2">&quot;NobleGas&quot;</span><span class="p">,</span> <span class="s2">&quot;NobleGas&quot;</span><span class="p">,</span> <span class="s2">&quot;NobleGas&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Valence_s&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Valence_p&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># Step 2: Create DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Element&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Step 3: Add combined valence total</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;Valence_Total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Valence_s&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Valence_p&quot;</span><span class="p">]</span>
+
+<span class="c1"># Step 4: Standardize all three features</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Valence_s&quot;</span><span class="p">,</span> <span class="s2">&quot;Valence_p&quot;</span><span class="p">,</span> <span class="s2">&quot;Valence_Total&quot;</span><span class="p">]]</span>
+<span class="n">scaled</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+<span class="n">scaled_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">scaled</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">features</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">features</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Step 5: Map groups to colors for visual labeling</span>
+<span class="n">group_colors</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Alkali&quot;</span><span class="p">:</span> <span class="s2">&quot;#d62728&quot;</span><span class="p">,</span>         <span class="c1"># red</span>
+    <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">:</span> <span class="s2">&quot;#1f77b4&quot;</span><span class="p">,</span>  <span class="c1"># blue</span>
+    <span class="s2">&quot;Halogen&quot;</span><span class="p">:</span> <span class="s2">&quot;#2ca02c&quot;</span><span class="p">,</span>        <span class="c1"># green</span>
+    <span class="s2">&quot;NobleGas&quot;</span><span class="p">:</span> <span class="s2">&quot;#9467bd&quot;</span>        <span class="c1"># purple</span>
+<span class="p">}</span>
+<span class="n">row_colors</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Group&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">group_colors</span><span class="p">)</span>
+
+<span class="c1"># Step 6: Create clustermap</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span>
+    <span class="n">scaled_df</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;vlag&quot;</span><span class="p">,</span>
+    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">row_cluster</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">col_cluster</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">row_colors</span><span class="o">=</span><span class="n">row_colors</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Clustermap of Valence Electron Configuration (s, p, total)&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b35d4a87321a9a2775082f35a2e271d23f2f236655b5d1684bf03b146a4167c6.png" src="../../_images/b35d4a87321a9a2775082f35a2e271d23f2f236655b5d1684bf03b146a4167c6.png" />
+</div>
+</div>
+</section>
+<section id="clutermap-and-euclidean-distance">
+<h4>clutermap() and Euclidean distance<a class="headerlink" href="#clutermap-and-euclidean-distance" title="Link to this heading">#</a></h4>
+<p>Clustermap() calculates the Euclidean distance across data values for each feature.  First it normalizes each column as some may have more values than others (there are on two s electrons, six p electrons and eight total electrons).</p>
+<ul class="simple">
+<li><p>Treats each row (element) as a vector:
+$<span class="math notranslate nohighlight">\(
+ \vec{x} = [z_{s}, z_{p}, z_{\text{total}}]
+ \)</span>$</p></li>
+<li><p>To compare how similar two elements are (say, Li and Be), we compute the Euclidean distance between their feature vectors:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+d(\vec{x}, \vec{y}) = \sqrt{(x_1 - y_1)^2 + (x_2 - y_2)^2 + (x_3 - y_3)^2}
+\]</div>
+<p>This is just the 3D Pythagorean theorem, measuring how far apart two points are in the space defined by:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( x_1, y_1 \)</span> → <code class="docutils literal notranslate"><span class="pre">Valence_s</span></code></p></li>
+<li><p><span class="math notranslate nohighlight">\( x_2, y_2 \)</span> → <code class="docutils literal notranslate"><span class="pre">Valence_p</span></code></p></li>
+<li><p><span class="math notranslate nohighlight">\( x_3, y_3 \)</span> → <code class="docutils literal notranslate"><span class="pre">Valence_Total</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.mplot3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="c1"># Step 1: Define simplified valence electron dataset</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Element&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Li&quot;</span><span class="p">,</span> <span class="s2">&quot;Na&quot;</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="s2">&quot;Rb&quot;</span><span class="p">,</span>             <span class="c1"># Alkali metals</span>
+        <span class="s2">&quot;Be&quot;</span><span class="p">,</span> <span class="s2">&quot;Mg&quot;</span><span class="p">,</span> <span class="s2">&quot;Ca&quot;</span><span class="p">,</span> <span class="s2">&quot;Sr&quot;</span><span class="p">,</span>            <span class="c1"># Alkaline earth metals</span>
+        <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;Cl&quot;</span><span class="p">,</span> <span class="s2">&quot;Br&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span>              <span class="c1"># Halogens</span>
+        <span class="s2">&quot;Ne&quot;</span><span class="p">,</span> <span class="s2">&quot;Ar&quot;</span><span class="p">,</span> <span class="s2">&quot;Kr&quot;</span><span class="p">,</span> <span class="s2">&quot;Xe&quot;</span>             <span class="c1"># Noble gases</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Group&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Alkali&quot;</span><span class="p">,</span> <span class="s2">&quot;Alkali&quot;</span><span class="p">,</span> <span class="s2">&quot;Alkali&quot;</span><span class="p">,</span> <span class="s2">&quot;Alkali&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">,</span> <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">,</span> <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">,</span> <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Halogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Halogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Halogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Halogen&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;NobleGas&quot;</span><span class="p">,</span> <span class="s2">&quot;NobleGas&quot;</span><span class="p">,</span> <span class="s2">&quot;NobleGas&quot;</span><span class="p">,</span> <span class="s2">&quot;NobleGas&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Valence_s&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Valence_p&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># Step 2: Create DataFrame and compute valence total</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Element&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;Valence_Total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Valence_s&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Valence_p&quot;</span><span class="p">]</span>
+
+<span class="c1"># Step 3: Standardize the features</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Valence_s&quot;</span><span class="p">,</span> <span class="s2">&quot;Valence_p&quot;</span><span class="p">,</span> <span class="s2">&quot;Valence_Total&quot;</span><span class="p">]]</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+<span class="n">scaled_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">scaled</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">features</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Step 4: Create 3D scatter plot</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+
+<span class="c1"># Extract standardized coordinates</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">scaled_df</span><span class="p">[</span><span class="s2">&quot;Valence_s&quot;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">scaled_df</span><span class="p">[</span><span class="s2">&quot;Valence_p&quot;</span><span class="p">]</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">scaled_df</span><span class="p">[</span><span class="s2">&quot;Valence_Total&quot;</span><span class="p">]</span>
+
+<span class="c1"># Plot the points</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;tomato&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)</span>
+
+<span class="c1"># Annotate each element</span>
+<span class="c1"># Smarter label offsetting to reduce overlap</span>
+<span class="n">offsets</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">0.07</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">),</span>
+    <span class="p">(</span><span class="o">-</span><span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">),</span>
+    <span class="p">(</span><span class="o">-</span><span class="mf">0.07</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.04</span><span class="p">),</span>
+    <span class="p">(</span><span class="o">-</span><span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.04</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">0.04</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.07</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.04</span><span class="p">),</span>
+    <span class="p">(</span><span class="o">-</span><span class="mf">0.04</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.07</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.04</span><span class="p">),</span>
+<span class="p">]</span> <span class="o">*</span> <span class="mi">2</span>  <span class="c1"># Extend if needed</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">zs</span><span class="p">),</span> <span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">scaled_df</span><span class="o">.</span><span class="n">itertuples</span><span class="p">(),</span> <span class="n">offsets</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">xs</span> <span class="o">+</span> <span class="n">dx</span><span class="p">,</span> <span class="n">ys</span> <span class="o">+</span> <span class="n">dy</span><span class="p">,</span> <span class="n">zs</span> <span class="o">+</span> <span class="n">dz</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># Axis labels</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Standardized Valence s&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Standardized Valence p&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">&quot;Standardized Valence Total&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;3D Feature Space of Elements (Standardized)&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b50102c5641ad50b28eafd9b54ac868ab75d00110137fc3edb99785229e39635.png" src="../../_images/b50102c5641ad50b28eafd9b54ac868ab75d00110137fc3edb99785229e39635.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial.distance</span><span class="w"> </span><span class="kn">import</span> <span class="n">pdist</span><span class="p">,</span> <span class="n">squareform</span>
+
+<span class="c1"># Step 1: Define simplified chemistry dataset (replacing He with Xe)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Element&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Li&quot;</span><span class="p">,</span> <span class="s2">&quot;Na&quot;</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="s2">&quot;Rb&quot;</span><span class="p">,</span>             <span class="c1"># Alkali metals</span>
+        <span class="s2">&quot;Be&quot;</span><span class="p">,</span> <span class="s2">&quot;Mg&quot;</span><span class="p">,</span> <span class="s2">&quot;Ca&quot;</span><span class="p">,</span> <span class="s2">&quot;Sr&quot;</span><span class="p">,</span>            <span class="c1"># Alkaline earth metals</span>
+        <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;Cl&quot;</span><span class="p">,</span> <span class="s2">&quot;Br&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span>              <span class="c1"># Halogens</span>
+        <span class="s2">&quot;Ne&quot;</span><span class="p">,</span> <span class="s2">&quot;Ar&quot;</span><span class="p">,</span> <span class="s2">&quot;Kr&quot;</span><span class="p">,</span> <span class="s2">&quot;Xe&quot;</span>             <span class="c1"># Noble gases</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Group&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Alkali&quot;</span><span class="p">,</span> <span class="s2">&quot;Alkali&quot;</span><span class="p">,</span> <span class="s2">&quot;Alkali&quot;</span><span class="p">,</span> <span class="s2">&quot;Alkali&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">,</span> <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">,</span> <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">,</span> <span class="s2">&quot;AlkalineEarth&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Halogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Halogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Halogen&quot;</span><span class="p">,</span> <span class="s2">&quot;Halogen&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;NobleGas&quot;</span><span class="p">,</span> <span class="s2">&quot;NobleGas&quot;</span><span class="p">,</span> <span class="s2">&quot;NobleGas&quot;</span><span class="p">,</span> <span class="s2">&quot;NobleGas&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Valence_s&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;Valence_p&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># Step 2: Create DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Element&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Step 3: Add combined valence column</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;Valence_Total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Valence_s&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Valence_p&quot;</span><span class="p">]</span>
+
+<span class="c1"># Step 4: Standardize features</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Valence_s&quot;</span><span class="p">,</span> <span class="s2">&quot;Valence_p&quot;</span><span class="p">,</span> <span class="s2">&quot;Valence_Total&quot;</span><span class="p">]]</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
+<span class="n">scaled_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">scaled</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">features</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Step 5: Compute pairwise Euclidean distances</span>
+<span class="n">dist_matrix</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="n">scaled_df</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;euclidean&quot;</span><span class="p">))</span>
+<span class="n">dist_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dist_matrix</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">scaled_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">scaled_df</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="c1"># Step 6: Plot the distance matrix as a heatmap</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">dist_df</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;mako&quot;</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">,</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linecolor</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Euclidean Distance Matrix Between Elements (Standardized Features)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Element&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Element&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2bbc2e125063e20819778da75e53cf1b3f9ce4f51dde2c87183514b5ee751c4c.png" src="../../_images/2bbc2e125063e20819778da75e53cf1b3f9ce4f51dde2c87183514b5ee751c4c.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="pair-plots-sns-pairplot">
+<h3>Pair Plots (sns.pairplot())<a class="headerlink" href="#pair-plots-sns-pairplot" title="Link to this heading">#</a></h3>
+<p>The Seaborn function <code class="docutils literal notranslate"><span class="pre">pairplot()</span></code> is an exploratory data analysis (EDA) tool for visualizing pairwise relationships in a dataset. It creates a grid of scatter plots (and histograms on the diagonals) for each pair of numerical variables.</p>
+<ul class="simple">
+<li><p>Plots every numerical variable against every other numerical variable.</p></li>
+<li><p>The diagonal shows univariate distributions (histograms or KDEs).</p></li>
+<li><p>Can color points by a categorical variable using the <code class="docutils literal notranslate"><span class="pre">hue</span></code> parameter.</p></li>
+<li><p>Can facet rows and columns using <code class="docutils literal notranslate"><span class="pre">row</span></code> and <code class="docutils literal notranslate"><span class="pre">col</span></code> parameters.</p></li>
+<li><p>Automatically skips non-numeric columns unless used for coloring or faceting</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">base_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data&quot;</span><span class="p">)</span>  <span class="c1"># Parent directory</span>
+<span class="n">pubchem_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_data_dir</span><span class="p">,</span> <span class="s2">&quot;pubchem_data&quot;</span><span class="p">)</span>  <span class="c1"># Subdirectory for PubChem</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">pubchem_data_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Ensure directories exist</span>
+<span class="n">periodictable_csv_datapath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pubchem_data_dir</span><span class="p">,</span> <span class="s2">&quot;PubChemElements_all.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">periodictable_csv_datapath</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;GroupBlock&#39;</span><span class="p">,</span> <span class="n">diag_kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/3f9c6d7ebf8b1593b400d4e346c918cf2507f6e7d49664e40e29a385f009e7b1.png" src="../../_images/3f9c6d7ebf8b1593b400d4e346c918cf2507f6e7d49664e40e29a385f009e7b1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Make sure you select only the relevant columns + &#39;GroupBlock&#39;</span>
+<span class="n">selected_columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;AtomicNumber&#39;</span><span class="p">,</span> <span class="s1">&#39;AtomicMass&#39;</span><span class="p">,</span> <span class="s1">&#39;AtomicRadius&#39;</span><span class="p">,</span> <span class="s1">&#39;MeltingPoint&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;BoilingPoint&#39;</span><span class="p">,</span> <span class="s1">&#39;Density&#39;</span><span class="p">,</span> <span class="s1">&#39;GroupBlock&#39;</span>
+<span class="p">]</span>
+
+<span class="c1"># Subset the DataFrame</span>
+<span class="n">df_subset</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">selected_columns</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>  <span class="c1"># drop rows with missing data</span>
+
+<span class="c1"># Create the pairplot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df_subset</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;GroupBlock&#39;</span><span class="p">,</span> <span class="n">diag_kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span> <span class="n">corner</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/bf212f748816fa449318aaa627524e741501845092950f51bbfd1888a9f37f2b.png" src="../../_images/bf212f748816fa449318aaa627524e741501845092950f51bbfd1888a9f37f2b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># List the numeric columns and &#39;GroupBlock&#39;</span>
+<span class="n">selected_columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;AtomicNumber&#39;</span><span class="p">,</span> <span class="s1">&#39;AtomicMass&#39;</span><span class="p">,</span> <span class="s1">&#39;AtomicRadius&#39;</span><span class="p">,</span> <span class="s1">&#39;MeltingPoint&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;BoilingPoint&#39;</span><span class="p">,</span> <span class="s1">&#39;Density&#39;</span><span class="p">,</span> <span class="s1">&#39;GroupBlock&#39;</span>
+<span class="p">]</span>
+
+<span class="c1"># Subset the DataFrame and filter only halogens and noble gases</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">selected_columns</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;GroupBlock&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Halogen&#39;</span><span class="p">,</span> <span class="s1">&#39;Noble gas&#39;</span><span class="p">])]</span>
+
+<span class="c1"># Create the pairplot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span>
+    <span class="n">df_filtered</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;GroupBlock&#39;</span><span class="p">,</span>
+    <span class="n">diag_kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span>
+    <span class="n">corner</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">plot_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># Show the plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/cb8d7601e733b5237b240d9e9fa4a3f1d49be7583cfe8d2a5d3e2188f90d7c3c.png" src="../../_images/cb8d7601e733b5237b240d9e9fa4a3f1d49be7583cfe8d2a5d3e2188f90d7c3c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Select and filter your data</span>
+<span class="n">selected_columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;AtomicMass&#39;</span><span class="p">,</span> <span class="s1">&#39;AtomicRadius&#39;</span><span class="p">,</span> <span class="s1">&#39;MeltingPoint&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;BoilingPoint&#39;</span><span class="p">,</span> <span class="s1">&#39;Density&#39;</span><span class="p">,</span> <span class="s1">&#39;GroupBlock&#39;</span>
+<span class="p">]</span>
+
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">selected_columns</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;GroupBlock&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Halogen&#39;</span><span class="p">,</span> <span class="s1">&#39;Noble gas&#39;</span><span class="p">])]</span>
+
+<span class="c1"># Create pairplot with regression lines</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span>
+    <span class="n">df_filtered</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;GroupBlock&#39;</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;reg&#39;</span><span class="p">,</span>              <span class="c1"># &lt;-- this adds regression fits</span>
+    <span class="n">diag_kind</span><span class="o">=</span><span class="s1">&#39;hist&#39;</span><span class="p">,</span>
+    <span class="n">corner</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">plot_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;scatter_kws&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="mi">40</span><span class="p">}}</span>  <span class="c1"># control point appearance</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1a0456d0fd5e486cc2a0b3cca0c697defd20cd53d3f2e4391af7a4be75a14cc5.png" src="../../_images/1a0456d0fd5e486cc2a0b3cca0c697defd20cd53d3f2e4391af7a4be75a14cc5.png" />
+</div>
+</div>
+</section>
+<section id="joint-plot-sns-jointplot">
+<h3>Joint Plot (sns.jointplot())<a class="headerlink" href="#joint-plot-sns-jointplot" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">base_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data&quot;</span><span class="p">)</span>  <span class="c1"># Parent directory</span>
+<span class="n">pubchem_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_data_dir</span><span class="p">,</span> <span class="s2">&quot;pubchem_data&quot;</span><span class="p">)</span>  <span class="c1"># Subdirectory for PubChem</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">pubchem_data_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Ensure directories exist</span>
+<span class="n">periodictable_csv_datapath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pubchem_data_dir</span><span class="p">,</span> <span class="s2">&quot;PubChemElements_all.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">periodictable_csv_datapath</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># Select and filter your data</span>
+<span class="n">selected_columns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;AtomicMass&#39;</span><span class="p">,</span> <span class="s1">&#39;AtomicRadius&#39;</span><span class="p">,</span> <span class="s1">&#39;MeltingPoint&#39;</span><span class="p">,</span> <span class="s1">&#39;IonizationEnergy&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;BoilingPoint&#39;</span><span class="p">,</span> <span class="s1">&#39;Density&#39;</span><span class="p">,</span> <span class="s1">&#39;GroupBlock&#39;</span><span class="p">,</span> <span class="s1">&#39;Electronegativity&#39;</span>
+<span class="p">]</span>
+
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">selected_columns</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[</span><span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;GroupBlock&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;Halogen&#39;</span><span class="p">,</span> <span class="s1">&#39;Noble gas&#39;</span><span class="p">])]</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;MeltingPoint&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;BoilingPoint&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;reg&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;AtomicRadius&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;IonizationEnergy&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;scatter&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Electronegativity&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;IonizationEnergy&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;reg&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_filtered</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Electronegativity&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;IonizationEnergy&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;reg&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        AtomicNumber       Name  AtomicMass CPKHexColor ElectronConfiguration  \
+Symbol                                                                          
+H                  1   Hydrogen    1.008000      FFFFFF                   1s1   
+He                 2     Helium    4.002600      D9FFFF                   1s2   
+Li                 3    Lithium    7.000000      CC80FF               [He]2s1   
+Be                 4  Beryllium    9.012183      C2FF00               [He]2s2   
+B                  5      Boron   10.810000      FFB5B5           [He]2s2 2p1   
+
+        Electronegativity  AtomicRadius  IonizationEnergy  ElectronAffinity  \
+Symbol                                                                        
+H                    2.20         120.0            13.598             0.754   
+He                    NaN         140.0            24.587               NaN   
+Li                   0.98         182.0             5.392             0.618   
+Be                   1.57         153.0             9.323               NaN   
+B                    2.04         192.0             8.298             0.277   
+
+       OxidationStates StandardState  MeltingPoint  BoilingPoint   Density  \
+Symbol                                                                       
+H               +1, -1           Gas         13.81         20.28  0.000090   
+He                   0           Gas          0.95          4.22  0.000179   
+Li                  +1         Solid        453.65       1615.00  0.534000   
+Be                  +2         Solid       1560.00       2744.00  1.850000   
+B                   +3         Solid       2348.00       4273.00  2.370000   
+
+                  GroupBlock YearDiscovered  
+Symbol                                       
+H                   Nonmetal           1766  
+He                 Noble gas           1868  
+Li              Alkali metal           1817  
+Be      Alkaline earth metal           1798  
+B                  Metalloid           1808  
+</pre></div>
+</div>
+<img alt="../../_images/a8eda21de7cfdbce988988d8f607cf25b8d29eceeec946f479746a9fc65b5753.png" src="../../_images/a8eda21de7cfdbce988988d8f607cf25b8d29eceeec946f479746a9fc65b5753.png" />
+<img alt="../../_images/f8adcab216fa4eead1c7db81226241923f084ce3b76647a2671adf7374b8f82a.png" src="../../_images/f8adcab216fa4eead1c7db81226241923f084ce3b76647a2671adf7374b8f82a.png" />
+<img alt="../../_images/a1635cb1e88e85d6e4c07726f2f02b9b1e7fe0a9b47fcf336ca126e53e2618da.png" src="../../_images/a1635cb1e88e85d6e4c07726f2f02b9b1e7fe0a9b47fcf336ca126e53e2618da.png" />
+<img alt="../../_images/9cfab4d6866369df81b095a3dc611402c02c99e4e0adffcff95056aafb9924d6.png" src="../../_images/9cfab4d6866369df81b095a3dc611402c02c99e4e0adffcff95056aafb9924d6.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Simulate concentration and absorbance with increasing variance</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">concentration</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">absorbance</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">concentration</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.15</span> <span class="o">*</span> <span class="n">concentration</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="c1">#</span>
+<span class="c1">#absorbance = 1.5 * concentration + np.random.normal(0, 0.15 * np.exp(concentration))</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Concentration&quot;</span><span class="p">:</span> <span class="n">concentration</span><span class="p">,</span>
+    <span class="s2">&quot;Absorbance&quot;</span><span class="p">:</span> <span class="n">absorbance</span>
+<span class="p">})</span>
+
+
+<span class="n">sns</span><span class="o">.</span><span class="n">jointplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Concentration&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Absorbance&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;reg&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/8331b67c72f2b4e4d9d7854eda37e158f828b22092f212b2eab9790823377c15.png" src="../../_images/8331b67c72f2b4e4d9d7854eda37e158f828b22092f212b2eab9790823377c15.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="acknowledgements">
+<h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">#</a></h1>
+<p>This content was developed with assistance from <a class="reference external" href="https://www.perplexity.ai/">Perplexity AI</a> and <a class="reference external" href="https://chatgpt.com/">Chat GPT</a>. Multiple queries were made during the Fall 2024 and the Spring 2025.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "py4sci"
+        },
+        kernelOptions: {
+            name: "py4sci",
+            path: "./content/module3-packages1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'py4sci'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03-6-seaborn.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">7. Seaborn Part 2</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03-8-scipy.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">8. SciPy</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">7. Seaborn Part 3</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#seaborn-plots-cont">3. Seaborn Plots (cont)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-plots">3.4 Regression Plots</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regression-plot-sns-regplot">Regression Plot (sns.regplot())</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistics-regression-sns-lmplot">Logistics Regression (sns.lmplot())</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmaps-grids">3.5 Heatmaps/grids</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#heatmaps">Heatmaps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cluster-map">Cluster Map</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-the-dendogram">Understanding the dendogram</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#clutermap-and-euclidean-distance">clutermap() and Euclidean distance</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pair-plots-sns-pairplot">Pair Plots (sns.pairplot())</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#joint-plot-sns-jointplot">Joint Plot (sns.jointplot())</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Robert Belford
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

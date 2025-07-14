@@ -1,0 +1,1 @@
+This is the repository for the Py4Sci class that was designed to help students use Artificial Intelligence to learn Python Modules.  This linke goes to the [online Jupyter Book](https://rebelford.github.io/py4scibook/content/index.html) of the class content, which is still under development

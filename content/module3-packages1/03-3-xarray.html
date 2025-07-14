@@ -1,0 +1,1751 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3. Xarray &#8212; Draft Python for Science Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e52fa269" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom-checkpoint.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/module3-packages1/03-3-xarray';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="4. MatPlotLib" href="03-4-matplotlib.html" />
+    <link rel="prev" title="2. Pandas" href="03-2-pandas.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Draft Python for Science Book - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Draft Python for Science Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Python for Science
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../math-test.html">In a Markdown cell:</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../module1-setup/README.html">Module 1: Getting Set Up</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-1-setupcomputer.html">1. Setting up your computer</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-2-jynbgettingstarted.html">2: Runnng and Creating Jupyter Notebooks</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-3-jynb-intro.html">3. Overview of Jupyter Notebooks</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-5-git.html">5. Git and GitHub</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-6-oop.html">6. Object Oriented Programming</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-7-virtual-environments.html">7. Virtual Environments</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../module2-oop-data-structures/README.html">Module 2: Data Structures</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-1-primitive-data-structures.html">1. Primative Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-2-py-calculator.html">2. Python as a Calculator</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-3-composite-data-structures.html">3. Composite Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-4-built-in-modules.html">4. Built-In Modules</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-5-control-structures.html">5. Logic and Control Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-6-external-data-structures.html">6. External Data Structures</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-7-db-external-data-structures.html">7. Databases as External Data Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-8-api-external-data-structures.html">8. APIs as External Data Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-9-webscrape-external-data-structures.html">9. WebScraping as External Data Structures</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="README.html">Module 3: Packages</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="03-1-numpy.html">1. NumPy</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-2-pandas.html">2. Pandas</a></li>
+
+
+
+
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3. Xarray</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-4-matplotlib.html">4. MatPlotLib</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-5-seaborn.html">5. Seaborn Part 1</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-6-seaborn.html">7. Seaborn Part 2</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-7-seaborn.html">7. Seaborn Part 3</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-8-scipy.html">8. SciPy</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-9-rdkit.html">9. RDKit</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-10-rdkit-descriptors.html">10. RDKit and Descriptors</a></li>
+
+
+
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/rebelford/py4scibook/master?urlpath=lab/tree/docs/content/module3-packages1/03-3-xarray.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://your-jupyterhub-url.com/hub/user-redirect/git-pull?repo=https%3A//github.com/rebelford/py4scibook&urlpath=lab/tree/py4scibook/docs/content/module3-packages1/03-3-xarray.ipynb&branch=master" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on JupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="JupyterHub logo" src="../../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rebelford/py4scibook/blob/master/docs/content/module3-packages1/03-3-xarray.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook/issues/new?title=Issue%20on%20page%20%2Fcontent/module3-packages1/03-3-xarray.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/module3-packages1/03-3-xarray.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>3. Xarray</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">3. Xarray</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. Xarray</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1.1: Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xarray-other-libraries">1.2: Xarray &amp; Other Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-xarray">Install xarray</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#xarray-i-o-functions">2. Xarray I/O Functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#files-pandas-can-read">2.1 Files Pandas can read</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multidimensional-files">2.2 Multidimensional files</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#xarray-functions">3. Xarray Functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Xarray Functions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataarray">4. DataArray</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attributes">4.1 Attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">4.2 Methods</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">5. Dataset</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">5.1 Attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">5.2 Methods</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#xarray-activity">6. Xarray Activity</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-spectra-simulation">6.1 Create spectra simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-csv-into-xarray">6.2 Load CSV into Xarray</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-xarray-dataset-as-netcdf-file">6.3 Save Xarray Dataset as NetCDF file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-netcdf-file-to-dataset">6.4 Loading NetCDF file to Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-the-data">6.5 Exploring the Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#find-range-of-variables">Find Range of Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-spectra-at-given-time">Plot Spectra at given time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-kinetic-decay-at-wavelength">Plot Kinetic decay at wavelength</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="xarray">
+<span id="module3-packages1-03-3-xarray"></span><h1>3. Xarray<a class="headerlink" href="#xarray" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>1. Xarray<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>1.1: Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Xarray builds off of Pandas and is designed to handle higher dimensional data and extends NumPy capabilities by allowing labels to dimensions. It has extensive integration into other packages and is extensivley used when dealing with complex IOT datasets, or those involving climate science. There are two major classes (data structures) in Xarray, <strong>DataArray</strong> and <strong>Dataset</strong>.</p>
+<ul class="simple">
+<li><p><strong>DataArray</strong> - Multi-dimensional data container, like a labeled Numpy Array</p></li>
+<li><p><strong>Dataset</strong> - A collection of DataArray objects, similar to Pandas DataFrame, but for multi-dimensional data.</p></li>
+</ul>
+<p><strong>Why Should Chemistry &amp; IoT Data Use Xarray?</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Benefit for Chemistry &amp; IoT Data</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Labeled Dimensions</p></td>
+<td><p>Easily track wavelength, time, temperature, sensor IDs.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Multi-Dimensional</p></td>
+<td><p>Store spectra, reaction kinetics, air quality sensor data in one dataset.</p></td>
+</tr>
+<tr class="row-even"><td><p>Lazy Loading</p></td>
+<td><p>Handle large environmental datasets efficiently.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dask Integration</p></td>
+<td><p>Scale to **big data (IoT sensor streams, satellite data).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="xarray-other-libraries">
+<h2>1.2: Xarray &amp; Other Libraries<a class="headerlink" href="#xarray-other-libraries" title="Link to this heading">#</a></h2>
+<p>Xarray is widely used in</p>
+<ul class="simple">
+<li><p>Climate Science</p></li>
+<li><p>Remote Sensing</p></li>
+<li><p>Oceanography and Meteorology</p></li>
+<li><p>Multidimensional Sensor Data (IoT, Machine Learning)</p></li>
+</ul>
+<p>Xarray extends Pandas and NumPy, but is also a dependency many other libraries depend on.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Library</p></th>
+<th class="head"><p>Xarray’s Relationship</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Pandas</p></td>
+<td><p>Xarray extends Pandas to higher dimensions (3D+ data).</p></td>
+</tr>
+<tr class="row-odd"><td><p>NumPy</p></td>
+<td><p>Xarray uses NumPy arrays under the hood.</p></td>
+</tr>
+<tr class="row-even"><td><p>NetCDF</p></td>
+<td><p>Xarray natively reads/writes NetCDF files (widely used in climate science).</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dask</p></td>
+<td><p>Xarray supports parallel computing with Dask for large datasets.</p></td>
+</tr>
+<tr class="row-even"><td><p>Bottleneck</p></td>
+<td><p>Xarray automatically optimizes performance using Bottleneck for fast reductions (mean, sum, min..) and handling NaNs.</p></td>
+</tr>
+<tr class="row-odd"><td><p>SciPy</p></td>
+<td><p>Xarray integrates with SciPy for interpolation and optimization.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="install-xarray">
+<h2>Install xarray<a class="headerlink" href="#install-xarray" title="Link to this heading">#</a></h2>
+<p>Open up your terminal and <strong>activate your virtual environment</strong>, and then install xarray using miniconda.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">xarray</span>
+</pre></div>
+</div>
+<p><strong>xarray is typically importated as xr</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="xarray-i-o-functions">
+<h1>2. Xarray I/O Functions<a class="headerlink" href="#xarray-i-o-functions" title="Link to this heading">#</a></h1>
+<section id="files-pandas-can-read">
+<h2>2.1 Files Pandas can read<a class="headerlink" href="#files-pandas-can-read" title="Link to this heading">#</a></h2>
+<p>Xarray <strong>does not duplicate Pandas I/O functions</strong> for formats that <strong>DataFrames</strong> can already handle efficiently (e.g., CSV, Excel, JSON). For files of these formats the typical workflow is”</p>
+<ol class="arabic simple">
+<li><p>Use Pandas to read general-purpose data formats (CSV, Excel, JSON).</p></li>
+<li><p>Convert the Pandas DataFrame into an Xarray object (<code class="docutils literal notranslate"><span class="pre">Dataset</span></code> or <code class="docutils literal notranslate"><span class="pre">DataArray</span></code>).</p></li>
+</ol>
+<p>Xarray provides specialized I/O functions for multidimensional data (NetCDF, Zarr, GeoTIFF).</p>
+</section>
+<section id="multidimensional-files">
+<h2>2.2 Multidimensional files<a class="headerlink" href="#multidimensional-files" title="Link to this heading">#</a></h2>
+<p>The following table provides read and write functions within xarray. Note the latter two convert xarray to other pythonic structures.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Reads/Writes</p></th>
+<th class="head"><p>File Format</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xr.open_dataset()</span></code></p></td>
+<td><p>Read</p></td>
+<td><p>NetCDF</p></td>
+<td><p>Open a NetCDF file as an <code class="docutils literal notranslate"><span class="pre">xarray.Dataset</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xr.open_dataarray()</span></code></p></td>
+<td><p>Read</p></td>
+<td><p>NetCDF</p></td>
+<td><p>Open a single NetCDF variable as an <code class="docutils literal notranslate"><span class="pre">xarray.DataArray</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xr.load_dataset()</span></code></p></td>
+<td><p>Read</p></td>
+<td><p>NetCDF</p></td>
+<td><p>Load NetCDF into memory instead of lazy loading.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xr.load_dataarray()</span></code></p></td>
+<td><p>Read</p></td>
+<td><p>NetCDF</p></td>
+<td><p>Load a single NetCDF variable into memory.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xr.open_zarr()</span></code></p></td>
+<td><p>Read</p></td>
+<td><p>Zarr</p></td>
+<td><p>Open a Zarr file as an Xarray Dataset.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xr.load_zarr()</span></code></p></td>
+<td><p>Read</p></td>
+<td><p>Zarr</p></td>
+<td><p>Load a Zarr file into memory.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xr.open_rasterio()</span></code></p></td>
+<td><p>Read</p></td>
+<td><p>GeoTIFF</p></td>
+<td><p>Open a GeoTIFF file for spatial analysis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xr.open_mfdataset()</span></code></p></td>
+<td><p>Read</p></td>
+<td><p>NetCDF</p></td>
+<td><p>Open multiple NetCDF files as a single dataset (lazy loading).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Dataset.to_netcdf()</span></code></p></td>
+<td><p>Write</p></td>
+<td><p>NetCDF</p></td>
+<td><p>Save an Xarray <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> to a NetCDF file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DataArray.to_netcdf()</span></code></p></td>
+<td><p>Write</p></td>
+<td><p>NetCDF</p></td>
+<td><p>Save an Xarray <code class="docutils literal notranslate"><span class="pre">DataArray</span></code> to a NetCDF file.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Dataset.to_zarr()</span></code></p></td>
+<td><p>Write</p></td>
+<td><p>Zarr</p></td>
+<td><p>Save an Xarray <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> to a Zarr file (good for cloud storage).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Dataset.to_csv()</span></code></p></td>
+<td><p>Write</p></td>
+<td><p>CSV</p></td>
+<td><p>Save a dataset as a CSV file (lossy conversion).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Dataset.to_dataframe()</span></code></p></td>
+<td><p>Convert</p></td>
+<td><p>Pandas DataFrame</p></td>
+<td><p>Convert an <code class="docutils literal notranslate"><span class="pre">xarray.Dataset</span></code> to a Pandas DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Dataset.to_dict()</span></code></p></td>
+<td><p>Convert</p></td>
+<td><p>Dictionary</p></td>
+<td><p>Convert an <code class="docutils literal notranslate"><span class="pre">xarray.Dataset</span></code> to a Python dictionary.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="xarray-functions">
+<h1>3. Xarray Functions<a class="headerlink" href="#xarray-functions" title="Link to this heading">#</a></h1>
+<section id="id2">
+<h2>Xarray Functions<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xr.open_dataset()</span></code></p></td>
+<td><p>Open a NetCDF file as an Xarray <code class="docutils literal notranslate"><span class="pre">Dataset</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xr.open_dataarray()</span></code></p></td>
+<td><p>Open a single NetCDF variable as an <code class="docutils literal notranslate"><span class="pre">DataArray</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xr.Dataset()</span></code></p></td>
+<td><p>Create a new multi-dimensional dataset.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xr.DataArray()</span></code></p></td>
+<td><p>Create a single variable with labeled axes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xr.concat()</span></code></p></td>
+<td><p>Concatenate Xarray objects along a new dimension.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xr.merge()</span></code></p></td>
+<td><p>Merge multiple datasets into one.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xr.combine_by_coords()</span></code></p></td>
+<td><p>Combine datasets by aligning their coordinates.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xr.align()</span></code></p></td>
+<td><p>Align two Xarray objects to a common set of coordinates.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xr.apply_ufunc()</span></code></p></td>
+<td><p>Apply a function to Xarray objects, supporting parallelization.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xr.where()</span></code></p></td>
+<td><p>Perform conditional selection like NumPy’s <code class="docutils literal notranslate"><span class="pre">np.where()</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xr.broadcast()</span></code></p></td>
+<td><p>Expand dimensions to make two datasets compatible for operations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xr.corr()</span></code></p></td>
+<td><p>Compute the correlation coefficient along a specified dimension.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">xr.load_dataset()</span></code></p></td>
+<td><p>Load a dataset into memory (useful for NetCDF files).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">xr.save_mfdataset()</span></code></p></td>
+<td><p>Save multiple datasets into separate NetCDF files.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="dataarray">
+<h1>4. DataArray<a class="headerlink" href="#dataarray" title="Link to this heading">#</a></h1>
+<section id="attributes">
+<h2>4.1 Attributes<a class="headerlink" href="#attributes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">da.values</span></code></p></td>
+<td><p>Returns the raw NumPy array backing the <code class="docutils literal notranslate"><span class="pre">DataArray</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">da.dims</span></code></p></td>
+<td><p>Tuple of dimension names (e.g., <code class="docutils literal notranslate"><span class="pre">('wavelength',</span> <span class="pre">'time')</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">da.shape</span></code></p></td>
+<td><p>Shape of the <code class="docutils literal notranslate"><span class="pre">DataArray</span></code> as a tuple (like NumPy arrays).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">da.ndim</span></code></p></td>
+<td><p>Number of dimensions in the <code class="docutils literal notranslate"><span class="pre">DataArray</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">da.size</span></code></p></td>
+<td><p>Total number of elements in the <code class="docutils literal notranslate"><span class="pre">DataArray</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">da.coords</span></code></p></td>
+<td><p>Dictionary of coordinate labels (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;wavelength&quot;:</span> <span class="pre">[350,</span> <span class="pre">400,</span> <span class="pre">450]</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">da.attrs</span></code></p></td>
+<td><p>Dictionary of metadata attributes (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;units&quot;:</span> <span class="pre">&quot;absorbance&quot;</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">da.name</span></code></p></td>
+<td><p>Name of the <code class="docutils literal notranslate"><span class="pre">DataArray</span></code> (can be <code class="docutils literal notranslate"><span class="pre">None</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">da.dtype</span></code></p></td>
+<td><p>Data type of the <code class="docutils literal notranslate"><span class="pre">DataArray</span></code> elements (e.g., <code class="docutils literal notranslate"><span class="pre">float64</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">da.nbytes</span></code></p></td>
+<td><p>Total memory usage in bytes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">da.sizes</span></code></p></td>
+<td><p>Dictionary mapping dimension names to sizes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">da.indexes</span></code></p></td>
+<td><p>Dictionary of Pandas <code class="docutils literal notranslate"><span class="pre">Index</span></code> objects for each coordinate.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">da.chunks</span></code></p></td>
+<td><p>If using Dask, shows chunk sizes for parallel computation.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="methods">
+<h2>4.2 Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.values</span></code></p></td>
+<td><p>Extract the underlying NumPy array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.dims</span></code></p></td>
+<td><p>Get the names of dimensions.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.coords</span></code></p></td>
+<td><p>Get coordinate labels.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.transpose()</span></code></p></td>
+<td><p>Transpose dimensions.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.expand_dims()</span></code></p></td>
+<td><p>Add a new dimension.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.squeeze()</span></code></p></td>
+<td><p>Remove singleton dimensions.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.plot()</span></code></p></td>
+<td><p>Generate quick visualizations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.rolling()</span></code></p></td>
+<td><p>Apply rolling-window operations.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="dataset">
+<h1>5. Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h1>
+<section id="id3">
+<h2>5.1 Attributes<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ds.data_vars</span></code></p></td>
+<td><p>Dictionary of variables (<code class="docutils literal notranslate"><span class="pre">DataArray</span></code> objects) stored in the <code class="docutils literal notranslate"><span class="pre">Dataset</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ds.dims</span></code></p></td>
+<td><p>Dictionary of dimension names and their sizes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ds.coords</span></code></p></td>
+<td><p>Dictionary of coordinate labels for each dimension.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ds.attrs</span></code></p></td>
+<td><p>Dictionary of metadata attributes (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;source&quot;:</span> <span class="pre">&quot;spectroscopy</span> <span class="pre">experiment&quot;</span></code>).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ds.sizes</span></code></p></td>
+<td><p>Dictionary of dimension names mapped to their sizes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ds.indexes</span></code></p></td>
+<td><p>Dictionary of Pandas <code class="docutils literal notranslate"><span class="pre">Index</span></code> objects for each coordinate.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ds.variables</span></code></p></td>
+<td><p>Dictionary of all variables (both data and coordinates).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ds.chunks</span></code></p></td>
+<td><p>If using Dask, shows chunk sizes for parallel computation.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ds.nbytes</span></code></p></td>
+<td><p>Total memory usage in bytes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ds.dtype</span></code></p></td>
+<td><p>Data type of the stored variables.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ds.shape</span></code></p></td>
+<td><p>Shape of the dataset as a tuple (not commonly used).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ds.encoding</span></code></p></td>
+<td><p>Dictionary of encoding options (useful for NetCDF/Zarr storage).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id4">
+<h2>5.2 Methods<a class="headerlink" href="#id4" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.isel()</span></code></p></td>
+<td><p>Select data by index (position-based).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.sel()</span></code></p></td>
+<td><p>Select data by coordinate label.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.drop_vars()</span></code></p></td>
+<td><p>Drop variables from a dataset.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.rename()</span></code></p></td>
+<td><p>Rename variables or dimensions.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.mean(dim=…)</span></code></p></td>
+<td><p>Compute the mean along a given dimension.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.sum(dim=…)</span></code></p></td>
+<td><p>Compute the sum along a given dimension.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.groupby()</span></code></p></td>
+<td><p>Group data by a coordinate value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.resample()</span></code></p></td>
+<td><p>Resample time-series data.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.rolling()</span></code></p></td>
+<td><p>Apply rolling window operations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">.differentiate()</span></code></p></td>
+<td><p>Compute the numerical derivative.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.integrate()</span></code></p></td>
+<td><p>Compute the numerical integral.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="xarray-activity">
+<h1>6. Xarray Activity<a class="headerlink" href="#xarray-activity" title="Link to this heading">#</a></h1>
+<p>In this activity we will generate a simulated kinetics plot of the spectra of a hypothetical molecule that follows a Boltzmann distrution and save it as a csv file.  Then we will load the csv file into an xarray DataArray and explore it.</p>
+<section id="create-spectra-simulation">
+<h2>6.1 Create spectra simulation<a class="headerlink" href="#create-spectra-simulation" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Define base directory and file path</span>
+<span class="n">base_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data&quot;</span><span class="p">)</span>  
+<span class="n">spectra_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_data_dir</span><span class="p">,</span> <span class="s2">&quot;spectra&quot;</span><span class="p">)</span>  
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">spectra_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Ensure directory exists</span>
+
+<span class="c1"># Define the file path for saving</span>
+<span class="n">spec2_vis_csv_spectrapath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">spectra_dir</span><span class="p">,</span> <span class="s2">&quot;spec2_vis.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Define wavelength and time ranges</span>
+<span class="n">wavelengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">350</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># 100 wavelength points</span>
+<span class="n">times</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>  <span class="c1"># 30 time points</span>
+
+<span class="c1"># Simulate Absorbance Spectrum with a Boltzmann-like Shape Across Wavelengths</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_spectrum</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">peak_wavelength</span><span class="o">=</span><span class="mi">525</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">max_absorbance</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Gaussian peak across the wavelength range.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">max_absorbance</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">wavelengths</span> <span class="o">-</span> <span class="n">peak_wavelength</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">width</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="n">base_spectrum</span> <span class="o">=</span> <span class="n">generate_spectrum</span><span class="p">(</span><span class="n">wavelengths</span><span class="p">)</span>
+
+<span class="c1"># Use exponential decay for time behavior</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">kinetic_decay</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">t_half</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Exponential decay function&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">time</span> <span class="o">/</span> <span class="n">t_half</span><span class="p">)</span>  <span class="c1"># Corrected to true exponential decay</span>
+<span class="c1"># Create a 2D Absorbance Array for (Wavelength, Time)</span>
+<span class="n">absorbance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">base_spectrum</span><span class="p">,</span> <span class="n">kinetic_decay</span><span class="p">(</span><span class="n">times</span><span class="p">))</span>
+
+<span class="c1"># Convert to Xarray Dataset</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span>
+    <span class="n">data_vars</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;absorbance&quot;</span><span class="p">:</span> <span class="p">([</span><span class="s2">&quot;wavelength&quot;</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">],</span> <span class="n">absorbance</span><span class="p">)},</span>
+    <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;wavelength&quot;</span><span class="p">:</span> <span class="n">wavelengths</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="n">times</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># **Use the correct colormap: &quot;Red-Yellow-Green&quot; (Reversed)**</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;RdYlGn_r&quot;</span><span class="p">)</span>  <span class="c1"># Green → Yellow → Red</span>
+<span class="n">norm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">times</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">vmax</span><span class="o">=</span><span class="n">times</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+
+<span class="c1"># **Create figure**</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># **Plot the evolving spectra using traffic light colors**</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">time</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">times</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">wavelengths</span><span class="p">,</span> 
+        <span class="n">ds</span><span class="o">.</span><span class="n">absorbance</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">),</span> 
+        <span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">time</span><span class="p">)),</span>  
+        <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">)</span><span class="si">}</span><span class="s2"> min&quot;</span> <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="p">)</span>
+
+<span class="c1"># **Labels and title**</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Wavelength (nm)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Absorbance&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Simulated Kinetic Spectral Evolution (Traffic Light Gradient)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># **Add a colorbar to show the time evolution properly**</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">ScalarMappable</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">set_array</span><span class="p">([])</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sm</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Time (min)&quot;</span><span class="p">)</span>
+
+<span class="c1"># **Show the plot**</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/2246faa029a062107fa0543765eba903900cd443458b6a9e23b18be245a04b9b.png" src="../../_images/2246faa029a062107fa0543765eba903900cd443458b6a9e23b18be245a04b9b.png" />
+</div>
+</div>
+</section>
+<section id="load-csv-into-xarray">
+<h2>6.2 Load CSV into Xarray<a class="headerlink" href="#load-csv-into-xarray" title="Link to this heading">#</a></h2>
+<p>The first step is to load the CSV into a Dataset. This can be a challenge and will often require you to look at the csv file to see how it is structured
+<img alt="image.png" src="../../_images/ed2b15ed-4dab-4763-984a-7a9daaef35cd.png" /></p>
+<p>Here you can see that the first row (index 0) is labels of the variable type string.  The following code will read the csv into a pandas dataframe, manipulate it so we can convert it to a dataframe and then create the dataframe.</p>
+<p>** Line-by-line explanation of code**</p>
+<ol class="arabic simple">
+<li><p>Importing Required Libraries</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pandas</span></code> (<code class="docutils literal notranslate"><span class="pre">pd</span></code>): Used for reading and manipulating the CSV file as a DataFrame.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xarray</span></code> (<code class="docutils literal notranslate"><span class="pre">xr</span></code>): Used to create and structure the data into a labeled <code class="docutils literal notranslate"><span class="pre">xarray.Dataset</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">os</span></code>: Used to construct file paths dynamically and ensure necessary directories exist.</p></li>
+</ul>
+<hr class="docutils" />
+<ol class="arabic simple" start="2">
+<li><p>Defining the File Path</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define base directory and file path</span>
+<span class="n">base_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data&quot;</span><span class="p">)</span>  
+<span class="n">spectra_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_data_dir</span><span class="p">,</span> <span class="s2">&quot;spectra&quot;</span><span class="p">)</span>  
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">spectra_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Ensure directory exists</span>
+
+<span class="c1"># Define the file path </span>
+<span class="n">spec2_vis_csv_spectrapath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">spectra_dir</span><span class="p">,</span> <span class="s2">&quot;spec2_vis.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">os.path.expanduser(&quot;~/data&quot;)</span></code>: Expands <code class="docutils literal notranslate"><span class="pre">~</span></code> (home directory) to its full path.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">os.path.join(base_data_dir,</span> <span class="pre">&quot;spectra&quot;)</span></code>: Constructs the full path to the <code class="docutils literal notranslate"><span class="pre">spectra</span></code> folder.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">os.makedirs(spectra_dir,</span> <span class="pre">exist_ok=True)</span></code>: Creates the directory if it doesn’t exist.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spec2_vis_csv_spectrapath</span></code>: Stores the full path of the CSV file.</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>Loading the CSV File into Pandas*</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define file path</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">spec2_vis_csv_spectrapath</span>  <span class="c1"># Replace with your actual file path</span>
+
+<span class="c1"># Load CSV with the first row as the header</span>
+<span class="n">df_clean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Reads the CSV file, assuming the first row (<code class="docutils literal notranslate"><span class="pre">header=0</span></code>) contains column names.</p></li>
+<li><p>Stores it in a Pandas DataFrame (<code class="docutils literal notranslate"><span class="pre">df_clean</span></code>).</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p>Debugging - Inspecting the Data</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Display the first few rows and column names for debugging</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Helps confirm whether the data is read correctly.</p></li>
+<li><p>Sometimes, the first row is mistakenly treated as data instead of headers.</p></li>
+</ul>
+<ol class="arabic simple" start="5">
+<li><p>Renaming Columns for Consistency</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rename columns to avoid confusion</span>
+<span class="n">df_clean</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Wavelength&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="s1">&#39;Absorbance&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Explicitly renames the columns to prevent confusion.</p></li>
+<li><p>Ensures consistent naming and avoids issues with column access.</p></li>
+</ul>
+<ol class="arabic simple" start="6">
+<li><p>Converting Data to Numeric Format</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert &#39;Wavelength&#39; and &#39;Time&#39; columns to numeric values</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s1">&#39;Wavelength&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="s1">&#39;Wavelength&#39;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Converts <code class="docutils literal notranslate"><span class="pre">Wavelength</span></code> and <code class="docutils literal notranslate"><span class="pre">Time</span></code> columns to numeric types.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">errors='coerce'</span></code>:</p>
+<ul>
+<li><p>Converts non-numeric values (e.g., missing or incorrect data) to <code class="docutils literal notranslate"><span class="pre">NaN</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+<ol class="arabic simple" start="7">
+<li><p>Removing Invalid Data</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Drop rows with NaN values in &#39;Wavelength&#39; or &#39;Time&#39; columns</span>
+<span class="n">df_clean</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Wavelength&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Ensures the dataset contains only valid numeric values.</p></li>
+</ul>
+<ol class="arabic simple" start="8">
+<li><p>Extracting Unique Time Values</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract unique time values</span>
+<span class="n">time_values</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Gets unique time values from the <code class="docutils literal notranslate"><span class="pre">Time</span></code> column.</p></li>
+<li><p>Needed later for defining <code class="docutils literal notranslate"><span class="pre">xarray.Dataset</span></code> coordinates.</p></li>
+</ul>
+<ol class="arabic simple" start="9">
+<li><p>Reshaping the Data for Xarray</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pivot the DataFrame to have &#39;Wavelength&#39; as index and &#39;Time&#39; as columns</span>
+<span class="n">df_pivot</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;Wavelength&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;Absorbance&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Transforms DataFrame:</p>
+<ul>
+<li><p>Rows become wavelengths.</p></li>
+<li><p>Columns become time values.</p></li>
+<li><p>Cells store absorbance data.</p></li>
+</ul>
+</li>
+<li><p>Why? This is necessary to create a structured <code class="docutils literal notranslate"><span class="pre">xarray.Dataset</span></code>.</p></li>
+</ul>
+<ol class="arabic simple" start="10">
+<li><p>Creating the Xarray Dataset</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert the pivoted DataFrame to an xarray Dataset</span>
+<span class="n">ds_final</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span>
+    <span class="n">data_vars</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;absorbance&#39;</span><span class="p">:</span> <span class="p">([</span><span class="s1">&#39;wavelength&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">],</span> <span class="n">df_pivot</span><span class="o">.</span><span class="n">values</span><span class="p">)},</span>
+    <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;wavelength&#39;</span><span class="p">:</span> <span class="n">df_pivot</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">df_pivot</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data_vars</span></code>:</p>
+<ul>
+<li><p>Defines <code class="docutils literal notranslate"><span class="pre">'absorbance'</span></code> as a 2D array with dimensions (<code class="docutils literal notranslate"><span class="pre">wavelength</span></code>, <code class="docutils literal notranslate"><span class="pre">time</span></code>).</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">coords</span></code>:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">'wavelength'</span></code> and <code class="docutils literal notranslate"><span class="pre">'time'</span></code> are used as coordinate labels.</p></li>
+</ul>
+</li>
+<li><p>This makes it easy to analyze, filter, and visualize the data.</p></li>
+</ul>
+<ol class="arabic simple" start="11">
+<li><p>Printing the Final Dataset</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Display dataset summary</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds_final</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Prints the final <code class="docutils literal notranslate"><span class="pre">xarray.Dataset</span></code>, confirming it has the expected dimensions.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="c1"># Define base directory and file path</span>
+<span class="n">base_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data&quot;</span><span class="p">)</span>  
+<span class="n">spectra_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_data_dir</span><span class="p">,</span> <span class="s2">&quot;spectra&quot;</span><span class="p">)</span>  
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">spectra_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Ensure directory exists</span>
+
+<span class="c1"># Define the file path </span>
+<span class="n">spec2_vis_csv_spectrapath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">spectra_dir</span><span class="p">,</span> <span class="s2">&quot;spec2_vis.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Define file path</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">spec2_vis_csv_spectrapath</span>  <span class="c1"># Replace with your actual file path</span>
+
+<span class="c1"># Load CSV with the first row as the header</span>
+<span class="n">df_clean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Display the first few rows and column names for debugging</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_clean</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Rename columns to avoid confusion</span>
+<span class="n">df_clean</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Wavelength&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="s1">&#39;Absorbance&#39;</span><span class="p">]</span>
+
+<span class="c1"># Convert &#39;Wavelength&#39; and &#39;Time&#39; columns to numeric values</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s1">&#39;Wavelength&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="s1">&#39;Wavelength&#39;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+<span class="n">df_clean</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df_clean</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+
+<span class="c1"># Drop rows with NaN values in &#39;Wavelength&#39; or &#39;Time&#39; columns</span>
+<span class="n">df_clean</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Wavelength&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="c1"># Extract unique time values</span>
+<span class="n">time_values</span> <span class="o">=</span> <span class="n">df_clean</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+
+<span class="c1"># Pivot the DataFrame to have &#39;Wavelength&#39; as index and &#39;Time&#39; as columns</span>
+<span class="n">df_pivot</span> <span class="o">=</span> <span class="n">df_clean</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">&#39;Wavelength&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">&#39;Absorbance&#39;</span><span class="p">)</span>
+
+<span class="c1"># Convert the pivoted DataFrame to an xarray Dataset</span>
+<span class="n">ds_final</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">(</span>
+    <span class="n">data_vars</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;absorbance&#39;</span><span class="p">:</span> <span class="p">([</span><span class="s1">&#39;wavelength&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">],</span> <span class="n">df_pivot</span><span class="o">.</span><span class="n">values</span><span class="p">)},</span>
+    <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;wavelength&#39;</span><span class="p">:</span> <span class="n">df_pivot</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">df_pivot</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># Display dataset summary</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ds_final</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   wavelength       time  absorbance
+0       350.0   0.000000    0.002187
+1       350.0  10.344828    0.001973
+2       350.0  20.689655    0.001779
+3       350.0  31.034483    0.001604
+4       350.0  41.379310    0.001446
+Index([&#39;wavelength&#39;, &#39;time&#39;, &#39;absorbance&#39;], dtype=&#39;object&#39;)
+&lt;xarray.Dataset&gt; Size: 25kB
+Dimensions:     (wavelength: 100, time: 30)
+Coordinates:
+  * wavelength  (wavelength) float64 800B 350.0 353.5 357.1 ... 696.5 700.0
+  * time        (time) float64 240B 0.0 10.34 20.69 31.03 ... 279.3 289.7 300.0
+Data variables:
+    absorbance  (wavelength, time) float64 24kB 0.002187 0.001973 ... 0.0001089
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="save-xarray-dataset-as-netcdf-file">
+<h2>6.3 Save Xarray Dataset as NetCDF file<a class="headerlink" href="#save-xarray-dataset-as-netcdf-file" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">base_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data&quot;</span><span class="p">)</span>  
+<span class="n">spectra_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_data_dir</span><span class="p">,</span> <span class="s2">&quot;spectra&quot;</span><span class="p">)</span>  
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">spectra_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Ensure directory exists</span>
+
+<span class="c1"># Define the file path </span>
+<span class="n">spec2_nc_spectrapath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">spectra_dir</span><span class="p">,</span> <span class="s2">&quot;spec2_vis.nc&quot;</span><span class="p">)</span>
+<span class="n">ds_final</span><span class="o">.</span><span class="n">to_netcdf</span><span class="p">(</span><span class="n">spec2_nc_spectrapath</span><span class="p">)</span>
+
+<span class="c1"># Confirm that the file has been saved</span>
+<span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">spec2_nc_spectrapath</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dataset successfully saved to: </span><span class="si">{</span><span class="n">spec2_nc_spectrapath</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed to save the dataset.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dataset successfully saved to: /home/rebelford/data/spectra/spec2_vis.nc
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="loading-netcdf-file-to-dataset">
+<h2>6.4 Loading NetCDF file to Dataset<a class="headerlink" href="#loading-netcdf-file-to-dataset" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+
+<span class="c1"># Define the path to your NetCDF file</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="n">spec2_nc_spectrapath</span>  <span class="c1"># Ensure this variable contains the correct path to &#39;cpec2_vis.nc&#39;</span>
+
+<span class="c1"># Open the NetCDF file and assign it to a new Dataset</span>
+<span class="n">new_ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+
+<span class="c1"># Display the contents of the new Dataset</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_ds</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;xarray.Dataset&gt; Size: 25kB
+Dimensions:     (wavelength: 100, time: 30)
+Coordinates:
+  * wavelength  (wavelength) float64 800B 350.0 353.5 357.1 ... 696.5 700.0
+  * time        (time) float64 240B 0.0 10.34 20.69 31.03 ... 279.3 289.7 300.0
+Data variables:
+    absorbance  (wavelength, time) float64 24kB ...
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exploring-the-data">
+<h2>6.5 Exploring the Data<a class="headerlink" href="#exploring-the-data" title="Link to this heading">#</a></h2>
+<p>We will first look at the range of our variables.</p>
+<section id="find-range-of-variables">
+<h3>Find Range of Variables<a class="headerlink" href="#find-range-of-variables" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Range of absorbance</span>
+<span class="n">absorbance_min</span> <span class="o">=</span> <span class="n">new_ds</span><span class="p">[</span><span class="s1">&#39;absorbance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+<span class="n">absorbance_max</span> <span class="o">=</span> <span class="n">new_ds</span><span class="p">[</span><span class="s1">&#39;absorbance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+<span class="c1"># Range of wavelength</span>
+<span class="n">wavelength_min</span> <span class="o">=</span> <span class="n">new_ds</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+<span class="n">wavelength_max</span> <span class="o">=</span> <span class="n">new_ds</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+<span class="c1"># Range of time</span>
+<span class="n">time_min</span> <span class="o">=</span> <span class="n">new_ds</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+<span class="n">time_max</span> <span class="o">=</span> <span class="n">new_ds</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Absorbance: min = </span><span class="si">{</span><span class="n">absorbance_min</span><span class="si">}</span><span class="s2">, max = </span><span class="si">{</span><span class="n">absorbance_max</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wavelength: min = </span><span class="si">{</span><span class="n">wavelength_min</span><span class="si">}</span><span class="s2">, max = </span><span class="si">{</span><span class="n">wavelength_max</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time: min = </span><span class="si">{</span><span class="n">time_min</span><span class="si">}</span><span class="s2">, max = </span><span class="si">{</span><span class="n">time_max</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Absorbance: min = 0.000108908769855, max = 0.9993752590009782
+Wavelength: min = 350.0, max = 700.0
+Time: min = 0.0, max = 300.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-spectra-at-given-time">
+<h3>Plot Spectra at given time<a class="headerlink" href="#plot-spectra-at-given-time" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Specify the time for which to plot the spectrum</span>
+<span class="n">time_point</span> <span class="o">=</span> <span class="mf">10.0</span>  <span class="c1"># Replace with your desired time value</span>
+
+<span class="c1"># Select the data at the specified time</span>
+<span class="n">spectrum</span> <span class="o">=</span> <span class="n">new_ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time_point</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the spectrum</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spectrum</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">],</span> <span class="n">spectrum</span><span class="p">[</span><span class="s1">&#39;absorbance&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Time = </span><span class="si">{</span><span class="n">time_point</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Absorbance&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Spectrum at Time = </span><span class="si">{</span><span class="n">time_point</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/59885daa3ff84981973578aebe962e3fb8c55466bf2737dbaad04e70fe94e620.png" src="../../_images/59885daa3ff84981973578aebe962e3fb8c55466bf2737dbaad04e70fe94e620.png" />
+</div>
+</div>
+</section>
+<section id="plot-kinetic-decay-at-wavelength">
+<h3>Plot Kinetic decay at wavelength<a class="headerlink" href="#plot-kinetic-decay-at-wavelength" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specify the wavelength for which to plot the kinetic decay</span>
+<span class="n">wavelength_point</span> <span class="o">=</span> <span class="mf">500.0</span>  <span class="c1"># Replace with your desired wavelength value</span>
+
+<span class="c1"># Select the data at the specified wavelength</span>
+<span class="n">kinetic_decay</span> <span class="o">=</span> <span class="n">new_ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="n">wavelength_point</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the kinetic decay</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kinetic_decay</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">],</span> <span class="n">kinetic_decay</span><span class="p">[</span><span class="s1">&#39;absorbance&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Wavelength = </span><span class="si">{</span><span class="n">wavelength_point</span><span class="si">}</span><span class="s1"> nm&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Absorbance&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Kinetic Decay at Wavelength = </span><span class="si">{</span><span class="n">wavelength_point</span><span class="si">}</span><span class="s1"> nm&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/9849a8b8d114352ee772c1e97d918c9bd0f26ad87430ac3fb95b199cbd76e9aa.png" src="../../_images/9849a8b8d114352ee772c1e97d918c9bd0f26ad87430ac3fb95b199cbd76e9aa.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="acknowledgements">
+<h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">#</a></h1>
+<p>This content was developed with assistance from <a class="reference external" href="https://www.perplexity.ai/">Perplexity AI</a> and <a class="reference external" href="https://chatgpt.com/">Chat GPT</a>. Multiple queries were made during the Fall 2024 and the Spring 2025.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "py4sci"
+        },
+        kernelOptions: {
+            name: "py4sci",
+            path: "./content/module3-packages1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'py4sci'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03-2-pandas.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">2. Pandas</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03-4-matplotlib.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">4. MatPlotLib</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">3. Xarray</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1. Xarray</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1.1: Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xarray-other-libraries">1.2: Xarray &amp; Other Libraries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-xarray">Install xarray</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#xarray-i-o-functions">2. Xarray I/O Functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#files-pandas-can-read">2.1 Files Pandas can read</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multidimensional-files">2.2 Multidimensional files</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#xarray-functions">3. Xarray Functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Xarray Functions</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataarray">4. DataArray</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attributes">4.1 Attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">4.2 Methods</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">5. Dataset</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">5.1 Attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">5.2 Methods</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#xarray-activity">6. Xarray Activity</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-spectra-simulation">6.1 Create spectra simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-csv-into-xarray">6.2 Load CSV into Xarray</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#save-xarray-dataset-as-netcdf-file">6.3 Save Xarray Dataset as NetCDF file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-netcdf-file-to-dataset">6.4 Loading NetCDF file to Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-the-data">6.5 Exploring the Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#find-range-of-variables">Find Range of Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-spectra-at-given-time">Plot Spectra at given time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-kinetic-decay-at-wavelength">Plot Kinetic decay at wavelength</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Robert Belford
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

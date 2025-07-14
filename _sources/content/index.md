@@ -23,3 +23,16 @@ This interactive Jupyter Book is designed to guide you through foundational conc
 - {ref}`module2-oop-data-structures/02-7-db-external-data-structures` — Brief Intro do Databases
 - {ref}`module2-oop-data-structures/02-8-api-external-data-structures` — Data and APIs
 - {ref}`module2-oop-data-structures/02-9-webscrape-external-data-structures` — Web Scraping
+
+# Module 3: Packages
+
+- {ref}`module3-packages1/03-1-numpy` — NumPy
+- {ref}`module3-packages1/03-2-pandas` — Pandas
+- {ref}`module3-packages1/03-3-xarray` — Xarray
+- {ref}`module3-packages1/03-4-matplotlib` — MatPlotLib
+- {ref}`module3-packages1/03-5-seaborn` — Seaborn Part 1
+- {ref}`module3-packages1/03-6-seaborn` — Seaborn Part 2
+- {ref}`module3-packages1/03-7-seaborn` — Seaborn Part 3
+- {ref}`module3-packages1/03-8-scipy` — SciPy
+- {ref}`module3-packages1/03-9-rdkit` — RDKit
+- {ref}`module3-packages1/03-10-rdkit-descriptors` — RDKit and Discriptors
