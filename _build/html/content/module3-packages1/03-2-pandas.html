@@ -1,0 +1,3487 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2. Pandas &#8212; Draft Python for Science Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e52fa269" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom-checkpoint.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/module3-packages1/03-2-pandas';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. Xarray" href="03-3-xarray.html" />
+    <link rel="prev" title="1. NumPy" href="03-1-numpy.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Draft Python for Science Book - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Draft Python for Science Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Python for Science
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../math-test.html">In a Markdown cell:</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../module1-setup/README.html">Module 1: Getting Set Up</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-1-setupcomputer.html">1. Setting up your computer</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-2-jynbgettingstarted.html">2: Runnng and Creating Jupyter Notebooks</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-3-jynb-intro.html">3. Overview of Jupyter Notebooks</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-5-git.html">5. Git and GitHub</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-6-oop.html">6. Object Oriented Programming</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-7-virtual-environments.html">7. Virtual Environments</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../module2-oop-data-structures/README.html">Module 2: Data Structures</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-1-primitive-data-structures.html">1. Primative Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-2-py-calculator.html">2. Python as a Calculator</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-3-composite-data-structures.html">3. Composite Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-4-built-in-modules.html">4. Built-In Modules</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-5-control-structures.html">5. Logic and Control Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-6-external-data-structures.html">6. External Data Structures</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-7-db-external-data-structures.html">7. Databases as External Data Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-8-api-external-data-structures.html">8. APIs as External Data Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-9-webscrape-external-data-structures.html">9. WebScraping as External Data Structures</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="README.html">Module 3: Packages</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="03-1-numpy.html">1. NumPy</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2. Pandas</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-3-xarray.html">3. Xarray</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-4-matplotlib.html">4. MatPlotLib</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-5-seaborn.html">5. Seaborn Part 1</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-6-seaborn.html">7. Seaborn Part 2</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-7-seaborn.html">7. Seaborn Part 3</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-8-scipy.html">8. SciPy</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-9-rdkit.html">9. RDKit</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-10-rdkit-descriptors.html">10. RDKit and Descriptors</a></li>
+
+
+
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/rebelford/py4scibook/master?urlpath=lab/tree/docs/content/module3-packages1/03-2-pandas.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://your-jupyterhub-url.com/hub/user-redirect/git-pull?repo=https%3A//github.com/rebelford/py4scibook&urlpath=lab/tree/py4scibook/docs/content/module3-packages1/03-2-pandas.ipynb&branch=master" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on JupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="JupyterHub logo" src="../../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rebelford/py4scibook/blob/master/docs/content/module3-packages1/03-2-pandas.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook/issues/new?title=Issue%20on%20page%20%2Fcontent/module3-packages1/03-2-pandas.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/module3-packages1/03-2-pandas.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>2. Pandas</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2. Pandas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-dataframes-vs-numpy-arrays">Pandas DataFrames vs. Numpy Arrays</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-object-overview">2. Pandas Object Overview</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">2.1: Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#series-functions-series-only">Series Functions (series only)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-functions-df-only">Dataframe functions (df only)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#series-and-dataframe-functions">Series and dataframe functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attributes">2.2 Attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series-attributes">Series Attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-attributes">Dataframe Attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series-and-dataframe-attributes">Series and Dataframe Attributes</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-series">3. Pandas Series</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-series">3.2 Creating Series</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pd-series-constructor">pd.Series() constructor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-lists">From Lists</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-numpy-arrays">From Numpy Arrays</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-dictionary">From Dictionary</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-scalar-value">From Scalar Value</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indirect-methods">Indirect Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-dataframe-column">From DataFrame Column</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-apply-on-dataframe-column">Using apply() on dataframe column</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-map-to-a-dataframe-column">Using map() to a dataframe column</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-iloc-on-a-dataframe">Using iloc() on a dataframe</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-loc-on-a-dataframe">Using loc() on a dataframe</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-dataframes">4. Pandas DataFrames</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-creation">4.1 DataFrame Creation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pd-dataframe-constructor">pd.DataFrame() constructor</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-methods">4.2 DataFrame Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploration">Exploration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-selection-and-filtering">DataFrame Selection and Filtering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-cleaning">DataFrame Cleaning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-transformation">DataFrame Transformation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-statistics-and-aggregation">DataFrame Statistics and Aggregation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-merging-and-concatenation">DataFrame Merging and Concatenation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-io">Dataframe IO</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-missing-data">4.3: Handling Missing Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dropna-remove-missing-values">dropna() - remove missing values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fillna-np-nan-replacing-missing-values-with-nan">fillna(np.nan)Replacing Missing Values with NaN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replace-custom-missing-values">Replace Custom Missing Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replace-missing-values-with-the-mean">Replace Missing Values with the Mean</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replace-missing-value-with-custom-values">Replace Missing Value with Custom Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-boolean-mask-to-remove-nan">Use Boolean mask to remove NaN</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistics">4. Statistics</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">5. Activity</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-the-symbols-column-as-the-index">Set the symbols column as the index</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-information-from-dataframe">Extracting Information from DataFrame</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="pandas">
+<span id="module3-packages1-03-2-pandas"></span><h1>2. Pandas<a class="headerlink" href="#pandas" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
+<p><strong>Pandas</strong> stands for <strong>Pan</strong>el <strong>da</strong>ta, which is an economics term for multi-dimensional datasets. Pandas is built on top of Numpy and has two primary data structures</p>
+<ol class="arabic simple">
+<li><p>Series (1D data structure)</p></li>
+<li><p>Dataframe (2D data structure)</p></li>
+</ol>
+<p>If you want higher dimensional data structures you should use the <a class="reference external" href="https://pypi.org/project/xarray/">xrray package</a>.</p>
+<p>Pandas series and dataframes are typically easier to work with than Numpy
+arrays because they can use labels as index numbers. That is, you can give a row or a column a heading label and then using the label to obtain the data value, whereas in numpy you need to use the index numbers. Pandas can also contain multiple data types while numpy arrays can only have one data type.</p>
+<section id="pandas-dataframes-vs-numpy-arrays">
+<h2>Pandas DataFrames vs. Numpy Arrays<a class="headerlink" href="#pandas-dataframes-vs-numpy-arrays" title="Link to this heading">#</a></h2>
+<br>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p><strong>Pandas DataFrame</strong></p></th>
+<th class="head"><p><strong>NumPy Array</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Type</p></td>
+<td><p>2D table with labeled rows &amp; columns</p></td>
+<td><p>N-dimensional homogeneous array</p></td>
+</tr>
+<tr class="row-odd"><td><p>Supports multiple data types?</p></td>
+<td><p>Yes (e.g., strings &amp; numbers in one column)</p></td>
+<td><p>No (all elements must be the same type)</p></td>
+</tr>
+<tr class="row-even"><td><p>Supports heterogeneous data?</p></td>
+<td><p>Yes (each column can have different types)</p></td>
+<td><p>No (all elements must be the same <code class="docutils literal notranslate"><span class="pre">dtype</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Row &amp; column labels</p></td>
+<td><p>Yes (uses <code class="docutils literal notranslate"><span class="pre">Index</span></code> and column names)</p></td>
+<td><p>No (only positional indexing)</p></td>
+</tr>
+<tr class="row-even"><td><p>Access by labels?</p></td>
+<td><p>Yes (<code class="docutils literal notranslate"><span class="pre">df.loc[&quot;row_label&quot;,</span> <span class="pre">&quot;column_label&quot;]</span></code>)</p></td>
+<td><p>No (only by index position)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Access by index position?</p></td>
+<td><p>Yes (<code class="docutils literal notranslate"><span class="pre">df.iloc[1,</span> <span class="pre">2]</span></code>)</p></td>
+<td><p>Yes (<code class="docutils literal notranslate"><span class="pre">arr[1,</span> <span class="pre">2]</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p>Supports missing values?</p></td>
+<td><p>Yes (<code class="docutils literal notranslate"><span class="pre">NaN</span></code>)</p></td>
+<td><p>No (must use masked arrays or <code class="docutils literal notranslate"><span class="pre">np.nan</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Built-in functions for missing data?</p></td>
+<td><p>Yes (<code class="docutils literal notranslate"><span class="pre">df.fillna()</span></code>, <code class="docutils literal notranslate"><span class="pre">df.dropna()</span></code>)</p></td>
+<td><p>No (requires workarounds)</p></td>
+</tr>
+<tr class="row-even"><td><p>Supports row/column operations?</p></td>
+<td><p>Yes (<code class="docutils literal notranslate"><span class="pre">df.mean(axis=0)</span></code>, <code class="docutils literal notranslate"><span class="pre">df.sum(axis=1)</span></code>)</p></td>
+<td><p>Yes (<code class="docutils literal notranslate"><span class="pre">arr.mean(axis=0)</span></code>, <code class="docutils literal notranslate"><span class="pre">arr.sum(axis=1)</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Supports grouping &amp; aggregation?</p></td>
+<td><p>Yes (<code class="docutils literal notranslate"><span class="pre">df.groupby()</span></code>, <code class="docutils literal notranslate"><span class="pre">df.agg()</span></code>)</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-even"><td><p>Supports reshaping?</p></td>
+<td><p>Yes (<code class="docutils literal notranslate"><span class="pre">df.pivot()</span></code>, <code class="docutils literal notranslate"><span class="pre">df.melt()</span></code>)</p></td>
+<td><p>Yes (<code class="docutils literal notranslate"><span class="pre">arr.reshape()</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Supports merging/joining?</p></td>
+<td><p>Yes (<code class="docutils literal notranslate"><span class="pre">df.merge()</span></code>, <code class="docutils literal notranslate"><span class="pre">df.join()</span></code>)</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-even"><td><p>Mutable</p></td>
+<td><p>Yes (you can modify/add/delete columns, rows or elements)</p></td>
+<td><p>Partially (you can modify elements but not change shape)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Read/Write CSV?</p></td>
+<td><p>Yes (<code class="docutils literal notranslate"><span class="pre">df.to_csv()</span></code>, <code class="docutils literal notranslate"><span class="pre">pd.read_csv()</span></code>)</p></td>
+<td><p>No (must use Pandas or <code class="docutils literal notranslate"><span class="pre">np.savetxt()</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p>Read/Write JSON?</p></td>
+<td><p>Yes (<code class="docutils literal notranslate"><span class="pre">df.to_json()</span></code>, <code class="docutils literal notranslate"><span class="pre">pd.read_json()</span></code>)</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>Read/Write Excel?</p></td>
+<td><p>Yes (<code class="docutils literal notranslate"><span class="pre">df.to_excel()</span></code>, <code class="docutils literal notranslate"><span class="pre">pd.read_excel()</span></code>)</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-even"><td><p>Save/Load Binary Format?</p></td>
+<td><p>Yes (<code class="docutils literal notranslate"><span class="pre">df.to_pickle()</span></code>)</p></td>
+<td><p>Yes (<code class="docutils literal notranslate"><span class="pre">np.save()</span></code>, <code class="docutils literal notranslate"><span class="pre">np.load()</span></code>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>If you have not installed pandas you need to activate your conda virtual environment and install it using your terminal</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>NameOfEnvironment
+conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>pandas
+</pre></div>
+</div>
+<p>Now check the version that is installed</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.2.3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pandas-object-overview">
+<h1>2. Pandas Object Overview<a class="headerlink" href="#pandas-object-overview" title="Link to this heading">#</a></h1>
+<section id="functions">
+<h2>2.1: Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
+<section id="series-functions-series-only">
+<h3>Series Functions (series only)<a class="headerlink" href="#series-functions-series-only" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Syntax</p></th>
+<th class="head"><p>Parameters</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.str.method()</span></code></p></td>
+<td><p>String-specific method</p></td>
+<td><p>Enables vectorized string operations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dt</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.dt.method()</span></code></p></td>
+<td><p>Datetime-specific method</p></td>
+<td><p>Enables date/time manipulations.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">map()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.map(func)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">func</span></code>: Function to apply</p></td>
+<td><p>Maps function to each value in the Series.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">unique()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.unique()</span></code></p></td>
+<td><p>No parameters</p></td>
+<td><p>Returns unique values in the Series.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nunique()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.nunique()</span></code></p></td>
+<td><p>No parameters</p></td>
+<td><p>Returns the number of unique values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">value_counts()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.value_counts()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">normalize</span></code>, <code class="docutils literal notranslate"><span class="pre">sort</span></code>, <code class="docutils literal notranslate"><span class="pre">ascending</span></code>, <code class="docutils literal notranslate"><span class="pre">bins</span></code></p></td>
+<td><p>Returns frequency counts of unique values.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">idxmax()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.idxmax()</span></code></p></td>
+<td><p>No parameters</p></td>
+<td><p>Returns index of the maximum value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">idxmin()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.idxmin()</span></code></p></td>
+<td><p>No parameters</p></td>
+<td><p>Returns index of the minimum value.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cumsum()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.cumsum()</span></code></p></td>
+<td><p>No parameters</p></td>
+<td><p>Computes the cumulative sum.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cumprod()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.cumprod()</span></code></p></td>
+<td><p>No parameters</p></td>
+<td><p>Computes the cumulative product.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cummax()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.cummax()</span></code></p></td>
+<td><p>No parameters</p></td>
+<td><p>Computes the cumulative max.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cummin()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.cummin()</span></code></p></td>
+<td><p>No parameters</p></td>
+<td><p>Computes the cumulative min.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">shift()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.shift(periods=1)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">periods</span></code> (int, default=1)</p></td>
+<td><p>Shifts values up or down.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">diff()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.diff(periods=1)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">periods</span></code> (int, default=1)</p></td>
+<td><p>Computes the difference between elements.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rank()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.rank(method='average')</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">method</span></code>: Ranking method</p></td>
+<td><p>Computes ranks of elements.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="dataframe-functions-df-only">
+<h3>Dataframe functions (df only)<a class="headerlink" href="#dataframe-functions-df-only" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Syntax</p></th>
+<th class="head"><p>Parameters</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">groupby()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.groupby(by)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">by</span></code>: Column(s) to group by</p></td>
+<td><p>Groups data and applies aggregation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pivot()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.pivot(index,</span> <span class="pre">columns,</span> <span class="pre">values)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">index</span></code>, <code class="docutils literal notranslate"><span class="pre">columns</span></code>, <code class="docutils literal notranslate"><span class="pre">values</span></code></p></td>
+<td><p>Reshapes data by pivoting columns.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pivot_table()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.pivot_table(values,</span> <span class="pre">index,</span> <span class="pre">columns)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">values</span></code>, <code class="docutils literal notranslate"><span class="pre">index</span></code>, <code class="docutils literal notranslate"><span class="pre">columns</span></code>, <code class="docutils literal notranslate"><span class="pre">aggfunc</span></code></p></td>
+<td><p>Similar to <code class="docutils literal notranslate"><span class="pre">pivot()</span></code>, but allows aggregation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">melt()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.melt(id_vars,</span> <span class="pre">value_vars)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">id_vars</span></code>, <code class="docutils literal notranslate"><span class="pre">value_vars</span></code></p></td>
+<td><p>Converts wide format to long format.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">merge()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.merge(df2,</span> <span class="pre">on,</span> <span class="pre">how)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">on</span></code>: Key column, <code class="docutils literal notranslate"><span class="pre">how</span></code>: Join type</p></td>
+<td><p>Merges two DataFrames on a key.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">join()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.join(df2,</span> <span class="pre">on)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">on</span></code>: Key column</p></td>
+<td><p>Joins two DataFrames based on index.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">concat()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pd.concat([df1,</span> <span class="pre">df2],</span> <span class="pre">axis=0)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">axis</span></code>: 0 for rows, 1 for columns</p></td>
+<td><p>Concatenates multiple DataFrames.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">stack()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.stack()</span></code></p></td>
+<td><p>No parameters</p></td>
+<td><p>Converts columns into rows (long format).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">unstack()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.unstack()</span></code></p></td>
+<td><p>No parameters</p></td>
+<td><p>Converts rows into columns (wide format).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">explode()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.explode(column)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">column</span></code>: Column to explode</p></td>
+<td><p>Expands list-like column values into rows.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.T</span></code></p></td>
+<td><p>No parameters</p></td>
+<td><p>Transposes rows and columns.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">corr()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.corr()</span></code></p></td>
+<td><p>No parameters</p></td>
+<td><p>Computes correlation between columns.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cov()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.cov()</span></code></p></td>
+<td><p>No parameters</p></td>
+<td><p>Computes covariance between columns.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">duplicated()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.duplicated(subset,</span> <span class="pre">keep='first')</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">subset</span></code>: Columns to check</p></td>
+<td><p>Identifies duplicate rows.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">drop_duplicates()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.drop_duplicates(subset,</span> <span class="pre">keep='first')</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">subset</span></code>: Columns to check</p></td>
+<td><p>Removes duplicate rows.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sample()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.sample(n=5,</span> <span class="pre">frac=None)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n</span></code>: Number of samples, <code class="docutils literal notranslate"><span class="pre">frac</span></code>: Fraction</p></td>
+<td><p>Returns a random sample.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nlargest()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.nlargest(n,</span> <span class="pre">columns)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n</span></code>: Number of rows, <code class="docutils literal notranslate"><span class="pre">columns</span></code>: Sort column</p></td>
+<td><p>Returns top <code class="docutils literal notranslate"><span class="pre">n</span></code> largest values in a column.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nsmallest()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.nsmallest(n,</span> <span class="pre">columns)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n</span></code>: Number of rows, <code class="docutils literal notranslate"><span class="pre">columns</span></code>: Sort column</p></td>
+<td><p>Returns top <code class="docutils literal notranslate"><span class="pre">n</span></code> smallest values in a column.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fillna()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.fillna(value)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: Value to fill missing data</p></td>
+<td><p>Fills missing values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dropna()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.dropna(axis=0)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">axis</span></code>: 0 (rows), 1 (columns)</p></td>
+<td><p>Drops missing values.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">replace()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.replace(to_replace,</span> <span class="pre">value)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">to_replace</span></code>, <code class="docutils literal notranslate"><span class="pre">value</span></code></p></td>
+<td><p>Replaces specific values.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="series-and-dataframe-functions">
+<h3>Series and dataframe functions<a class="headerlink" href="#series-and-dataframe-functions" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Syntax</p></th>
+<th class="head"><p>Parameters</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">head()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.head(n)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n</span></code> (int, default=5): Number of rows to return</p></td>
+<td><p>Returns the first <code class="docutils literal notranslate"><span class="pre">n</span></code> rows.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tail()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.tail(n)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">n</span></code> (int, default=5): Number of rows to return</p></td>
+<td><p>Returns the last <code class="docutils literal notranslate"><span class="pre">n</span></code> rows.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">describe()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.describe()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">percentiles</span></code>, <code class="docutils literal notranslate"><span class="pre">include</span></code>, <code class="docutils literal notranslate"><span class="pre">exclude</span></code></p></td>
+<td><p>Generates summary statistics for numerical data.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">count()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.count()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">axis=0</span></code> (count rows) or <code class="docutils literal notranslate"><span class="pre">axis=1</span></code> (count columns)</p></td>
+<td><p>Counts non-null values.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sum()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.sum(axis=0)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">axis=0</span></code> (column-wise) or <code class="docutils literal notranslate"><span class="pre">axis=1</span></code> (row-wise)</p></td>
+<td><p>Computes sum of values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mean()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.mean(axis=0)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">axis=0</span></code> (default, column-wise)</p></td>
+<td><p>Computes mean of values.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">min()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.min(axis=0)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">axis=0</span></code> (default, column-wise)</p></td>
+<td><p>Returns the minimum value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">max()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.max(axis=0)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">axis=0</span></code> (default, column-wise)</p></td>
+<td><p>Returns the maximum value.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">std()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.std(axis=0)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">axis=0</span></code> (default, column-wise)</p></td>
+<td><p>Computes standard deviation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">var()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.var(axis=0)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">axis=0</span></code> (default, column-wise)</p></td>
+<td><p>Computes variance.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">median()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.median(axis=0)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">axis=0</span></code> (default, column-wise)</p></td>
+<td><p>Computes the median value.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mode()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.mode()</span></code></p></td>
+<td><p>No parameters</p></td>
+<td><p>Returns the most frequent value(s).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">abs()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.abs()</span></code></p></td>
+<td><p>No parameters</p></td>
+<td><p>Returns absolute values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">clip()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.clip(lower,</span> <span class="pre">upper)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">lower</span></code>, <code class="docutils literal notranslate"><span class="pre">upper</span></code>: Clip values to limits</p></td>
+<td><p>Clips values to a range.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">apply()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.apply(func,</span> <span class="pre">axis=0)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">func</span></code>: Function to apply, <code class="docutils literal notranslate"><span class="pre">axis</span></code></p></td>
+<td><p>Applies a function element-wise.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">map()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.map(func)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">func</span></code>: Function to apply</p></td>
+<td><p>Applies function to each element (Series only).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">astype()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.astype(dtype)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dtype</span></code>: Target data type</p></td>
+<td><p>Converts data type of elements.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="attributes">
+<h2>2.2 Attributes<a class="headerlink" href="#attributes" title="Link to this heading">#</a></h2>
+</section>
+<section id="series-attributes">
+<h2>Series Attributes<a class="headerlink" href="#series-attributes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Syntax</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.name</span></code></p></td>
+<td><p>Returns or sets the name of the Series.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dtype</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.dtype</span></code></p></td>
+<td><p>Returns the data type of the Series.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nbytes</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.nbytes</span></code></p></td>
+<td><p>Returns the total memory usage of the Series (in bytes).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.T</span></code></p></td>
+<td><p>Returns the Series itself (useful for compatibility with DataFrames).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hasnans</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.hasnans</span></code></p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the Series contains <code class="docutils literal notranslate"><span class="pre">NaN</span></code> values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">is_unique</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">series.is_unique</span></code></p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if all values in the Series are unique.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="dataframe-attributes">
+<h2>Dataframe Attributes<a class="headerlink" href="#dataframe-attributes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Syntax</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">columns</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.columns</span></code></p></td>
+<td><p>Returns column labels of the DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">axes</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.axes</span></code></p></td>
+<td><p>Returns a list of row and column index labels.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.T</span></code></p></td>
+<td><p>Returns the transposed DataFrame (swaps rows and columns).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">info()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.info()</span></code></p></td>
+<td><p>Displays a summary of the DataFrame (index, dtypes, memory usage).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">memory_usage()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.memory_usage()</span></code></p></td>
+<td><p>Returns the memory usage of each column.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">select_dtypes()</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.select_dtypes(include=[...])</span></code></p></td>
+<td><p>Selects columns of a specific dtype.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nbytes</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.nbytes</span></code></p></td>
+<td><p>Returns the total memory usage of the DataFrame (in bytes).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="series-and-dataframe-attributes">
+<h2>Series and Dataframe Attributes<a class="headerlink" href="#series-and-dataframe-attributes" title="Link to this heading">#</a></h2>
+<p>These work on both</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Attribute</p></th>
+<th class="head"><p>Syntax</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">index</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.index</span></code></p></td>
+<td><p>Returns the row index labels.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">columns</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.columns</span></code></p></td>
+<td><p>Returns the column labels (DataFrame only).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">shape</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.shape</span></code></p></td>
+<td><p>Returns the dimensions (rows, columns).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">size</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.size</span></code></p></td>
+<td><p>Returns the total number of elements (rows × columns).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ndim</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.ndim</span></code></p></td>
+<td><p>Returns the number of dimensions (1D for Series, 2D for DataFrame).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">values</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.values</span></code></p></td>
+<td><p>Returns data as a NumPy array.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dtypes</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.dtypes</span></code></p></td>
+<td><p>Returns the data type of each column.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">empty</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.empty</span></code></p></td>
+<td><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the object is empty.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pandas-series">
+<h1>3. Pandas Series<a class="headerlink" href="#pandas-series" title="Link to this heading">#</a></h1>
+<section id="creating-series">
+<h2>3.2 Creating Series<a class="headerlink" href="#creating-series" title="Link to this heading">#</a></h2>
+<section id="pd-series-constructor">
+<h3>pd.Series() constructor<a class="headerlink" href="#pd-series-constructor" title="Link to this heading">#</a></h3>
+<p>General syntax for the <strong>pd.Series() Constructor:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">data</span></code></p></td>
+<td><p>The main data (can be list, dict, array, scalar, etc.)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">index</span></code></p></td>
+<td><p>Labels for the Series elements (default: auto-generated integers)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dtype</span></code></p></td>
+<td><p>The data type (e.g., <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">int</span></code>, <code class="docutils literal notranslate"><span class="pre">str</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">name</span></code></p></td>
+<td><p>Optional name for the Series</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">copy</span></code></p></td>
+<td><p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, makes a copy of the data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="from-lists">
+<h4>From Lists<a class="headerlink" href="#from-lists" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Index can be manually assigned or autogenerated (0,1,2,…)</p></li>
+<li><p>By default produces a view if possible</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Creating a Series: Boiling points (in °C) of halogens</span>
+<span class="n">boiling_points</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+    <span class="p">[</span><span class="o">-</span><span class="mf">188.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">34.0</span><span class="p">,</span> <span class="mf">59.5</span><span class="p">,</span> <span class="mf">184.4</span><span class="p">,</span> <span class="mf">336.8</span><span class="p">],</span>  <span class="c1"># Values</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;Cl&quot;</span><span class="p">,</span> <span class="s2">&quot;Br&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;At&quot;</span><span class="p">],</span>  <span class="c1"># Element symbols as labels</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Boiling Point (°C)&quot;</span>
+    <span class="p">)</span>
+
+
+<span class="c1"># Display the Series</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">boiling_points</span><span class="p">)</span>
+
+<span class="c1"># Example Operations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Highest Boiling Point:&quot;</span><span class="p">,</span> <span class="n">boiling_points</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>  <span class="c1"># Get the highest boiling point</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sorted Boiling Points:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">boiling_points</span><span class="o">.</span><span class="n">sort_values</span><span class="p">())</span>  <span class="c1"># Sort in ascending order</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Ranked Boiling Points:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">boiling_points</span><span class="o">.</span><span class="n">rank</span><span class="p">())</span>  <span class="c1"># Rank the elements</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F    -188.1
+Cl    -34.0
+Br     59.5
+I     184.4
+At    336.8
+Name: Boiling Point (°C), dtype: float64
+
+Highest Boiling Point: 336.8
+
+Sorted Boiling Points:
+ F    -188.1
+Cl    -34.0
+Br     59.5
+I     184.4
+At    336.8
+Name: Boiling Point (°C), dtype: float64
+
+Ranked Boiling Points:
+ F     1.0
+Cl    2.0
+Br    3.0
+I     4.0
+At    5.0
+Name: Boiling Point (°C), dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="from-numpy-arrays">
+<h4>From Numpy Arrays<a class="headerlink" href="#from-numpy-arrays" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">s</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">([</span><span class="s1">&#39;H&#39;</span><span class="p">,</span><span class="s1">&#39;He&#39;</span><span class="p">,</span> <span class="s1">&#39;Li&#39;</span><span class="p">,</span> <span class="s1">&#39;Be&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H     1
+He    2
+Li    3
+Be    4
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="from-dictionary">
+<h4>From Dictionary<a class="headerlink" href="#from-dictionary" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating a Series from a dictionary (keys become the index)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="mf">1.008</span><span class="p">,</span> <span class="s2">&quot;He&quot;</span><span class="p">:</span> <span class="mf">4.0026</span><span class="p">,</span> <span class="s2">&quot;Li&quot;</span><span class="p">:</span> <span class="mf">6.94</span><span class="p">,</span> <span class="s2">&quot;Be&quot;</span><span class="p">:</span> <span class="mf">9.0122</span><span class="p">}</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Atomic Mass (g/mol)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H     1.0080
+He    4.0026
+Li    6.9400
+Be    9.0122
+Name: Atomic Mass (g/mol), dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="from-scalar-value">
+<h4>From Scalar Value<a class="headerlink" href="#from-scalar-value" title="Link to this heading">#</a></h4>
+<p>-useful for initializing placeholders</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A    1
+B    1
+C    1
+D    1
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>s = pd.Series(1, index=[“A”, “B”, “C”, “D”])
+print(s)</p>
+</section>
+</section>
+<section id="indirect-methods">
+<h3>Indirect Methods<a class="headerlink" href="#indirect-methods" title="Link to this heading">#</a></h3>
+<section id="from-dataframe-column">
+<h4>From DataFrame Column<a class="headerlink" href="#from-dataframe-column" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Creating a DataFrame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Element&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;Li&quot;</span><span class="p">],</span> <span class="s2">&quot;Atomic Mass&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.008</span><span class="p">,</span> <span class="mf">4.0026</span><span class="p">,</span> <span class="mf">6.94</span><span class="p">]})</span>
+
+<span class="c1"># Extracting a single column as a Series</span>
+<span class="n">atomic_mass_series</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Atomic Mass&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">atomic_mass_series</span><span class="p">))</span>  <span class="c1"># &lt;class &#39;pandas.core.series.Series&#39;&gt;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">atomic_mass_series</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.series.Series&#39;&gt;
+0    1.0080
+1    4.0026
+2    6.9400
+Name: Atomic Mass, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-apply-on-dataframe-column">
+<h4>Using apply() on dataframe column<a class="headerlink" href="#using-apply-on-dataframe-column" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Atomic Mass Squared&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Atomic Mass&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Atomic Mass Squared&quot;</span><span class="p">]))</span>  <span class="c1"># &lt;class &#39;pandas.core.series.Series&#39;&gt;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Atomic Mass Squared&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.series.Series&#39;&gt;
+0     1.016064
+1    16.020807
+2    48.163600
+Name: Atomic Mass Squared, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-map-to-a-dataframe-column">
+<h4>Using map() to a dataframe column<a class="headerlink" href="#using-map-to-a-dataframe-column" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Step 1: Create a DataFrame of electronegativity values for halogens</span>
+<span class="n">halogens</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Element&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;Cl&quot;</span><span class="p">,</span> <span class="s2">&quot;Br&quot;</span><span class="p">,</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;At&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Electronegativity&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">3.98</span><span class="p">,</span> <span class="mf">3.16</span><span class="p">,</span> <span class="mf">2.96</span><span class="p">,</span> <span class="mf">2.66</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="c1"># Step 2: Define a function to classify elements based on electronegativity</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">classify_electronegativity</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">3.5</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Highly Electronegative&quot;</span>
+    <span class="k">elif</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">2.5</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Moderately Electronegative&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Low Electronegativity&quot;</span>
+
+<span class="c1"># Step 3: Use `map()` to create a new Series with classifications</span>
+<span class="n">electronegativity_class</span> <span class="o">=</span> <span class="n">halogens</span><span class="p">[</span><span class="s2">&quot;Electronegativity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">classify_electronegativity</span><span class="p">)</span>
+
+<span class="c1"># Step 4: Add the new classification Series to the DataFrame</span>
+<span class="n">halogens</span><span class="p">[</span><span class="s2">&quot;Electronegativity Category&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">electronegativity_class</span>
+
+<span class="c1"># Step 5: Display the Series and DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">electronegativity_class</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">electronegativity_class</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">halogens</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">halogens</span><span class="p">))</span>
+<span class="c1"># Step 6 (Optional): Save the DataFrame to a CSV file</span>
+<span class="n">halogens</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;halogens_electronegativity.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0        Highly Electronegative
+1    Moderately Electronegative
+2    Moderately Electronegative
+3    Moderately Electronegative
+4         Low Electronegativity
+Name: Electronegativity, dtype: object
+&lt;class &#39;pandas.core.series.Series&#39;&gt;
+
+
+  Element  Electronegativity  Electronegativity Category
+0       F               3.98      Highly Electronegative
+1      Cl               3.16  Moderately Electronegative
+2      Br               2.96  Moderately Electronegative
+3       I               2.66  Moderately Electronegative
+4      At               2.20       Low Electronegativity
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-iloc-on-a-dataframe">
+<h4>Using iloc() on a dataframe<a class="headerlink" href="#using-iloc-on-a-dataframe" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Create a sample DataFrame with chemical properties</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Element&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Na&quot;</span><span class="p">,</span> <span class="s2">&quot;Mg&quot;</span><span class="p">,</span> <span class="s2">&quot;Al&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;P&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Atomic Number&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+    <span class="s2">&quot;Electronegativity&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.93</span><span class="p">,</span> <span class="mf">1.31</span><span class="p">,</span> <span class="mf">1.61</span><span class="p">,</span> <span class="mf">1.90</span><span class="p">,</span> <span class="mf">2.19</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="c1"># Extract the &quot;Electronegativity&quot; column using iloc</span>
+<span class="n">electronegativity_series</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>  <span class="c1"># Selecting column index 2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">electronegativity_series</span><span class="p">))</span>  <span class="c1"># Output: &lt;class &#39;pandas.core.series.Series&#39;&gt;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">electronegativity_series</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.series.Series&#39;&gt;
+0    0.93
+1    1.31
+2    1.61
+3    1.90
+4    2.19
+Name: Electronegativity, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-loc-on-a-dataframe">
+<h4>Using loc() on a dataframe<a class="headerlink" href="#using-loc-on-a-dataframe" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract &quot;Electronegativity&quot; column using loc</span>
+<span class="n">electronegativity_series</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">&quot;Electronegativity&quot;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">electronegativity_series</span><span class="p">))</span>  <span class="c1"># Output: &lt;class &#39;pandas.core.series.Series&#39;&gt;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">electronegativity_series</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.series.Series&#39;&gt;
+0    0.93
+1    1.31
+2    1.61
+3    1.90
+4    2.19
+Name: Electronegativity, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pandas-dataframes">
+<h1>4. Pandas DataFrames<a class="headerlink" href="#pandas-dataframes" title="Link to this heading">#</a></h1>
+<section id="dataframe-creation">
+<h2>4.1 DataFrame Creation<a class="headerlink" href="#dataframe-creation" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pd.DataFrame()</span></code></p></td>
+<td><p>Creates a DataFrame from a dictionary, list, NumPy array, or other data source.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pd.read_csv()</span></code></p></td>
+<td><p>Reads a CSV file into a DataFrame.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pd.read_excel()</span></code></p></td>
+<td><p>Reads an Excel file into a DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pd.read_json()</span></code></p></td>
+<td><p>Reads a JSON file into a DataFrame.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pd.read_sql()</span></code></p></td>
+<td><p>Reads from a SQL database into a DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pd.read_html()</span></code></p></td>
+<td><p>Reads an HTML table into a DataFrame.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="pd-dataframe-constructor">
+<h3>pd.DataFrame() constructor<a class="headerlink" href="#pd-dataframe-constructor" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="dataframe-methods">
+<h2>4.2 DataFrame Methods<a class="headerlink" href="#dataframe-methods" title="Link to this heading">#</a></h2>
+<section id="exploration">
+<h3>Exploration<a class="headerlink" href="#exploration" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.head(n)</span></code></p></td>
+<td><p>Returns the first <code class="docutils literal notranslate"><span class="pre">n</span></code> rows.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.tail(n)</span></code></p></td>
+<td><p>Returns the last <code class="docutils literal notranslate"><span class="pre">n</span></code> rows.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.info()</span></code></p></td>
+<td><p>Displays concise summary of the DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.describe()</span></code></p></td>
+<td><p>Generates summary statistics for numerical columns.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.shape</span></code></p></td>
+<td><p>Returns tuple of (rows, columns).</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.dtypes</span></code></p></td>
+<td><p>Returns the data types of each column.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.columns</span></code></p></td>
+<td><p>Returns the column labels.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.index</span></code></p></td>
+<td><p>Returns the index (row labels).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.sample(n)</span></code></p></td>
+<td><p>Returns a random sample of <code class="docutils literal notranslate"><span class="pre">n</span></code> rows.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="dataframe-selection-and-filtering">
+<h3>DataFrame Selection and Filtering<a class="headerlink" href="#dataframe-selection-and-filtering" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df['column']</span></code></p></td>
+<td><p>Selects a single column as a Series.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df[['col1',</span> <span class="pre">'col2']]</span></code></p></td>
+<td><p>Selects multiple columns.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.iloc[row,</span> <span class="pre">col]</span></code></p></td>
+<td><p>Selects data using integer-location indexing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.loc[row_label,</span> <span class="pre">col_label]</span></code></p></td>
+<td><p>Selects data using label-based indexing.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df[df['column']</span> <span class="pre">&gt;</span> <span class="pre">value]</span></code></p></td>
+<td><p>Filters rows based on a condition.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.query('column</span> <span class="pre">&gt;</span> <span class="pre">value')</span></code></p></td>
+<td><p>Queries the DataFrame using an expression.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.set_index('column')</span></code></p></td>
+<td><p>Sets a specific column as the index.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.reset_index()</span></code></p></td>
+<td><p>Resets the index to default integer values.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="dataframe-cleaning">
+<h3>DataFrame Cleaning<a class="headerlink" href="#dataframe-cleaning" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.dropna()</span></code></p></td>
+<td><p>Removes rows with missing values.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.fillna(value)</span></code></p></td>
+<td><p>Fills missing values with a specified value.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.drop(columns=['col1',</span> <span class="pre">'col2'])</span></code></p></td>
+<td><p>Drops specified columns.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.drop(index=[0,1])</span></code></p></td>
+<td><p>Drops specified rows.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.rename(columns={'old':'new'})</span></code></p></td>
+<td><p>Renames column labels.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.duplicated()</span></code></p></td>
+<td><p>Checks for duplicate rows.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.drop_duplicates()</span></code></p></td>
+<td><p>Removes duplicate rows.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.replace(old,</span> <span class="pre">new)</span></code></p></td>
+<td><p>Replaces values in the DataFrame.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="dataframe-transformation">
+<h3>DataFrame Transformation<a class="headerlink" href="#dataframe-transformation" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.apply(func,</span> <span class="pre">axis=0</span> <span class="pre">or</span> <span class="pre">1)</span></code></p></td>
+<td><p>Applies a function across rows or columns.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.applymap(func)</span></code></p></td>
+<td><p>Applies a function element-wise.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.assign(new_col=value)</span></code></p></td>
+<td><p>Creates a new column.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.astype(dtype)</span></code></p></td>
+<td><p>Changes the data type of a column.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.sort_values(by='column')</span></code></p></td>
+<td><p>Sorts values based on a column.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.sort_index()</span></code></p></td>
+<td><p>Sorts DataFrame by index.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.pivot(index,</span> <span class="pre">columns,</span> <span class="pre">values)</span></code></p></td>
+<td><p>Creates a pivot table.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="dataframe-statistics-and-aggregation">
+<h3>DataFrame Statistics and Aggregation<a class="headerlink" href="#dataframe-statistics-and-aggregation" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.groupby('column')</span></code></p></td>
+<td><p>Groups data by a column.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.agg(['mean',</span> <span class="pre">'sum'])</span></code></p></td>
+<td><p>Applies aggregation functions.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.mean()</span></code></p></td>
+<td><p>Computes mean of numerical columns.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.median()</span></code></p></td>
+<td><p>Computes median.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.sum()</span></code></p></td>
+<td><p>Computes sum.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.min()</span></code></p></td>
+<td><p>Computes minimum.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.max()</span></code></p></td>
+<td><p>Computes maximum.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.count()</span></code></p></td>
+<td><p>Counts non-null values.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.nunique()</span></code></p></td>
+<td><p>Counts unique values in each column.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="dataframe-merging-and-concatenation">
+<h3>DataFrame Merging and Concatenation<a class="headerlink" href="#dataframe-merging-and-concatenation" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pd.concat([df1,</span> <span class="pre">df2])</span></code></p></td>
+<td><p>Concatenates DataFrames along an axis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df1.merge(df2,</span> <span class="pre">on='column')</span></code></p></td>
+<td><p>Merges DataFrames on a common column.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df1.join(df2,</span> <span class="pre">on='column')</span></code></p></td>
+<td><p>Joins DataFrames based on index.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="dataframe-io">
+<h3>Dataframe IO<a class="headerlink" href="#dataframe-io" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.to_csv('file.csv')</span></code></p></td>
+<td><p>Writes DataFrame to a CSV file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.to_excel('file.xlsx')</span></code></p></td>
+<td><p>Writes DataFrame to an Excel file.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">df.to_json('file.json')</span></code></p></td>
+<td><p>Writes DataFrame to a JSON file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.to_sql('table',</span> <span class="pre">con=engine)</span></code></p></td>
+<td><p>Writes DataFrame to a SQL table.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pd.read_clipboard()</span></code></p></td>
+<td><p>Reads data from clipboard into a Pandas DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.to_clipboard()</span></code></p></td>
+<td><p>Copies a DataFrame to the clipboard for easy pasting elsewhere.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pd.read_table(&quot;file.txt&quot;)</span></code></p></td>
+<td><p>Reads a tab-separated text file into a Pandas DataFrame.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">df.to_csv(&quot;file.txt&quot;,</span> <span class="pre">sep=&quot;\t&quot;,</span> <span class="pre">index=False)</span></code></p></td>
+<td><p>Saves a DataFrame as a tab-separated text file.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pd.read_csv()</span></code></p></td>
+<td><p>Reads CSV file</p></td>
+</tr>
+<tr class="row-odd"><td><p>pd.read_json()</p></td>
+<td><p>Reads JSON file</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="handling-missing-data">
+<h2>4.3: Handling Missing Data<a class="headerlink" href="#handling-missing-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Creating a DataFrame with missing values</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Element&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;Li&quot;</span><span class="p">,</span> <span class="s2">&quot;Be&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;Ne&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Na&quot;</span><span class="p">,</span> <span class="s2">&quot;Mg&quot;</span><span class="p">,</span> <span class="s2">&quot;Al&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">,</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;Cl&quot;</span><span class="p">,</span> <span class="s2">&quot;Ar&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Atomic_Weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.008</span><span class="p">,</span> <span class="mf">4.0026</span><span class="p">,</span> <span class="mf">6.94</span><span class="p">,</span> <span class="mf">9.0122</span><span class="p">,</span> <span class="mf">10.81</span><span class="p">,</span> <span class="mf">12.011</span><span class="p">,</span> <span class="mf">14.007</span><span class="p">,</span> 
+                      <span class="mf">15.999</span><span class="p">,</span> <span class="mf">18.998</span><span class="p">,</span> <span class="mf">20.180</span><span class="p">,</span> <span class="mf">22.990</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mf">26.981</span><span class="p">,</span> <span class="mf">28.085</span><span class="p">,</span> 
+                      <span class="mf">30.974</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mf">35.45</span><span class="p">,</span> <span class="mf">39.948</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># Display the original DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original DataFrame:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original DataFrame:
+   Element  Atomic_Weight
+0        H         1.0080
+1       He         4.0026
+2       Li         6.9400
+3       Be         9.0122
+4        B        10.8100
+5        C        12.0110
+6        N        14.0070
+7        O        15.9990
+8        F        18.9980
+9       Ne        20.1800
+10      Na        22.9900
+11      Mg            NaN
+12      Al        26.9810
+13      Si        28.0850
+14       P        30.9740
+15       S            NaN
+16      Cl        35.4500
+17      Ar        39.9480
+</pre></div>
+</div>
+</div>
+</div>
+<section id="dropna-remove-missing-values">
+<h3>dropna() - remove missing values<a class="headerlink" href="#dropna-remove-missing-values" title="Link to this heading">#</a></h3>
+<p>Note the index values are removed and not changed</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_cleaned</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">DataFrame after dropping missing values:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_cleaned</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DataFrame after dropping missing values:
+   Element  Atomic_Weight
+0        H         1.0080
+1       He         4.0026
+2       Li         6.9400
+3       Be         9.0122
+4        B        10.8100
+5        C        12.0110
+6        N        14.0070
+7        O        15.9990
+8        F        18.9980
+9       Ne        20.1800
+10      Na        22.9900
+12      Al        26.9810
+13      Si        28.0850
+14       P        30.9740
+16      Cl        35.4500
+17      Ar        39.9480
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fillna-np-nan-replacing-missing-values-with-nan">
+<h3>fillna(np.nan)Replacing Missing Values with NaN<a class="headerlink" href="#fillna-np-nan-replacing-missing-values-with-nan" title="Link to this heading">#</a></h3>
+<p>Note, Pandas automatically converts None to NaN, but sometimes other characters get introduced into the data.  Also, sometimes missing data can cause problems when doing functions over entire dataframes even if it is a string (remember NaN is a float).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Element&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;Li&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;State&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Gas&quot;</span><span class="p">,</span> <span class="s2">&quot;Gas&quot;</span><span class="p">,</span> <span class="s2">&quot;Solid&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Solid&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span>
+<span class="c1"># Ensure missing values are explicitly set to NaN</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Element  State
+0       H    Gas
+1      He    Gas
+2      Li  Solid
+3    None   None
+4       B  Solid
+  Element  State
+0       H    Gas
+1      He    Gas
+2      Li  Solid
+3     NaN    NaN
+4       B  Solid
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="replace-custom-missing-values">
+<h3>Replace Custom Missing Values<a class="headerlink" href="#replace-custom-missing-values" title="Link to this heading">#</a></h3>
+<p>This gets tricky as Pandas is discontinuing type implicit down casting and we have two data types in the Atomic Weight column. We had to force it to a string, replace the values with np.nan, and then convert to a float</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Create DataFrame</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Element&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;He&quot;</span><span class="p">,</span> <span class="s2">&quot;Li&quot;</span><span class="p">,</span> <span class="s2">&quot;Be&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Atomic_Weight&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.008</span><span class="p">,</span> <span class="mf">4.0026</span><span class="p">,</span> <span class="s2">&quot;N/A&quot;</span><span class="p">,</span> <span class="s2">&quot;?&quot;</span><span class="p">,</span> <span class="mf">10.81</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original DataFrame:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span>
+
+<span class="c1"># ✅ Fully Future-Proof Method</span>
+<span class="n">df2</span><span class="p">[</span><span class="s2">&quot;Atomic_Weight&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df2</span><span class="p">[</span><span class="s2">&quot;Atomic_Weight&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;string&quot;</span><span class="p">)</span>  <span class="c1"># Force string type to avoid downcasting</span>
+<span class="n">df2</span><span class="p">[</span><span class="s2">&quot;Atomic_Weight&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df2</span><span class="p">[</span><span class="s2">&quot;Atomic_Weight&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="s2">&quot;N/A&quot;</span><span class="p">,</span> <span class="s2">&quot;?&quot;</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>  <span class="c1"># Replace missing values</span>
+<span class="n">df2</span><span class="p">[</span><span class="s2">&quot;Atomic_Weight&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df2</span><span class="p">[</span><span class="s2">&quot;Atomic_Weight&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>  <span class="c1"># Convert to float after replacement</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Updated DataFrame:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Original DataFrame:
+  Element Atomic_Weight
+0       H         1.008
+1      He        4.0026
+2      Li           N/A
+3      Be             ?
+4       B         10.81
+
+Updated DataFrame:
+  Element  Atomic_Weight
+0       H         1.0080
+1      He         4.0026
+2      Li            NaN
+3      Be            NaN
+4       B        10.8100
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="replace-missing-values-with-the-mean">
+<h3>Replace Missing Values with the Mean<a class="headerlink" href="#replace-missing-values-with-the-mean" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_mean_filled</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_mean_filled</span><span class="p">[</span><span class="s2">&quot;Atomic_Weight&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_mean_filled</span><span class="p">[</span><span class="s2">&quot;Atomic_Weight&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Atomic_Weight&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">DataFrame with missing values replaced by the mean:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_mean_filled</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DataFrame with missing values replaced by the mean:
+   Element  Atomic_Weight
+0        H       1.008000
+1       He       4.002600
+2       Li       6.940000
+3       Be       9.012200
+4        B      10.810000
+5        C      12.011000
+6        N      14.007000
+7        O      15.999000
+8        F      18.998000
+9       Ne      20.180000
+10      Na      22.990000
+11      Mg      18.587238
+12      Al      26.981000
+13      Si      28.085000
+14       P      30.974000
+15       S      18.587238
+16      Cl      35.450000
+17      Ar      39.948000
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="replace-missing-value-with-custom-values">
+<h3>Replace Missing Value with Custom Values<a class="headerlink" href="#replace-missing-value-with-custom-values" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filled_custom</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># ✅ Assign the modified column explicitly (instead of using inplace=True)</span>
+<span class="n">df_filled_custom</span><span class="p">[</span><span class="s2">&quot;Atomic_Weight&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_filled_custom</span><span class="p">[</span><span class="s2">&quot;Atomic_Weight&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">DataFrame with missing values replaced by 0:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_filled_custom</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DataFrame with missing values replaced by 0:
+   Element  Atomic_Weight
+0        H         1.0080
+1       He         4.0026
+2       Li         6.9400
+3       Be         9.0122
+4        B        10.8100
+5        C        12.0110
+6        N        14.0070
+7        O        15.9990
+8        F        18.9980
+9       Ne        20.1800
+10      Na        22.9900
+11      Mg         0.0000
+12      Al        26.9810
+13      Si        28.0850
+14       P        30.9740
+15       S         0.0000
+16      Cl        35.4500
+17      Ar        39.9480
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="use-boolean-mask-to-remove-nan">
+<h3>Use Boolean mask to remove NaN<a class="headerlink" href="#use-boolean-mask-to-remove-nan" title="Link to this heading">#</a></h3>
+<p>Note, we are using .notna() and not .notnan().  ‘na’ stands for “not available”, and this extends to non numeric data types like strings.  the not in notna() inverts the Boolean mask the way ~ does in numpy. So it returns True if the value is a number</p>
+<p>Now Pandas uses NaN as a standard marker for missing data, not just an invalid number.  This is slightly different than Numpy, which treats it as a float.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_valid</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Atomic_Weight&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">DataFrame with only valid atomic weights:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_valid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DataFrame with only valid atomic weights:
+   Element  Atomic_Weight
+0        H         1.0080
+1       He         4.0026
+2       Li         6.9400
+3       Be         9.0122
+4        B        10.8100
+5        C        12.0110
+6        N        14.0070
+7        O        15.9990
+8        F        18.9980
+9       Ne        20.1800
+10      Na        22.9900
+12      Al        26.9810
+13      Si        28.0850
+14       P        30.9740
+16      Cl        35.4500
+17      Ar        39.9480
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="statistics">
+<h2>4. Statistics<a class="headerlink" href="#statistics" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating a DataFrame with physical properties of alkali metals</span>
+<span class="n">alkali_metals</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Atomic Number&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">55</span><span class="p">],</span>  <span class="c1"># Lithium to Cesium</span>
+    <span class="s2">&quot;Atomic Radius (pm)&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">152</span><span class="p">,</span> <span class="mi">186</span><span class="p">,</span> <span class="mi">227</span><span class="p">,</span> <span class="mi">248</span><span class="p">,</span> <span class="mi">265</span><span class="p">],</span>
+    <span class="s2">&quot;Density (g/cm³)&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.534</span><span class="p">,</span> <span class="mf">0.97</span><span class="p">,</span> <span class="mf">0.86</span><span class="p">,</span> <span class="mf">1.53</span><span class="p">,</span> <span class="mf">1.87</span><span class="p">],</span>
+    <span class="s2">&quot;Melting Point (°C)&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">180.5</span><span class="p">,</span> <span class="mf">97.8</span><span class="p">,</span> <span class="mf">63.5</span><span class="p">,</span> <span class="mf">39.3</span><span class="p">,</span> <span class="mf">28.5</span><span class="p">]</span>
+<span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Li&quot;</span><span class="p">,</span> <span class="s2">&quot;Na&quot;</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="s2">&quot;Rb&quot;</span><span class="p">,</span> <span class="s2">&quot;Cs&quot;</span><span class="p">])</span>  <span class="c1"># Using symbols as row index</span>
+
+<span class="c1"># Display the DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">alkali_metals</span><span class="p">)</span>
+
+<span class="c1"># Example Operations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Mean Atomic Radius:&quot;</span><span class="p">,</span> <span class="n">alkali_metals</span><span class="p">[</span><span class="s2">&quot;Atomic Radius (pm)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>  <span class="c1"># Average atomic radius</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Sorted by Melting Point:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">alkali_metals</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;Melting Point (°C)&quot;</span><span class="p">))</span>  <span class="c1"># Sort by melting point</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Density Correlation:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">alkali_metals</span><span class="o">.</span><span class="n">corr</span><span class="p">())</span>  <span class="c1"># Correlation between properties</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Atomic Number  Atomic Radius (pm)  Density (g/cm³)  Melting Point (°C)
+Li              3                 152            0.534               180.5
+Na             11                 186            0.970                97.8
+K              19                 227            0.860                63.5
+Rb             37                 248            1.530                39.3
+Cs             55                 265            1.870                28.5
+
+Mean Atomic Radius: 215.6
+
+Sorted by Melting Point:
+     Atomic Number  Atomic Radius (pm)  Density (g/cm³)  Melting Point (°C)
+Cs             55                 265            1.870                28.5
+Rb             37                 248            1.530                39.3
+K              19                 227            0.860                63.5
+Na             11                 186            0.970                97.8
+Li              3                 152            0.534               180.5
+
+Density Correlation:
+                     Atomic Number  Atomic Radius (pm)  Density (g/cm³)  \
+Atomic Number            1.000000            0.932637         0.973714   
+Atomic Radius (pm)       0.932637            1.000000         0.895427   
+Density (g/cm³)          0.973714            0.895427         1.000000   
+Melting Point (°C)      -0.855879           -0.969793        -0.856947   
+
+                    Melting Point (°C)  
+Atomic Number                -0.855879  
+Atomic Radius (pm)           -0.969793  
+Density (g/cm³)              -0.856947  
+Melting Point (°C)            1.000000  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert melting points from °C to Kelvin (for both Series &amp; DataFrame)</span>
+<span class="n">to_kelvin</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">temp</span><span class="p">:</span> <span class="n">temp</span> <span class="o">+</span> <span class="mf">273.15</span>
+
+<span class="c1"># Apply function to the boiling points Series</span>
+<span class="n">boiling_points_K</span> <span class="o">=</span> <span class="n">boiling_points</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">to_kelvin</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Boiling Points in Kelvin:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">boiling_points_K</span><span class="p">)</span>
+
+<span class="c1"># Apply function to the DataFrame column</span>
+<span class="c1">#print(&quot;\n&quot;, alkali_metals)</span>
+<span class="n">alkali_metals</span><span class="p">[</span><span class="s2">&quot;Melting Point (K)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">alkali_metals</span><span class="p">[</span><span class="s2">&quot;Melting Point (°C)&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">to_kelvin</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Updated Alkali Metals DataFrame:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">alkali_metals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Boiling Points in Kelvin:
+ F      85.05
+Cl    239.15
+Br    332.65
+I     457.55
+At    609.95
+Name: Boiling Point (°C), dtype: float64
+
+Updated Alkali Metals DataFrame:
+     Atomic Number  Atomic Radius (pm)  Density (g/cm³)  Melting Point (°C)  \
+Li              3                 152            0.534               180.5   
+Na             11                 186            0.970                97.8   
+K              19                 227            0.860                63.5   
+Rb             37                 248            1.530                39.3   
+Cs             55                 265            1.870                28.5   
+
+    Melting Point (K)  
+Li             453.65  
+Na             370.95  
+K              336.65  
+Rb             312.45  
+Cs             301.65  
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="activity">
+<h1>5. Activity<a class="headerlink" href="#activity" title="Link to this heading">#</a></h1>
+<p>We are going to upload the periodic table from worksheet 4 and explore it in a Pandas Dataframe</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>Command</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Shape</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.shape</span></code></p></td>
+<td><p>Get number of rows &amp; columns</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Column Labels</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.columns</span></code></p></td>
+<td><p>See column names</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Row &amp; Column Count</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.shape[0]</span></code>, <code class="docutils literal notranslate"><span class="pre">df.shape[1]</span></code></p></td>
+<td><p>Get counts separately</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Data Types</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.dtypes</span></code></p></td>
+<td><p>Check variable types</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Data Overview</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.info()</span></code></p></td>
+<td><p>Summarize structure &amp; missing values</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>First Few Rows</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.head(n)</span></code></p></td>
+<td><p>Preview top rows</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Last Few Rows</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.tail(n)</span></code></p></td>
+<td><p>Preview bottom rows</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Statistics</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.describe()</span></code></p></td>
+<td><p>Get numeric summaries</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Missing Data</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">df.isnull().sum()</span></code></p></td>
+<td><p>Identify missing values</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the directory structure from Workbook 4</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">base_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/data&quot;</span><span class="p">)</span>  <span class="c1"># Parent directory</span>
+<span class="n">pubchem_data_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base_data_dir</span><span class="p">,</span> <span class="s2">&quot;pubchem_data&quot;</span><span class="p">)</span>  <span class="c1"># Subdirectory for PubChem</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">pubchem_data_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Ensure directories exist</span>
+<span class="n">periodictable_csv_datapath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pubchem_data_dir</span><span class="p">,</span> <span class="s2">&quot;PubChemElements_all.csv&quot;</span><span class="p">)</span>
+<span class="n">df_periodictable</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">periodictable_csv_datapath</span><span class="p">)</span>
+<span class="n">df_periodictable</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AtomicNumber</th>
+      <th>Symbol</th>
+      <th>Name</th>
+      <th>AtomicMass</th>
+      <th>CPKHexColor</th>
+      <th>ElectronConfiguration</th>
+      <th>Electronegativity</th>
+      <th>AtomicRadius</th>
+      <th>IonizationEnergy</th>
+      <th>ElectronAffinity</th>
+      <th>OxidationStates</th>
+      <th>StandardState</th>
+      <th>MeltingPoint</th>
+      <th>BoilingPoint</th>
+      <th>Density</th>
+      <th>GroupBlock</th>
+      <th>YearDiscovered</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>H</td>
+      <td>Hydrogen</td>
+      <td>1.008000</td>
+      <td>FFFFFF</td>
+      <td>1s1</td>
+      <td>2.20</td>
+      <td>120.0</td>
+      <td>13.598</td>
+      <td>0.754</td>
+      <td>+1, -1</td>
+      <td>Gas</td>
+      <td>13.81</td>
+      <td>20.28</td>
+      <td>0.000090</td>
+      <td>Nonmetal</td>
+      <td>1766</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>He</td>
+      <td>Helium</td>
+      <td>4.002600</td>
+      <td>D9FFFF</td>
+      <td>1s2</td>
+      <td>NaN</td>
+      <td>140.0</td>
+      <td>24.587</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>Gas</td>
+      <td>0.95</td>
+      <td>4.22</td>
+      <td>0.000179</td>
+      <td>Noble gas</td>
+      <td>1868</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Li</td>
+      <td>Lithium</td>
+      <td>7.000000</td>
+      <td>CC80FF</td>
+      <td>[He]2s1</td>
+      <td>0.98</td>
+      <td>182.0</td>
+      <td>5.392</td>
+      <td>0.618</td>
+      <td>+1</td>
+      <td>Solid</td>
+      <td>453.65</td>
+      <td>1615.00</td>
+      <td>0.534000</td>
+      <td>Alkali metal</td>
+      <td>1817</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Be</td>
+      <td>Beryllium</td>
+      <td>9.012183</td>
+      <td>C2FF00</td>
+      <td>[He]2s2</td>
+      <td>1.57</td>
+      <td>153.0</td>
+      <td>9.323</td>
+      <td>NaN</td>
+      <td>+2</td>
+      <td>Solid</td>
+      <td>1560.00</td>
+      <td>2744.00</td>
+      <td>1.850000</td>
+      <td>Alkaline earth metal</td>
+      <td>1798</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>B</td>
+      <td>Boron</td>
+      <td>10.810000</td>
+      <td>FFB5B5</td>
+      <td>[He]2s2 2p1</td>
+      <td>2.04</td>
+      <td>192.0</td>
+      <td>8.298</td>
+      <td>0.277</td>
+      <td>+3</td>
+      <td>Solid</td>
+      <td>2348.00</td>
+      <td>4273.00</td>
+      <td>2.370000</td>
+      <td>Metalloid</td>
+      <td>1808</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="set-the-symbols-column-as-the-index">
+<h2>Set the symbols column as the index<a class="headerlink" href="#set-the-symbols-column-as-the-index" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_periodictable</span><span class="o">=</span><span class="n">df_periodictable</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;Symbol&quot;</span><span class="p">)</span>
+<span class="n">df_periodictable</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AtomicNumber</th>
+      <th>Name</th>
+      <th>AtomicMass</th>
+      <th>CPKHexColor</th>
+      <th>ElectronConfiguration</th>
+      <th>Electronegativity</th>
+      <th>AtomicRadius</th>
+      <th>IonizationEnergy</th>
+      <th>ElectronAffinity</th>
+      <th>OxidationStates</th>
+      <th>StandardState</th>
+      <th>MeltingPoint</th>
+      <th>BoilingPoint</th>
+      <th>Density</th>
+      <th>GroupBlock</th>
+      <th>YearDiscovered</th>
+    </tr>
+    <tr>
+      <th>Symbol</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>H</th>
+      <td>1</td>
+      <td>Hydrogen</td>
+      <td>1.008000</td>
+      <td>FFFFFF</td>
+      <td>1s1</td>
+      <td>2.20</td>
+      <td>120.0</td>
+      <td>13.598</td>
+      <td>0.754</td>
+      <td>+1, -1</td>
+      <td>Gas</td>
+      <td>13.81</td>
+      <td>20.28</td>
+      <td>0.000090</td>
+      <td>Nonmetal</td>
+      <td>1766</td>
+    </tr>
+    <tr>
+      <th>He</th>
+      <td>2</td>
+      <td>Helium</td>
+      <td>4.002600</td>
+      <td>D9FFFF</td>
+      <td>1s2</td>
+      <td>NaN</td>
+      <td>140.0</td>
+      <td>24.587</td>
+      <td>NaN</td>
+      <td>0</td>
+      <td>Gas</td>
+      <td>0.95</td>
+      <td>4.22</td>
+      <td>0.000179</td>
+      <td>Noble gas</td>
+      <td>1868</td>
+    </tr>
+    <tr>
+      <th>Li</th>
+      <td>3</td>
+      <td>Lithium</td>
+      <td>7.000000</td>
+      <td>CC80FF</td>
+      <td>[He]2s1</td>
+      <td>0.98</td>
+      <td>182.0</td>
+      <td>5.392</td>
+      <td>0.618</td>
+      <td>+1</td>
+      <td>Solid</td>
+      <td>453.65</td>
+      <td>1615.00</td>
+      <td>0.534000</td>
+      <td>Alkali metal</td>
+      <td>1817</td>
+    </tr>
+    <tr>
+      <th>Be</th>
+      <td>4</td>
+      <td>Beryllium</td>
+      <td>9.012183</td>
+      <td>C2FF00</td>
+      <td>[He]2s2</td>
+      <td>1.57</td>
+      <td>153.0</td>
+      <td>9.323</td>
+      <td>NaN</td>
+      <td>+2</td>
+      <td>Solid</td>
+      <td>1560.00</td>
+      <td>2744.00</td>
+      <td>1.850000</td>
+      <td>Alkaline earth metal</td>
+      <td>1798</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>5</td>
+      <td>Boron</td>
+      <td>10.810000</td>
+      <td>FFB5B5</td>
+      <td>[He]2s2 2p1</td>
+      <td>2.04</td>
+      <td>192.0</td>
+      <td>8.298</td>
+      <td>0.277</td>
+      <td>+3</td>
+      <td>Solid</td>
+      <td>2348.00</td>
+      <td>4273.00</td>
+      <td>2.370000</td>
+      <td>Metalloid</td>
+      <td>1808</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_periodictable</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AtomicNumber</th>
+      <th>Name</th>
+      <th>AtomicMass</th>
+      <th>CPKHexColor</th>
+      <th>ElectronConfiguration</th>
+      <th>Electronegativity</th>
+      <th>AtomicRadius</th>
+      <th>IonizationEnergy</th>
+      <th>ElectronAffinity</th>
+      <th>OxidationStates</th>
+      <th>StandardState</th>
+      <th>MeltingPoint</th>
+      <th>BoilingPoint</th>
+      <th>Density</th>
+      <th>GroupBlock</th>
+      <th>YearDiscovered</th>
+    </tr>
+    <tr>
+      <th>Symbol</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Fl</th>
+      <td>114</td>
+      <td>Flerovium</td>
+      <td>290.192</td>
+      <td>NaN</td>
+      <td>[Rn]7s2 7p2 5f14 6d10 (predicted)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>6, 4,2, 1, 0</td>
+      <td>Expected to be a Solid</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Post-transition metal</td>
+      <td>1998</td>
+    </tr>
+    <tr>
+      <th>Mc</th>
+      <td>115</td>
+      <td>Moscovium</td>
+      <td>290.196</td>
+      <td>NaN</td>
+      <td>[Rn]7s2 7p3 5f14 6d10 (predicted)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3, 1</td>
+      <td>Expected to be a Solid</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Post-transition metal</td>
+      <td>2003</td>
+    </tr>
+    <tr>
+      <th>Lv</th>
+      <td>116</td>
+      <td>Livermorium</td>
+      <td>293.205</td>
+      <td>NaN</td>
+      <td>[Rn]7s2 7p4 5f14 6d10 (predicted)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>+4, +2, -2</td>
+      <td>Expected to be a Solid</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Post-transition metal</td>
+      <td>2000</td>
+    </tr>
+    <tr>
+      <th>Ts</th>
+      <td>117</td>
+      <td>Tennessine</td>
+      <td>294.211</td>
+      <td>NaN</td>
+      <td>[Rn]7s2 7p5 5f14 6d10 (predicted)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>+5, +3, +1, -1</td>
+      <td>Expected to be a Solid</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Halogen</td>
+      <td>2010</td>
+    </tr>
+    <tr>
+      <th>Og</th>
+      <td>118</td>
+      <td>Oganesson</td>
+      <td>295.216</td>
+      <td>NaN</td>
+      <td>[Rn]7s2 7p6 5f14 6d10 (predicted)</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>+6, +4, +2, +1, 0, -1</td>
+      <td>Expected to be a Gas</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Noble gas</td>
+      <td>2006</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df_periodictable</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;number rows is: </span><span class="si">{</span><span class="n">df_periodictable</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">, </span><span class="se">\n</span><span class="s1">number of columns is </span><span class="si">{</span><span class="n">df_periodictable</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_periodictable</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_periodictable</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>      
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(118, 16)
+number rows is: 118, 
+number of columns is 16
+Index([&#39;AtomicNumber&#39;, &#39;Name&#39;, &#39;AtomicMass&#39;, &#39;CPKHexColor&#39;,
+       &#39;ElectronConfiguration&#39;, &#39;Electronegativity&#39;, &#39;AtomicRadius&#39;,
+       &#39;IonizationEnergy&#39;, &#39;ElectronAffinity&#39;, &#39;OxidationStates&#39;,
+       &#39;StandardState&#39;, &#39;MeltingPoint&#39;, &#39;BoilingPoint&#39;, &#39;Density&#39;,
+       &#39;GroupBlock&#39;, &#39;YearDiscovered&#39;],
+      dtype=&#39;object&#39;)
+AtomicNumber               int64
+Name                      object
+AtomicMass               float64
+CPKHexColor               object
+ElectronConfiguration     object
+Electronegativity        float64
+AtomicRadius             float64
+IonizationEnergy         float64
+ElectronAffinity         float64
+OxidationStates           object
+StandardState             object
+MeltingPoint             float64
+BoilingPoint             float64
+Density                  float64
+GroupBlock                object
+YearDiscovered            object
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_periodictable</span><span class="o">.</span><span class="n">info</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;bound method DataFrame.info of         AtomicNumber         Name  AtomicMass CPKHexColor  \
+Symbol                                                      
+H                  1     Hydrogen    1.008000      FFFFFF   
+He                 2       Helium    4.002600      D9FFFF   
+Li                 3      Lithium    7.000000      CC80FF   
+Be                 4    Beryllium    9.012183      C2FF00   
+B                  5        Boron   10.810000      FFB5B5   
+...              ...          ...         ...         ...   
+Fl               114    Flerovium  290.192000         NaN   
+Mc               115    Moscovium  290.196000         NaN   
+Lv               116  Livermorium  293.205000         NaN   
+Ts               117   Tennessine  294.211000         NaN   
+Og               118    Oganesson  295.216000         NaN   
+
+                    ElectronConfiguration  Electronegativity  AtomicRadius  \
+Symbol                                                                       
+H                                     1s1               2.20         120.0   
+He                                    1s2                NaN         140.0   
+Li                                [He]2s1               0.98         182.0   
+Be                                [He]2s2               1.57         153.0   
+B                             [He]2s2 2p1               2.04         192.0   
+...                                   ...                ...           ...   
+Fl      [Rn]7s2 7p2 5f14 6d10 (predicted)                NaN           NaN   
+Mc      [Rn]7s2 7p3 5f14 6d10 (predicted)                NaN           NaN   
+Lv      [Rn]7s2 7p4 5f14 6d10 (predicted)                NaN           NaN   
+Ts      [Rn]7s2 7p5 5f14 6d10 (predicted)                NaN           NaN   
+Og      [Rn]7s2 7p6 5f14 6d10 (predicted)                NaN           NaN   
+
+        IonizationEnergy  ElectronAffinity        OxidationStates  \
+Symbol                                                              
+H                 13.598             0.754                 +1, -1   
+He                24.587               NaN                      0   
+Li                 5.392             0.618                     +1   
+Be                 9.323               NaN                     +2   
+B                  8.298             0.277                     +3   
+...                  ...               ...                    ...   
+Fl                   NaN               NaN           6, 4,2, 1, 0   
+Mc                   NaN               NaN                   3, 1   
+Lv                   NaN               NaN             +4, +2, -2   
+Ts                   NaN               NaN         +5, +3, +1, -1   
+Og                   NaN               NaN  +6, +4, +2, +1, 0, -1   
+
+                 StandardState  MeltingPoint  BoilingPoint   Density  \
+Symbol                                                                 
+H                          Gas         13.81         20.28  0.000090   
+He                         Gas          0.95          4.22  0.000179   
+Li                       Solid        453.65       1615.00  0.534000   
+Be                       Solid       1560.00       2744.00  1.850000   
+B                        Solid       2348.00       4273.00  2.370000   
+...                        ...           ...           ...       ...   
+Fl      Expected to be a Solid           NaN           NaN       NaN   
+Mc      Expected to be a Solid           NaN           NaN       NaN   
+Lv      Expected to be a Solid           NaN           NaN       NaN   
+Ts      Expected to be a Solid           NaN           NaN       NaN   
+Og        Expected to be a Gas           NaN           NaN       NaN   
+
+                   GroupBlock YearDiscovered  
+Symbol                                        
+H                    Nonmetal           1766  
+He                  Noble gas           1868  
+Li               Alkali metal           1817  
+Be       Alkaline earth metal           1798  
+B                   Metalloid           1808  
+...                       ...            ...  
+Fl      Post-transition metal           1998  
+Mc      Post-transition metal           2003  
+Lv      Post-transition metal           2000  
+Ts                    Halogen           2010  
+Og                  Noble gas           2006  
+
+[118 rows x 16 columns]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_periodictable</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AtomicNumber</th>
+      <th>AtomicMass</th>
+      <th>Electronegativity</th>
+      <th>AtomicRadius</th>
+      <th>IonizationEnergy</th>
+      <th>ElectronAffinity</th>
+      <th>MeltingPoint</th>
+      <th>BoilingPoint</th>
+      <th>Density</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>118.000000</td>
+      <td>118.000000</td>
+      <td>95.000000</td>
+      <td>99.000000</td>
+      <td>102.000000</td>
+      <td>57.000000</td>
+      <td>103.000000</td>
+      <td>93.000000</td>
+      <td>96.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>59.500000</td>
+      <td>146.540281</td>
+      <td>1.732316</td>
+      <td>209.464646</td>
+      <td>7.997255</td>
+      <td>1.072140</td>
+      <td>1273.740553</td>
+      <td>2536.212473</td>
+      <td>7.608001</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>34.207699</td>
+      <td>89.768356</td>
+      <td>0.635187</td>
+      <td>38.569130</td>
+      <td>3.339066</td>
+      <td>0.879163</td>
+      <td>888.853859</td>
+      <td>1588.410919</td>
+      <td>5.878692</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>1.008000</td>
+      <td>0.700000</td>
+      <td>120.000000</td>
+      <td>3.894000</td>
+      <td>0.079000</td>
+      <td>0.950000</td>
+      <td>4.220000</td>
+      <td>0.000090</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>30.250000</td>
+      <td>66.480750</td>
+      <td>1.290000</td>
+      <td>187.000000</td>
+      <td>6.020500</td>
+      <td>0.470000</td>
+      <td>516.040000</td>
+      <td>1180.000000</td>
+      <td>2.572500</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>59.500000</td>
+      <td>142.573830</td>
+      <td>1.620000</td>
+      <td>209.000000</td>
+      <td>6.960000</td>
+      <td>0.754000</td>
+      <td>1191.000000</td>
+      <td>2792.000000</td>
+      <td>7.072000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>88.750000</td>
+      <td>226.777165</td>
+      <td>2.170000</td>
+      <td>232.000000</td>
+      <td>8.998500</td>
+      <td>1.350000</td>
+      <td>1806.500000</td>
+      <td>3618.000000</td>
+      <td>10.275250</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>118.000000</td>
+      <td>295.216000</td>
+      <td>3.980000</td>
+      <td>348.000000</td>
+      <td>24.587000</td>
+      <td>3.617000</td>
+      <td>3823.000000</td>
+      <td>5869.000000</td>
+      <td>22.570000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Check for missing data for each column</span>
+<span class="n">df_periodictable</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AtomicNumber              0
+Name                      0
+AtomicMass                0
+CPKHexColor              10
+ElectronConfiguration     0
+Electronegativity        23
+AtomicRadius             19
+IonizationEnergy         16
+ElectronAffinity         61
+OxidationStates           1
+StandardState             0
+MeltingPoint             15
+BoilingPoint             25
+Density                  22
+GroupBlock                0
+YearDiscovered            0
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="extracting-information-from-dataframe">
+<h2>Extracting Information from DataFrame<a class="headerlink" href="#extracting-information-from-dataframe" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_periodictable</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Cr&#39;</span><span class="p">,</span><span class="s1">&#39;ElectronConfiguration&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;[Ar]3d5 4s1&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the list of halogens</span>
+<span class="n">halogens</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;Cl&#39;</span><span class="p">,</span> <span class="s1">&#39;Br&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;At&#39;</span><span class="p">]</span>
+
+<span class="c1"># Select ionization energy for halogens</span>
+<span class="n">halogen_ionization</span> <span class="o">=</span> <span class="n">df_periodictable</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_periodictable</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">halogens</span><span class="p">),</span> <span class="s2">&quot;IonizationEnergy&quot;</span><span class="p">]</span>
+
+<span class="c1"># Display results</span>
+<span class="c1">#display(halogen_ionization.to_frame())  # Ensures it shows as a DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">halogen_ionization</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">halogen_ionization</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Symbol
+F     17.423
+Cl    12.968
+Br    11.814
+I     10.451
+At     9.500
+Name: IonizationEnergy, dtype: float64
+&lt;class &#39;pandas.core.series.Series&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Explaining the above code</p>
+<ol class="arabic simple">
+<li><p>Create a list of halogens</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">halogens</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;Cl&#39;</span><span class="p">,</span> <span class="s1">&#39;Br&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;At&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Create a boolean mask that is True for halogens</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df_periodictable</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">halogens</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Select rows where boolean mask is True and return only “IonizationEnergy”</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_periodictable</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">halogens</span><span class="p">),</span> <span class="s2">&quot;IonizationEnergy&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Assign to variable halogen_ionization</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">halogen_ionization</span> <span class="o">=</span> <span class="n">df_periodictable</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_periodictable</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">halogens</span><span class="p">),</span> <span class="s2">&quot;IonizationEnergy&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">halogen_ionization</span><span class="o">.</span><span class="n">to_frame</span><span class="p">())</span>  <span class="c1"># Ensures it shows as a DataFrame</span>
+</pre></div>
+</div>
+<p>Display is a jupyter function and will only work in notebooks, you need to spring to a string if you want to print it out</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">halogen_ionization</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Symbol
+F     17.423
+Cl    12.968
+Br    11.814
+I     10.451
+At     9.500
+Name: IonizationEnergy, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">halogen_ionization</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Symbol
+F     17.423
+Cl    12.968
+Br    11.814
+I     10.451
+At     9.500
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">halogen_ionization</span><span class="o">.</span><span class="n">to_frame</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">halogen_ionization</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        IonizationEnergy
+Symbol                  
+F                 17.423
+Cl                12.968
+Br                11.814
+I                 10.451
+At                 9.500
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">halogen_ionization</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">halogen_ionization</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        IonizationEnergy
+Symbol                  
+F                 17.423
+Cl                12.968
+Br                11.814
+I                 10.451
+At                 9.500
+&lt;class &#39;str&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">halogen_melt_boil_pts</span> <span class="o">=</span> <span class="n">df_periodictable</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_periodictable</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">halogens</span><span class="p">),</span> <span class="p">[</span><span class="s2">&quot;MeltingPoint&quot;</span><span class="p">,</span> <span class="s2">&quot;BoilingPoint&quot;</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">halogen_melt_boil_pts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">halogen_melt_boil_pts</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        MeltingPoint  BoilingPoint
+Symbol                            
+F              53.53         85.03
+Cl            171.65        239.11
+Br            265.95        331.95
+I             386.85        457.55
+At            575.00           NaN
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="acknowledgements">
+<h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">#</a></h1>
+<p>This content was developed with assistance from <a class="reference external" href="https://www.perplexity.ai/">Perplexity AI</a> and <a class="reference external" href="https://chatgpt.com/">Chat GPT</a>. Multiple queries were made during the Fall 2024 and the Spring 2025.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "py4sci"
+        },
+        kernelOptions: {
+            name: "py4sci",
+            path: "./content/module3-packages1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'py4sci'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03-1-numpy.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">1. NumPy</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03-3-xarray.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">3. Xarray</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2. Pandas</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-dataframes-vs-numpy-arrays">Pandas DataFrames vs. Numpy Arrays</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-object-overview">2. Pandas Object Overview</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">2.1: Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#series-functions-series-only">Series Functions (series only)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-functions-df-only">Dataframe functions (df only)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#series-and-dataframe-functions">Series and dataframe functions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attributes">2.2 Attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series-attributes">Series Attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-attributes">Dataframe Attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#series-and-dataframe-attributes">Series and Dataframe Attributes</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-series">3. Pandas Series</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-series">3.2 Creating Series</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pd-series-constructor">pd.Series() constructor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-lists">From Lists</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-numpy-arrays">From Numpy Arrays</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-dictionary">From Dictionary</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-scalar-value">From Scalar Value</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#indirect-methods">Indirect Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#from-dataframe-column">From DataFrame Column</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-apply-on-dataframe-column">Using apply() on dataframe column</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-map-to-a-dataframe-column">Using map() to a dataframe column</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-iloc-on-a-dataframe">Using iloc() on a dataframe</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-loc-on-a-dataframe">Using loc() on a dataframe</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pandas-dataframes">4. Pandas DataFrames</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-creation">4.1 DataFrame Creation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pd-dataframe-constructor">pd.DataFrame() constructor</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-methods">4.2 DataFrame Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploration">Exploration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-selection-and-filtering">DataFrame Selection and Filtering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-cleaning">DataFrame Cleaning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-transformation">DataFrame Transformation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-statistics-and-aggregation">DataFrame Statistics and Aggregation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-merging-and-concatenation">DataFrame Merging and Concatenation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataframe-io">Dataframe IO</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-missing-data">4.3: Handling Missing Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dropna-remove-missing-values">dropna() - remove missing values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fillna-np-nan-replacing-missing-values-with-nan">fillna(np.nan)Replacing Missing Values with NaN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replace-custom-missing-values">Replace Custom Missing Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replace-missing-values-with-the-mean">Replace Missing Values with the Mean</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replace-missing-value-with-custom-values">Replace Missing Value with Custom Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-boolean-mask-to-remove-nan">Use Boolean mask to remove NaN</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistics">4. Statistics</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">5. Activity</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-the-symbols-column-as-the-index">Set the symbols column as the index</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-information-from-dataframe">Extracting Information from DataFrame</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Robert Belford
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

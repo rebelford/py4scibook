@@ -1,0 +1,3716 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>9. RDKit &#8212; Draft Python for Science Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e52fa269" />
+    <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom-checkpoint.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/module3-packages1/03-9-rdkit';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="10. RDKit and Descriptors" href="03-10-rdkit-descriptors.html" />
+    <link rel="prev" title="8. SciPy" href="03-8-scipy.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Draft Python for Science Book - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Draft Python for Science Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome to Python for Science
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../math-test.html">In a Markdown cell:</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../module1-setup/README.html">Module 1: Getting Set Up</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-1-setupcomputer.html">1. Setting up your computer</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-2-jynbgettingstarted.html">2: Runnng and Creating Jupyter Notebooks</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-3-jynb-intro.html">3. Overview of Jupyter Notebooks</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-5-git.html">5. Git and GitHub</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-6-oop.html">6. Object Oriented Programming</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module1-setup/01-7-virtual-environments.html">7. Virtual Environments</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../module2-oop-data-structures/README.html">Module 2: Data Structures</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-1-primitive-data-structures.html">1. Primative Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-2-py-calculator.html">2. Python as a Calculator</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-3-composite-data-structures.html">3. Composite Data Structures</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-4-built-in-modules.html">4. Built-In Modules</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-5-control-structures.html">5. Logic and Control Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-6-external-data-structures.html">6. External Data Structures</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-7-db-external-data-structures.html">7. Databases as External Data Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-8-api-external-data-structures.html">8. APIs as External Data Structures</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../module2-oop-data-structures/02-9-webscrape-external-data-structures.html">9. WebScraping as External Data Structures</a></li>
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="README.html">Module 3: Packages</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="03-1-numpy.html">1. NumPy</a></li>
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-2-pandas.html">2. Pandas</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-3-xarray.html">3. Xarray</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-4-matplotlib.html">4. MatPlotLib</a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-5-seaborn.html">5. Seaborn Part 1</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-6-seaborn.html">7. Seaborn Part 2</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-7-seaborn.html">7. Seaborn Part 3</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-8-scipy.html">8. SciPy</a></li>
+
+
+
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">9. RDKit</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="03-10-rdkit-descriptors.html">10. RDKit and Descriptors</a></li>
+
+
+
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/rebelford/py4scibook/master?urlpath=lab/tree/docs/content/module3-packages1/03-9-rdkit.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://your-jupyterhub-url.com/hub/user-redirect/git-pull?repo=https%3A//github.com/rebelford/py4scibook&urlpath=lab/tree/py4scibook/docs/content/module3-packages1/03-9-rdkit.ipynb&branch=master" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on JupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="JupyterHub logo" src="../../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/rebelford/py4scibook/blob/master/docs/content/module3-packages1/03-9-rdkit.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/rebelford/py4scibook/issues/new?title=Issue%20on%20page%20%2Fcontent/module3-packages1/03-9-rdkit.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/content/module3-packages1/03-9-rdkit.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>9. RDKit</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">9. RDKit</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rdkit-resources">1.1 RDkit Resources</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rdkit-major-submodules">2. RDkit Major Submodules</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rdkit-functions-and-classes">2.1 RDKit Functions and Classes</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rdkit-chem">3. rdkit.Chem</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#allchem-rdkit-chem-allchem">3.1 AllChem (rdkit.chem.AllChem)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-functions-in-rdkit-chem-allchem">Key Functions in <code class="docutils literal notranslate"><span class="pre">rdkit.Chem.AllChem</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-3d-structure-from-smiles">Generate 3D structure from SMILES</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#draw-rdkit-chem-draw">3.2 Draw (rdkit.Chem.Draw)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#molstogridimage">MolsToGridImage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#stereochemistry">4.  Stereochemistry</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sterochemistry-in-smiles">Sterochemistry in SMILES</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#steroisomers-of-glucose">Steroisomers of Glucose</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-tautomer-form">Open Tautomer Form</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptors-rdkit-chem-descriptors">5. Descriptors (rdkit.Chem.Descriptors)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physicochemical-properties">Physicochemical Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-indices">Topological Indices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structural-features">Structural Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electronic-properties">Electronic Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fragment-counts-functional-group-indicators">Fragment Counts (Functional Group Indicators)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drug-likeness-scores">Drug-Likeness Scores</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowldegments">Acknowldegments</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="rdkit">
+<span id="module3-packages1-03-9-rdkit"></span><h1>9. RDKit<a class="headerlink" href="#rdkit" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
+<p>RDKit (Rational Discovery) is a cheminformatics toolbox for which Greg Landrum is the lead developer.</p>
+<p>RDKit provides tools for:</p>
+<ul class="simple">
+<li><p>Creating and parsing molecular structures (SMILES, SDF, etc.)</p></li>
+<li><p>Computing chemical descriptors and fingerprints</p></li>
+<li><p>Drawing chemical structures and highlighting substructures</p></li>
+<li><p>Performing substructure and similarity searches</p></li>
+<li><p>Working with reactions, 3D conformers, and force fields</p></li>
+</ul>
+<section id="rdkit-resources">
+<h2>1.1 RDkit Resources<a class="headerlink" href="#rdkit-resources" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Resource</p></th>
+<th class="head"><p>Link</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>GitHub Repository</strong></p></td>
+<td><p><a class="reference external" href="https://github.com/rdkit/rdkit">github.com/rdkit/rdkit</a></p></td>
+<td><p>Source code, issue tracking, and installation instructions</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Documentation (ReadTheDocs)</strong></p></td>
+<td><p><a class="reference external" href="https://www.rdkit.org/docs/">rdkit.readthedocs.io</a></p></td>
+<td><p>Core documentation and API references</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Official Website</strong></p></td>
+<td><p><a class="reference external" href="https://www.rdkit.org">www.rdkit.org</a></p></td>
+<td><p>Central hub with installation links, tutorials, and project info</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="border-left: 4px solid #3498db; padding: 1em; background-color: #f0f8ff; margin: 1em 0;">
+    <strong>Install rdkit</strong><br>
+<p>conda install -c rdkit rdkit</p>
+</div></section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="rdkit-major-submodules">
+<h1>2. RDkit Major Submodules<a class="headerlink" href="#rdkit-major-submodules" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Submodule</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Chem</span></code></p></td>
+<td><p>Core chemical functionality (molecules, atoms, bonds, reactions)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">DataStructs</span></code></p></td>
+<td><p>Fingerprints and similarity metrics</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ML</span></code></p></td>
+<td><p>Machine learning tools, often used with molecular descriptors</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Geometry</span></code></p></td>
+<td><p>2D and 3D geometry operations and vector math</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">SimDivFilters</span></code></p></td>
+<td><p>Diversity filtering for compound selection</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VLib</span></code></p></td>
+<td><p>Virtual screening and filtering tools</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="rdkit-functions-and-classes">
+<h2>2.1 RDKit Functions and Classes<a class="headerlink" href="#rdkit-functions-and-classes" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Module</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Mol</span></code></p></td>
+<td><p>Class</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Chem.rdchem</span></code></p></td>
+<td><p>Core molecule object</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RWMol</span></code></p></td>
+<td><p>Class</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Chem.rdchem</span></code></p></td>
+<td><p>Read/write version of <code class="docutils literal notranslate"><span class="pre">Mol</span></code> for editing</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Atom</span></code></p></td>
+<td><p>Class</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Chem.rdchem</span></code></p></td>
+<td><p>Atom object in a molecule</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Bond</span></code></p></td>
+<td><p>Class</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Chem.rdchem</span></code></p></td>
+<td><p>Bond between two atoms</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Conformer</span></code></p></td>
+<td><p>Class</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Chem.rdchem</span></code></p></td>
+<td><p>Stores 3D atom coordinates</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MolFromSmiles(smiles)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Chem</span></code></p></td>
+<td><p>Creates a <code class="docutils literal notranslate"><span class="pre">Mol</span></code> from a SMILES string</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MolToSmiles(mol)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Chem</span></code></p></td>
+<td><p>Converts a molecule back to SMILES</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MolFromMolFile(path)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Chem</span></code></p></td>
+<td><p>Loads a molecule from <code class="docutils literal notranslate"><span class="pre">.mol</span></code> or <code class="docutils literal notranslate"><span class="pre">.sdf</span></code> file</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MolToMolFile(mol,</span> <span class="pre">path)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Chem</span></code></p></td>
+<td><p>Saves a molecule to file</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AddHs(mol)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Chem</span></code></p></td>
+<td><p>Adds explicit hydrogens</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RemoveHs(mol)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Chem</span></code></p></td>
+<td><p>Removes hydrogens</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SanitizeMol(mol)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Chem</span></code></p></td>
+<td><p>Standardizes valences, charges, etc.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Compute2DCoords(mol)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AllChem</span></code></p></td>
+<td><p>Generates 2D coordinates for drawing</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">EmbedMolecule(mol)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AllChem</span></code></p></td>
+<td><p>Generates 3D coordinates (distance geometry)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">EmbedMultipleConfs(mol)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AllChem</span></code></p></td>
+<td><p>Creates multiple 3D conformers</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">UFFOptimizeMolecule(mol)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AllChem</span></code></p></td>
+<td><p>Minimizes energy using UFF</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MMFFOptimizeMolecule(mol)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AllChem</span></code></p></td>
+<td><p>Minimizes energy using MMFF94</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ReactionFromSmarts(smartstr)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AllChem</span></code></p></td>
+<td><p>Creates a reaction object from SMARTS</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">RunReactants((mol1,</span> <span class="pre">mol2))</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AllChem</span></code></p></td>
+<td><p>Applies a reaction to reactants</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">GetMorganFingerprint(mol,</span> <span class="pre">radius)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AllChem</span></code></p></td>
+<td><p>Generates circular (ECFP-like) fingerprint</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">GetMorganFingerprintAsBitVect()</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AllChem</span></code></p></td>
+<td><p>Bit vector version for similarity search</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">TanimotoSimilarity(fp1,</span> <span class="pre">fp2)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DataStructs</span></code></p></td>
+<td><p>Computes similarity between fingerprints</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MolToImage(mol)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Draw</span></code></p></td>
+<td><p>Returns a PIL image of the molecule</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MolsToGridImage([mol1,</span> <span class="pre">mol2])</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Draw</span></code></p></td>
+<td><p>Displays multiple molecules as a grid</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">IPythonConsole.ipython_useSVG=True</span></code></p></td>
+<td><p>Setting</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Draw</span></code></p></td>
+<td><p>Enables high-quality SVG rendering in Jupyter</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Descriptors.MolWt(mol)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Descriptors</span></code></p></td>
+<td><p>Computes molecular weight</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Descriptors.MolLogP(mol)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Descriptors</span></code></p></td>
+<td><p>Computes logP</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Descriptors.NumRotatableBonds()</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Descriptors</span></code></p></td>
+<td><p>Rotatable bond count</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rdMolDescriptors.CalcTPSA()</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rdMolDescriptors</span></code></p></td>
+<td><p>Calculates topological polar surface area</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rdMolDescriptors.CalcNumRings()</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rdMolDescriptors</span></code></p></td>
+<td><p>Counts rings in a molecule</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rdMolDescriptors.CalcExactMolWt()</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rdMolDescriptors</span></code></p></td>
+<td><p>Computes monoisotopic molecular weight</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AlignMol(mol,</span> <span class="pre">refMol)</span></code></p></td>
+<td><p>Function</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AllChem</span></code></p></td>
+<td><p>Aligns one molecule to another (3D)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="rdkit-chem">
+<h1>3. rdkit.Chem<a class="headerlink" href="#rdkit-chem" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Submodule</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">AllChem</span></code></p></td>
+<td><p>3D coordinates, conformers, reaction SMARTS, molecular mechanics</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Draw</span></code></p></td>
+<td><p>Visualization and rendering tools (e.g., SVGs for notebooks)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Descriptors</span></code></p></td>
+<td><p>Standard descriptors (MolWt, LogP, TPSA, etc.)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rdFingerprintGenerator</span></code></p></td>
+<td><p>Tools for creating fingerprints (e.g., Morgan, MACCS)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rdMolDescriptors</span></code></p></td>
+<td><p>More specific descriptors (e.g., fragment counts, topological descriptors)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rdChemReactions</span></code></p></td>
+<td><p>Reaction objects, SMARTS parsing</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rdMolAlign</span></code>, <code class="docutils literal notranslate"><span class="pre">rdForceFieldHelpers</span></code></p></td>
+<td><p>Tools for alignment and force-field calculations</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rdmolfiles</span></code>, <code class="docutils literal notranslate"><span class="pre">rdmolops</span></code></p></td>
+<td><p>File I/O and general molecule operations</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<section id="allchem-rdkit-chem-allchem">
+<h2>3.1 AllChem (rdkit.chem.AllChem)<a class="headerlink" href="#allchem-rdkit-chem-allchem" title="Link to this heading">#</a></h2>
+<section id="key-functions-in-rdkit-chem-allchem">
+<h3>Key Functions in <code class="docutils literal notranslate"><span class="pre">rdkit.Chem.AllChem</span></code><a class="headerlink" href="#key-functions-in-rdkit-chem-allchem" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">EmbedMolecule()</span></code></p></td>
+<td><p>Generates a 3D conformer from a molecule (uses distance geometry)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">EmbedMultipleConfs()</span></code></p></td>
+<td><p>Generates multiple conformers (for conformer search)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">UFFOptimizeMolecule()</span></code></p></td>
+<td><p>Optimizes geometry using UFF force field</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MMFFOptimizeMolecule()</span></code></p></td>
+<td><p>Optimizes geometry using MMFF94 force field</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MMFFGetMoleculeProperties()</span></code></p></td>
+<td><p>Returns MMFF-specific parameters for a molecule</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">UFFGetMoleculeForceField()</span></code></p></td>
+<td><p>Returns a UFF force field object</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MMFFGetMoleculeForceField()</span></code></p></td>
+<td><p>Returns a MMFF force field object</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">GenerateDepictionMatching2DStructure()</span></code></p></td>
+<td><p>Matches 2D coordinates across conformers</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">GetMorganFingerprint()</span></code></p></td>
+<td><p>Computes circular Morgan fingerprints (similar to ECFP)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">GetMorganFingerprintAsBitVect()</span></code></p></td>
+<td><p>Computes a bit vector version of the Morgan fingerprint</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ReactionFromSmarts()</span></code></p></td>
+<td><p>Creates a chemical reaction object from a SMARTS string</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">RunReactants()</span></code></p></td>
+<td><p>Applies a chemical reaction object to a set of reactants</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">AssignBondOrdersFromTemplate()</span></code></p></td>
+<td><p>Transfers bond order info to a generated 3D molecule</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AlignMol()</span></code></p></td>
+<td><p>Aligns one molecule to another (conformer or scaffold alignment)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Compute2DCoords()</span></code></p></td>
+<td><p>Generates 2D coordinates for drawing (used in visualization)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="generate-3d-structure-from-smiles">
+<h3>Generate 3D structure from SMILES<a class="headerlink" href="#generate-3d-structure-from-smiles" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">AllChem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Draw</span>
+
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;CCO&quot;</span><span class="p">)</span>        <span class="c1"># Ethanol</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>                  <span class="c1"># Add hydrogens (important for 3D)</span>
+<span class="n">AllChem</span><span class="o">.</span><span class="n">EmbedMolecule</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>             <span class="c1"># Generate 3D coordinates</span>
+<span class="n">AllChem</span><span class="o">.</span><span class="n">UFFOptimizeMolecule</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>       <span class="c1"># Minimize energy with UFF force field</span>
+
+<span class="c1"># Visualize 2D structure (you can&#39;t see the 3D here, but it&#39;s encoded)</span>
+<span class="n">Draw</span><span class="o">.</span><span class="n">MolToImage</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/aab5380ae952f1563340c807f31bfab610568d652d9baf1c250d3211a1913436.png" src="../../_images/aab5380ae952f1563340c807f31bfab610568d652d9baf1c250d3211a1913436.png" />
+</div>
+</div>
+<p>Generating RDkit Molecules from SMILES</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">caffeine</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;Cn1cnc2c1c(=O)n(C)c(=O)n2C&#39;</span><span class="p">)</span>
+<span class="n">caffeine</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/366adff2f19ec1b4c1f22ed895e71277f2029880ffc1551ebabc869aab69ff96.png" src="../../_images/366adff2f19ec1b4c1f22ed895e71277f2029880ffc1551ebabc869aab69ff96.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">caffeine</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">caffeine</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rdkit.Chem.rdchem.Mol
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Draw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span>
+
+<span class="c1"># Display the molecule</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Draw</span><span class="o">.</span><span class="n">MolToImage</span><span class="p">(</span><span class="n">caffeine</span><span class="p">))</span>
+
+<span class="c1"># Print the type below it</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">caffeine</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/cf354682325750119fd4ae9b1d33d1f111f4a63314429611817879f46fb419d8.png" src="../../_images/cf354682325750119fd4ae9b1d33d1f111f4a63314429611817879f46fb419d8.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;rdkit.Chem.rdchem.Mol&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Chem</span><span class="o">.</span><span class="n">Draw</span><span class="o">.</span><span class="n">MolToFile</span><span class="p">(</span><span class="n">caffeine</span><span class="p">,</span> <span class="s1">&#39;caffeine.svg&#39;</span><span class="p">,</span>
+                    <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="mi">500</span><span class="p">),</span>
+                    <span class="n">imageType</span><span class="o">=</span><span class="s1">&#39;svg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To install jcamp you need to open your terminal</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>your_env_name
+pip<span class="w"> </span>install<span class="w"> </span>jcamp
+</pre></div>
+</div>
+<p>The IR spectra of caffeine can be downloaded from <a class="reference external" href="https://webbook.nist.gov/cgi/cbook.cgi?ID=C58082&amp;amp;Type=IR-SPEC&amp;amp;Index=1#IR-SPEC">NIST WebBook</a> as a jcmap-dx file,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Draw</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jcamp</span><span class="w"> </span><span class="kn">import</span> <span class="n">jcamp_readfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.axes_grid1.inset_locator</span><span class="w"> </span><span class="kn">import</span> <span class="n">inset_axes</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Create molecule object</span>
+<span class="n">caffeine</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;Cn1cnc2c1c(=O)n(c(=O)n2C)C&#39;</span><span class="p">)</span>
+<span class="n">mol_image</span> <span class="o">=</span> <span class="n">Draw</span><span class="o">.</span><span class="n">MolToImage</span><span class="p">(</span><span class="n">caffeine</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+
+<span class="c1"># Read JCAMP-DX spectrum</span>
+<span class="n">spectrum</span> <span class="o">=</span> <span class="n">jcamp_readfile</span><span class="p">(</span><span class="s1">&#39;data/caffeine_IR.jdx&#39;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">spectrum</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">spectrum</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+<span class="c1"># Ensure x and y are the same length</span>
+<span class="n">min_len</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span><span class="n">min_len</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="n">min_len</span><span class="p">]</span>
+
+<span class="c1"># Filter to 400–4000 cm⁻¹ range</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">400</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">4000</span><span class="p">)</span>
+<span class="n">x_filtered</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<span class="n">y_filtered</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+<span class="c1"># Plot with inset image</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Plot your main data</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_filtered</span><span class="p">,</span> <span class="n">y_filtered</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkred&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Wavenumber (cm⁻¹)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Absorbance&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;IR Spectrum of Caffeine&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">invert_xaxis</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Add inset axes</span>
+<span class="n">ax_inset</span> <span class="o">=</span> <span class="n">inset_axes</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;30%&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;30%&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">ax_inset</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mol_image</span><span class="p">)</span>
+<span class="n">ax_inset</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d92d002bfbb2efeff4e7d2e61f53dc0e7fc00d7861145cb556ae3ff31135eb23.png" src="../../_images/d92d002bfbb2efeff4e7d2e61f53dc0e7fc00d7861145cb556ae3ff31135eb23.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="draw-rdkit-chem-draw">
+<h2>3.2 Draw (rdkit.Chem.Draw)<a class="headerlink" href="#draw-rdkit-chem-draw" title="Link to this heading">#</a></h2>
+<p>The following material is adapted from Charles Weiss
+First we will read a text file with amino acids as smiles strings into a Pandas DataFame</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/amino_acid_SMILES.txt&#39;</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>SMILES</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>alanine</td>
+      <td>C[C@@H](C(=O)[O-])[NH3+]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>arginine</td>
+      <td>[NH3+][C@@H](CCCNC(=[NH2+])N)C(=O)[O-]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>asparagine</td>
+      <td>O=C(N)C[C@H]([NH3+])C(=O)[O-]</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>aspartate</td>
+      <td>C([C@@H](C(=O)[O-])[NH3+])C(=O)[O-]</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>cysteine</td>
+      <td>C([C@@H](C(=O)[O-])[NH3+])S</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now we will use list-comprehension to create a list of rdkit molecule objects from the SMILES Strings in the dataframe</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">AminoAcids</span> <span class="o">=</span> <span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">SMILES</span><span class="p">)</span> <span class="k">for</span> <span class="n">SMILES</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;SMILES&#39;</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">AminoAcids</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">AminoAcids</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2adc0&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2ae30&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2aea0&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2af10&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2af80&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2aff0&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2b060&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2b0d0&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2b140&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2b1b0&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2b220&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2b290&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2b300&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2b370&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2b3e0&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2b450&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2b4c0&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2b530&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2b5a0&gt;, &lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9f2b610&gt;]
+&lt;class &#39;list&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="molstogridimage">
+<h3>MolsToGridImage<a class="headerlink" href="#molstogridimage" title="Link to this heading">#</a></h3>
+<p>This has one positional argument which is a container data type containing the molecular objects you want to plot.  It is followed by optional keyword arguments. Note for the legends we used the “name” column of the dataframe, and we used SVG images.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Chem</span><span class="o">.</span><span class="n">Draw</span><span class="o">.</span><span class="n">MolsToGridImage</span><span class="p">(</span><span class="n">AminoAcids</span><span class="p">,</span> 
+                          <span class="n">molsPerRow</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                          <span class="n">subImgSize</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">200</span><span class="p">),</span>
+                          <span class="n">legends</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]),</span>
+                          <span class="n">useSVG</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7db0dc9fa290ab18567b4441860ce1d94dc88f0cdc7a1f3db8dbb0e548c0d804.svg" src="../../_images/7db0dc9fa290ab18567b4441860ce1d94dc88f0cdc7a1f3db8dbb0e548c0d804.svg" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="stereochemistry">
+<h1>4.  Stereochemistry<a class="headerlink" href="#stereochemistry" title="Link to this heading">#</a></h1>
+<section id="sterochemistry-in-smiles">
+<h2>Sterochemistry in SMILES<a class="headerlink" href="#sterochemistry-in-smiles" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;&#64;</span></code> to represent tetrahedral chirality</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/</span></code> and <code class="docutils literal notranslate"><span class="pre">\</span></code> for cis/trans (E/Z) stereochemistry around double bonds</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lactic1</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;C[C@H](O)C(=O)O&quot;</span><span class="p">)</span>
+<span class="n">lactic2</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;C[C@@H](O)C(=O)O&quot;</span><span class="p">)</span>
+<span class="c1">#Draw.MolToImage(lactic)</span>
+
+<span class="n">cis_butene</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;C/C=C/C&quot;</span><span class="p">)</span>  <span class="c1"># cis</span>
+<span class="n">trans_butene</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s2">&quot;C/C=C</span><span class="se">\\</span><span class="s2">C&quot;</span><span class="p">)</span>  <span class="c1"># trans</span>
+
+<span class="n">Draw</span><span class="o">.</span><span class="n">MolsToGridImage</span><span class="p">([</span><span class="n">lactic1</span><span class="p">,</span> <span class="n">lactic2</span><span class="p">,</span> <span class="n">cis_butene</span><span class="p">,</span> <span class="n">trans_butene</span><span class="p">],</span> <span class="n">legends</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;chiral&quot;</span><span class="p">,</span> <span class="s2">&quot;chiral&quot;</span><span class="p">,</span> <span class="s2">&quot;cis&quot;</span><span class="p">,</span> <span class="s2">&quot;trans&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/5aa6661b20f90f4fc223a0f6636e3e2951a09ff0621e5f302cf6f00d57ab8db4.png" src="../../_images/5aa6661b20f90f4fc223a0f6636e3e2951a09ff0621e5f302cf6f00d57ab8db4.png" />
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>Create molecule objects from SMILES strings.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Draw</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="c1"># Define SMILES strings for the molecules</span>
+<span class="n">smiles_list</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;C[C@H](O)C(=O)O&quot;</span><span class="p">,</span>    <span class="c1"># Lactic acid (R)</span>
+    <span class="s2">&quot;C[C@@H](O)C(=O)O&quot;</span><span class="p">,</span>   <span class="c1"># Lactic acid (S)</span>
+    <span class="s2">&quot;C/C=C/C&quot;</span><span class="p">,</span>            <span class="c1"># cis-2-butene</span>
+    <span class="s2">&quot;C/C=C</span><span class="se">\\</span><span class="s2">C&quot;</span>            <span class="c1"># trans-2-butene</span>
+<span class="p">]</span>
+
+<span class="c1"># Convert SMILES strings to RDKit molecule objects</span>
+<span class="n">molecules</span> <span class="o">=</span> <span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span> <span class="k">for</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="n">smiles_list</span><span class="p">]</span>
+<span class="n">molecules</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;rdkit.Chem.rdchem.Mol at 0x7c31c99f4660&gt;,
+ &lt;rdkit.Chem.rdchem.Mol at 0x7c31c99f4820&gt;,
+ &lt;rdkit.Chem.rdchem.Mol at 0x7c31c99f6490&gt;,
+ &lt;rdkit.Chem.rdchem.Mol at 0x7c31c99f6500&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Retrieve IUPAC Names Using NCI Chemical Resolver</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_iupac_name</span><span class="p">(</span><span class="n">smiles</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://cactus.nci.nih.gov/chemical/structure/</span><span class="si">{</span><span class="n">smiles</span><span class="si">}</span><span class="s2">/iupac_name&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">RequestException</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;IUPAC name not found&quot;</span>
+
+<span class="n">iupac_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">get_iupac_name</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span> <span class="k">for</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="n">smiles_list</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">iupac_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;(2S)-2-hydroxypropanoic acid&#39;, &#39;(2R)-2-hydroxypropanoic acid&#39;, &#39;(E)-But-2-ene&#39;, &#39;(Z)-But-2-ene&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Generate Iosmeric Smiles Strings</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">isomeric_smiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">isomericSmiles</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">molecules</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>Create Legend Combining IUPAC Names and SMILES</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">legends</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">smiles</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">iupac_names</span><span class="p">,</span> <span class="n">isomeric_smiles</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple" start="6">
+<li><p>Organize Molecules and Legends into a 2x2 Grid</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Arrange molecules and legends into a 2x2 grid</span>
+<span class="n">mols_matrix</span> <span class="o">=</span> <span class="p">[</span><span class="n">molecules</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">molecules</span><span class="p">[</span><span class="mi">2</span><span class="p">:]]</span>
+<span class="n">legends_matrix</span> <span class="o">=</span> <span class="p">[</span><span class="n">legends</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">legends</span><span class="p">[</span><span class="mi">2</span><span class="p">:]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Generate and Display the Grid</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem.Draw</span><span class="w"> </span><span class="kn">import</span> <span class="n">MolsMatrixToGridImage</span>
+
+<span class="c1"># Generate the grid image</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">MolsMatrixToGridImage</span><span class="p">(</span>
+    <span class="n">molsMatrix</span><span class="o">=</span><span class="n">mols_matrix</span><span class="p">,</span>
+    <span class="n">legendsMatrix</span><span class="o">=</span><span class="n">legends_matrix</span><span class="p">,</span>
+    <span class="n">subImgSize</span><span class="o">=</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Display the image (in Jupyter Notebook)</span>
+<span class="c1">#img</span>
+<span class="n">display</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="c1"># To save as image, uncomment the next line</span>
+<span class="c1">#  img.save(&quot;molecule_grid.png&quot;)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/b8372bfbfaa358067ed38f48723d8cf276e66e4874a0aef579ed9d2f24dfc893.png" src="../../_images/b8372bfbfaa358067ed38f48723d8cf276e66e4874a0aef579ed9d2f24dfc893.png" />
+</div>
+</div>
+</section>
+<section id="steroisomers-of-glucose">
+<h2>Steroisomers of Glucose<a class="headerlink" href="#steroisomers-of-glucose" title="Link to this heading">#</a></h2>
+<p>Glucose has 4 chiral centers and so <span class="math notranslate nohighlight">\(2^4\)</span> = 16 sterioisomers</p>
+<p><img alt="image.png" src="../../_images/3251b399-5834-41df-b627-7a5555925843.png" /></p>
+<p><strong>Generate a Grid of the stereoisomers with both their IUPAC name and isomeric SMILES Strings</strong></p>
+<ol class="arabic simple">
+<li><p>Generate a tuple containing the 16 rdkit molecule objects representing each stereoisomer</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">AllChem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem.EnumerateStereoisomers</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnumerateStereoisomers</span><span class="p">,</span> <span class="n">StereoEnumerationOptions</span>
+
+<span class="c1"># Base SMILES for D-glucose without specified stereochemistry</span>
+<span class="n">base_smiles</span> <span class="o">=</span> <span class="s2">&quot;OC[C@H]1O[C@H](O)[C@H](O)[C@H](O)[C@H]1O&quot;</span>
+<span class="n">base_mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">base_smiles</span><span class="p">)</span>
+
+<span class="c1"># Set up options to enumerate all stereoisomers</span>
+<span class="n">opts</span> <span class="o">=</span> <span class="n">StereoEnumerationOptions</span><span class="p">(</span><span class="n">onlyUnassigned</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">isomers</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">EnumerateStereoisomers</span><span class="p">(</span><span class="n">base_mol</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">opts</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_iupac_name</span><span class="p">(</span><span class="n">smiles</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://cactus.nci.nih.gov/chemical/structure/</span><span class="si">{</span><span class="n">smiles</span><span class="si">}</span><span class="s2">/iupac_name&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">RequestException</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;IUPAC name not found&quot;</span>
+
+<span class="c1"># Prepare data for each isomer</span>
+<span class="n">isomer_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">isomers</span><span class="p">:</span>
+    <span class="n">smiles</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">isomericSmiles</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">get_iupac_name</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+    <span class="n">isomer_data</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">mol</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">smiles</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">isomer_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">isomer_data</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">isomer_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> tuples in this list, meaning there are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">isomer_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> isomers.&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9859fd0&gt;, &#39;(2S,3R,4R,5S,6S)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@@H]1O[C@H](O)[C@H](O)[C@H](O)[C@@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985a070&gt;, &#39;(2S,3R,4R,5S,6R)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@H]1O[C@H](O)[C@H](O)[C@H](O)[C@@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985a110&gt;, &#39;(2R,3R,4R,5S,6S)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@@H]1O[C@@H](O)[C@H](O)[C@H](O)[C@@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985a1b0&gt;, &#39;(2R,3R,4R,5S,6R)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@H]1O[C@@H](O)[C@H](O)[C@H](O)[C@@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985a250&gt;, &#39;IUPAC name not found&#39;, &#39;OC[C@@H]1O[C@H](O)[C@@H](O)[C@H](O)[C@@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985a2f0&gt;, &#39;(2S,3S,4R,5S,6R)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@H]1O[C@H](O)[C@@H](O)[C@H](O)[C@@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985a390&gt;, &#39;(2R,3S,4R,5S,6S)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@@H]1O[C@@H](O)[C@@H](O)[C@H](O)[C@@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985a430&gt;, &#39;(2R,3S,4R,5S,6R)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@H]1O[C@@H](O)[C@@H](O)[C@H](O)[C@@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985a4d0&gt;, &#39;(2S,3R,4S,5S,6S)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@@H]1O[C@H](O)[C@H](O)[C@@H](O)[C@@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985a570&gt;, &#39;IUPAC name not found&#39;, &#39;OC[C@H]1O[C@H](O)[C@H](O)[C@@H](O)[C@@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985a610&gt;, &#39;(2R,3R,4S,5S,6S)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@@H]1O[C@@H](O)[C@H](O)[C@@H](O)[C@@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985a6b0&gt;, &#39;(2R,3R,4S,5S,6R)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@H]1O[C@@H](O)[C@H](O)[C@@H](O)[C@@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985a750&gt;, &#39;IUPAC name not found&#39;, &#39;OC[C@@H]1O[C@H](O)[C@@H](O)[C@@H](O)[C@@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985a7f0&gt;, &#39;(2S,3S,4S,5S,6R)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@H]1O[C@H](O)[C@@H](O)[C@@H](O)[C@@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985a890&gt;, &#39;(2R,3S,4S,5S,6S)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@@H]1O[C@@H](O)[C@@H](O)[C@@H](O)[C@@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985a930&gt;, &#39;(2R,3S,4S,5S,6R)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@H]1O[C@@H](O)[C@@H](O)[C@@H](O)[C@@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985a9d0&gt;, &#39;(2S,3R,4R,5R,6S)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@@H]1O[C@H](O)[C@H](O)[C@H](O)[C@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985aa70&gt;, &#39;(2S,3R,4R,5R,6R)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@H]1O[C@H](O)[C@H](O)[C@H](O)[C@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985ab10&gt;, &#39;IUPAC name not found&#39;, &#39;OC[C@@H]1O[C@@H](O)[C@H](O)[C@H](O)[C@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985abb0&gt;, &#39;(2R,3R,4R,5R,6R)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@H]1O[C@@H](O)[C@H](O)[C@H](O)[C@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c9c067f0&gt;, &#39;(2S,3S,4R,5R,6S)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@@H]1O[C@H](O)[C@@H](O)[C@H](O)[C@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985ac50&gt;, &#39;(2S,3S,4R,5R,6R)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@H]1O[C@H](O)[C@@H](O)[C@H](O)[C@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985ad40&gt;, &#39;IUPAC name not found&#39;, &#39;OC[C@@H]1O[C@@H](O)[C@@H](O)[C@H](O)[C@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985ade0&gt;, &#39;(2R,3S,4R,5R,6R)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@H]1O[C@@H](O)[C@@H](O)[C@H](O)[C@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985ae80&gt;, &#39;IUPAC name not found&#39;, &#39;OC[C@@H]1O[C@H](O)[C@H](O)[C@@H](O)[C@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985af20&gt;, &#39;(2S,3R,4S,5R,6R)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@H]1O[C@H](O)[C@H](O)[C@@H](O)[C@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985afc0&gt;, &#39;(2R,3R,4S,5R,6S)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@@H]1O[C@@H](O)[C@H](O)[C@@H](O)[C@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985b060&gt;, &#39;(2R,3R,4S,5R,6R)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@H]1O[C@@H](O)[C@H](O)[C@@H](O)[C@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31d18b31a0&gt;, &#39;(2S,3S,4S,5R,6S)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@@H]1O[C@H](O)[C@@H](O)[C@@H](O)[C@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985b100&gt;, &#39;(2S,3S,4S,5R,6R)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@H]1O[C@H](O)[C@@H](O)[C@@H](O)[C@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985b1f0&gt;, &#39;(2R,3S,4S,5R,6S)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@@H]1O[C@@H](O)[C@@H](O)[C@@H](O)[C@H]1O&#39;), (&lt;rdkit.Chem.rdchem.Mol object at 0x7c31c985b290&gt;, &#39;(2R,3S,4S,5R,6R)-6-(hydroxymethyl)oxane-2,3,4,5-tetrol&#39;, &#39;OC[C@H]1O[C@@H](O)[C@@H](O)[C@@H](O)[C@H]1O&#39;)]
+&lt;class &#39;list&#39;&gt;
+There are 32 tuples in this list, meaning there are 32 isomers.
+</pre></div>
+</div>
+</div>
+</div>
+<p>So where is the 5th stereocenter?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Draw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem.Draw</span><span class="w"> </span><span class="kn">import</span> <span class="n">rdMolDraw2D</span>
+
+<span class="c1"># Define the SMILES string for glucose</span>
+<span class="n">smiles</span> <span class="o">=</span> <span class="s1">&#39;OC[C@H]1O[C@H](O)[C@H](O)[C@H](O)[C@H]1O&#39;</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+
+<span class="c1"># Assign stereochemistry to the molecule</span>
+<span class="n">Chem</span><span class="o">.</span><span class="n">AssignStereochemistry</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cleanIt</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Find chiral centers</span>
+<span class="n">chiral_centers</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">FindMolChiralCenters</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">includeUnassigned</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chiral centers: </span><span class="si">{</span><span class="n">chiral_centers</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Prepare the molecule for drawing</span>
+<span class="n">drawer</span> <span class="o">=</span> <span class="n">rdMolDraw2D</span><span class="o">.</span><span class="n">MolDraw2DCairo</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">drawer</span><span class="o">.</span><span class="n">drawOptions</span><span class="p">()</span><span class="o">.</span><span class="n">addAtomIndices</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">drawer</span><span class="o">.</span><span class="n">drawOptions</span><span class="p">()</span><span class="o">.</span><span class="n">addStereoAnnotation</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">rdMolDraw2D</span><span class="o">.</span><span class="n">PrepareAndDrawMolecule</span><span class="p">(</span><span class="n">drawer</span><span class="p">,</span> <span class="n">mol</span><span class="p">)</span>
+<span class="n">drawer</span><span class="o">.</span><span class="n">FinishDrawing</span><span class="p">()</span>
+
+<span class="c1"># Save the image</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;glucose_chiral_centers.png&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">drawer</span><span class="o">.</span><span class="n">GetDrawingText</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chiral centers: [(2, &#39;R&#39;), (4, &#39;S&#39;), (6, &#39;R&#39;), (8, &#39;R&#39;), (10, &#39;R&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Draw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem.Draw</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPythonConsole</span>
+
+<span class="c1"># Enable SVG rendering in Jupyter</span>
+<span class="n">IPythonConsole</span><span class="o">.</span><span class="n">ipython_useSVG</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">IPythonConsole</span><span class="o">.</span><span class="n">drawOptions</span><span class="o">.</span><span class="n">addAtomIndices</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">IPythonConsole</span><span class="o">.</span><span class="n">drawOptions</span><span class="o">.</span><span class="n">addStereoAnnotation</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Define the SMILES string for D-glucose</span>
+<span class="n">smiles</span> <span class="o">=</span> <span class="s1">&#39;OC[C@H]1O[C@H](O)[C@H](O)[C@H](O)[C@H]1O&#39;</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+
+<span class="c1"># Display the molecule</span>
+<span class="n">mol</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><?xml version='1.0' encoding='iso-8859-1'?>
+<svg version='1.1' baseProfile='full'
+              xmlns='http://www.w3.org/2000/svg'
+                      xmlns:rdkit='http://www.rdkit.org/xml'
+                      xmlns:xlink='http://www.w3.org/1999/xlink'
+                  xml:space='preserve'
+width='450px' height='150px' viewBox='0 0 450 150'>
+<!-- END OF HEADER -->
+<rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='450.0' height='150.0' x='0.0' y='0.0'> </rect>
+<path class='bond-0 atom-0 atom-1' d='M 158.3,59.4 L 165.1,69.5' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-0 atom-0 atom-1' d='M 165.1,69.5 L 173.4,81.7' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-1 atom-2 atom-1' d='M 202.9,77.3 L 173.4,81.7 L 170.4,77.2 Z' style='fill:#000000;fill-rule:evenodd;fill-opacity:1;stroke:#000000;stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path class='bond-2 atom-2 atom-3' d='M 202.9,77.3 L 208.4,66.1' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-2 atom-2 atom-3' d='M 208.4,66.1 L 213.8,54.9' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-3 atom-3 atom-4' d='M 221.6,48.9 L 234.5,48.0' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-3 atom-3 atom-4' d='M 234.5,48.0 L 247.5,47.0' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-4 atom-4 atom-5' d='M 248.7,43.8 L 249.3,44.1' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-4 atom-4 atom-5' d='M 249.8,40.6 L 251.0,41.2' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-4 atom-4 atom-5' d='M 251.0,37.4 L 252.8,38.3' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-4 atom-4 atom-5' d='M 252.2,34.2 L 254.6,35.4' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-4 atom-4 atom-5' d='M 253.4,31.0 L 256.4,32.5' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-4 atom-4 atom-5' d='M 254.5,27.8 L 258.1,29.6' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-4 atom-4 atom-5' d='M 255.7,24.7 L 259.9,26.7' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-5 atom-4 atom-6' d='M 247.5,47.0 L 265.0,72.7' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 268.5,72.1 L 268.5,72.8' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 272.0,71.5 L 272.1,72.9' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 275.6,71.0 L 275.7,72.9' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 279.1,70.4 L 279.3,73.0' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 282.6,69.8 L 282.9,73.1' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 286.2,69.2 L 286.5,73.2' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 289.7,68.6 L 290.0,73.2' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-7 atom-6 atom-8' d='M 265.0,72.7 L 251.4,100.7' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-8 atom-8 atom-9' d='M 253.6,103.3 L 253.0,103.6' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-8 atom-8 atom-9' d='M 255.7,105.8 L 254.6,106.6' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-8 atom-8 atom-9' d='M 257.8,108.4 L 256.2,109.5' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-8 atom-8 atom-9' d='M 260.0,110.9 L 257.8,112.4' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-8 atom-8 atom-9' d='M 262.1,113.5 L 259.4,115.4' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-8 atom-8 atom-9' d='M 264.2,116.1 L 260.9,118.3' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-8 atom-8 atom-9' d='M 266.4,118.6 L 262.5,121.2' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-9 atom-8 atom-10' d='M 251.4,100.7 L 220.4,103.0' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-10 atom-10 atom-11' d='M 220.4,103.0 L 216.3,114.2 L 214.2,113.2 Z' style='fill:#000000;fill-rule:evenodd;fill-opacity:1;stroke:#000000;stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path class='bond-10 atom-10 atom-11' d='M 216.3,114.2 L 207.9,123.4 L 212.1,125.5 Z' style='fill:#FF0000;fill-rule:evenodd;fill-opacity:1;stroke:#FF0000;stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path class='bond-10 atom-10 atom-11' d='M 216.3,114.2 L 214.2,113.2 L 207.9,123.4 Z' style='fill:#FF0000;fill-rule:evenodd;fill-opacity:1;stroke:#FF0000;stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path class='bond-11 atom-10 atom-2' d='M 220.4,103.0 L 202.9,77.3' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path d='M 203.2,76.7 L 202.9,77.3 L 203.8,78.5' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 246.8,47.1 L 247.5,47.0 L 248.4,48.3' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 264.1,71.4 L 265.0,72.7 L 264.3,74.1' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 252.1,99.3 L 251.4,100.7 L 249.9,100.8' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 222.0,102.9 L 220.4,103.0 L 219.5,101.7' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path class='atom-0' d='M 141.7 49.4
+L 142.9 49.4
+L 142.9 53.2
+L 147.4 53.2
+L 147.4 49.4
+L 148.6 49.4
+L 148.6 58.3
+L 147.4 58.3
+L 147.4 54.2
+L 142.9 54.2
+L 142.9 58.3
+L 141.7 58.3
+L 141.7 49.4
+' fill='#FF0000'/>
+<path class='atom-0' d='M 150.4 53.8
+Q 150.4 51.7, 151.5 50.5
+Q 152.5 49.3, 154.5 49.3
+Q 156.4 49.3, 157.5 50.5
+Q 158.5 51.7, 158.5 53.8
+Q 158.5 56.0, 157.5 57.2
+Q 156.4 58.4, 154.5 58.4
+Q 152.5 58.4, 151.5 57.2
+Q 150.4 56.0, 150.4 53.8
+M 154.5 57.4
+Q 155.8 57.4, 156.5 56.5
+Q 157.3 55.6, 157.3 53.8
+Q 157.3 52.1, 156.5 51.2
+Q 155.8 50.3, 154.5 50.3
+Q 153.1 50.3, 152.4 51.2
+Q 151.7 52.1, 151.7 53.8
+Q 151.7 55.6, 152.4 56.5
+Q 153.1 57.4, 154.5 57.4
+' fill='#FF0000'/>
+<path class='atom-3' d='M 212.4 49.3
+Q 212.4 47.2, 213.5 46.0
+Q 214.5 44.8, 216.5 44.8
+Q 218.4 44.8, 219.5 46.0
+Q 220.5 47.2, 220.5 49.3
+Q 220.5 51.4, 219.5 52.7
+Q 218.4 53.9, 216.5 53.9
+Q 214.5 53.9, 213.5 52.7
+Q 212.4 51.5, 212.4 49.3
+M 216.5 52.9
+Q 217.8 52.9, 218.6 52.0
+Q 219.3 51.1, 219.3 49.3
+Q 219.3 47.6, 218.6 46.7
+Q 217.8 45.8, 216.5 45.8
+Q 215.1 45.8, 214.4 46.7
+Q 213.7 47.6, 213.7 49.3
+Q 213.7 51.1, 214.4 52.0
+Q 215.1 52.9, 216.5 52.9
+' fill='#FF0000'/>
+<path class='atom-5' d='M 257.0 19.1
+Q 257.0 16.9, 258.0 15.8
+Q 259.1 14.6, 261.0 14.6
+Q 263.0 14.6, 264.0 15.8
+Q 265.1 16.9, 265.1 19.1
+Q 265.1 21.2, 264.0 22.4
+Q 263.0 23.6, 261.0 23.6
+Q 259.1 23.6, 258.0 22.4
+Q 257.0 21.2, 257.0 19.1
+M 261.0 22.6
+Q 262.4 22.6, 263.1 21.7
+Q 263.8 20.8, 263.8 19.1
+Q 263.8 17.3, 263.1 16.5
+Q 262.4 15.6, 261.0 15.6
+Q 259.7 15.6, 259.0 16.4
+Q 258.2 17.3, 258.2 19.1
+Q 258.2 20.8, 259.0 21.7
+Q 259.7 22.6, 261.0 22.6
+' fill='#FF0000'/>
+<path class='atom-5' d='M 266.4 14.7
+L 267.6 14.7
+L 267.6 18.4
+L 272.1 18.4
+L 272.1 14.7
+L 273.3 14.7
+L 273.3 23.5
+L 272.1 23.5
+L 272.1 19.4
+L 267.6 19.4
+L 267.6 23.5
+L 266.4 23.5
+L 266.4 14.7
+' fill='#FF0000'/>
+<path class='atom-7' d='M 291.9 70.5
+Q 291.9 68.4, 293.0 67.2
+Q 294.0 66.0, 296.0 66.0
+Q 297.9 66.0, 299.0 67.2
+Q 300.0 68.4, 300.0 70.5
+Q 300.0 72.6, 298.9 73.8
+Q 297.9 75.1, 296.0 75.1
+Q 294.0 75.1, 293.0 73.8
+Q 291.9 72.6, 291.9 70.5
+M 296.0 74.1
+Q 297.3 74.1, 298.0 73.2
+Q 298.8 72.3, 298.8 70.5
+Q 298.8 68.8, 298.0 67.9
+Q 297.3 67.0, 296.0 67.0
+Q 294.6 67.0, 293.9 67.9
+Q 293.2 68.8, 293.2 70.5
+Q 293.2 72.3, 293.9 73.2
+Q 294.6 74.1, 296.0 74.1
+' fill='#FF0000'/>
+<path class='atom-7' d='M 301.4 66.1
+L 302.6 66.1
+L 302.6 69.9
+L 307.1 69.9
+L 307.1 66.1
+L 308.3 66.1
+L 308.3 74.9
+L 307.1 74.9
+L 307.1 70.9
+L 302.6 70.9
+L 302.6 74.9
+L 301.4 74.9
+L 301.4 66.1
+' fill='#FF0000'/>
+<path class='atom-9' d='M 264.8 126.5
+Q 264.8 124.3, 265.9 123.2
+Q 266.9 122.0, 268.9 122.0
+Q 270.8 122.0, 271.9 123.2
+Q 272.9 124.3, 272.9 126.5
+Q 272.9 128.6, 271.9 129.8
+Q 270.8 131.0, 268.9 131.0
+Q 266.9 131.0, 265.9 129.8
+Q 264.8 128.6, 264.8 126.5
+M 268.9 130.0
+Q 270.2 130.0, 270.9 129.1
+Q 271.7 128.2, 271.7 126.5
+Q 271.7 124.7, 270.9 123.9
+Q 270.2 123.0, 268.9 123.0
+Q 267.5 123.0, 266.8 123.8
+Q 266.1 124.7, 266.1 126.5
+Q 266.1 128.2, 266.8 129.1
+Q 267.5 130.0, 268.9 130.0
+' fill='#FF0000'/>
+<path class='atom-9' d='M 274.3 122.1
+L 275.5 122.1
+L 275.5 125.8
+L 280.0 125.8
+L 280.0 122.1
+L 281.2 122.1
+L 281.2 130.9
+L 280.0 130.9
+L 280.0 126.8
+L 275.5 126.8
+L 275.5 130.9
+L 274.3 130.9
+L 274.3 122.1
+' fill='#FF0000'/>
+<path class='atom-11' d='M 194.1 126.6
+L 195.3 126.6
+L 195.3 130.3
+L 199.8 130.3
+L 199.8 126.6
+L 201.0 126.6
+L 201.0 135.4
+L 199.8 135.4
+L 199.8 131.3
+L 195.3 131.3
+L 195.3 135.4
+L 194.1 135.4
+L 194.1 126.6
+' fill='#FF0000'/>
+<path class='atom-11' d='M 202.8 131.0
+Q 202.8 128.9, 203.9 127.7
+Q 204.9 126.5, 206.9 126.5
+Q 208.8 126.5, 209.9 127.7
+Q 210.9 128.9, 210.9 131.0
+Q 210.9 133.1, 209.8 134.3
+Q 208.8 135.5, 206.9 135.5
+Q 204.9 135.5, 203.9 134.3
+Q 202.8 133.1, 202.8 131.0
+M 206.9 134.6
+Q 208.2 134.6, 208.9 133.7
+Q 209.7 132.7, 209.7 131.0
+Q 209.7 129.3, 208.9 128.4
+Q 208.2 127.5, 206.9 127.5
+Q 205.5 127.5, 204.8 128.4
+Q 204.1 129.2, 204.1 131.0
+Q 204.1 132.8, 204.8 133.7
+Q 205.5 134.6, 206.9 134.6
+' fill='#FF0000'/>
+<path class='note' d='M 148.7 47.5
+Q 147.8 47.5, 147.4 46.9
+Q 147.0 46.3, 147.0 45.2
+Q 147.0 44.2, 147.4 43.6
+Q 147.8 43.0, 148.7 43.0
+Q 149.5 43.0, 149.9 43.6
+Q 150.3 44.2, 150.3 45.2
+Q 150.3 46.3, 149.9 46.9
+Q 149.5 47.5, 148.7 47.5
+M 148.7 47.0
+Q 149.1 47.0, 149.4 46.6
+Q 149.6 46.1, 149.6 45.2
+Q 149.6 44.4, 149.4 43.9
+Q 149.1 43.5, 148.7 43.5
+Q 148.2 43.5, 147.9 43.9
+Q 147.7 44.4, 147.7 45.2
+Q 147.7 46.1, 147.9 46.6
+Q 148.2 47.0, 148.7 47.0
+' fill='#000000'/>
+<path class='note' d='M 168.6 85.9
+L 169.6 85.9
+L 169.6 82.6
+L 168.5 82.9
+L 168.4 82.6
+L 169.7 82.0
+L 170.1 82.0
+L 170.1 85.9
+L 171.0 85.9
+L 171.0 86.4
+L 168.6 86.4
+L 168.6 85.9
+' fill='#000000'/>
+<path class='note' d='M 191.5 67.6
+Q 191.7 67.2, 192.1 66.9
+Q 192.5 66.7, 193.0 66.7
+Q 193.7 66.7, 194.1 67.1
+Q 194.4 67.4, 194.4 68.1
+Q 194.4 68.7, 193.9 69.3
+Q 193.5 69.9, 192.5 70.6
+L 194.5 70.6
+L 194.5 71.1
+L 191.5 71.1
+L 191.5 70.7
+Q 192.4 70.1, 192.8 69.7
+Q 193.3 69.3, 193.6 68.9
+Q 193.8 68.5, 193.8 68.1
+Q 193.8 67.7, 193.6 67.4
+Q 193.4 67.2, 193.0 67.2
+Q 192.7 67.2, 192.4 67.3
+Q 192.2 67.5, 192.0 67.8
+L 191.5 67.6
+' fill='#000000'/>
+<path class='note' d='M 195.1 70.5
+L 195.7 70.5
+L 195.7 71.0
+L 195.6 71.9
+L 195.3 71.9
+L 195.3 71.1
+L 195.1 71.1
+L 195.1 70.5
+' fill='#000000'/>
+<path class='note' d='M 196.3 69.4
+Q 196.3 68.5, 196.5 67.8
+Q 196.8 67.0, 197.3 66.2
+L 197.6 66.4
+Q 197.2 67.2, 197.0 67.9
+Q 196.8 68.5, 196.8 69.4
+Q 196.8 70.2, 197.0 70.9
+Q 197.2 71.5, 197.6 72.3
+L 197.3 72.5
+Q 196.8 71.7, 196.5 71.0
+Q 196.3 70.3, 196.3 69.4
+' fill='#000000'/>
+<path class='note' d='M 200.4 71.1
+L 199.3 69.3
+L 199.3 69.3
+L 198.6 69.3
+L 198.6 71.1
+L 198.0 71.1
+L 198.0 66.7
+L 199.3 66.7
+Q 200.0 66.7, 200.4 67.1
+Q 200.8 67.4, 200.8 68.0
+Q 200.8 68.5, 200.6 68.8
+Q 200.3 69.1, 199.9 69.3
+L 201.0 71.1
+L 200.4 71.1
+M 198.6 68.8
+L 199.3 68.8
+Q 199.7 68.8, 199.9 68.6
+Q 200.2 68.4, 200.2 68.0
+Q 200.2 67.6, 199.9 67.4
+Q 199.7 67.2, 199.3 67.2
+L 198.6 67.2
+L 198.6 68.8
+' fill='#000000'/>
+<path class='note' d='M 202.7 69.4
+Q 202.7 70.3, 202.5 71.0
+Q 202.2 71.7, 201.7 72.5
+L 201.3 72.3
+Q 201.8 71.5, 201.9 70.9
+Q 202.2 70.2, 202.2 69.4
+Q 202.2 68.5, 201.9 67.9
+Q 201.8 67.2, 201.3 66.4
+L 201.7 66.2
+Q 202.2 67.0, 202.5 67.8
+Q 202.7 68.5, 202.7 69.4
+' fill='#000000'/>
+<path class='note' d='M 211.3 40.6
+Q 211.7 40.7, 211.9 41.0
+Q 212.1 41.3, 212.1 41.7
+Q 212.1 42.1, 212.0 42.4
+Q 211.8 42.7, 211.4 42.8
+Q 211.1 43.0, 210.6 43.0
+Q 210.2 43.0, 209.8 42.8
+Q 209.5 42.7, 209.2 42.3
+L 209.5 42.0
+Q 209.8 42.3, 210.0 42.4
+Q 210.3 42.5, 210.6 42.5
+Q 211.0 42.5, 211.3 42.3
+Q 211.5 42.1, 211.5 41.7
+Q 211.5 41.3, 211.3 41.1
+Q 211.0 40.9, 210.5 40.9
+L 210.2 40.9
+L 210.2 40.4
+L 210.4 40.4
+Q 210.9 40.4, 211.2 40.2
+Q 211.4 40.0, 211.4 39.6
+Q 211.4 39.3, 211.2 39.1
+Q 211.0 39.0, 210.6 39.0
+Q 210.3 39.0, 210.0 39.1
+Q 209.8 39.2, 209.7 39.6
+L 209.2 39.3
+Q 209.4 39.0, 209.8 38.7
+Q 210.1 38.5, 210.6 38.5
+Q 211.3 38.5, 211.7 38.8
+Q 212.1 39.1, 212.1 39.6
+Q 212.1 40.0, 211.9 40.2
+Q 211.7 40.5, 211.3 40.6
+' fill='#000000'/>
+<path class='note' d='M 238.8 39.4
+L 239.3 39.4
+L 239.3 39.9
+L 238.8 39.9
+L 238.8 40.9
+L 238.2 40.9
+L 238.2 39.9
+L 235.9 39.9
+L 235.9 39.5
+L 237.9 36.5
+L 238.8 36.5
+L 238.8 39.4
+M 236.6 39.4
+L 238.2 39.4
+L 238.2 36.9
+L 236.6 39.4
+' fill='#000000'/>
+<path class='note' d='M 239.8 40.3
+L 240.4 40.3
+L 240.4 40.8
+L 240.3 41.6
+L 240.1 41.6
+L 240.1 40.9
+L 239.8 40.9
+L 239.8 40.3
+' fill='#000000'/>
+<path class='note' d='M 241.0 39.1
+Q 241.0 38.2, 241.3 37.5
+Q 241.5 36.8, 242.0 36.0
+L 242.4 36.2
+Q 242.0 36.9, 241.8 37.6
+Q 241.6 38.3, 241.6 39.1
+Q 241.6 40.0, 241.8 40.6
+Q 242.0 41.3, 242.4 42.1
+L 242.0 42.3
+Q 241.5 41.5, 241.3 40.8
+Q 241.0 40.0, 241.0 39.1
+' fill='#000000'/>
+<path class='note' d='M 242.9 40.2
+Q 243.0 40.2, 243.2 40.3
+Q 243.4 40.4, 243.6 40.5
+Q 243.8 40.5, 244.0 40.5
+Q 244.5 40.5, 244.7 40.3
+Q 244.9 40.1, 244.9 39.8
+Q 244.9 39.5, 244.8 39.4
+Q 244.7 39.2, 244.5 39.1
+Q 244.3 39.1, 244.0 39.0
+Q 243.6 38.8, 243.4 38.7
+Q 243.2 38.6, 243.0 38.4
+Q 242.8 38.1, 242.8 37.7
+Q 242.8 37.2, 243.2 36.9
+Q 243.6 36.5, 244.3 36.5
+Q 244.8 36.5, 245.4 36.8
+L 245.3 37.2
+Q 244.7 37.0, 244.4 37.0
+Q 243.9 37.0, 243.7 37.2
+Q 243.5 37.4, 243.5 37.7
+Q 243.5 37.9, 243.6 38.1
+Q 243.7 38.2, 243.9 38.3
+Q 244.1 38.4, 244.4 38.5
+Q 244.7 38.6, 245.0 38.7
+Q 245.2 38.8, 245.4 39.1
+Q 245.6 39.3, 245.6 39.8
+Q 245.6 40.4, 245.2 40.7
+Q 244.7 41.0, 244.1 41.0
+Q 243.7 41.0, 243.4 40.9
+Q 243.1 40.9, 242.7 40.7
+L 242.9 40.2
+' fill='#000000'/>
+<path class='note' d='M 247.4 39.1
+Q 247.4 40.0, 247.2 40.8
+Q 246.9 41.5, 246.4 42.3
+L 246.0 42.1
+Q 246.5 41.3, 246.7 40.6
+Q 246.9 40.0, 246.9 39.1
+Q 246.9 38.3, 246.7 37.6
+Q 246.5 36.9, 246.0 36.2
+L 246.4 36.0
+Q 246.9 36.8, 247.2 37.5
+Q 247.4 38.2, 247.4 39.1
+' fill='#000000'/>
+<path class='note' d='M 265.7 9.1
+Q 266.0 9.1, 266.4 9.3
+Q 266.7 9.5, 266.9 9.8
+Q 267.0 10.1, 267.0 10.5
+Q 267.0 11.0, 266.8 11.3
+Q 266.6 11.6, 266.2 11.8
+Q 265.9 12.0, 265.5 12.0
+Q 265.1 12.0, 264.7 11.8
+Q 264.3 11.7, 264.1 11.4
+L 264.4 11.0
+Q 264.6 11.2, 264.9 11.3
+Q 265.2 11.4, 265.5 11.4
+Q 265.9 11.4, 266.1 11.2
+Q 266.4 11.0, 266.4 10.5
+Q 266.4 10.1, 266.1 9.8
+Q 265.9 9.6, 265.4 9.6
+Q 265.1 9.6, 264.6 9.8
+L 264.3 9.6
+L 264.5 7.5
+L 266.8 7.5
+L 266.7 8.0
+L 265.0 8.0
+L 264.9 9.3
+Q 265.3 9.1, 265.7 9.1
+' fill='#000000'/>
+<path class='note' d='M 265.6 63.1
+Q 266.0 63.1, 266.3 63.3
+Q 266.6 63.5, 266.7 63.8
+Q 266.9 64.1, 266.9 64.4
+Q 266.9 64.9, 266.7 65.2
+Q 266.5 65.5, 266.2 65.7
+Q 265.8 65.9, 265.4 65.9
+Q 264.6 65.9, 264.2 65.4
+Q 263.8 64.9, 263.8 63.8
+Q 263.8 62.6, 264.3 62.0
+Q 264.8 61.4, 265.8 61.4
+Q 266.0 61.4, 266.3 61.5
+Q 266.5 61.5, 266.7 61.7
+L 266.5 62.1
+Q 266.2 61.9, 265.8 61.9
+Q 265.1 61.9, 264.8 62.3
+Q 264.5 62.7, 264.5 63.5
+Q 264.7 63.3, 265.0 63.2
+Q 265.3 63.1, 265.6 63.1
+M 265.4 65.4
+Q 265.7 65.4, 265.9 65.3
+Q 266.1 65.2, 266.2 64.9
+Q 266.3 64.7, 266.3 64.5
+Q 266.3 64.1, 266.1 63.8
+Q 265.8 63.6, 265.5 63.6
+Q 265.2 63.6, 264.9 63.7
+Q 264.7 63.8, 264.5 64.0
+Q 264.5 64.7, 264.7 65.1
+Q 265.0 65.4, 265.4 65.4
+' fill='#000000'/>
+<path class='note' d='M 267.4 65.2
+L 268.1 65.2
+L 268.1 65.7
+L 267.9 66.6
+L 267.7 66.6
+L 267.7 65.9
+L 267.4 65.9
+L 267.4 65.2
+' fill='#000000'/>
+<path class='note' d='M 268.6 64.1
+Q 268.6 63.2, 268.9 62.5
+Q 269.2 61.7, 269.7 60.9
+L 270.0 61.2
+Q 269.6 61.9, 269.4 62.6
+Q 269.2 63.2, 269.2 64.1
+Q 269.2 64.9, 269.4 65.6
+Q 269.6 66.3, 270.0 67.0
+L 269.7 67.2
+Q 269.2 66.5, 268.9 65.7
+Q 268.6 65.0, 268.6 64.1
+' fill='#000000'/>
+<path class='note' d='M 272.7 65.9
+L 271.7 64.1
+L 271.7 64.1
+L 271.0 64.1
+L 271.0 65.9
+L 270.4 65.9
+L 270.4 61.5
+L 271.7 61.5
+Q 272.4 61.5, 272.8 61.8
+Q 273.2 62.1, 273.2 62.8
+Q 273.2 63.2, 272.9 63.5
+Q 272.7 63.9, 272.3 64.0
+L 273.4 65.9
+L 272.7 65.9
+M 271.0 63.6
+L 271.7 63.6
+Q 272.1 63.6, 272.3 63.4
+Q 272.5 63.1, 272.5 62.8
+Q 272.5 62.4, 272.3 62.2
+Q 272.1 62.0, 271.7 62.0
+L 271.0 62.0
+L 271.0 63.6
+' fill='#000000'/>
+<path class='note' d='M 275.1 64.1
+Q 275.1 65.0, 274.8 65.7
+Q 274.6 66.5, 274.1 67.2
+L 273.7 67.0
+Q 274.1 66.3, 274.3 65.6
+Q 274.5 64.9, 274.5 64.1
+Q 274.5 63.2, 274.3 62.6
+Q 274.1 61.9, 273.7 61.2
+L 274.1 60.9
+Q 274.6 61.7, 274.8 62.5
+Q 275.1 63.2, 275.1 64.1
+' fill='#000000'/>
+<path class='note' d='M 302.6 77.3
+L 300.3 77.3
+L 300.3 76.8
+L 303.2 76.8
+L 303.2 77.3
+L 301.5 81.2
+L 300.9 81.2
+L 302.6 77.3
+' fill='#000000'/>
+<path class='note' d='M 258.3 100.1
+Q 258.7 100.3, 258.9 100.5
+Q 259.2 100.8, 259.2 101.2
+Q 259.2 101.6, 259.0 101.9
+Q 258.8 102.2, 258.4 102.3
+Q 258.1 102.5, 257.6 102.5
+Q 256.9 102.5, 256.5 102.1
+Q 256.1 101.8, 256.1 101.2
+Q 256.1 100.9, 256.3 100.6
+Q 256.4 100.3, 256.8 100.1
+Q 256.5 99.9, 256.4 99.7
+Q 256.2 99.5, 256.2 99.1
+Q 256.2 98.6, 256.6 98.3
+Q 257.0 98.0, 257.6 98.0
+Q 258.3 98.0, 258.6 98.3
+Q 259.0 98.6, 259.0 99.1
+Q 259.0 99.4, 258.8 99.7
+Q 258.7 99.9, 258.3 100.1
+M 257.6 98.4
+Q 257.3 98.4, 257.1 98.6
+Q 256.9 98.8, 256.9 99.1
+Q 256.9 99.3, 257.0 99.5
+Q 257.1 99.6, 257.3 99.7
+Q 257.5 99.8, 257.9 99.9
+Q 258.2 99.7, 258.3 99.5
+Q 258.4 99.3, 258.4 99.1
+Q 258.4 98.8, 258.2 98.6
+Q 258.0 98.4, 257.6 98.4
+M 257.6 102.0
+Q 258.1 102.0, 258.3 101.8
+Q 258.6 101.6, 258.6 101.2
+Q 258.6 101.0, 258.4 100.8
+Q 258.3 100.7, 258.1 100.6
+Q 257.9 100.5, 257.6 100.4
+L 257.3 100.3
+Q 257.0 100.5, 256.8 100.7
+Q 256.7 100.9, 256.7 101.2
+Q 256.7 101.6, 257.0 101.8
+Q 257.2 102.0, 257.6 102.0
+' fill='#000000'/>
+<path class='note' d='M 259.8 101.8
+L 260.4 101.8
+L 260.4 102.3
+L 260.3 103.2
+L 260.0 103.2
+L 260.0 102.4
+L 259.8 102.4
+L 259.8 101.8
+' fill='#000000'/>
+<path class='note' d='M 261.0 100.6
+Q 261.0 99.8, 261.2 99.0
+Q 261.5 98.3, 262.0 97.5
+L 262.3 97.7
+Q 261.9 98.5, 261.7 99.1
+Q 261.5 99.8, 261.5 100.6
+Q 261.5 101.5, 261.7 102.2
+Q 261.9 102.8, 262.3 103.6
+L 262.0 103.8
+Q 261.5 103.0, 261.2 102.3
+Q 261.0 101.6, 261.0 100.6
+' fill='#000000'/>
+<path class='note' d='M 265.1 102.4
+L 264.0 100.6
+L 264.0 100.6
+L 263.3 100.6
+L 263.3 102.4
+L 262.7 102.4
+L 262.7 98.0
+L 264.0 98.0
+Q 264.7 98.0, 265.1 98.4
+Q 265.5 98.7, 265.5 99.3
+Q 265.5 99.8, 265.3 100.1
+Q 265.0 100.4, 264.6 100.5
+L 265.7 102.4
+L 265.1 102.4
+M 263.3 100.1
+L 264.0 100.1
+Q 264.4 100.1, 264.6 99.9
+Q 264.9 99.7, 264.9 99.3
+Q 264.9 98.9, 264.6 98.7
+Q 264.4 98.5, 264.0 98.5
+L 263.3 98.5
+L 263.3 100.1
+' fill='#000000'/>
+<path class='note' d='M 267.4 100.6
+Q 267.4 101.6, 267.2 102.3
+Q 266.9 103.0, 266.4 103.8
+L 266.1 103.6
+Q 266.5 102.8, 266.7 102.2
+Q 266.9 101.5, 266.9 100.6
+Q 266.9 99.8, 266.7 99.1
+Q 266.5 98.5, 266.1 97.7
+L 266.4 97.5
+Q 266.9 98.3, 267.2 99.0
+Q 267.4 99.8, 267.4 100.6
+' fill='#000000'/>
+<path class='note' d='M 274.6 132.8
+Q 275.4 132.8, 275.8 133.3
+Q 276.2 133.8, 276.2 134.9
+Q 276.2 136.1, 275.7 136.7
+Q 275.2 137.3, 274.3 137.3
+Q 274.0 137.3, 273.8 137.2
+Q 273.6 137.2, 273.3 137.0
+L 273.6 136.6
+Q 273.9 136.8, 274.3 136.8
+Q 274.9 136.8, 275.2 136.4
+Q 275.6 136.0, 275.6 135.2
+Q 275.4 135.4, 275.1 135.5
+Q 274.8 135.6, 274.5 135.6
+Q 274.1 135.6, 273.8 135.4
+Q 273.5 135.2, 273.3 134.9
+Q 273.2 134.6, 273.2 134.2
+Q 273.2 133.8, 273.4 133.5
+Q 273.5 133.2, 273.9 133.0
+Q 274.2 132.8, 274.6 132.8
+M 273.8 134.2
+Q 273.8 134.6, 274.0 134.9
+Q 274.2 135.1, 274.6 135.1
+Q 274.9 135.1, 275.1 135.0
+Q 275.4 134.9, 275.6 134.7
+Q 275.6 133.9, 275.3 133.6
+Q 275.1 133.3, 274.6 133.3
+Q 274.4 133.3, 274.2 133.4
+Q 274.0 133.5, 273.9 133.8
+Q 273.8 134.0, 273.8 134.2
+' fill='#000000'/>
+<path class='note' d='M 217.8 95.6
+L 218.8 95.6
+L 218.8 92.3
+L 217.7 92.7
+L 217.6 92.3
+L 218.9 91.7
+L 219.4 91.8
+L 219.4 95.6
+L 220.2 95.6
+L 220.2 96.1
+L 217.8 96.1
+L 217.8 95.6
+' fill='#000000'/>
+<path class='note' d='M 222.3 96.2
+Q 221.5 96.2, 221.1 95.6
+Q 220.7 95.0, 220.7 93.9
+Q 220.7 92.8, 221.1 92.2
+Q 221.5 91.7, 222.3 91.7
+Q 223.1 91.7, 223.5 92.2
+Q 223.9 92.8, 223.9 93.9
+Q 223.9 95.0, 223.5 95.6
+Q 223.1 96.2, 222.3 96.2
+M 222.3 95.7
+Q 222.8 95.7, 223.1 95.2
+Q 223.3 94.8, 223.3 93.9
+Q 223.3 93.0, 223.1 92.6
+Q 222.8 92.2, 222.3 92.2
+Q 221.9 92.2, 221.6 92.6
+Q 221.3 93.0, 221.3 93.9
+Q 221.3 94.8, 221.6 95.2
+Q 221.9 95.7, 222.3 95.7
+' fill='#000000'/>
+<path class='note' d='M 224.5 95.5
+L 225.2 95.5
+L 225.2 96.0
+L 225.0 96.8
+L 224.8 96.8
+L 224.8 96.1
+L 224.5 96.1
+L 224.5 95.5
+' fill='#000000'/>
+<path class='note' d='M 225.8 94.3
+Q 225.8 93.4, 226.0 92.7
+Q 226.3 92.0, 226.8 91.2
+L 227.1 91.4
+Q 226.7 92.2, 226.5 92.8
+Q 226.3 93.5, 226.3 94.3
+Q 226.3 95.2, 226.5 95.8
+Q 226.7 96.5, 227.1 97.3
+L 226.8 97.5
+Q 226.3 96.7, 226.0 96.0
+Q 225.8 95.2, 225.8 94.3
+' fill='#000000'/>
+<path class='note' d='M 229.9 96.1
+L 228.8 94.3
+L 228.8 94.3
+L 228.1 94.3
+L 228.1 96.1
+L 227.5 96.1
+L 227.5 91.7
+L 228.8 91.7
+Q 229.6 91.7, 229.9 92.1
+Q 230.3 92.4, 230.3 93.0
+Q 230.3 93.5, 230.1 93.8
+Q 229.9 94.1, 229.4 94.2
+L 230.5 96.1
+L 229.9 96.1
+M 228.1 93.8
+L 228.8 93.8
+Q 229.2 93.8, 229.5 93.6
+Q 229.7 93.4, 229.7 93.0
+Q 229.7 92.6, 229.5 92.4
+Q 229.2 92.2, 228.8 92.2
+L 228.1 92.2
+L 228.1 93.8
+' fill='#000000'/>
+<path class='note' d='M 232.2 94.3
+Q 232.2 95.2, 232.0 96.0
+Q 231.7 96.7, 231.2 97.5
+L 230.9 97.3
+Q 231.3 96.5, 231.5 95.8
+Q 231.7 95.2, 231.7 94.3
+Q 231.7 93.5, 231.5 92.8
+Q 231.3 92.2, 230.9 91.4
+L 231.2 91.2
+Q 231.7 92.0, 232.0 92.7
+Q 232.2 93.4, 232.2 94.3
+' fill='#000000'/>
+<path class='note' d='M 199.7 142.0
+L 200.6 142.0
+L 200.6 138.7
+L 199.6 139.0
+L 199.4 138.7
+L 200.8 138.1
+L 201.2 138.1
+L 201.2 142.0
+L 202.1 142.0
+L 202.1 142.5
+L 199.7 142.5
+L 199.7 142.0
+' fill='#000000'/>
+<path class='note' d='M 202.9 142.0
+L 203.8 142.0
+L 203.8 138.7
+L 202.8 139.0
+L 202.6 138.7
+L 204.0 138.1
+L 204.4 138.1
+L 204.4 142.0
+L 205.3 142.0
+L 205.3 142.5
+L 202.9 142.5
+L 202.9 142.0
+' fill='#000000'/>
+</svg>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Draw</span>
+
+<span class="c1"># Extract molecules and legends</span>
+<span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">isomer_data</span><span class="p">]</span>
+<span class="n">legends</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">isomer_data</span><span class="p">]</span>
+
+<span class="c1"># Generate and display the grid image</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Draw</span><span class="o">.</span><span class="n">MolsToGridImage</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">legends</span><span class="o">=</span><span class="n">legends</span><span class="p">,</span> <span class="n">molsPerRow</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">subImgSize</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+<span class="n">img</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c2d1e8a2dfb0cea544552428a00b51376e1e54cb90d4365fefa7db994aec22c6.svg" src="../../_images/c2d1e8a2dfb0cea544552428a00b51376e1e54cb90d4365fefa7db994aec22c6.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Draw</span>
+
+<span class="c1"># Extract molecules and legends</span>
+<span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">isomer_data</span><span class="p">]</span>
+<span class="n">legends</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">isomer_data</span><span class="p">]</span>
+
+<span class="c1"># Generate and display the grid image</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Draw</span><span class="o">.</span><span class="n">MolsToGridImage</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">legends</span><span class="o">=</span><span class="n">legends</span><span class="p">,</span> <span class="n">molsPerRow</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">subImgSize</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+<span class="n">img</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/c2d1e8a2dfb0cea544552428a00b51376e1e54cb90d4365fefa7db994aec22c6.svg" src="../../_images/c2d1e8a2dfb0cea544552428a00b51376e1e54cb90d4365fefa7db994aec22c6.svg" />
+</div>
+</div>
+<section id="open-tautomer-form">
+<h3>Open Tautomer Form<a class="headerlink" href="#open-tautomer-form" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Draw</span>
+
+<span class="c1"># Explicitly defined stereochemistry</span>
+<span class="n">smiles_open_chain</span> <span class="o">=</span> <span class="s2">&quot;OC[C@H](O)[C@H](O)[C@H](O)[C@H](O)C=O&quot;</span>
+<span class="n">smiles_alpha</span> <span class="o">=</span> <span class="s2">&quot;OC[C@H]1O[C@@H](O)[C@H](O)[C@H](O)[C@H]1O&quot;</span>  <span class="c1"># α-D-glucopyranose</span>
+<span class="n">smiles_beta</span> <span class="o">=</span> <span class="s2">&quot;OC[C@H]1O[C@H](O)[C@H](O)[C@H](O)[C@H]1O&quot;</span>   <span class="c1"># β-D-glucopyranose</span>
+
+<span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smi</span><span class="p">)</span> <span class="k">for</span> <span class="n">smi</span> <span class="ow">in</span> <span class="p">[</span><span class="n">smiles_open_chain</span><span class="p">,</span> <span class="n">smiles_alpha</span><span class="p">,</span> <span class="n">smiles_beta</span><span class="p">]]</span>
+
+<span class="c1"># Optional: add hydrogens for better 2D layout</span>
+<span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
+
+<span class="c1"># Generate image</span>
+<span class="n">Draw</span><span class="o">.</span><span class="n">MolsToImage</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">legends</span><span class="o">=</span><span class="p">[</span>
+    <span class="s2">&quot;Open-Chain D-Glucose&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;alpha-D-Glucopyranose (axial OH at C1)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;beta-D-Glucopyranose (equatorial OH at C1)&quot;</span>
+<span class="p">],</span> <span class="n">subImgSize</span><span class="o">=</span><span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/1c1e3caa271e67bf95cb0a0ab9e2a88050d8b39acbaf14530a698cf0815320ae.png" src="../../_images/1c1e3caa271e67bf95cb0a0ab9e2a88050d8b39acbaf14530a698cf0815320ae.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">open_chain_smiles</span> <span class="o">=</span> <span class="s1">&#39;OC[C@H](O)[C@H](O)[C@H](O)[C@H](O)C=O&#39;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Draw</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem.Draw</span><span class="w"> </span><span class="kn">import</span> <span class="n">IPythonConsole</span>
+
+<span class="c1"># Enable SVG rendering in Jupyter</span>
+<span class="n">IPythonConsole</span><span class="o">.</span><span class="n">ipython_useSVG</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># Create the molecule from the SMILES string</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">open_chain_smiles</span><span class="p">)</span>
+
+<span class="c1"># Display the molecule</span>
+<span class="n">mol</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><?xml version='1.0' encoding='iso-8859-1'?>
+<svg version='1.1' baseProfile='full'
+              xmlns='http://www.w3.org/2000/svg'
+                      xmlns:rdkit='http://www.rdkit.org/xml'
+                      xmlns:xlink='http://www.w3.org/1999/xlink'
+                  xml:space='preserve'
+width='450px' height='150px' viewBox='0 0 450 150'>
+<!-- END OF HEADER -->
+<rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='450.0' height='150.0' x='0.0' y='0.0'> </rect>
+<path class='bond-0 atom-0 atom-1' d='M 339.9,69.4 L 325.0,62.7' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-0 atom-0 atom-1' d='M 325.0,62.7 L 310.0,56.0' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-1 atom-1 atom-2' d='M 310.0,56.0 L 277.7,79.5' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-2 atom-2 atom-3' d='M 278.4,83.0 L 277.7,83.0' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-2 atom-2 atom-3' d='M 279.1,86.4 L 277.7,86.5' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-2 atom-2 atom-3' d='M 279.8,89.8 L 277.8,90.1' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-2 atom-2 atom-3' d='M 280.5,93.3 L 277.8,93.6' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-2 atom-2 atom-3' d='M 281.2,96.7 L 277.9,97.1' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-2 atom-2 atom-3' d='M 281.9,100.2 L 277.9,100.6' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-2 atom-2 atom-3' d='M 282.6,103.6 L 277.9,104.1' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-2 atom-2 atom-3' d='M 283.3,107.1 L 278.0,107.6' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-2 atom-2 atom-3' d='M 284.0,110.5 L 278.0,111.2' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-3 atom-2 atom-4' d='M 277.7,79.5 L 241.2,63.3' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-4 atom-4 atom-5' d='M 241.2,63.3 L 238.1,47.8 L 241.1,47.5 Z' style='fill:#000000;fill-rule:evenodd;fill-opacity:1;stroke:#000000;stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path class='bond-4 atom-4 atom-5' d='M 238.1,47.8 L 240.9,31.8 L 234.9,32.4 Z' style='fill:#FF0000;fill-rule:evenodd;fill-opacity:1;stroke:#FF0000;stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path class='bond-4 atom-4 atom-5' d='M 238.1,47.8 L 241.1,47.5 L 240.9,31.8 Z' style='fill:#FF0000;fill-rule:evenodd;fill-opacity:1;stroke:#FF0000;stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path class='bond-5 atom-4 atom-6' d='M 241.2,63.3 L 208.9,86.7' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 209.6,90.2 L 208.9,90.3' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 210.3,93.6 L 209.0,93.8' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 211.0,97.1 L 209.0,97.3' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 211.7,100.5 L 209.0,100.8' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 212.4,104.0 L 209.1,104.3' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 213.1,107.4 L 209.1,107.8' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 213.8,110.9 L 209.2,111.4' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 214.5,114.3 L 209.2,114.9' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-6 atom-6 atom-7' d='M 215.2,117.8 L 209.2,118.4' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:1.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-7 atom-6 atom-8' d='M 208.9,86.7 L 172.4,70.5' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-8 atom-8 atom-9' d='M 172.4,70.5 L 169.3,55.1 L 172.3,54.8 Z' style='fill:#000000;fill-rule:evenodd;fill-opacity:1;stroke:#000000;stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path class='bond-8 atom-8 atom-9' d='M 169.3,55.1 L 172.1,39.0 L 166.2,39.6 Z' style='fill:#FF0000;fill-rule:evenodd;fill-opacity:1;stroke:#FF0000;stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path class='bond-8 atom-8 atom-9' d='M 169.3,55.1 L 172.3,54.8 L 172.1,39.0 Z' style='fill:#FF0000;fill-rule:evenodd;fill-opacity:1;stroke:#FF0000;stroke-width:0.5px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path class='bond-9 atom-8 atom-10' d='M 172.4,70.5 L 140.1,94.0' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-10 atom-10 atom-11' d='M 140.1,94.0 L 125.2,87.3' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-10 atom-10 atom-11' d='M 125.2,87.3 L 110.2,80.6' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-10 atom-10 atom-11' d='M 139.4,87.1 L 127.6,81.8' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path class='bond-10 atom-10 atom-11' d='M 127.6,81.8 L 112.6,75.2' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' />
+<path d='M 310.7,56.4 L 310.0,56.0 L 308.4,57.2' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 279.3,78.3 L 277.7,79.5 L 275.9,78.7' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 243.0,64.1 L 241.2,63.3 L 239.6,64.4' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 210.5,85.6 L 208.9,86.7 L 207.1,85.9' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 174.3,71.3 L 172.4,70.5 L 170.8,71.7' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path d='M 141.8,92.8 L 140.1,94.0 L 139.4,93.6' style='fill:none;stroke:#000000;stroke-width:2.0px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;' />
+<path class='atom-0' d='M 341.3 72.3
+Q 341.3 69.6, 342.6 68.1
+Q 343.9 66.6, 346.4 66.6
+Q 349.0 66.6, 350.3 68.1
+Q 351.6 69.6, 351.6 72.3
+Q 351.6 75.0, 350.3 76.6
+Q 348.9 78.2, 346.4 78.2
+Q 344.0 78.2, 342.6 76.6
+Q 341.3 75.1, 341.3 72.3
+M 346.4 76.9
+Q 348.2 76.9, 349.1 75.7
+Q 350.0 74.6, 350.0 72.3
+Q 350.0 70.1, 349.1 69.0
+Q 348.2 67.8, 346.4 67.8
+Q 344.7 67.8, 343.8 68.9
+Q 342.9 70.1, 342.9 72.3
+Q 342.9 74.6, 343.8 75.7
+Q 344.7 76.9, 346.4 76.9
+' fill='#FF0000'/>
+<path class='atom-0' d='M 353.4 66.7
+L 354.9 66.7
+L 354.9 71.5
+L 360.7 71.5
+L 360.7 66.7
+L 362.2 66.7
+L 362.2 78.0
+L 360.7 78.0
+L 360.7 72.8
+L 354.9 72.8
+L 354.9 78.0
+L 353.4 78.0
+L 353.4 66.7
+' fill='#FF0000'/>
+<path class='atom-3' d='M 276.7 119.2
+Q 276.7 116.5, 278.0 115.0
+Q 279.3 113.5, 281.9 113.5
+Q 284.4 113.5, 285.7 115.0
+Q 287.0 116.5, 287.0 119.2
+Q 287.0 122.0, 285.7 123.5
+Q 284.3 125.1, 281.9 125.1
+Q 279.4 125.1, 278.0 123.5
+Q 276.7 122.0, 276.7 119.2
+M 281.9 123.8
+Q 283.6 123.8, 284.5 122.7
+Q 285.4 121.5, 285.4 119.2
+Q 285.4 117.0, 284.5 115.9
+Q 283.6 114.8, 281.9 114.8
+Q 280.1 114.8, 279.2 115.9
+Q 278.3 117.0, 278.3 119.2
+Q 278.3 121.5, 279.2 122.7
+Q 280.1 123.8, 281.9 123.8
+' fill='#FF0000'/>
+<path class='atom-3' d='M 288.8 113.6
+L 290.3 113.6
+L 290.3 118.4
+L 296.1 118.4
+L 296.1 113.6
+L 297.6 113.6
+L 297.6 124.9
+L 296.1 124.9
+L 296.1 119.7
+L 290.3 119.7
+L 290.3 124.9
+L 288.8 124.9
+L 288.8 113.6
+' fill='#FF0000'/>
+<path class='atom-5' d='M 231.8 23.6
+Q 231.8 20.9, 233.2 19.4
+Q 234.5 17.8, 237.0 17.8
+Q 239.5 17.8, 240.9 19.4
+Q 242.2 20.9, 242.2 23.6
+Q 242.2 26.3, 240.9 27.9
+Q 239.5 29.5, 237.0 29.5
+Q 234.5 29.5, 233.2 27.9
+Q 231.8 26.4, 231.8 23.6
+M 237.0 28.2
+Q 238.8 28.2, 239.7 27.0
+Q 240.6 25.9, 240.6 23.6
+Q 240.6 21.4, 239.7 20.3
+Q 238.8 19.1, 237.0 19.1
+Q 235.3 19.1, 234.4 20.2
+Q 233.4 21.4, 233.4 23.6
+Q 233.4 25.9, 234.4 27.0
+Q 235.3 28.2, 237.0 28.2
+' fill='#FF0000'/>
+<path class='atom-5' d='M 244.0 18.0
+L 245.5 18.0
+L 245.5 22.8
+L 251.3 22.8
+L 251.3 18.0
+L 252.8 18.0
+L 252.8 29.3
+L 251.3 29.3
+L 251.3 24.1
+L 245.5 24.1
+L 245.5 29.3
+L 244.0 29.3
+L 244.0 18.0
+' fill='#FF0000'/>
+<path class='atom-7' d='M 207.9 126.5
+Q 207.9 123.8, 209.2 122.2
+Q 210.6 120.7, 213.1 120.7
+Q 215.6 120.7, 216.9 122.2
+Q 218.3 123.8, 218.3 126.5
+Q 218.3 129.2, 216.9 130.8
+Q 215.6 132.3, 213.1 132.3
+Q 210.6 132.3, 209.2 130.8
+Q 207.9 129.2, 207.9 126.5
+M 213.1 131.1
+Q 214.8 131.1, 215.7 129.9
+Q 216.7 128.7, 216.7 126.5
+Q 216.7 124.3, 215.7 123.1
+Q 214.8 122.0, 213.1 122.0
+Q 211.4 122.0, 210.4 123.1
+Q 209.5 124.2, 209.5 126.5
+Q 209.5 128.8, 210.4 129.9
+Q 211.4 131.1, 213.1 131.1
+' fill='#FF0000'/>
+<path class='atom-7' d='M 220.0 120.8
+L 221.6 120.8
+L 221.6 125.7
+L 227.3 125.7
+L 227.3 120.8
+L 228.9 120.8
+L 228.9 132.2
+L 227.3 132.2
+L 227.3 126.9
+L 221.6 126.9
+L 221.6 132.2
+L 220.0 132.2
+L 220.0 120.8
+' fill='#FF0000'/>
+<path class='atom-9' d='M 163.1 30.8
+Q 163.1 28.1, 164.4 26.6
+Q 165.7 25.1, 168.3 25.1
+Q 170.8 25.1, 172.1 26.6
+Q 173.4 28.1, 173.4 30.8
+Q 173.4 33.6, 172.1 35.1
+Q 170.7 36.7, 168.3 36.7
+Q 165.8 36.7, 164.4 35.1
+Q 163.1 33.6, 163.1 30.8
+M 168.3 35.4
+Q 170.0 35.4, 170.9 34.3
+Q 171.8 33.1, 171.8 30.8
+Q 171.8 28.6, 170.9 27.5
+Q 170.0 26.4, 168.3 26.4
+Q 166.5 26.4, 165.6 27.5
+Q 164.7 28.6, 164.7 30.8
+Q 164.7 33.1, 165.6 34.3
+Q 166.5 35.4, 168.3 35.4
+' fill='#FF0000'/>
+<path class='atom-9' d='M 175.2 25.2
+L 176.7 25.2
+L 176.7 30.0
+L 182.5 30.0
+L 182.5 25.2
+L 184.1 25.2
+L 184.1 36.5
+L 182.5 36.5
+L 182.5 31.3
+L 176.7 31.3
+L 176.7 36.5
+L 175.2 36.5
+L 175.2 25.2
+' fill='#FF0000'/>
+<path class='atom-11' d='M 99.7 75.0
+Q 99.7 72.3, 101.0 70.8
+Q 102.4 69.3, 104.9 69.3
+Q 107.4 69.3, 108.7 70.8
+Q 110.1 72.3, 110.1 75.0
+Q 110.1 77.8, 108.7 79.3
+Q 107.4 80.9, 104.9 80.9
+Q 102.4 80.9, 101.0 79.3
+Q 99.7 77.8, 99.7 75.0
+M 104.9 79.6
+Q 106.6 79.6, 107.5 78.5
+Q 108.5 77.3, 108.5 75.0
+Q 108.5 72.8, 107.5 71.7
+Q 106.6 70.6, 104.9 70.6
+Q 103.2 70.6, 102.2 71.7
+Q 101.3 72.8, 101.3 75.0
+Q 101.3 77.3, 102.2 78.5
+Q 103.2 79.6, 104.9 79.6
+' fill='#FF0000'/>
+<path class='note' d='M 347.8 88.4
+Q 346.8 88.4, 346.3 87.7
+Q 345.8 86.9, 345.8 85.5
+Q 345.8 84.2, 346.3 83.4
+Q 346.8 82.6, 347.8 82.6
+Q 348.9 82.6, 349.4 83.4
+Q 349.9 84.2, 349.9 85.5
+Q 349.9 86.9, 349.4 87.7
+Q 348.9 88.4, 347.8 88.4
+M 347.8 87.8
+Q 348.5 87.8, 348.8 87.2
+Q 349.1 86.6, 349.1 85.5
+Q 349.1 84.4, 348.8 83.9
+Q 348.5 83.3, 347.8 83.3
+Q 347.2 83.3, 346.9 83.9
+Q 346.6 84.4, 346.6 85.5
+Q 346.6 86.6, 346.9 87.2
+Q 347.2 87.8, 347.8 87.8
+' fill='#000000'/>
+<path class='note' d='M 307.9 51.6
+L 309.1 51.6
+L 309.1 47.4
+L 307.8 47.8
+L 307.6 47.3
+L 309.3 46.6
+L 309.9 46.7
+L 309.9 51.6
+L 311.0 51.6
+L 311.0 52.3
+L 307.9 52.3
+L 307.9 51.6
+' fill='#000000'/>
+<path class='note' d='M 282.7 83.5
+Q 282.9 83.0, 283.4 82.7
+Q 283.9 82.4, 284.6 82.4
+Q 285.5 82.4, 285.9 82.8
+Q 286.4 83.3, 286.4 84.1
+Q 286.4 84.9, 285.8 85.7
+Q 285.2 86.5, 283.9 87.4
+L 286.5 87.4
+L 286.5 88.1
+L 282.7 88.1
+L 282.7 87.5
+Q 283.8 86.8, 284.4 86.2
+Q 285.0 85.7, 285.3 85.2
+Q 285.6 84.7, 285.6 84.1
+Q 285.6 83.6, 285.3 83.3
+Q 285.1 83.0, 284.6 83.0
+Q 284.1 83.0, 283.8 83.2
+Q 283.5 83.4, 283.3 83.8
+L 282.7 83.5
+' fill='#000000'/>
+<path class='note' d='M 287.2 87.3
+L 288.0 87.3
+L 288.0 87.9
+L 287.9 89.0
+L 287.6 89.0
+L 287.6 88.1
+L 287.2 88.1
+L 287.2 87.3
+' fill='#000000'/>
+<path class='note' d='M 288.8 85.8
+Q 288.8 84.6, 289.1 83.7
+Q 289.4 82.8, 290.1 81.8
+L 290.5 82.0
+Q 290.0 83.0, 289.8 83.9
+Q 289.5 84.7, 289.5 85.8
+Q 289.5 86.9, 289.8 87.7
+Q 290.0 88.6, 290.5 89.6
+L 290.1 89.8
+Q 289.4 88.8, 289.1 87.9
+Q 288.8 87.0, 288.8 85.8
+' fill='#000000'/>
+<path class='note' d='M 291.2 87.2
+Q 291.2 87.2, 291.5 87.3
+Q 291.8 87.4, 292.1 87.5
+Q 292.4 87.6, 292.6 87.6
+Q 293.2 87.6, 293.5 87.3
+Q 293.8 87.1, 293.8 86.6
+Q 293.8 86.3, 293.6 86.1
+Q 293.5 85.9, 293.3 85.8
+Q 293.0 85.7, 292.6 85.6
+Q 292.1 85.4, 291.8 85.3
+Q 291.5 85.1, 291.3 84.8
+Q 291.1 84.5, 291.1 84.0
+Q 291.1 83.3, 291.6 82.9
+Q 292.1 82.4, 293.0 82.4
+Q 293.7 82.4, 294.4 82.7
+L 294.2 83.4
+Q 293.5 83.1, 293.0 83.1
+Q 292.5 83.1, 292.2 83.3
+Q 291.9 83.5, 291.9 83.9
+Q 291.9 84.2, 292.0 84.4
+Q 292.2 84.6, 292.4 84.7
+Q 292.7 84.8, 293.0 84.9
+Q 293.5 85.1, 293.9 85.2
+Q 294.2 85.4, 294.4 85.7
+Q 294.6 86.1, 294.6 86.6
+Q 294.6 87.4, 294.1 87.8
+Q 293.5 88.2, 292.7 88.2
+Q 292.2 88.2, 291.8 88.1
+Q 291.4 88.0, 291.0 87.8
+L 291.2 87.2
+' fill='#000000'/>
+<path class='note' d='M 297.0 85.8
+Q 297.0 87.0, 296.6 87.9
+Q 296.3 88.8, 295.7 89.8
+L 295.2 89.6
+Q 295.7 88.6, 296.0 87.7
+Q 296.2 86.9, 296.2 85.8
+Q 296.2 84.7, 296.0 83.9
+Q 295.7 83.0, 295.2 82.0
+L 295.7 81.8
+Q 296.3 82.8, 296.6 83.7
+Q 297.0 84.6, 297.0 85.8
+' fill='#000000'/>
+<path class='note' d='M 284.1 132.3
+Q 284.6 132.5, 284.9 132.8
+Q 285.1 133.2, 285.1 133.7
+Q 285.1 134.2, 284.9 134.6
+Q 284.7 135.0, 284.2 135.2
+Q 283.8 135.4, 283.2 135.4
+Q 282.6 135.4, 282.1 135.2
+Q 281.7 135.0, 281.3 134.5
+L 281.8 134.1
+Q 282.1 134.4, 282.4 134.6
+Q 282.7 134.7, 283.2 134.7
+Q 283.7 134.7, 284.0 134.5
+Q 284.3 134.2, 284.3 133.7
+Q 284.3 133.2, 284.0 132.9
+Q 283.7 132.6, 283.0 132.6
+L 282.6 132.6
+L 282.6 132.1
+L 283.0 132.1
+Q 283.6 132.1, 283.9 131.8
+Q 284.2 131.5, 284.2 131.0
+Q 284.2 130.7, 284.0 130.4
+Q 283.7 130.2, 283.2 130.2
+Q 282.7 130.2, 282.5 130.4
+Q 282.2 130.6, 281.9 131.0
+L 281.4 130.7
+Q 281.6 130.2, 282.1 129.9
+Q 282.5 129.6, 283.2 129.6
+Q 284.1 129.6, 284.5 130.0
+Q 285.0 130.4, 285.0 131.0
+Q 285.0 131.5, 284.8 131.8
+Q 284.5 132.1, 284.1 132.3
+' fill='#000000'/>
+<path class='note' d='M 248.3 56.7
+L 248.9 56.7
+L 248.9 57.3
+L 248.3 57.3
+L 248.3 58.6
+L 247.5 58.6
+L 247.5 57.3
+L 244.6 57.3
+L 244.6 56.8
+L 247.1 53.0
+L 248.3 53.0
+L 248.3 56.7
+M 245.5 56.7
+L 247.5 56.7
+L 247.5 53.5
+L 245.5 56.7
+' fill='#000000'/>
+<path class='note' d='M 249.6 57.8
+L 250.4 57.8
+L 250.4 58.4
+L 250.2 59.5
+L 249.9 59.5
+L 249.9 58.6
+L 249.6 58.6
+L 249.6 57.8
+' fill='#000000'/>
+<path class='note' d='M 251.1 56.3
+Q 251.1 55.2, 251.5 54.2
+Q 251.8 53.3, 252.5 52.3
+L 252.9 52.6
+Q 252.4 53.5, 252.1 54.4
+Q 251.9 55.2, 251.9 56.3
+Q 251.9 57.4, 252.1 58.3
+Q 252.4 59.1, 252.9 60.1
+L 252.5 60.4
+Q 251.8 59.4, 251.5 58.4
+Q 251.1 57.5, 251.1 56.3
+' fill='#000000'/>
+<path class='note' d='M 253.6 57.7
+Q 253.6 57.8, 253.9 57.9
+Q 254.2 58.0, 254.4 58.0
+Q 254.7 58.1, 255.0 58.1
+Q 255.6 58.1, 255.9 57.9
+Q 256.2 57.6, 256.2 57.1
+Q 256.2 56.8, 256.0 56.6
+Q 255.9 56.4, 255.6 56.3
+Q 255.4 56.2, 255.0 56.1
+Q 254.5 56.0, 254.2 55.8
+Q 253.9 55.7, 253.7 55.4
+Q 253.5 55.1, 253.5 54.6
+Q 253.5 53.8, 253.9 53.4
+Q 254.4 53.0, 255.4 53.0
+Q 256.0 53.0, 256.8 53.3
+L 256.6 53.9
+Q 255.9 53.6, 255.4 53.6
+Q 254.9 53.6, 254.6 53.8
+Q 254.3 54.1, 254.3 54.5
+Q 254.3 54.8, 254.4 54.9
+Q 254.6 55.1, 254.8 55.2
+Q 255.0 55.3, 255.4 55.5
+Q 255.9 55.6, 256.2 55.8
+Q 256.5 55.9, 256.7 56.3
+Q 257.0 56.6, 257.0 57.1
+Q 257.0 57.9, 256.4 58.3
+Q 255.9 58.8, 255.1 58.8
+Q 254.5 58.8, 254.2 58.6
+Q 253.8 58.5, 253.3 58.4
+L 253.6 57.7
+' fill='#000000'/>
+<path class='note' d='M 259.3 56.3
+Q 259.3 57.5, 259.0 58.4
+Q 258.7 59.4, 258.0 60.4
+L 257.6 60.1
+Q 258.1 59.1, 258.4 58.3
+Q 258.6 57.4, 258.6 56.3
+Q 258.6 55.2, 258.4 54.4
+Q 258.1 53.5, 257.6 52.6
+L 258.0 52.3
+Q 258.7 53.3, 259.0 54.2
+Q 259.3 55.2, 259.3 56.3
+' fill='#000000'/>
+<path class='note' d='M 235.8 9.6
+Q 236.3 9.6, 236.7 9.8
+Q 237.1 10.0, 237.3 10.4
+Q 237.5 10.8, 237.5 11.4
+Q 237.5 11.9, 237.3 12.4
+Q 237.0 12.8, 236.5 13.0
+Q 236.1 13.2, 235.5 13.2
+Q 235.0 13.2, 234.5 13.0
+Q 234.0 12.8, 233.7 12.5
+L 234.2 12.0
+Q 234.5 12.3, 234.8 12.4
+Q 235.2 12.6, 235.6 12.6
+Q 236.1 12.6, 236.4 12.3
+Q 236.7 11.9, 236.7 11.4
+Q 236.7 10.8, 236.4 10.5
+Q 236.1 10.2, 235.5 10.2
+Q 235.0 10.2, 234.5 10.4
+L 234.0 10.2
+L 234.3 7.5
+L 237.2 7.5
+L 237.1 8.1
+L 234.9 8.1
+L 234.8 9.8
+Q 235.3 9.6, 235.8 9.6
+' fill='#000000'/>
+<path class='note' d='M 216.1 91.8
+Q 216.6 91.8, 217.0 92.0
+Q 217.4 92.2, 217.6 92.6
+Q 217.8 93.0, 217.8 93.5
+Q 217.8 94.0, 217.6 94.5
+Q 217.3 94.9, 216.9 95.1
+Q 216.5 95.4, 215.9 95.4
+Q 214.9 95.4, 214.4 94.7
+Q 213.9 94.0, 213.9 92.6
+Q 213.9 91.1, 214.5 90.4
+Q 215.1 89.6, 216.4 89.6
+Q 216.7 89.6, 217.0 89.7
+Q 217.3 89.8, 217.6 89.9
+L 217.3 90.5
+Q 216.9 90.2, 216.4 90.2
+Q 215.6 90.2, 215.2 90.7
+Q 214.7 91.3, 214.7 92.3
+Q 215.0 92.1, 215.3 91.9
+Q 215.7 91.8, 216.1 91.8
+M 215.9 94.7
+Q 216.2 94.7, 216.5 94.6
+Q 216.7 94.4, 216.9 94.1
+Q 217.0 93.8, 217.0 93.5
+Q 217.0 93.0, 216.7 92.7
+Q 216.5 92.4, 216.0 92.4
+Q 215.6 92.4, 215.3 92.6
+Q 214.9 92.7, 214.7 92.9
+Q 214.7 93.9, 215.0 94.3
+Q 215.3 94.7, 215.9 94.7
+' fill='#000000'/>
+<path class='note' d='M 218.5 94.5
+L 219.3 94.5
+L 219.3 95.1
+L 219.1 96.3
+L 218.9 96.3
+L 218.9 95.3
+L 218.5 95.3
+L 218.5 94.5
+' fill='#000000'/>
+<path class='note' d='M 220.0 93.0
+Q 220.0 91.9, 220.4 90.9
+Q 220.7 90.0, 221.4 89.0
+L 221.8 89.3
+Q 221.3 90.2, 221.0 91.1
+Q 220.8 91.9, 220.8 93.0
+Q 220.8 94.1, 221.0 95.0
+Q 221.3 95.8, 221.8 96.8
+L 221.4 97.1
+Q 220.7 96.1, 220.4 95.1
+Q 220.0 94.2, 220.0 93.0
+' fill='#000000'/>
+<path class='note' d='M 222.5 94.4
+Q 222.5 94.5, 222.8 94.6
+Q 223.0 94.7, 223.3 94.7
+Q 223.6 94.8, 223.9 94.8
+Q 224.5 94.8, 224.8 94.6
+Q 225.1 94.3, 225.1 93.8
+Q 225.1 93.5, 224.9 93.3
+Q 224.8 93.1, 224.5 93.0
+Q 224.3 92.9, 223.9 92.8
+Q 223.4 92.7, 223.1 92.5
+Q 222.8 92.4, 222.6 92.1
+Q 222.4 91.8, 222.4 91.3
+Q 222.4 90.5, 222.8 90.1
+Q 223.3 89.7, 224.3 89.7
+Q 224.9 89.7, 225.7 90.0
+L 225.5 90.6
+Q 224.8 90.3, 224.3 90.3
+Q 223.8 90.3, 223.5 90.5
+Q 223.1 90.8, 223.2 91.2
+Q 223.2 91.5, 223.3 91.7
+Q 223.5 91.8, 223.7 91.9
+Q 223.9 92.0, 224.3 92.2
+Q 224.8 92.3, 225.1 92.5
+Q 225.4 92.6, 225.6 93.0
+Q 225.9 93.3, 225.9 93.8
+Q 225.9 94.6, 225.3 95.0
+Q 224.8 95.5, 223.9 95.5
+Q 223.4 95.5, 223.1 95.3
+Q 222.7 95.2, 222.2 95.1
+L 222.5 94.4
+' fill='#000000'/>
+<path class='note' d='M 228.2 93.0
+Q 228.2 94.2, 227.9 95.1
+Q 227.6 96.1, 226.9 97.1
+L 226.5 96.8
+Q 227.0 95.8, 227.3 95.0
+Q 227.5 94.1, 227.5 93.0
+Q 227.5 91.9, 227.3 91.1
+Q 227.0 90.2, 226.5 89.3
+L 226.9 89.0
+Q 227.6 90.0, 227.9 90.9
+Q 228.2 91.9, 228.2 93.0
+' fill='#000000'/>
+<path class='note' d='M 215.6 137.5
+L 212.6 137.5
+L 212.6 136.8
+L 216.4 136.8
+L 216.4 137.4
+L 214.1 142.5
+L 213.3 142.5
+L 215.6 137.5
+' fill='#000000'/>
+<path class='note' d='M 178.8 62.8
+Q 179.4 63.1, 179.7 63.4
+Q 180.0 63.7, 180.0 64.3
+Q 180.0 64.8, 179.7 65.1
+Q 179.5 65.5, 179.0 65.7
+Q 178.6 65.9, 178.0 65.9
+Q 177.0 65.9, 176.5 65.5
+Q 176.0 65.0, 176.0 64.3
+Q 176.0 63.8, 176.2 63.5
+Q 176.4 63.1, 176.9 62.9
+Q 176.6 62.7, 176.4 62.4
+Q 176.2 62.0, 176.2 61.6
+Q 176.2 60.9, 176.6 60.5
+Q 177.1 60.1, 178.0 60.1
+Q 178.8 60.1, 179.3 60.5
+Q 179.7 60.9, 179.7 61.6
+Q 179.7 62.0, 179.5 62.3
+Q 179.3 62.6, 178.8 62.8
+M 178.0 60.7
+Q 177.5 60.7, 177.2 60.9
+Q 177.0 61.2, 177.0 61.6
+Q 177.0 61.9, 177.1 62.1
+Q 177.3 62.3, 177.6 62.4
+Q 177.8 62.5, 178.3 62.6
+Q 178.6 62.4, 178.8 62.1
+Q 178.9 61.9, 178.9 61.6
+Q 178.9 61.2, 178.7 60.9
+Q 178.4 60.7, 178.0 60.7
+M 178.0 65.3
+Q 178.5 65.3, 178.8 65.0
+Q 179.2 64.8, 179.2 64.3
+Q 179.2 64.0, 179.0 63.8
+Q 178.8 63.6, 178.6 63.5
+Q 178.3 63.4, 177.9 63.2
+L 177.5 63.1
+Q 177.1 63.3, 176.9 63.6
+Q 176.8 63.9, 176.8 64.3
+Q 176.8 64.8, 177.1 65.0
+Q 177.4 65.3, 178.0 65.3
+' fill='#000000'/>
+<path class='note' d='M 180.7 65.0
+L 181.5 65.0
+L 181.5 65.7
+L 181.3 66.8
+L 181.1 66.8
+L 181.1 65.8
+L 180.7 65.8
+L 180.7 65.0
+' fill='#000000'/>
+<path class='note' d='M 182.2 63.6
+Q 182.2 62.4, 182.6 61.5
+Q 182.9 60.5, 183.6 59.5
+L 184.0 59.8
+Q 183.5 60.8, 183.2 61.6
+Q 183.0 62.5, 183.0 63.6
+Q 183.0 64.6, 183.2 65.5
+Q 183.5 66.3, 184.0 67.3
+L 183.6 67.6
+Q 182.9 66.6, 182.6 65.7
+Q 182.2 64.7, 182.2 63.6
+' fill='#000000'/>
+<path class='note' d='M 184.7 65.0
+Q 184.7 65.0, 185.0 65.1
+Q 185.2 65.2, 185.5 65.3
+Q 185.8 65.3, 186.1 65.3
+Q 186.7 65.3, 187.0 65.1
+Q 187.3 64.8, 187.3 64.4
+Q 187.3 64.1, 187.1 63.9
+Q 187.0 63.7, 186.7 63.6
+Q 186.5 63.5, 186.1 63.3
+Q 185.6 63.2, 185.3 63.1
+Q 185.0 62.9, 184.8 62.6
+Q 184.6 62.3, 184.6 61.8
+Q 184.6 61.1, 185.0 60.6
+Q 185.5 60.2, 186.5 60.2
+Q 187.1 60.2, 187.9 60.5
+L 187.7 61.1
+Q 187.0 60.8, 186.5 60.8
+Q 186.0 60.8, 185.7 61.1
+Q 185.4 61.3, 185.4 61.7
+Q 185.4 62.0, 185.5 62.2
+Q 185.7 62.4, 185.9 62.5
+Q 186.1 62.6, 186.5 62.7
+Q 187.0 62.9, 187.3 63.0
+Q 187.6 63.2, 187.8 63.5
+Q 188.1 63.8, 188.1 64.4
+Q 188.1 65.2, 187.5 65.6
+Q 187.0 66.0, 186.2 66.0
+Q 185.6 66.0, 185.3 65.9
+Q 184.9 65.8, 184.4 65.6
+L 184.7 65.0
+' fill='#000000'/>
+<path class='note' d='M 190.4 63.6
+Q 190.4 64.7, 190.1 65.7
+Q 189.8 66.6, 189.1 67.6
+L 188.7 67.3
+Q 189.2 66.3, 189.5 65.5
+Q 189.7 64.6, 189.7 63.6
+Q 189.7 62.5, 189.5 61.6
+Q 189.2 60.8, 188.7 59.8
+L 189.1 59.5
+Q 189.8 60.5, 190.1 61.5
+Q 190.4 62.4, 190.4 63.6
+' fill='#000000'/>
+<path class='note' d='M 166.8 14.7
+Q 167.8 14.7, 168.3 15.4
+Q 168.8 16.1, 168.8 17.4
+Q 168.8 18.9, 168.2 19.7
+Q 167.6 20.5, 166.4 20.5
+Q 166.0 20.5, 165.7 20.4
+Q 165.4 20.3, 165.1 20.2
+L 165.4 19.6
+Q 165.9 19.8, 166.4 19.8
+Q 167.2 19.8, 167.6 19.3
+Q 168.0 18.8, 168.0 17.8
+Q 167.7 18.0, 167.4 18.2
+Q 167.0 18.3, 166.6 18.3
+Q 166.1 18.3, 165.7 18.1
+Q 165.3 17.9, 165.1 17.5
+Q 164.9 17.1, 164.9 16.6
+Q 164.9 16.0, 165.1 15.6
+Q 165.4 15.2, 165.8 14.9
+Q 166.3 14.7, 166.8 14.7
+M 165.7 16.6
+Q 165.7 17.1, 166.0 17.4
+Q 166.3 17.7, 166.8 17.7
+Q 167.1 17.7, 167.4 17.5
+Q 167.8 17.4, 168.0 17.1
+Q 168.0 16.2, 167.7 15.8
+Q 167.4 15.4, 166.8 15.4
+Q 166.5 15.4, 166.2 15.5
+Q 166.0 15.7, 165.8 16.0
+Q 165.7 16.2, 165.7 16.6
+' fill='#000000'/>
+<path class='note' d='M 137.0 102.8
+L 138.3 102.8
+L 138.3 98.6
+L 136.9 99.0
+L 136.7 98.5
+L 138.4 97.8
+L 139.0 97.9
+L 139.0 102.8
+L 140.1 102.8
+L 140.1 103.4
+L 137.0 103.4
+L 137.0 102.8
+' fill='#000000'/>
+<path class='note' d='M 142.9 103.5
+Q 141.9 103.5, 141.3 102.7
+Q 140.8 102.0, 140.8 100.6
+Q 140.8 99.2, 141.3 98.5
+Q 141.8 97.7, 142.9 97.7
+Q 143.9 97.7, 144.4 98.5
+Q 145.0 99.2, 145.0 100.6
+Q 145.0 102.0, 144.4 102.7
+Q 143.9 103.5, 142.9 103.5
+M 142.9 102.9
+Q 143.5 102.9, 143.8 102.3
+Q 144.2 101.7, 144.2 100.6
+Q 144.2 99.5, 143.8 98.9
+Q 143.5 98.4, 142.9 98.4
+Q 142.3 98.4, 142.0 98.9
+Q 141.6 99.5, 141.6 100.6
+Q 141.6 101.7, 142.0 102.3
+Q 142.3 102.9, 142.9 102.9
+' fill='#000000'/>
+<path class='note' d='M 88.1 74.5
+L 89.3 74.5
+L 89.3 70.3
+L 87.9 70.7
+L 87.8 70.3
+L 89.5 69.5
+L 90.1 69.6
+L 90.1 74.5
+L 91.2 74.5
+L 91.2 75.2
+L 88.1 75.2
+L 88.1 74.5
+' fill='#000000'/>
+<path class='note' d='M 92.2 74.5
+L 93.4 74.5
+L 93.4 70.3
+L 92.0 70.7
+L 91.8 70.3
+L 93.6 69.5
+L 94.1 69.6
+L 94.1 74.5
+L 95.3 74.5
+L 95.3 75.2
+L 92.2 75.2
+L 92.2 74.5
+' fill='#000000'/>
+</svg>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem.EnumerateStereoisomers</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnumerateStereoisomers</span><span class="p">,</span> <span class="n">StereoEnumerationOptions</span>
+
+<span class="c1"># Define the open-chain SMILES for D-glucose</span>
+<span class="n">open_chain_smiles</span> <span class="o">=</span> <span class="s1">&#39;OC[C@H](O)[C@H](O)[C@H](O)[C@H](O)C=O&#39;</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">open_chain_smiles</span><span class="p">)</span>
+
+<span class="c1"># Set up stereoisomer enumeration options</span>
+<span class="n">opts</span> <span class="o">=</span> <span class="n">StereoEnumerationOptions</span><span class="p">(</span><span class="n">onlyUnassigned</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Generate stereoisomers</span>
+<span class="n">stereoisomers</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">EnumerateStereoisomers</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">opts</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of open-chain stereoisomers generated: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">stereoisomers</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of open-chain stereoisomers generated: 16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem.EnumerateStereoisomers</span><span class="w"> </span><span class="kn">import</span> <span class="n">EnumerateStereoisomers</span><span class="p">,</span> <span class="n">StereoEnumerationOptions</span>
+
+<span class="c1"># Define the open-chain SMILES for D-glucose</span>
+<span class="n">open_chain_smiles</span> <span class="o">=</span> <span class="s1">&#39;OC[C@H](O)[C@H](O)[C@H](O)[C@H](O)C=O&#39;</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">open_chain_smiles</span><span class="p">)</span>
+
+<span class="c1"># Set up stereoisomer enumeration options</span>
+<span class="n">opts</span> <span class="o">=</span> <span class="n">StereoEnumerationOptions</span><span class="p">(</span><span class="n">onlyUnassigned</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Generate stereoisomers</span>
+<span class="n">stereoisomers</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">EnumerateStereoisomers</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">opts</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of open-chain stereoisomers generated: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">stereoisomers</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of open-chain stereoisomers generated: 16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Draw</span>
+
+<span class="c1"># Generate images with SMILES as legends</span>
+<span class="n">images</span> <span class="o">=</span> <span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">isomericSmiles</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">stereoisomers</span><span class="p">]</span>
+
+<span class="c1"># Create a grid image</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Draw</span><span class="o">.</span><span class="n">MolsToGridImage</span><span class="p">(</span><span class="n">stereoisomers</span><span class="p">,</span> <span class="n">molsPerRow</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">subImgSize</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="n">legends</span><span class="o">=</span><span class="n">images</span><span class="p">)</span>
+
+<span class="c1"># Display the image</span>
+<span class="n">img</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/7bca8f081b51d44bd92f4b9b4df060654eabd0e22883ceb08b3f2d54d41f8b1b.svg" src="../../_images/7bca8f081b51d44bd92f4b9b4df060654eabd0e22883ceb08b3f2d54d41f8b1b.svg" />
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="descriptors-rdkit-chem-descriptors">
+<h1>5. Descriptors (rdkit.Chem.Descriptors)<a class="headerlink" href="#descriptors-rdkit-chem-descriptors" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><strong>Physicochemical Properties:</strong> Basic molecular properties like size, lipophilicity, and polarity (e.g. molecular weight, LogP, polar surface area). These influence solubility, permeability, and drug-likeness.</p></li>
+<li><p><strong>Topological Indices:</strong> Graph-theoretic indices that quantify molecular shape and connectivity (e.g. chi connectivity indices, kappa shape indices, Balaban’s J index). They measure structural complexity and are useful in QSAR modeling.</p></li>
+<li><p><strong>Structural Features:</strong> Simple counts of structural moieties (e.g. ring counts, rotatable bond count, functional group counts). These help profile molecular flexibility, aromaticity, and the presence of particular substructures (used in filters like Lipinski’s Rule of 5).</p></li>
+<li><p><strong>Electronic Properties:</strong> Descriptors capturing electronic distribution (e.g. partial charge extremes, EState indices). They reflect how electron-rich or electron-poor parts of a molecule are, which can affect reactivity and interactions.</p></li>
+<li><p><strong>Fragment Counts:</strong> Indicators for specific functional groups or substructures (usually prefixed with <code class="docutils literal notranslate"><span class="pre">fr_</span></code> in RDKit). These count occurrences of motifs like benzene rings, halogens, nitro groups, etc., often used as structural alerts or to calculate fragment-based scores.</p></li>
+<li><p><strong>Drug-Likeness Scores:</strong> Composite indices that combine multiple descriptors into a single score evaluating how “drug-like” a molecule is (e.g. QED score). These aid in prioritizing compounds likely to have favorable pharmacokinetic and safety profiles.</p></li>
+</ul>
+<section id="physicochemical-properties">
+<h2>Physicochemical Properties<a class="headerlink" href="#physicochemical-properties" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Descriptor Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>MolWt</strong></p></td>
+<td><p>Molecular weight (average mass of the molecule)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>ExactMolWt</strong></p></td>
+<td><p>Exact molecular weight (monoisotopic mass of the molecule)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>MolLogP</strong></p></td>
+<td><p>Wildman–Crippen estimated LogP (octanol–water partition coefficient)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>MolMR</strong></p></td>
+<td><p>Wildman–Crippen molar refractivity (volume-dependent refractivity)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>TPSA</strong></p></td>
+<td><p>Topological polar surface area (sum of fragment-based polar surface areas)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>LabuteASA</strong></p></td>
+<td><p>Labute’s approximate solvent-accessible surface area (MOE ASA)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="topological-indices">
+<h2>Topological Indices<a class="headerlink" href="#topological-indices" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Descriptor Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Chi0, Chi1</strong> (Chi Indices)</p></td>
+<td><p>Molecular connectivity indices of order 0 and 1 (higher orders Chi2–Chi4 also available, including valence (v) and normalized (n) forms) (<a class="reference external" href="https://www.rdkit.org/docs/GettingStartedInPython.html#:~:text=Chi0%2C%20Chi1">Getting Started with the RDKit in Python — The RDKit 2025.03.1 documentation</a>). These indices are derived from molecular graph connectivity and help describe molecular topology.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Kappa1, Kappa2, Kappa3</strong> (Kappa Indices)</p></td>
+<td><p>Kier &amp; Hall molecular shape indices of first, second, and third order (<a class="reference external" href="https://www.rdkit.org/docs/GettingStartedInPython.html#:~:text=Kappa1%20">Getting Started with the RDKit in Python — The RDKit 2025.03.1 documentation</a>). They quantify shape by comparing the molecule’s graph to idealized linear or ring structures (i.e. capturing branching and complexity).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>BalabanJ</strong></p></td>
+<td><p>Balaban’s <em>J</em> index (distance connectivity index) – a topological index accounting for distances in the molecular graph (<a class="reference external" href="https://datagrok.ai/help/datagrok/solutions/domains/chem/descriptors#:~:text=BalabanJ%20Balaban%27s%20J%20value%20BertzCT,422%2C%20%281991">Molecular descriptors Datagrok</a>). It is used as an overall metric of molecular connectivity and complexity.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>BertzCT</strong></p></td>
+<td><p>Bertz’s complexity index – a topological index quantifying molecular complexity (<a class="reference external" href="https://www.rdkit.org/docs/source/rdkit.Chem.GraphDescriptors.html#:~:text=A%20topological%20index%20meant%20to,quantify%20%E2%80%9Ccomplexity%E2%80%9D%20of%20molecules">rdkit.Chem.GraphDescriptors module — The RDKit 2025.03.1 documentation</a>) (sums contributions from bonding patterns and heteroatom distribution (<a class="reference external" href="https://www.rdkit.org/docs/source/rdkit.Chem.GraphDescriptors.html#:~:text=A%20topological%20index%20meant%20to,quantify%20%E2%80%9Ccomplexity%E2%80%9D%20of%20molecules">rdkit.Chem.GraphDescriptors module — The RDKit 2025.03.1 documentation</a>)).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Ipc</strong></p></td>
+<td><p>Information content index – Shannon information content of the adjacency matrix’s characteristic polynomial coefficients (measures structural information content) (<a class="reference external" href="https://www.rdkit.org/docs/source/rdkit.Chem.GraphDescriptors.html#:~:text=rdkit">rdkit.Chem.GraphDescriptors module — The RDKit 2025.03.1 documentation</a>). RDKit provides both total (Ipc) and average (AvgIpc) variants of this descriptor.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>WienerIndex</strong></p></td>
+<td><p>Wiener index – the sum of all shortest-path distances between pairs of atoms in the molecule (a classic topological index indicating overall connectivity).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="structural-features">
+<h2>Structural Features<a class="headerlink" href="#structural-features" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Descriptor Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>HeavyAtomCount</strong></p></td>
+<td><p>Number of heavy atoms (non-hydrogen atoms) in the molecule ([Molecular descriptors</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>NumHeteroatoms</strong></p></td>
+<td><p>Number of heteroatoms (atoms that are not carbon or hydrogen) (<a class="reference external" href="https://www.rdkit.org/docs/source/rdkit.Chem.Lipinski.html#:~:text=rdkit">rdkit.Chem.Lipinski module — The RDKit 2025.03.1 documentation</a>).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>RingCount</strong></p></td>
+<td><p>Total number of rings in the molecule (SSSR count). <em>Note:</em> RDKit also provides specific ring counts like NumAromaticRings, NumSaturatedRings, NumHeterocycles, etc. for more detailed ring analysis.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>NumRotatableBonds</strong></p></td>
+<td><p>Number of rotatable bonds (single bonds that can rotate freely, excluding trivial rotations) (<a class="reference external" href="https://www.rdkit.org/docs/source/rdkit.Chem.Lipinski.html#:~:text=rdkit">rdkit.Chem.Lipinski module — The RDKit 2025.03.1 documentation</a>).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>FractionCSP3</strong></p></td>
+<td><p>Fraction of carbon atoms that are sp³-hybridized (a ratio indicating saturated carbon content) .</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>NumHBA / NumHBD</strong> (NumHAcceptors / NumHDonors)</p></td>
+<td><p>Number of hydrogen bond acceptors and donors, respectively (<a class="reference external" href="https://www.rdkit.org/docs/source/rdkit.Chem.Lipinski.html#:~:text=rdkit">rdkit.Chem.Lipinski module — The RDKit 2025.03.1 documentation</a>). (Commonly used in Lipinski’s Rule of 5 for drug-likeness.)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="electronic-properties">
+<h2>Electronic Properties<a class="headerlink" href="#electronic-properties" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Descriptor Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>MaxPartialCharge / MinPartialCharge</strong></p></td>
+<td><p>Maximum and minimum partial atomic charge on any atom in the molecule (most positive and most negative partial charges). These are computed (e.g. via Gasteiger charges) to gauge charge distribution.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>MaxAbsPartialCharge / MinAbsPartialCharge</strong></p></td>
+<td><p>Maximum and minimum <em>absolute</em> partial charge on any atom  – i.e. the largest magnitude partial charges (positive or negative).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>MaxEStateIndex / MinEStateIndex</strong></p></td>
+<td><p>Maximum and minimum EState indices in the molecule – the highest and lowest <em>electrotopological state</em> values of any atom . EState indices integrate atom electronegativity with topological environment, indicating reactive centers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>MaxAbsEStateIndex / MinAbsEStateIndex</strong></p></td>
+<td><p>Maximum and minimum <em>absolute</em> EState index values in the molecule . These represent the extremal magnitudes of electrotopological state, regardless of sign.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="fragment-counts-functional-group-indicators">
+<h2>Fragment Counts (Functional Group Indicators)<a class="headerlink" href="#fragment-counts-functional-group-indicators" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Descriptor Name</p></th>
+<th class="head"><p>Description (counts of specific substructures in the molecule)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>fr_benzene</strong></p></td>
+<td><p>Number of benzene rings (aromatic C6 rings) (</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>fr_imidazole</strong></p></td>
+<td><p>Number of imidazole rings (five-membered aromatic rings with two nitrogens) (</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>fr_halogen</strong></p></td>
+<td><p>Number of halogen atoms present (F, Cl, Br, or I) .</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>fr_nitro</strong></p></td>
+<td><p>Number of nitro groups (<code class="docutils literal notranslate"><span class="pre">–NO₂</span></code>) (</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>fr_ether</strong></p></td>
+<td><p>Number of ether groups (oxygen atoms connecting two carbons, incl. phenoxy</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>fr_amide</strong></p></td>
+<td><p>Number of amide functional groups (–C(=O)NH–)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="drug-likeness-scores">
+<h2>Drug-Likeness Scores<a class="headerlink" href="#drug-likeness-scores" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Descriptor Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>qed</strong></p></td>
+<td><p>QED (Quantitative Estimate of Drug-likeness) – a unitless score from 0 to 1 assessing drug-likeness ([Molecular descriptors</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Summary:</strong> The above descriptors provide a quantitative profile of molecules. Physicochemical and electronic descriptors relate to ADME properties and reactivity, topological and structural descriptors capture 2D structure and complexity, fragment counts flag particular functional groups, and drug-likeness indices combine these factors to guide drug discovery decisions. Chemoinformaticians often use these in QSAR models, filtering libraries (e.g. Lipinski’s Rule of 5 uses MolWt, LogP, HBD, HBA, etc.), and comparing molecules during lead optimization (<a class="reference external" href="https://medium.com/&#64;ayushgharat234/decoding-molecular-weight-a-dive-into-molecular-descriptors-fce6cc3c82f6#:~:text=,potential%20harmful%20effects%20of%20chemicals">Decoding Molecular Weight: A Dive into Molecular Descriptors | by Ayush Gharat | Medium</a>). By organizing RDKit’s descriptor functions into categories, researchers can more easily select relevant descriptors for their specific needs in cheminformatics and drug design.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Descriptors</span>
+
+<span class="c1"># Access the list of descriptor name-function pairs</span>
+<span class="n">descriptor_list</span> <span class="o">=</span> <span class="n">Descriptors</span><span class="o">.</span><span class="n">_descList</span>
+
+<span class="c1"># Display the total number of descriptors</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total descriptors available: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">descriptor_list</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Print the first 10 descriptors as an example</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">func</span> <span class="ow">in</span> <span class="n">descriptor_list</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">func</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total descriptors available: 217
+
+MaxAbsEStateIndex: &lt;function MaxAbsEStateIndex at 0x7c31c941e560&gt;
+MaxEStateIndex: &lt;function MaxEStateIndex at 0x7c31c941e3b0&gt;
+MinAbsEStateIndex: &lt;function MinAbsEStateIndex at 0x7c31c941e5f0&gt;
+MinEStateIndex: &lt;function MinEStateIndex at 0x7c31c941e4d0&gt;
+qed: &lt;function qed at 0x7c31c96093f0&gt;
+SPS: &lt;function SPS at 0x7c31c9609870&gt;
+MolWt: &lt;function &lt;lambda&gt; at 0x7c31c9609ea0&gt;
+HeavyAtomMolWt: &lt;function HeavyAtomMolWt at 0x7c31c9609f30&gt;
+ExactMolWt: &lt;function &lt;lambda&gt; at 0x7c31c9609fc0&gt;
+NumValenceElectrons: &lt;function NumValenceElectrons at 0x7c31c960a050&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List all descriptor names</span>
+<span class="n">descriptor_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">Descriptors</span><span class="o">.</span><span class="n">_descList</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">descriptor_names</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">descriptor_names</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>217
+[&#39;MaxAbsEStateIndex&#39;, &#39;MaxEStateIndex&#39;, &#39;MinAbsEStateIndex&#39;, &#39;MinEStateIndex&#39;, &#39;qed&#39;, &#39;SPS&#39;, &#39;MolWt&#39;, &#39;HeavyAtomMolWt&#39;, &#39;ExactMolWt&#39;, &#39;NumValenceElectrons&#39;, &#39;NumRadicalElectrons&#39;, &#39;MaxPartialCharge&#39;, &#39;MinPartialCharge&#39;, &#39;MaxAbsPartialCharge&#39;, &#39;MinAbsPartialCharge&#39;, &#39;FpDensityMorgan1&#39;, &#39;FpDensityMorgan2&#39;, &#39;FpDensityMorgan3&#39;, &#39;BCUT2D_MWHI&#39;, &#39;BCUT2D_MWLOW&#39;, &#39;BCUT2D_CHGHI&#39;, &#39;BCUT2D_CHGLO&#39;, &#39;BCUT2D_LOGPHI&#39;, &#39;BCUT2D_LOGPLOW&#39;, &#39;BCUT2D_MRHI&#39;, &#39;BCUT2D_MRLOW&#39;, &#39;AvgIpc&#39;, &#39;BalabanJ&#39;, &#39;BertzCT&#39;, &#39;Chi0&#39;, &#39;Chi0n&#39;, &#39;Chi0v&#39;, &#39;Chi1&#39;, &#39;Chi1n&#39;, &#39;Chi1v&#39;, &#39;Chi2n&#39;, &#39;Chi2v&#39;, &#39;Chi3n&#39;, &#39;Chi3v&#39;, &#39;Chi4n&#39;, &#39;Chi4v&#39;, &#39;HallKierAlpha&#39;, &#39;Ipc&#39;, &#39;Kappa1&#39;, &#39;Kappa2&#39;, &#39;Kappa3&#39;, &#39;LabuteASA&#39;, &#39;PEOE_VSA1&#39;, &#39;PEOE_VSA10&#39;, &#39;PEOE_VSA11&#39;, &#39;PEOE_VSA12&#39;, &#39;PEOE_VSA13&#39;, &#39;PEOE_VSA14&#39;, &#39;PEOE_VSA2&#39;, &#39;PEOE_VSA3&#39;, &#39;PEOE_VSA4&#39;, &#39;PEOE_VSA5&#39;, &#39;PEOE_VSA6&#39;, &#39;PEOE_VSA7&#39;, &#39;PEOE_VSA8&#39;, &#39;PEOE_VSA9&#39;, &#39;SMR_VSA1&#39;, &#39;SMR_VSA10&#39;, &#39;SMR_VSA2&#39;, &#39;SMR_VSA3&#39;, &#39;SMR_VSA4&#39;, &#39;SMR_VSA5&#39;, &#39;SMR_VSA6&#39;, &#39;SMR_VSA7&#39;, &#39;SMR_VSA8&#39;, &#39;SMR_VSA9&#39;, &#39;SlogP_VSA1&#39;, &#39;SlogP_VSA10&#39;, &#39;SlogP_VSA11&#39;, &#39;SlogP_VSA12&#39;, &#39;SlogP_VSA2&#39;, &#39;SlogP_VSA3&#39;, &#39;SlogP_VSA4&#39;, &#39;SlogP_VSA5&#39;, &#39;SlogP_VSA6&#39;, &#39;SlogP_VSA7&#39;, &#39;SlogP_VSA8&#39;, &#39;SlogP_VSA9&#39;, &#39;TPSA&#39;, &#39;EState_VSA1&#39;, &#39;EState_VSA10&#39;, &#39;EState_VSA11&#39;, &#39;EState_VSA2&#39;, &#39;EState_VSA3&#39;, &#39;EState_VSA4&#39;, &#39;EState_VSA5&#39;, &#39;EState_VSA6&#39;, &#39;EState_VSA7&#39;, &#39;EState_VSA8&#39;, &#39;EState_VSA9&#39;, &#39;VSA_EState1&#39;, &#39;VSA_EState10&#39;, &#39;VSA_EState2&#39;, &#39;VSA_EState3&#39;, &#39;VSA_EState4&#39;, &#39;VSA_EState5&#39;, &#39;VSA_EState6&#39;, &#39;VSA_EState7&#39;, &#39;VSA_EState8&#39;, &#39;VSA_EState9&#39;, &#39;FractionCSP3&#39;, &#39;HeavyAtomCount&#39;, &#39;NHOHCount&#39;, &#39;NOCount&#39;, &#39;NumAliphaticCarbocycles&#39;, &#39;NumAliphaticHeterocycles&#39;, &#39;NumAliphaticRings&#39;, &#39;NumAmideBonds&#39;, &#39;NumAromaticCarbocycles&#39;, &#39;NumAromaticHeterocycles&#39;, &#39;NumAromaticRings&#39;, &#39;NumAtomStereoCenters&#39;, &#39;NumBridgeheadAtoms&#39;, &#39;NumHAcceptors&#39;, &#39;NumHDonors&#39;, &#39;NumHeteroatoms&#39;, &#39;NumHeterocycles&#39;, &#39;NumRotatableBonds&#39;, &#39;NumSaturatedCarbocycles&#39;, &#39;NumSaturatedHeterocycles&#39;, &#39;NumSaturatedRings&#39;, &#39;NumSpiroAtoms&#39;, &#39;NumUnspecifiedAtomStereoCenters&#39;, &#39;Phi&#39;, &#39;RingCount&#39;, &#39;MolLogP&#39;, &#39;MolMR&#39;, &#39;fr_Al_COO&#39;, &#39;fr_Al_OH&#39;, &#39;fr_Al_OH_noTert&#39;, &#39;fr_ArN&#39;, &#39;fr_Ar_COO&#39;, &#39;fr_Ar_N&#39;, &#39;fr_Ar_NH&#39;, &#39;fr_Ar_OH&#39;, &#39;fr_COO&#39;, &#39;fr_COO2&#39;, &#39;fr_C_O&#39;, &#39;fr_C_O_noCOO&#39;, &#39;fr_C_S&#39;, &#39;fr_HOCCN&#39;, &#39;fr_Imine&#39;, &#39;fr_NH0&#39;, &#39;fr_NH1&#39;, &#39;fr_NH2&#39;, &#39;fr_N_O&#39;, &#39;fr_Ndealkylation1&#39;, &#39;fr_Ndealkylation2&#39;, &#39;fr_Nhpyrrole&#39;, &#39;fr_SH&#39;, &#39;fr_aldehyde&#39;, &#39;fr_alkyl_carbamate&#39;, &#39;fr_alkyl_halide&#39;, &#39;fr_allylic_oxid&#39;, &#39;fr_amide&#39;, &#39;fr_amidine&#39;, &#39;fr_aniline&#39;, &#39;fr_aryl_methyl&#39;, &#39;fr_azide&#39;, &#39;fr_azo&#39;, &#39;fr_barbitur&#39;, &#39;fr_benzene&#39;, &#39;fr_benzodiazepine&#39;, &#39;fr_bicyclic&#39;, &#39;fr_diazo&#39;, &#39;fr_dihydropyridine&#39;, &#39;fr_epoxide&#39;, &#39;fr_ester&#39;, &#39;fr_ether&#39;, &#39;fr_furan&#39;, &#39;fr_guanido&#39;, &#39;fr_halogen&#39;, &#39;fr_hdrzine&#39;, &#39;fr_hdrzone&#39;, &#39;fr_imidazole&#39;, &#39;fr_imide&#39;, &#39;fr_isocyan&#39;, &#39;fr_isothiocyan&#39;, &#39;fr_ketone&#39;, &#39;fr_ketone_Topliss&#39;, &#39;fr_lactam&#39;, &#39;fr_lactone&#39;, &#39;fr_methoxy&#39;, &#39;fr_morpholine&#39;, &#39;fr_nitrile&#39;, &#39;fr_nitro&#39;, &#39;fr_nitro_arom&#39;, &#39;fr_nitro_arom_nonortho&#39;, &#39;fr_nitroso&#39;, &#39;fr_oxazole&#39;, &#39;fr_oxime&#39;, &#39;fr_para_hydroxylation&#39;, &#39;fr_phenol&#39;, &#39;fr_phenol_noOrthoHbond&#39;, &#39;fr_phos_acid&#39;, &#39;fr_phos_ester&#39;, &#39;fr_piperdine&#39;, &#39;fr_piperzine&#39;, &#39;fr_priamide&#39;, &#39;fr_prisulfonamd&#39;, &#39;fr_pyridine&#39;, &#39;fr_quatN&#39;, &#39;fr_sulfide&#39;, &#39;fr_sulfonamd&#39;, &#39;fr_sulfone&#39;, &#39;fr_term_acetylene&#39;, &#39;fr_tetrazole&#39;, &#39;fr_thiazole&#39;, &#39;fr_thiocyan&#39;, &#39;fr_thiophene&#39;, &#39;fr_unbrch_alkane&#39;, &#39;fr_urea&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ptx</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;[H][C@@]12CC[C@](O)(C(=O)CO)[C@@]1(C)CC(=O)[C@@]1([H])[C@@]2([H])CCC2=CC(=O)C=C[C@]12C&#39;</span><span class="p">)</span>
+<span class="n">Chem</span><span class="o">.</span><span class="n">Draw</span><span class="o">.</span><span class="n">MolToImage</span><span class="p">(</span><span class="n">ptx</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="mi">500</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/ac345d8858f427fd1d2acd7ba3a4dc6a0c7d9d620ba1c08f865fba86e2a24140.png" src="../../_images/ac345d8858f427fd1d2acd7ba3a4dc6a0c7d9d620ba1c08f865fba86e2a24140.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">urllib.parse</span>
+
+<span class="n">smiles</span> <span class="o">=</span> <span class="s2">&quot;[H][C@@]12CC[C@](O)(C(=O)CO)[C@@]1(C)CC(=O)[C@@]1([H])[C@@]2([H])CCC2=CC(=O)C=C[C@]12C&quot;</span>
+<span class="n">encoded_smiles</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">encoded_smiles</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>%5BH%5D%5BC%40%40%5D12CC%5BC%40%5D%28O%29%28C%28%3DO%29CO%29%5BC%40%40%5D1%28C%29CC%28%3DO%29%5BC%40%40%5D1%28%5BH%5D%29%5BC%40%40%5D2%28%5BH%5D%29CCC2%3DCC%28%3DO%29C%3DC%5BC%40%5D12C
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="acknowldegments">
+<h1>Acknowldegments<a class="headerlink" href="#acknowldegments" title="Link to this heading">#</a></h1>
+<p>Material in this activty has been adapted from chapter 3 of Charles Weiss’s book <a class="reference external" href="https://weisscharlesj.github.io/SciCompforChemists/notebooks/introduction/intro.html">“Scientific Computing for Chemists with Python”</a>,  <a class="reference external" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.</p>
+<p>Additional content was developed with assistance from <a class="reference external" href="https://www.perplexity.ai/">Perplexity AI</a> and <a class="reference external" href="https://chatgpt.com/">Chat GPT</a>. Multiple queries were made during the Fall 2024 and the Spring 2025.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "py4sci"
+        },
+        kernelOptions: {
+            name: "py4sci",
+            path: "./content/module3-packages1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'py4sci'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="03-8-scipy.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">8. SciPy</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="03-10-rdkit-descriptors.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">10. RDKit and Descriptors</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">9. RDKit</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">1. Introduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rdkit-resources">1.1 RDkit Resources</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rdkit-major-submodules">2. RDkit Major Submodules</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rdkit-functions-and-classes">2.1 RDKit Functions and Classes</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rdkit-chem">3. rdkit.Chem</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#allchem-rdkit-chem-allchem">3.1 AllChem (rdkit.chem.AllChem)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-functions-in-rdkit-chem-allchem">Key Functions in <code class="docutils literal notranslate"><span class="pre">rdkit.Chem.AllChem</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-3d-structure-from-smiles">Generate 3D structure from SMILES</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#draw-rdkit-chem-draw">3.2 Draw (rdkit.Chem.Draw)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#molstogridimage">MolsToGridImage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#stereochemistry">4.  Stereochemistry</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sterochemistry-in-smiles">Sterochemistry in SMILES</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#steroisomers-of-glucose">Steroisomers of Glucose</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-tautomer-form">Open Tautomer Form</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptors-rdkit-chem-descriptors">5. Descriptors (rdkit.Chem.Descriptors)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physicochemical-properties">Physicochemical Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topological-indices">Topological Indices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structural-features">Structural Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#electronic-properties">Electronic Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fragment-counts-functional-group-indicators">Fragment Counts (Functional Group Indicators)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drug-likeness-scores">Drug-Likeness Scores</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowldegments">Acknowldegments</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Robert Belford
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

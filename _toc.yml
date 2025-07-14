@@ -22,4 +22,15 @@ chapters:
     - file: content/module2-oop-data-structures/02-7-db-external-data-structures
     - file: content/module2-oop-data-structures/02-8-api-external-data-structures
     - file: content/module2-oop-data-structures/02-9-webscrape-external-data-structures
-    #- file: content/module2-OOPDataStructures/02-10-FunctionPackage
+- file: content/module3-packages1/README
+  sections:
+    - file: content/module3-packages1/03-1-numpy
+    - file: content/module3-packages1/03-2-pandas
+    - file: content/module3-packages1/03-3-xarray
+    - file: content/module3-packages1/03-4-matplotlib
+    - file: content/module3-packages1/03-5-seaborn
+    - file: content/module3-packages1/03-6-seaborn
+    - file: content/module3-packages1/03-7-seaborn
+    - file: content/module3-packages1/03-8-scipy
+    - file: content/module3-packages1/03-9-rdkit
+    - file: content/module3-packages1/03-10-rdkit-descriptors
