@@ -35,7 +35,8 @@
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e52fa269" />
+    <link rel="stylesheet" type="text/css" href="../../_static/oldcustom.css?v=e52fa269" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=ba2d5b83" />
     <link rel="stylesheet" type="text/css" href="../../_static/.ipynb_checkpoints/custom-checkpoint.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -289,6 +290,7 @@
 
 
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">7. Databases as External Data Structures</a></li>
+
 
 
 
@@ -677,6 +679,10 @@ document.write(`
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sqlite-activity">5. SQLite Activity</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-sql-database">5.1: Create SQL Database</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">5. SQLite Activity</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">5.1: Create SQL Database</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insert-elements">5.2: Insert Elements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-data-value">5.3: Changing Data Value</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deleting-data-value">5.4: Deleting Data Value</a></li>
@@ -688,7 +694,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#print-first-5-records-rows">5.10: Print first 5 Records (rows)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-elements-with-mass-less-than-50-amu">5.11: Find Elements with mass less than 50 amu.</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-element-with-largest-atomic-mass">5.12: Find Element with largest Atomic Mass</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-db-to-pandas-dataframe">5.13: Convert db to pandas dataframe</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
@@ -1209,75 +1214,75 @@ document.write(`
 <section id="create-sql-database">
 <h2>5.1: Create SQL Database<a class="headerlink" href="#create-sql-database" title="Link to this heading">#</a></h2>
 <p>We will start by creating a simple database called halogens.db in the sandbox with a table called elements that contains 4 fields (AtomicNumber, Name, Symbol and AtomicMass), along with specifying the type of data in each field.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>5. SQLite Activity<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<section id="id2">
+<h2>5.1: Create SQL Database<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>We will start by creating a simple database called halogens.db in the sandbox with a table called elements that contains 4 fields (AtomicNumber, Name, Symbol and AtomicMass), along with specifying the type of data in each field.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 1: Define File Paths</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="c1"># Define the directory structure</span>
-<span class="n">sandbox_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/sandbox&quot;</span><span class="p">)</span>  <span class="c1"># Parent directory</span>
-<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">sandbox_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># Ensure directories exist</span>
-<span class="n">halogens_db_sbpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sandbox_dir</span><span class="p">,</span> <span class="s2">&quot;halogens.db&quot;</span><span class="p">)</span>  <span class="c1"># SQLite database file</span>
+<span class="c1"># Define file paths</span>
+<span class="n">sandbox_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s2">&quot;~/sandbox/&quot;</span><span class="p">)</span>
+<span class="n">halogen_csv_sbpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sandbox_dir</span><span class="p">,</span> <span class="s2">&quot;halogens.csv&quot;</span><span class="p">)</span>
+<span class="n">halogens_db_sbpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">sandbox_dir</span><span class="p">,</span> <span class="s2">&quot;halogens.db&quot;</span><span class="p">)</span>
 
-<span class="c1"># Connect to SQLite database (creates file if it doesn&#39;t exist)</span>
+<span class="c1"># Step 2: Create Database and create elements table within it</span>
+<span class="c1"># Connect to the database (creates file if it doesn&#39;t exist)</span>
 <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">halogens_db_sbpath</span><span class="p">)</span>
 <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-<span class="c1"># Create a table called elements</span>
+<span class="c1"># Drop old table (optional during testing)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;DROP TABLE IF EXISTS elements&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create table with schema matching your CSV</span>
 <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">    CREATE TABLE IF NOT EXISTS elements (</span>
-<span class="s1">        AtomicNumber INTEGER PRIMARY KEY,</span>
-<span class="s1">        Name TEXT NOT NULL,</span>
-<span class="s1">        Symbol TEXT NOT NULL,</span>
-<span class="s1">        AtomicMass REAL NOT NULL</span>
+<span class="s1">    CREATE TABLE elements (</span>
+<span class="s1">        Element TEXT NOT NULL,</span>
+<span class="s1">        Atomic_Number INTEGER PRIMARY KEY,</span>
+<span class="s1">        Atomic_Mass REAL NOT NULL,</span>
+<span class="s1">        Electronegativity REAL</span>
 <span class="s1">    )</span>
 <span class="s1">&#39;&#39;&#39;</span><span class="p">)</span>
 
-<span class="c1"># Commit changes and close connection</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
-
-<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">halogens_db_sbpath</span><span class="p">)</span>
-<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-
+<span class="c1"># Retrieve and print data schema (must come after CREATE TABLE)</span>
 <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;PRAGMA table_info(elements)&quot;</span><span class="p">)</span>
 <span class="n">schema</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data Schema:&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">schema</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
 
-<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, &#39;Element&#39;, &#39;TEXT&#39;, 0, None, 0)
-(1, &#39;AtomicNumber&#39;, &#39;INTEGER&#39;, 0, None, 0)
-(2, &#39;AtomicMass&#39;, &#39;REAL&#39;, 0, None, 0)
-(3, &#39;Electronegativity&#39;, &#39;REAL&#39;, 0, None, 0)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+<span class="c1"># Step 3: Read from CSV and Insert Data</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">halogen_csv_sbpath</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="c1"># Handle possible empty Electronegativity</span>
+        <span class="n">en</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;Electronegativity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">en_val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">en</span><span class="p">)</span> <span class="k">if</span> <span class="n">en</span> <span class="k">else</span> <span class="kc">None</span>
 
-<span class="c1"># Connect to your database</span>
-<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">halogens_db_sbpath</span><span class="p">)</span>
-<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            INSERT INTO elements (Element, Atomic_Number, Atomic_Mass, Electronegativity)</span>
+<span class="s1">            VALUES (?, ?, ?, ?)</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">,</span> <span class="p">(</span>
+            <span class="n">row</span><span class="p">[</span><span class="s2">&quot;Element&quot;</span><span class="p">],</span>
+            <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;Atomic_Number&quot;</span><span class="p">]),</span>
+            <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;Atomic_Mass&quot;</span><span class="p">]),</span>
+            <span class="n">en_val</span>
+        <span class="p">))</span>
 
-<span class="c1"># Select all rows from the elements table</span>
+<span class="c1"># Step 4: Print Rows and Commit Data</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
 <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM elements&quot;</span><span class="p">)</span>
 <span class="n">rows</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
-<span class="c1"># Print each row</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Data:&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 
@@ -1287,7 +1292,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;F&#39;, 9, 18.998, 3.98)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data Schema:
+(0, &#39;Element&#39;, &#39;TEXT&#39;, 1, None, 0)
+(1, &#39;Atomic_Number&#39;, &#39;INTEGER&#39;, 0, None, 1)
+(2, &#39;Atomic_Mass&#39;, &#39;REAL&#39;, 1, None, 0)
+(3, &#39;Electronegativity&#39;, &#39;REAL&#39;, 0, None, 0)
+
+Data:
+(&#39;F&#39;, 9, 18.998, 3.98)
 (&#39;Cl&#39;, 17, 35.45, 3.16)
 (&#39;Br&#39;, 35, 79.904, 2.96)
 (&#39;I&#39;, 53, 126.9, 2.66)
@@ -1308,13 +1320,13 @@ document.write(`
 <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">halogens_db_sbpath</span><span class="p">)</span>
 <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-<span class="c1"># Insert element data</span>
+<span class="c1"># Insert or replace element data</span>
 <span class="n">elements_data</span> <span class="o">=</span> <span class="p">[</span>
     <span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.008</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">&quot;Li&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">6.94</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
 <span class="p">]</span>
 
-<span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="s2">&quot;INSERT INTO elements VALUES (?, ?, ?, ?)&quot;</span><span class="p">,</span> <span class="n">elements_data</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="s2">&quot;INSERT OR REPLACE INTO elements VALUES (?, ?, ?, ?)&quot;</span><span class="p">,</span> <span class="n">elements_data</span><span class="p">)</span>
 
 <span class="c1"># Commit changes and close connection</span>
 <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
@@ -1346,14 +1358,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;F&#39;, 9, 18.998, 3.98)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;H&#39;, 1, 1.008, 2.4)
+(&#39;Li&#39;, 3, 6.94, 1.0)
+(&#39;F&#39;, 9, 18.998, 3.98)
 (&#39;Cl&#39;, 17, 35.45, 3.16)
 (&#39;Br&#39;, 35, 79.904, 2.96)
 (&#39;I&#39;, 53, 126.9, 2.66)
 (&#39;At&#39;, 85, 210.0, 2.2)
 (&#39;Ts&#39;, 117, 294.0, None)
-(&#39;H&#39;, 1, 1.008, 2.4)
-(&#39;Li&#39;, 3, 6.94, 1.0)
 </pre></div>
 </div>
 </div>
@@ -1361,7 +1373,9 @@ document.write(`
 </section>
 <section id="changing-data-value">
 <h2>5.3: Changing Data Value<a class="headerlink" href="#changing-data-value" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
+<div class="alert alert-info">  
+<center>We will change the values of electronegativity of hydrogen to 2.2 and that of lithium to 0.98</center> 
+</div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
 
@@ -1412,14 +1426,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;F&#39;, 9, 18.998, 3.98)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;H&#39;, 1, 1.008, 2.2)
+(&#39;Li&#39;, 3, 6.94, 0.98)
+(&#39;F&#39;, 9, 18.998, 3.98)
 (&#39;Cl&#39;, 17, 35.45, 3.16)
 (&#39;Br&#39;, 35, 79.904, 2.96)
 (&#39;I&#39;, 53, 126.9, 2.66)
 (&#39;At&#39;, 85, 210.0, 2.2)
 (&#39;Ts&#39;, 117, 294.0, None)
-(&#39;H&#39;, 1, 1.008, 2.2)
-(&#39;Li&#39;, 3, 6.94, 0.98)
 </pre></div>
 </div>
 </div>
@@ -1427,8 +1441,9 @@ document.write(`
 </section>
 <section id="deleting-data-value">
 <h2>5.4: Deleting Data Value<a class="headerlink" href="#deleting-data-value" title="Link to this heading">#</a></h2>
-<p>Hydrogen and Lithium are not halogens so lets remove them from the database</p>
-<div class="cell docutils container">
+<div class="alert alert-info">  
+<center>Hydrogen and Lithium are not halogens so lets remove them from the database</center> 
+</div><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
 
@@ -1445,15 +1460,9 @@ document.write(`
 </div>
 </div>
 <p>Show Hydrogen and Lithium are removed from the data base</p>
-</section>
-<section id="query-data">
-<h2>5.5: Query Data<a class="headerlink" href="#query-data" title="Link to this heading">#</a></h2>
-<p>Find all elements with Atomic Number &gt;= 10.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
-
-<span class="c1"># Connect to your database</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Connect to your database</span>
 <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">halogens_db_sbpath</span><span class="p">)</span>
 <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
@@ -1481,6 +1490,10 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
+<section id="query-data">
+<h2>5.5: Query Data<a class="headerlink" href="#query-data" title="Link to this heading">#</a></h2>
+<p>Find all elements with Atomic Number &gt;= 10.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
@@ -1490,8 +1503,8 @@ document.write(`
 <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
 <span class="c1"># Run a query</span>
-<span class="c1">#cursor.execute(&quot;SELECT Element FROM elements WHERE AtomicNumber &gt;= 10&quot;)</span>
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT Element, AtomicNumber FROM elements WHERE AtomicNumber &gt;= 10&quot;</span><span class="p">)</span>
+<span class="c1">#cursor.execute(&quot;SELECT Element FROM elements WHERE Atomic_Number &gt;= 10&quot;)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT Element, Atomic_Number FROM elements WHERE Atomic_Number &gt;= 10&quot;</span><span class="p">)</span>
 
 
 <span class="c1"># Fetch and print results</span>
@@ -1538,13 +1551,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Element  AtomicNumber  AtomicMass  Electronegativity
-0       F             9      18.998               3.98
-1      Cl            17      35.450               3.16
-2      Br            35      79.904               2.96
-3       I            53     126.900               2.66
-4      At            85     210.000               2.20
-5      Ts           117     294.000                NaN
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Element  Atomic_Number  Atomic_Mass  Electronegativity
+0       F              9       18.998               3.98
+1      Cl             17       35.450               3.16
+2      Br             35       79.904               2.96
+3       I             53      126.900               2.66
+4      At             85      210.000               2.20
+5      Ts            117      294.000                NaN
 </pre></div>
 </div>
 </div>
@@ -1635,7 +1648,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fields in the &#39;elements&#39; table: [&#39;Element&#39;, &#39;Atomic Number&#39;, &#39;Atomic Mass&#39;, &#39;Electronegativity&#39;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fields in the &#39;elements&#39; table: [&#39;Element&#39;, &#39;Atomic_Number&#39;, &#39;Atomic_Mass&#39;, &#39;Electronegativity&#39;]
 </pre></div>
 </div>
 </div>
@@ -1650,27 +1663,6 @@ document.write(`
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fields in the &#39;elements&#39; table:&quot;</span><span class="p">,</span> <span class="n">fields</span><span class="p">)</span>
 <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">halogens_db_sbpath</span><span class="p">)</span>
-<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;ALTER TABLE elements RENAME COLUMN &quot;Atomic Mass&quot; TO AtomicMass;&#39;</span><span class="p">)</span>
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;ALTER TABLE elements RENAME COLUMN &quot;Atomic Number&quot; TO AtomicNumber;&#39;</span><span class="p">)</span>
-
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;PRAGMA table_info(elements);&quot;</span><span class="p">)</span>
-<span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()]</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fields in the &#39;elements&#39; table:&quot;</span><span class="p">,</span> <span class="n">fields</span><span class="p">)</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fields in the &#39;elements&#39; table: [&#39;Element&#39;, &#39;AtomicNumber&#39;, &#39;AtomicMass&#39;, &#39;Electronegativity&#39;]
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="print-first-5-records-rows">
@@ -1708,13 +1700,13 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">halogens_db_sbpath</span><span class="p">)</span>
 <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT Element FROM elements WHERE AtomicMass &lt; 50;&quot;</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT Element FROM elements WHERE Atomic_Mass &lt; 50;&quot;</span><span class="p">)</span>
 <span class="n">light_elements</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Elements that weight less than 50 amu:&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">light_elements</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT AtomicMass FROM elements WHERE Element LIKE &#39;Cl&#39;;&quot;</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT Atomic_Mass FROM elements WHERE Element LIKE &#39;Cl&#39;;&quot;</span><span class="p">)</span>
 <span class="n">var</span><span class="o">=</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
 <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
@@ -1771,7 +1763,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">halogens_db_sbpath</span><span class="p">)</span>
 <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT AtomicMass FROM elements WHERE Element LIKE &#39;Cl&#39;;&quot;</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT Atomic_Mass FROM elements WHERE Element LIKE &#39;Cl&#39;;&quot;</span><span class="p">)</span>
 <span class="n">var</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>  <span class="c1"># Use fetchone() for a single value</span>
 <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 <span class="n">atomic_mass</span> <span class="o">=</span> <span class="n">var</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Extract float value</span>
@@ -1793,7 +1785,7 @@ document.write(`
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">halogens_db_sbpath</span><span class="p">)</span>
 <span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
 
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT Element, AtomicMass FROM elements ORDER BY AtomicMass DESC LIMIT 1;&quot;</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT Element, Atomic_Mass FROM elements ORDER BY Atomic_Mass DESC LIMIT 1;&quot;</span><span class="p">)</span>
 <span class="n">heaviest_element</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Heaviest element:&quot;</span><span class="p">,</span> <span class="n">heaviest_element</span><span class="p">)</span>
@@ -1803,40 +1795,6 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Heaviest element: (&#39;Ts&#39;, 294.0)
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="convert-db-to-pandas-dataframe">
-<h2>5.13: Convert db to pandas dataframe<a class="headerlink" href="#convert-db-to-pandas-dataframe" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-
-<span class="c1"># Connect to SQLite database</span>
-<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">halogens_db_sbpath</span><span class="p">)</span>
-
-<span class="c1"># Load entire &#39;elements&#39; table into a DataFrame</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM elements;&quot;</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
-
-<span class="c1"># Close connection</span>
-<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-<span class="c1"># Display DataFrame</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Element  AtomicNumber  AtomicMass  Electronegativity
-0       F             9      18.998               3.98
-1      Cl            17      35.450               3.16
-2      Br            35      79.904               2.96
-3       I            53     126.900               2.66
-4      At            85     210.000               2.20
-5      Ts           117     294.000                NaN
 </pre></div>
 </div>
 </div>
@@ -1954,6 +1912,10 @@ document.write(`
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sqlite-activity">5. SQLite Activity</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-sql-database">5.1: Create SQL Database</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">5. SQLite Activity</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">5.1: Create SQL Database</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#insert-elements">5.2: Insert Elements</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-data-value">5.3: Changing Data Value</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deleting-data-value">5.4: Deleting Data Value</a></li>
@@ -1965,7 +1927,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#print-first-5-records-rows">5.10: Print first 5 Records (rows)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-elements-with-mass-less-than-50-amu">5.11: Find Elements with mass less than 50 amu.</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#find-element-with-largest-atomic-mass">5.12: Find Element with largest Atomic Mass</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-db-to-pandas-dataframe">5.13: Convert db to pandas dataframe</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
