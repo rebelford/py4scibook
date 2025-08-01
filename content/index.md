@@ -20,7 +20,7 @@ This interactive Jupyter Book is designed to guide you through foundational conc
 - {ref}`module2-oop-data-structures/02-4-built-in-modules` — Built-in Modules
 - {ref}`module2-oop-data-structures/02-5-control-structures` — Control Structures
 - {ref}`module2-oop-data-structures/02-6-external-data-structures` — External Data Structures
-- {ref}`module2-oop-data-structures/02-7-db-external-data-structures` — Brief Intro do Databases
+- {ref}`module2-oop-data-structures/02-7-db-external-data-structures` — Brief Intro to Databases
 - {ref}`module2-oop-data-structures/02-8-api-external-data-structures` — Data and APIs
 - {ref}`module2-oop-data-structures/02-9-webscrape-external-data-structures` — Web Scraping
 
@@ -35,4 +35,4 @@ This interactive Jupyter Book is designed to guide you through foundational conc
 - {ref}`module3-packages1/03-7-seaborn` — Seaborn Part 3
 - {ref}`module3-packages1/03-8-scipy` — SciPy
 - {ref}`module3-packages1/03-9-rdkit` — RDKit
-- {ref}`module3-packages1/03-10-rdkit-descriptors` — RDKit and Discriptors
+- {ref}`module3-packages1/03-10-rdkit-descriptors` — RDKit and Descriptors
