@@ -214,6 +214,7 @@
 
 
 
+
 <li class="toctree-l2"><a class="reference internal" href="01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
 
 
@@ -666,7 +667,10 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gitignore-templates">.gitignore templates</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-yml-file">8.3 environment.yml File</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-yml-file">8.3 environment.yml File</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#programmatic-generation-of-env-yml">Programmatic generation of env.yml</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-and-upload-to-a-github-repo">9. Create and Upload to a GitHub Repo</a><ul class="visible nav section-nav flex-column">
@@ -1144,6 +1148,24 @@ dependencies:</p></li>
 </li>
 </ul>
 <p>Note: the first <code class="docutils literal notranslate"><span class="pre">-pip</span></code> installs pip, and the second <code class="docutils literal notranslate"><span class="pre">-pip:</span></code> uses pip to install the subsequent packages below it.</p>
+<section id="programmatic-generation-of-env-yml">
+<h3>Programmatic generation of env.yml<a class="headerlink" href="#programmatic-generation-of-env-yml" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>The following command makes a short env.yml file by pulling all packages from conda’s history.</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>--from-history<span class="w"> </span>&gt;<span class="w"> </span>env.yml
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Now the above file does not pick up any packages installed through pip, but you can do this by generating a full env.yml file, which we will call environment.yml</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span><span class="nb">export</span><span class="w"> </span>&gt;<span class="w"> </span>environment.yml
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Now go into the environment.yml file, identify any pip installed packages, this is typically at the bottom of the file, and transfer that to env.yml.</p></li>
+</ol>
+</section>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="create-and-upload-to-a-github-repo">
@@ -1481,7 +1503,10 @@ Retrieves and reapplies your stashed changes on top of the updated codebase.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gitignore-templates">.gitignore templates</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-yml-file">8.3 environment.yml File</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment-yml-file">8.3 environment.yml File</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#programmatic-generation-of-env-yml">Programmatic generation of env.yml</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-and-upload-to-a-github-repo">9. Create and Upload to a GitHub Repo</a><ul class="visible nav section-nav flex-column">
