@@ -214,6 +214,7 @@
 
 
 
+
 <li class="toctree-l2"><a class="reference internal" href="01-4-oshardware.html">4. Computer Hardware Germane to Running a Program</a></li>
 
 
@@ -656,6 +657,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-lab-vs-google-colab">3. Jupyter Lab vs Google Colab</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-books">3. Jupyter Books</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
 </ul>
 
@@ -902,6 +904,40 @@ document.write(`
 </ul>
 </section>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="jupyter-books">
+<h1>3. Jupyter Books<a class="headerlink" href="#jupyter-books" title="Link to this heading">#</a></h1>
+<p>To create a Jupyter book</p>
+<ol class="arabic simple">
+<li><p>Go to folder you want your book in, the following command will create a folder for you book, so do not do that.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jb</span> <span class="n">create</span> <span class="n">name</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">book</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>update (push) your files to the github associated with the book (your book will provide a link to this).  You want to be sure you have a <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file before doing this</p></li>
+<li><p>Clean and build the book</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">jb</span> <span class="n">clean</span> <span class="n">name</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">book</span>
+<span class="n">jb</span> <span class="n">build</span> <span class="n">name</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">book</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Push the book to gitHub pages</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ghp</span><span class="o">-</span><span class="kn">import</span><span class="w"> </span><span class="o">-</span><span class="n">n</span> <span class="o">-</span><span class="n">p</span> <span class="o">-</span><span class="n">f</span> <span class="n">_build</span><span class="o">/</span><span class="n">html</span>  
+</pre></div>
+</div>
+<p>This uses the <a class="reference external" href="https://github.com/c-w/ghp-import"><code class="docutils literal notranslate"><span class="pre">ghp-import</span></code></a> tool, which takes a built site (like your <code class="docutils literal notranslate"><span class="pre">_build/html</span></code> folder) and commits it to the special <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch of your repo — the branch GitHub Pages serves as a website.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ghp-import</span></code>
+Copies the contents of your <code class="docutils literal notranslate"><span class="pre">_build/html</span></code> directory into a new Git commit on the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch.
+<code class="docutils literal notranslate"><span class="pre">-n</span></code> (no Jekyll). Tells GitHub Pages to skip Jekyll processing. Necessary because Jupyter Book (and Sphinx) use directories starting with <code class="docutils literal notranslate"><span class="pre">_</span></code> (like <code class="docutils literal notranslate"><span class="pre">_static/</span></code>), which Jekyll would normally ignore. Without <code class="docutils literal notranslate"><span class="pre">-n</span></code>, parts of your book may not render correctly.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-p</span></code> (push)
+After creating the new commit on <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>, immediately push it to GitHub, saves you from having to run a separate <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">gh-pages</span></code>. If you leave this off, it only creates the commit locally.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-f</span></code> (force)
+Forces overwriting the existing <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch. Useful because your site is always rebuilt from scratch, so you want the branch to match the new <code class="docutils literal notranslate"><span class="pre">_build/html</span></code>.  Without this, the push might fail if history has diverged.</p></li>
+</ul>
+</section>
 <section class="tex2jax_ignore mathjax_ignore" id="acknowledgements">
 <h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">#</a></h1>
 <p>This content was developed with assistance from <a class="reference external" href="https://www.perplexity.ai/">Perplexity AI</a> and <a class="reference external" href="https://chatgpt.com/">Chat GPT</a>. Multiple queries were made during the Fall 2024 and the Spring 2025.</p>
@@ -990,6 +1026,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-lab-vs-google-colab">3. Jupyter Lab vs Google Colab</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-books">3. Jupyter Books</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#acknowledgements">Acknowledgements</a></li>
 </ul>
 
